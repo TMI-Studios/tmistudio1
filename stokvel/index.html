@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0a">
-  <meta name="description" content="Plan your stokvel savings in South Africa. Explore stokvel types, calculate contributions and prepare a constitution for your savings club.">
-  <meta name="robots" content="index, follow">
-  <title>Stokvel App South Africa | Savings Calculator & Constitution</title>
+  <meta name="description" content="Explore free stokvel tools for South Africa. Calculate group savings, learn about different stokvel types and find a constitution template for your group.">
+  <title>Stokvel Tools South Africa | TMI Studios</title>
   <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/stokvel/">
+
   <style>
     :root {
       color-scheme: dark;
@@ -37,11 +37,17 @@
     }
 
     a {
-      color: inherit;
+      color: var(--cyan);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
     }
 
     .container {
-      width: min(100% - 36px, 1000px);
+      width: min(100% - 36px, 1050px);
       margin: 0 auto;
     }
 
@@ -56,168 +62,206 @@
       justify-content: space-between;
       gap: 16px;
     }
-    .feature a {
-  display: inline-block;
-  margin-top: 12px;
-  color: #00ffff;
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.feature a:hover {
-  opacity: 0.7;
-  text-decoration: underline;
-}
-
-.feature a:focus-visible {
-  outline: 2px solid #00ffff;
-  outline-offset: 4px;
-  border-radius: 3px;
-}
 
     .brand {
-      font-size: 17px;
+      color: #ffffff;
+      font-size: 16px;
       font-weight: 800;
       text-decoration: none;
-      letter-spacing: -0.5px;
+      letter-spacing: 0.3px;
     }
 
     .brand span {
       color: var(--cyan);
     }
 
-    .back {
+    .nav-link {
       color: var(--muted);
       font-size: 13px;
       text-decoration: none;
     }
 
+    .nav-link:hover {
+      color: var(--cyan);
+    }
+
     .hero {
-      padding: 76px 0 60px;
+      padding: 64px 0 48px;
       text-align: center;
     }
 
     .eyebrow {
-      display: inline-block;
-      padding: 6px 12px;
-      border: 1px solid #164747;
-      border-radius: 50px;
       color: var(--cyan);
-      font-size: 11px;
-      letter-spacing: 1.4px;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 700;
     }
 
     h1 {
-      margin: 22px 0 18px;
-      font-size: clamp(36px, 7vw, 64px);
-      line-height: 1.06;
-      letter-spacing: -2px;
+      max-width: 800px;
+      margin: 15px auto;
+      font-size: clamp(36px, 8vw, 64px);
+      line-height: 1.08;
+      letter-spacing: -1.5px;
     }
 
     h1 span {
       color: var(--cyan);
     }
 
-    .intro {
-      max-width: 570px;
-      margin: 0 auto;
+    .hero-copy {
+      max-width: 590px;
+      margin: 18px auto 25px;
       color: var(--muted);
       font-size: 16px;
     }
 
-    .actions {
-      display: grid;
-      grid-template-columns: 1fr;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
-      max-width: 360px;
-      margin: 30px auto 0;
+      margin-top: 25px;
     }
 
     .button {
-      display: block;
-      padding: 15px 18px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--panel);
-      color: var(--text);
-      font-size: 15px;
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border: 1px solid var(--cyan);
+      border-radius: 8px;
+      color: var(--cyan);
+      font-size: 14px;
       font-weight: 700;
       text-align: center;
       text-decoration: none;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      border-color: var(--cyan);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .button.primary {
       background: var(--cyan);
-      border-color: var(--cyan);
       color: #000000;
     }
 
-    .trust {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px 22px;
-      margin-top: 28px;
-      color: #a0a0a0;
-      font-size: 12px;
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--cyan);
+      color: #000000;
     }
 
     .section {
-      padding: 38px 0 60px;
+      padding: 38px 0 55px;
     }
 
-    .section h2 {
-      margin: 0 0 10px;
-      font-size: 27px;
-      letter-spacing: -0.7px;
+    .section-heading {
+      margin-bottom: 25px;
+      text-align: center;
     }
 
-    .section-intro {
-      margin: 0 0 24px;
+    .section-heading h2 {
+      margin: 8px 0;
+      font-size: clamp(25px, 5vw, 34px);
+    }
+
+    .section-heading p {
+      max-width: 570px;
+      margin: 0 auto;
       color: var(--muted);
       font-size: 14px;
     }
 
     .features {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .feature {
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      padding: 24px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--panel);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .feature:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px);
     }
 
     .feature .icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      margin-bottom: 12px;
+      border: 1px solid #244444;
+      border-radius: 12px;
+      background: #102020;
       font-size: 24px;
     }
 
     .feature h3 {
-      margin: 12px 0 6px;
-      font-size: 16px;
+      margin: 0 0 8px;
+      font-size: 20px;
     }
 
     .feature p {
       margin: 0;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
     }
 
-    .notice {
-      margin-top: 22px;
-      padding: 16px;
+    .feature-action {
+      display: inline-block;
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--cyan);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .feature:hover .feature-action {
+      text-decoration: underline;
+    }
+
+    .feature:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .info-panel {
+      margin-top: 10px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #101010;
+    }
+
+    .info-panel h2 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    .info-panel p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 15px;
       border-left: 3px solid var(--cyan);
       background: #101717;
       color: var(--muted);
@@ -225,94 +269,139 @@
     }
 
     footer {
-      padding: 26px 0;
+      padding: 24px 0;
       border-top: 1px solid var(--border);
       color: #888888;
       font-size: 12px;
       text-align: center;
     }
 
+    footer p {
+      margin: 5px 0;
+    }
+
     footer a {
-      color: var(--cyan);
+      color: var(--muted);
       text-decoration: none;
     }
 
-    @media (max-width: 650px) {
+    footer a:hover {
+      color: var(--cyan);
+    }
+
+    @media (min-width: 650px) {
       .features {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .feature {
+        min-height: 270px;
       }
 
       .hero {
-        padding-top: 58px;
+        padding-top: 85px;
+        padding-bottom: 65px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
       }
 
-      .nav {
-        min-height: 60px;
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container nav">
       <a class="brand" href="../">TMI <span>STUDIOS</span></a>
-      <a class="back" href="../">Back to TMI Studios</a>
+      <a class="nav-link" href="../">← Main website</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <span class="eyebrow">Made for South Africa</span>
-        <h1>Stokvel App<br><span>South Africa</span></h1>
-        <p class="intro">
-          Bring your savings club planning together. Explore stokvel types,
-          plan contributions and prepare for better organised group savings.
-        </p>
+    <section class="hero container">
+      <div class="eyebrow">Made for South African stokvels</div>
 
-        <div class="actions">
-          <a class="button primary" href="#tools">Explore Stokvel Tools</a>
-          <a class="button" href="#tools">Explore Stokvel Types</a>
-          <a class="button" href="#constitution">Stokvel Constitution</a>
-        </div>
+      <h1>Your stokvel.<br><span>Better organised.</span></h1>
 
-        <div class="trust">
-          <span>✓ No account required for this landing page</span>
-          <span>✓ Designed for South Africa</span>
-        </div>
+      <p class="hero-copy">
+        Whether you're starting a savings club or organising an existing group,
+        these simple tools can help you plan contributions, understand stokvel
+        structures and prepare your group's rules.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="calculator.html">Calculate Your Savings →</a>
+        <a class="button" href="types.html">Explore Stokvel Types</a>
       </div>
     </section>
 
-    <section class="section" id="tools">
-      <div class="container">
-        <h2>Your stokvel toolkit</h2>
-        <p class="section-intro">
-          Start planning your savings club. Full tools will be linked here as they are published.
+    <section class="section container" id="tools">
+      <div class="section-heading">
+        <div class="eyebrow">Your toolkit</div>
+        <h2>Everything starts with a plan.</h2>
+        <p>
+          Explore the tools below. Start with the free calculator,
+          learn about different stokvel types, or view our planned constitution template.
         </p>
+      </div>
 
-        <div class="features">
-          <article class="feature">
-            <a href="calculator.html">Open calculator →</a>
-            <div class="icon" aria-hidden="true">🧮</div>
-            <h3>Savings calculator</h3>
-            <p>Work out potential group contributions and savings totals.</p>
-          </article>
+      <div class="features">
+        <a class="feature" href="calculator.html">
+          <div class="icon" aria-hidden="true">🧮</div>
+          <h3>Savings Calculator</h3>
+          <p>
+            Estimate monthly group collections, total contributions and
+            average savings per member.
+          </p>
+          <span class="feature-action">Open calculator →</span>
+        </a>
 
-          <article class="feature">
-            <div class="icon" aria-hidden="true">🤝</div>
-            <h3>Explore stokvel types</h3>
-            <p>Learn about different savings club structures and how they work.</p>
-          </article>
+        <a class="feature" href="types.html">
+          <div class="icon" aria-hidden="true">🤝</div>
+          <h3>Types of Stokvels</h3>
+          <p>
+            Learn about grocery stokvels, rotating money groups, burial
+            societies and savings clubs.
+          </p>
+          <span class="feature-action">Explore the guide →</span>
+        </a>
 
-          <article class="feature" id="constitution">
-            <div class="icon" aria-hidden="true">📄</div>
-            <h3>Stokvel constitution</h3>
-            <p>Prepare written rules for contributions, meetings and group decisions.</p>
-          </article>
-        </div>
+        <a class="feature" href="constitution.html">
+          <div class="icon" aria-hidden="true">📄</div>
+          <h3>Constitution Template</h3>
+          <p>
+            Explore the planned R99 template and the group rules it is
+            intended to help you document.
+          </p>
+          <span class="feature-action">View template details →</span>
+        </a>
+      </div>
+    </section>
 
-        <div class="notice">
-          These tools are being connected as the app is migrated. This page does not yet calculate savings or sell a constitution. Constitution pricing and payment options will be added once the document and checkout process are ready.
+    <section class="section container">
+      <div class="info-panel">
+        <h2>Good stokvels start with clear rules.</h2>
+        <p>
+          Before members contribute money, agree on payment dates, member
+          responsibilities, record-keeping, payout arrangements and what
+          happens when someone misses a payment. Keep a written record of
+          decisions made by the group.
+        </p>
+        <div class="note">
+          The calculator provides estimates based on the numbers entered.
+          Actual payouts depend on your group's rules. The constitution
+          template is not yet available for purchase or download, and this
+          website does not provide legal advice.
         </div>
       </div>
     </section>
@@ -320,8 +409,16 @@
 
   <footer>
     <div class="container">
-      <p>Part of TMI Studios · Built for South African stokvels</p>
-      <p><a href="../">Visit TMI Studios</a></p>
+      <p>Part of TMI Studios · Independent Internet Product Lab</p>
+      <p>
+        <a href="../">TMI Studios Home</a>
+        &nbsp;·&nbsp;
+        <a href="calculator.html">Calculator</a>
+        &nbsp;·&nbsp;
+        <a href="types.html">Stokvel Types</a>
+        &nbsp;·&nbsp;
+        <a href="constitution.html">Constitution Template</a>
+      </p>
     </div>
   </footer>
 </body>
