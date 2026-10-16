@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="Calculate your South African stokvel contributions, total savings pot and average amount per member with this free stokvel calculator.">
+  <title>Free Stokvel Calculator South Africa | TMI Studios</title>
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/stokvel/calculator.html">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0a;
+      --panel: #141414;
+      --cyan: #00ffff;
+      --text: #ffffff;
+      --muted: #b0b0b0;
+      --border: #303030;
+      --error: #ff8585;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 0 35px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--cyan);
+    }
+
+    .container {
+      width: min(100% - 36px, 540px);
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .back {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    main {
+      padding-top: 36px;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(30px, 7vw, 42px);
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .intro {
+      margin: 12px auto 26px;
+      max-width: 420px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .calculator {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      color: #dddddd;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    label:first-child {
+      margin-top: 0;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px;
+      border: 1px solid #414141;
+      border-radius: 8px;
+      background: #090909;
+      color: #ffffff;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .hint {
+      margin-top: 5px;
+      color: #999999;
+      font-size: 12px;
+    }
+
+    button {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px;
+      margin-top: 22px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--cyan);
+      color: #000000;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a5ffff;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border: 1px solid #733838;
+      border-radius: 8px;
+      color: var(--error);
+      font-size: 13px;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid var(--cyan);
+      border-radius: 12px;
+      background: #101717;
+    }
+
+    .result h2 {
+      margin: 0 0 15px;
+      color: var(--cyan);
+      font-size: 20px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .result-row:last-of-type {
+      border-bottom: 0;
+    }
+
+    .result-row span:first-child {
+      color: var(--muted);
+    }
+
+    .amount {
+      font-weight: 800;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .total {
+      color: var(--cyan);
+      font-size: 22px;
+    }
+
+    .disclaimer {
+      margin: 14px 0 0;
+      color: #999999;
+      font-size: 12px;
+    }
+
+    .constitution-link {
+      display: block;
+      margin-top: 18px;
+      padding: 13px;
+      border: 1px solid #333333;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .info {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .info h2 {
+      color: #ffffff;
+      font-size: 18px;
+    }
+
+    footer {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: #888888;
+      font-size: 12px;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="../">TMI <span>STUDIOS</span></a>
+      <a class="back" href="./">← Stokvel home</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="eyebrow">Free savings tool</div>
+    <h1>Stokvel Calculator</h1>
+    <p class="intro">
+      Estimate your group contributions and total savings pot in seconds.
+      Enter your numbers below to get started.
+    </p>
+
+    <form class="calculator" id="calculator">
+      <div>
+        <label for="members">Number of members</label>
+        <input id="members" name="members" type="number" min="1" max="1000000" step="1" value="12" required>
+        <div class="hint">How many people contribute to your stokvel?</div>
+      </div>
+
+      <div>
+        <label for="contribution">Contribution per member per month (R)</label>
+        <input id="contribution" name="contribution" type="number" min="0.01" max="1000000000" step="0.01" value="500" required>
+        <div class="hint">Enter the amount each member contributes monthly.</div>
+      </div>
+
+      <div>
+        <label for="months">Number of months</label>
+        <input id="months" name="months" type="number" min="1" max="1200" step="1" value="12" required>
+        <div class="hint">For example, 12 months for a year.</div>
+      </div>
+
+      <button type="submit">Calculate My Stokvel Pot</button>
+      <div class="error" id="error" role="alert"></div>
+
+      <section class="result" id="result" aria-live="polite" aria-labelledby="result-title">
+        <h2 id="result-title">Your estimated savings</h2>
+
+        <div class="result-row">
+          <span>Total group contributions</span>
+          <span class="amount total" id="total">R0</span>
+        </div>
+
+        <div class="result-row">
+          <span>Group collection per month</span>
+          <span class="amount" id="monthly">R0</span>
+        </div>
+
+        <div class="result-row">
+          <span>Average savings per member</span>
+          <span class="amount" id="perMember">R0</span>
+        </div>
+
+        <p class="disclaimer">
+          Estimates assume every member pays the full contribution each month.
+          They exclude interest, fees, missed payments and other expenses.
+          Actual payouts depend on your stokvel's rules.
+        </p>
+
+        <a class="constitution-link" href="constitution.html">Need written rules for your group? Explore the constitution template →</a>
+      </section>
+    </form>
+
+    <section class="info">
+      <h2>How is the stokvel pot calculated?</h2>
+      <p>
+        Multiply the number of members by each member's monthly contribution
+        to estimate the amount collected each month. Multiply that amount by
+        the number of months to estimate total contributions.
+      </p>
+      <p>
+        The average savings per member is the total group contributions divided
+        by the number of members. This is not necessarily the payout for a
+        rotating stokvel, where payout amounts and schedules depend on the
+        group's agreed rules.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Part of TMI Studios · Built for South African stokvels</p>
+      <p><a href="./">Stokvel home</a> · <a href="../">TMI Studios</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("calculator");
+    const error = document.getElementById("error");
+    const result = document.getElementById("result");
+
+    const money = new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      maximumFractionDigits: 2
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const membersInput = document.getElementById("members");
+      const contributionInput = document.getElementById("contribution");
+      const monthsInput = document.getElementById("months");
+
+      const members = Number(membersInput.value);
+      const contribution = Number(contributionInput.value);
+      const months = Number(monthsInput.value);
+
+      if (
+        !Number.isSafeInteger(members) ||
+        members < 1 ||
+        !Number.isFinite(contribution) ||
+        contribution <= 0 ||
+        !Number.isSafeInteger(months) ||
+        months < 1
+      ) {
+        error.textContent = "Please enter a whole number of members and months, and a contribution greater than R0.";
+        error.style.display = "block";
+        result.style.display = "none";
+        return;
+      }
+
+      const monthly = members * contribution;
+      const total = monthly * months;
+      const perMember = total / members;
+
+      if (![monthly, total, perMember].every(Number.isFinite)) {
+        error.textContent = "Those numbers are too large to calculate. Please enter smaller values.";
+        error.style.display = "block";
+        result.style.display = "none";
+        return;
+      }
+
+      document.getElementById("total").textContent = money.format(total);
+      document.getElementById("monthly").textContent = money.format(monthly);
+      document.getElementById("perMember").textContent = money.format(perMember);
+
+      error.style.display = "none";
+      result.style.display = "block";
+    });
+  </script>
+</body>
+</html>
