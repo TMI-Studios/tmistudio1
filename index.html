@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0015">
+  <meta name="description" content="TMI Studios is an independent internet product lab building playful tools, interactive experiences, quizzes, generators and useful little apps for the internet.">
+  <title>TMI Studios | Independent Internet Product Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0015;
+      --panel: #160b24;
+      --panel-hover: #21102f;
+      --purple: #c5a3ff;
+      --pink: #ff9de2;
+      --text: #f8f3ff;
+      --muted: #b0a2bf;
+      --border: rgba(197, 163, 255, 0.18);
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .announcement {
+      padding: 9px 16px;
+      text-align: center;
+      background: #1c0d2d;
+      color: var(--purple);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11, 0, 21, 0.94);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 100px 0 88px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(137, 72, 220, 0.16);
+      filter: blur(90px);
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid var(--border);
+      color: var(--purple);
+      background: rgba(197, 163, 255, 0.07);
+      padding: 7px 13px;
+      border-radius: 100px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 1.04;
+      letter-spacing: -0.075em;
+      margin: 26px 0 22px;
+    }
+
+    h1 span {
+      color: var(--purple);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 21px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--purple);
+      color: #160725;
+      border-color: var(--purple);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #82748f;
+    }
+
+    section {
+      padding: 66px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px, 4vw, 35px);
+      letter-spacing: -0.05em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 8px 0 0;
+      font-size: 14px;
+    }
+
+    .section-label {
+      color: var(--pink);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .category {
+      padding: 25px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .category-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(197, 163, 255, 0.12);
+      font-size: 21px;
+      margin-bottom: 18px;
+    }
+
+    .category h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .category p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 20px;
+    }
+
+    .category a {
+      color: var(--purple);
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: auto;
+    }
+
+    .coming-soon {
+      padding: 34px;
+      border: 1px dashed rgba(197, 163, 255, 0.28);
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(197, 163, 255, 0.035);
+    }
+
+    .coming-soon h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .coming-soon p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .about-grid h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: -0.06em;
+      margin: 0;
+    }
+
+    .about-copy {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .about-copy p:first-child {
+      margin-top: 0;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .principle {
+      padding: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    .principle span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        min-height: 66px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 78px 0 65px;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        min-height: auto;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 9px;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">AN INDEPENDENT INTERNET PRODUCT LAB</div>
+
+  <header>
+    <div class="container nav">
+      <a class="logo" href="./">TMI <span>STUDIOS</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#explore">Explore</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">Curiosity, with a little chaos</span>
+        <h1>The internet needed it.<br><span>We built it.</span></h1>
+        <p>
+          Tiny tools. Big feelings. Useful little experiments.
+          TMI Studios builds playful digital products for the things
+          you Google, wonder about, and send to your group chat.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#explore">Explore the lab</a>
+          <a class="button button-secondary" href="#about">Get to know us</a>
+        </div>
+        <div class="hero-note">Independent ideas, built for the internet.</div>
+      </div>
+    </section>
+
+    <section id="explore">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Find your corner</div>
+            <h2>Explore the lab.</h2>
+            <p>Different moods. Different problems. One curious little studio.</p>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">🧪</div>
+            <h3>TMI Lab</h3>
+            <p>Generators, creative tools, experiments and unexpected internet utilities.</p>
+            <a href="#coming-soon">Explore TMI Lab →</a>
+          </article>
+
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">🚩</div>
+            <h3>Toxic Lab</h3>
+            <p>Dating dilemmas, red-flag detectors, relationship quizzes and a little chaos.</p>
+            <a href="#coming-soon">Explore Toxic Lab →</a>
+          </article>
+
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">✨</div>
+            <h3>Vibe Lab</h3>
+            <p>Personality quizzes, self-discovery, lifestyle ideas and main-character energy.</p>
+            <a href="#coming-soon">Explore Vibe Lab →</a>
+          </article>
+
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">🧮</div>
+            <h3>Useful Things</h3>
+            <p>Calculators, planners and practical tools designed to make everyday life easier.</p>
+            <a href="#coming-soon">Explore tools →</a>
+          </article>
+
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">🇿🇦</div>
+            <h3>Made for South Africa</h3>
+            <p>Local-first tools for real-life needs, from savings planning to everyday admin.</p>
+            <a href="#coming-soon">Explore local tools →</a>
+          </article>
+
+          <article class="category">
+            <div class="category-icon" aria-hidden="true">💡</div>
+            <h3>Fresh Experiments</h3>
+            <p>New ideas in progress. Some useful, some weird, all built out of curiosity.</p>
+            <a href="#coming-soon">See what's brewing →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="coming-soon">
+      <div class="container">
+        <div class="coming-soon">
+          <div class="section-label">The rebuild is underway</div>
+          <h3>A bigger little corner of the internet is coming.</h3>
+          <p>
+            We're bringing our digital products together in one place.
+            Individual app links will appear here as each product is checked,
+            updated and published.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <div class="section-label">A little about us</div>
+            <h2>Small team energy.<br>Big internet curiosity.</h2>
+          </div>
+          <div class="about-copy">
+            <p>
+              TMI Studios is an independent product studio exploring the
+              intersection of everyday problems, internet culture and useful
+              digital experiences.
+            </p>
+            <p>
+              We build small products that help people figure things out,
+              make something, have a laugh or get through the day with one
+              less thing to worry about.
+            </p>
+            <p>
+              Every product starts with a question: can we make this easier,
+              more interesting or more fun?
+            </p>
+          </div>
+        </div>
+
+        <div class="principles">
+          <div class="principle">
+            <strong>Built with curiosity</strong>
+            <span>We follow interesting questions and turn ideas into real tools.</span>
+          </div>
+          <div class="principle">
+            <strong>Useful by design</strong>
+            <span>Our products should give people a reason to come back.</span>
+          </div>
+          <div class="principle">
+            <strong>Always experimenting</strong>
+            <span>We learn, improve and keep making the internet more interesting.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="coming-soon">
+          <div class="section-label">Stay curious</div>
+          <h3>Have an idea, question or collaboration in mind?</h3>
+          <p>
+            TMI Studios is growing. Contact details and more ways to connect
+            will be added as the studio's new home takes shape.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year">2026</span> TMI Studios. Built with curiosity.</div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#explore">Explore</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
