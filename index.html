@@ -7,9 +7,11 @@
   <meta name="theme-color" content="#0b0015">
   <meta name="description" content="TMI Studios is an independent internet product lab building playful tools, interactive experiences, quizzes, generators and useful little apps for the internet.">
   <title>TMI Studios | Independent Internet Product Lab</title>
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #0b0015;
@@ -284,6 +286,10 @@
       margin-top: auto;
     }
 
+    .category a:hover {
+      color: var(--pink);
+    }
+
     .coming-soon {
       padding: 34px;
       border: 1px dashed rgba(197, 163, 255, 0.28);
@@ -302,6 +308,19 @@
       font-size: 14px;
       max-width: 500px;
       margin: 0 auto;
+    }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--purple);
+      font-weight: 700;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-email:hover {
+      color: var(--pink);
     }
 
     .about-grid {
@@ -367,7 +386,7 @@
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 12px 18px;
     }
 
     .footer-links a {
@@ -376,6 +395,26 @@
 
     .footer-links a:hover {
       color: var(--text);
+    }
+
+    .footer-legal {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      padding-top: 20px;
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-legal a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-legal a:hover {
+      color: var(--purple);
     }
 
     @media (max-width: 760px) {
@@ -596,9 +635,10 @@
           <div class="section-label">Stay curious</div>
           <h3>Have an idea, question or collaboration in mind?</h3>
           <p>
-            TMI Studios is growing. Contact details and more ways to connect
-            will be added as the studio's new home takes shape.
+            Want to talk about a product, share an idea or explore a collaboration?
+            We'd love to hear from you.
           </p>
+          <a class="contact-email" href="mailto:tmistudios01@gmail.com">tmistudios01@gmail.com</a>
         </div>
       </div>
     </section>
@@ -607,11 +647,18 @@
   <footer>
     <div class="container footer-inner">
       <div>© <span id="year">2026</span> TMI Studios. Built with curiosity.</div>
+
       <div class="footer-links">
         <a href="#about">About</a>
         <a href="#explore">Explore</a>
         <a href="#contact">Contact</a>
       </div>
+
+      <nav class="footer-legal" aria-label="Legal links">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Use</a>
+        <a href="./disclaimer.html">Disclaimer</a>
+      </nav>
     </div>
   </footer>
 
