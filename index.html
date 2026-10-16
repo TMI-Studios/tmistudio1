@@ -5,9 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0015">
-  <meta name="description" content="TMI Studios is an independent internet product lab building playful tools, interactive experiences, quizzes, generators and useful little apps for the internet.">
+  <meta name="description" content="Explore TMI Studios, an independent internet product lab building playful digital products, useful tools, interactive experiences, quizzes and generators.">
+  <meta name="robots" content="index, follow">
   <title>TMI Studios | Independent Internet Product Lab</title>
   <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/">
+  <meta property="og:title" content="TMI Studios | Independent Internet Product Lab">
+  <meta property="og:description" content="Tiny tools. Big feelings. Useful little experiments. Explore the TMI Studios digital product library.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -254,6 +259,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .category:hover {
+      background: var(--panel-hover);
+      border-color: rgba(197, 163, 255, 0.4);
     }
 
     .category-icon {
@@ -306,8 +317,12 @@
     .coming-soon p {
       color: var(--muted);
       font-size: 14px;
-      max-width: 500px;
+      max-width: 570px;
       margin: 0 auto;
+    }
+
+    .directory-button {
+      margin-top: 22px;
     }
 
     .contact-email {
@@ -483,6 +498,18 @@
         width: 100%;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -492,7 +519,7 @@
     <div class="container nav">
       <a class="logo" href="./">TMI <span>STUDIOS</span></a>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="#explore">Explore</a>
+        <a href="./apps/">Explore</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -510,7 +537,7 @@
           you Google, wonder about, and send to your group chat.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#explore">Explore the lab</a>
+          <a class="button button-primary" href="./apps/">Explore the lab</a>
           <a class="button button-secondary" href="#about">Get to know us</a>
         </div>
         <div class="hero-note">Independent ideas, built for the internet.</div>
@@ -525,6 +552,7 @@
             <h2>Explore the lab.</h2>
             <p>Different moods. Different problems. One curious little studio.</p>
           </div>
+          <a class="button button-secondary" href="./apps/">Browse all apps and tools →</a>
         </div>
 
         <div class="category-grid">
@@ -532,57 +560,58 @@
             <div class="category-icon" aria-hidden="true">🧪</div>
             <h3>TMI Lab</h3>
             <p>Generators, creative tools, experiments and unexpected internet utilities.</p>
-            <a href="#coming-soon">Explore TMI Lab →</a>
+            <a href="./apps/">Explore TMI Lab →</a>
           </article>
 
           <article class="category">
             <div class="category-icon" aria-hidden="true">🚩</div>
             <h3>Toxic Lab</h3>
             <p>Dating dilemmas, red-flag detectors, relationship quizzes and a little chaos.</p>
-            <a href="#coming-soon">Explore Toxic Lab →</a>
+            <a href="./apps/">Explore Toxic Lab →</a>
           </article>
 
           <article class="category">
             <div class="category-icon" aria-hidden="true">✨</div>
             <h3>Vibe Lab</h3>
             <p>Personality quizzes, self-discovery, lifestyle ideas and main-character energy.</p>
-            <a href="#coming-soon">Explore Vibe Lab →</a>
+            <a href="./apps/">Explore Vibe Lab →</a>
           </article>
 
           <article class="category">
             <div class="category-icon" aria-hidden="true">🧮</div>
             <h3>Useful Things</h3>
             <p>Calculators, planners and practical tools designed to make everyday life easier.</p>
-            <a href="#coming-soon">Explore tools →</a>
+            <a href="./apps/">Explore tools →</a>
           </article>
 
           <article class="category">
             <div class="category-icon" aria-hidden="true">🇿🇦</div>
             <h3>Made for South Africa</h3>
             <p>Local-first tools for real-life needs, from savings planning to everyday admin.</p>
-            <a href="./stokvel/">Explore Stokvel app →</a>
+            <a href="./stokvel/">Explore Stokvel Hub →</a>
           </article>
 
           <article class="category">
             <div class="category-icon" aria-hidden="true">💡</div>
             <h3>Fresh Experiments</h3>
             <p>New ideas in progress. Some useful, some weird, all built out of curiosity.</p>
-            <a href="#coming-soon">See what's brewing →</a>
+            <a href="./apps/">Explore the collection →</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="coming-soon">
+    <section id="collection">
       <div class="container">
         <div class="coming-soon">
-          <div class="section-label">The rebuild is underway</div>
-          <h3>A bigger little corner of the internet is coming.</h3>
+          <div class="section-label">The collection is growing</div>
+          <h3>Find your next favourite little tool.</h3>
           <p>
-            We're bringing our digital products together in one place.
-            Individual app links will appear here as each product is checked,
-            updated and published.
+            Explore the products currently available, discover practical resources,
+            and check back as we bring more experiments into the library.
+            Every product is added as it is checked and published.
           </p>
+          <a class="button button-primary directory-button" href="./apps/">Explore all apps and tools →</a>
         </div>
       </div>
     </section>
@@ -650,7 +679,7 @@
 
       <div class="footer-links">
         <a href="#about">About</a>
-        <a href="#explore">Explore</a>
+        <a href="./apps/">Explore</a>
         <a href="#contact">Contact</a>
       </div>
 
