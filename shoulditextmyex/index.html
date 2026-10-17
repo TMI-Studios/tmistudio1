@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Should I Text My Ex? Take the 4 Question Test | TMI Studios</title>
+  <meta name="description" content="Wondering whether to text your ex? Take this free 4 question quiz for a thoughtful result, a reality check, and a message template if reaching out makes sense.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/shoulditextmyex/">
+  <meta name="theme-color" content="#0b0015">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Should I Text My Ex? 👀">
+  <meta property="og:description" content="Before you send that text, take the four question reality check.">
+  <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/shoulditextmyex/">
+  <meta property="og:site_name" content="TMI Studios">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Should I Text My Ex? 👀">
+  <meta name="twitter:description" content="A four question reality check before you hit send.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Should I Text My Ex?",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Any",
+    "description": "A free interactive four question tool to help people think through whether contacting an ex is a good idea.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "ZAR"
+    },
+    "url": "https://tmi-studios.github.io/tmistudio1/shoulditextmyex/"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0015;
+      --panel: #160b24;
+      --panel-light: #21132f;
+      --purple: #b388ff;
+      --pink: #ff8fcf;
+      --text: #f7f1ff;
+      --muted: #c2b4d2;
+      --border: #382448;
+      --green: #9ff0c1;
+      --yellow: #ffe49a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top, #26103b 0%, var(--bg) 55%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--pink); }
+
+    button, textarea { font: inherit; }
+
+    button:focus-visible,
+    a:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--pink);
+      outline-offset: 4px;
+    }
+
+    .site-header {
+      max-width: 900px;
+      margin: auto;
+      padding: 22px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-weight: 900;
+      letter-spacing: .5px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--purple); }
+
+    .back-link {
+      color: var(--muted);
+      font-size: .9rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--pink); }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 18px 20px 64px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 26px 0 28px;
+    }
+
+    .eyebrow {
+      color: var(--pink);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 8vw, 4.1rem);
+      line-height: 1.06;
+      letter-spacing: -1.8px;
+      margin: 14px 0;
+    }
+
+    h1 span {
+      color: var(--purple);
+      display: block;
+    }
+
+    .hero p {
+      max-width: 540px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .notice {
+      margin: 24px 0;
+      padding: 14px 16px;
+      background: #21152b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .notice strong { color: var(--text); }
+
+    .quiz-card,
+    .result-card,
+    .faq-card {
+      background: rgba(22, 11, 36, .94);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(20px, 5vw, 34px);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, .2);
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-bottom: 12px;
+    }
+
+    .progress-track {
+      height: 6px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: #352340;
+      margin-bottom: 28px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      transition: width .2s ease;
+    }
+
+    .question-number {
+      color: var(--pink);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      line-height: 1.25;
+      margin: 8px 0 10px;
+    }
+
+    .question-help {
+      color: var(--muted);
+      margin: 0 0 22px;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      background: var(--panel-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color .15s, transform .15s, background .15s;
+    }
+
+    .option:hover {
+      border-color: var(--purple);
+      transform: translateY(-1px);
+    }
+
+    .option:active { transform: scale(.99); }
+
+    .option strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .option small {
+      display: block;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 800;
+      text-decoration: none;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #180a27;
+    }
+
+    .btn-primary:hover { background: #c7a8ff; }
+
+    .btn-secondary {
+      background: #2a1b38;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--pink); }
+
+    .btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .result-card { border-color: #6e4c91; }
+
+    .result-icon { font-size: 2.4rem; }
+
+    .result-label {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: .8rem;
+      color: var(--pink);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .result-card p { color: var(--muted); }
+
+    .result-card h3 {
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+
+    .message-box {
+      width: 100%;
+      min-height: 110px;
+      resize: vertical;
+      background: #10071a;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .hidden { display: none !important; }
+
+    .section { margin-top: 38px; }
+
+    .section-intro { color: var(--muted); }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    details {
+      background: #160b24;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 16px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    details p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--pink); }
+
+    .footer p { margin: 6px 0; }
+
+    @media (max-width: 480px) {
+      .site-header { padding: 18px 16px; }
+      main { padding: 10px 14px 48px; }
+      .hero { padding-top: 22px; }
+      .quiz-card,
+      .result-card,
+      .faq-card { border-radius: 17px; }
+      .button-row .btn { flex: 1 1 100%; }
+      .footer-links { gap: 10px 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">TMI <span>STUDIOS</span></a>
+    <a class="back-link" href="../apps/">← All apps</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">The almost texted your ex test</div>
+      <h1>Should I text <span>my ex? 👀</span></h1>
+      <p>Before you type “hey stranger”, let's have a tiny reality check. Four questions. One thoughtful answer. Absolutely no judgement.</p>
+    </section>
+
+    <div class="notice">
+      <strong>Quick boundary check:</strong> this tool is for reflection, not permission to override someone else's boundaries. If they asked you not to contact them, blocked you, or contact could put anyone at risk, respect that boundary.
+    </div>
+
+    <section id="quiz" class="quiz-card" aria-live="polite">
+      <div class="progress-row">
+        <span id="step-label">Question 1 of 4</span>
+        <span id="progress-percent">25% complete</span>
+      </div>
+
+      <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" id="progress-track">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <div id="question-area">
+        <div class="question-number" id="question-number">QUESTION 01</div>
+        <h2 id="question-title">Has your ex asked for no contact?</h2>
+        <p class="question-help" id="question-help">This one matters more than everything else in this quiz.</p>
+        <div class="options" id="options"></div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-secondary" id="back-button" type="button" disabled>← Back</button>
+        <button class="btn btn-secondary" id="restart-button" type="button">Start again</button>
+      </div>
+    </section>
+
+    <section id="result" class="result-card hidden" aria-live="polite" tabindex="-1">
+      <div class="result-icon" id="result-icon">💌</div>
+      <div class="result-label" id="result-label">YOUR REALITY CHECK</div>
+      <h2 id="result-title">Take a breath first.</h2>
+      <p id="result-description"></p>
+
+      <div id="message-section" class="hidden">
+        <h3>A low pressure message idea</h3>
+        <p class="small-note">Only use this if contact is welcome and appropriate. You do not owe anyone a message, either.</p>
+        <textarea class="message-box" id="message-template" aria-label="Suggested message" rows="4"></textarea>
+        <div class="button-row">
+          <button class="btn btn-primary" id="copy-button" type="button">Copy message</button>
+          <button class="btn btn-secondary" id="edit-button" type="button">Edit message</button>
+        </div>
+        <p class="small-note" id="copy-status" role="status"></p>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-primary" id="share-button" type="button">Share this result</button>
+        <button class="btn btn-secondary" id="result-restart-button" type="button">Retake the test</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Before you hit send...</h2>
+      <p class="section-intro">Missing someone is a feeling, not an instruction. You can miss a person and still choose what is healthiest for you.</p>
+
+      <div class="faq-list">
+        <details>
+          <summary>What if I just want closure?</summary>
+          <p>Closure does not always come from another conversation. Ask yourself what you hope they will say, and whether you can move forward if they never say it. If they have asked for no contact, do not use closure as a reason to cross that boundary.</p>
+        </details>
+
+        <details>
+          <summary>What if I was the one who ended it?</summary>
+          <p>You can still think carefully before reaching out. Consider why the relationship ended, what has genuinely changed, and whether contacting them would be fair to both of you. Give them room to decline or not respond.</p>
+        </details>
+
+        <details>
+          <summary>What if I sent a text and they did not reply?</summary>
+          <p>Give them space. Avoid sending repeated follow ups to force an answer. Silence can feel painful, but you cannot make someone participate in a conversation.</p>
+        </details>
+
+        <details>
+          <summary>Does this quiz know what my ex is thinking?</summary>
+          <p>No. This is a reflection tool, not a prediction. It cannot know what another person feels or guarantee how they will respond. It helps you pause and consider your own reasons, boundaries, and readiness.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="faq-card">
+        <h2>A final reminder 💜</h2>
+        <p class="section-intro">You do not have to make a decision tonight. Write the message in your notes, talk it through with someone you trust, or do absolutely nothing for a while. You are allowed to protect your peace.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../">Home</a>
+      <a href="../apps/">Apps</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms of Use</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+      <a href="mailto:tmistudios01@gmail.com">Contact</a>
+    </nav>
+    <p>Made with a little too much honesty by TMI Studios.</p>
+    <p>© <span id="year"></span> TMI Studios. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const questions = [
+        {
+          title: "Has your ex asked for no contact?",
+          help: "This one matters more than everything else in this quiz.",
+          options: [
+            {
+              label: "Yes, or they've blocked me",
+              detail: "Their boundary needs to be respected.",
+              value: "boundary"
+            },
+            {
+              label: "Contact could be unsafe or harmful",
+              detail: "My safety or theirs could be affected.",
+              value: "unsafe"
+            },
+            {
+              label: "No, contact is welcome or there is no such boundary",
+              detail: "I can consider the other questions.",
+              value: "clear"
+            },
+            {
+              label: "I'm not sure",
+              detail: "I don't know whether contact would be welcome.",
+              value: "unsure"
+            }
+          ]
+        },
+        {
+          title: "What is making you want to text them?",
+          help: "Be honest with yourself. There are no gold stars here.",
+          options: [
+            {
+              label: "Something practical needs sorting out",
+              detail: "Belongings, arrangements, or another necessary detail.",
+              value: "practical"
+            },
+            {
+              label: "I miss them or feel lonely",
+              detail: "I want to feel close to someone familiar.",
+              value: "lonely"
+            },
+            {
+              label: "I need closure or reassurance",
+              detail: "I want answers, an apology, or to know they care.",
+              value: "closure"
+            },
+            {
+              label: "I genuinely want a calm conversation",
+              detail: "I have something considered to say.",
+              value: "calm"
+            }
+          ]
+        },
+        {
+          title: "Could you handle no reply?",
+          help: "Imagine sending the text and hearing absolutely nothing back.",
+          options: [
+            {
+              label: "Yes, I can accept that",
+              detail: "It might sting, but I would respect it.",
+              value: "ready"
+            },
+            {
+              label: "Honestly, that would wreck my day",
+              detail: "I am hoping for a particular response.",
+              value: "notready"
+            },
+            {
+              label: "I would probably send another message",
+              detail: "I might struggle to leave it there.",
+              value: "followup"
+            }
+          ]
+        },
+        {
+          title: "What state are you in right now?",
+          help: "Your timing can matter as much as your reason.",
+          options: [
+            {
+              label: "Calm, clear headed, and sober",
+              detail: "I've thought about this beyond one emotional moment.",
+              value: "calm"
+            },
+            {
+              label: "Sad, angry, anxious, or overwhelmed",
+              detail: "My feelings are doing most of the driving.",
+              value: "emotional"
+            },
+            {
+              label: "It's late, I've been drinking, or I'm exhausted",
+              detail: "Tomorrow me might have a different opinion.",
+              value: "late"
+            }
+          ]
+        }
+      ];
+
+      const answers = [];
+      let currentQuestion = 0;
+
+      const $ = function (id) {
+        return document.getElementById(id);
+      };
+
+      $("year").textContent = new Date().getFullYear();
+
+      function renderQuestion() {
+        const question = questions[currentQuestion];
+        const number = currentQuestion + 1;
+        const percent = Math.round((number / questions.length) * 100);
+
+        $("step-label").textContent = "Question " + number + " of " + questions.length;
+        $("progress-percent").textContent = percent + "% complete";
+        $("progress-bar").style.width = percent + "%";
+        $("progress-track").setAttribute("aria-valuenow", String(number));
+        $("question-number").textContent = "QUESTION " + String(number).padStart(2, "0");
+        $("question-title").textContent = question.title;
+        $("question-help").textContent = question.help;
+        $("back-button").disabled = currentQuestion === 0;
+        $("options").replaceChildren();
+
+        question.options.forEach(function (option) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "option";
+
+          const strong = document.createElement("strong");
+          strong.textContent = option.label;
+
+          const small = document.createElement("small");
+          small.textContent = option.detail;
+
+          button.append(strong, small);
+          button.addEventListener("click", function () {
+            answers[currentQuestion] = option.value;
+
+            if (currentQuestion < questions.length - 1) {
+              currentQuestion++;
+              renderQuestion();
+            } else {
+              showResult();
+            }
+          });
+
+          $("options").appendChild(button);
+        });
+      }
+
+      function decideResult() {
+        const boundary = answers[0];
+        const reason = answers[1];
+        const readiness = answers[2];
+        const mood = answers[3];
+
+        if (boundary === "boundary") {
+          return {
+            icon: "🛑",
+            label: "BOUNDARY CHECK",
+            title: "Don't send that text.",
+            description: "If they asked for no contact or blocked you, respect that boundary. Do not use another number, account, or another person to get around it. You can write what you wish you could say without sending it. Your feelings matter, and so does their boundary.",
+            message: "",
+            share: "My Should I Text My Ex? result: respect the boundary and don't send the text."
+          };
+        }
+
+        if (boundary === "unsafe") {
+          return {
+            icon: "🛡️",
+            label: "SAFETY FIRST",
+            title: "Your safety comes first.",
+            description: "If contact could expose you or someone else to harm, don't use this quiz as a reason to reach out. Consider support from someone you trust and use a safer, appropriate channel for any essential practical matter.",
+            message: "",
+            share: "My Should I Text My Ex? result: putting safety first."
+          };
+        }
+
+        if (boundary === "unsure") {
+          return {
+            icon: "🤔",
+            label: "PAUSE AND CHECK",
+            title: "Don't guess your way past a boundary.",
+            description: "If you are unsure whether contact is welcome, pause. Don't try to get around a block or a request for space. If there is a genuinely necessary practical issue, consider an appropriate, neutral channel rather than an emotional message.",
+            message: "",
+            share: "My Should I Text My Ex? result: pause and respect boundaries."
+          };
+        }
+
+        if (mood !== "calm") {
+          return {
+            icon: "🌙",
+            label: "NOT RIGHT NOW",
+            title: "Save the text. Revisit it tomorrow.",
+            description: "You don't have to decide while your feelings are loud, you're tired, or you've been drinking. Put the message in your notes instead. Give yourself at least 24 hours, then reread it when you're rested and clear headed.",
+            message: "",
+            share: "My Should I Text My Ex? result: sleep on it before sending anything."
+          };
+        }
+
+        if (readiness !== "ready") {
+          return {
+            icon: "💜",
+            label: "PROTECT YOUR PEACE",
+            title: "You might be looking for more than a text can give.",
+            description: "If no reply would leave you spiralling, or you think you'd keep messaging, wait. Ask yourself what you need from their response and how you could care for yourself if it never comes. You can revisit the decision when the outcome feels less tied to your wellbeing.",
+            message: "",
+            share: "My Should I Text My Ex? result: protecting my peace before reaching out."
+          };
+        }
+
+        if (reason === "lonely") {
+          return {
+            icon: "🫶",
+            label: "CHECK IN WITH YOURSELF",
+            title: "Missing them doesn't automatically mean text them.",
+            description: "Loneliness can make the familiar feel like the right answer. Before reaching out, try calling a friend, getting some rest, or writing down what you miss. If you still want to contact them later, consider whether you miss the person as they are, or the comfort you associate with them.",
+            message: "",
+            share: "My Should I Text My Ex? result: missing someone isn't an instruction."
+          };
+        }
+
+        if (reason === "closure") {
+          return {
+            icon: "📝",
+            label: "GET CLEAR ON YOUR WHY",
+            title: "Could you find closure without their reply?",
+            description: "It's understandable to want answers, but the other person may not give you the response you hope for. Write down the one thing you want to ask and what you would do if they couldn't answer it. If you still choose to reach out, keep it respectful and leave room for them not to respond.",
+            message: "Hi. I've been reflecting on things and had a question I'd like to ask, if you're comfortable having that conversation. No pressure if you'd rather not.",
+            share: "My Should I Text My Ex? result: think about what closure means to me."
+          };
+        }
+
+        if (reason === "practical") {
+          return {
+            icon: "📦",
+            label: "KEEP IT PRACTICAL",
+            title: "A short, clear message may be enough.",
+            description: "If contact is welcome and the matter genuinely needs sorting out, keep the message focused on the practical issue. Avoid using logistics as a way to restart a relationship conversation unless both of you want that.",
+            message: "Hi. I'm messaging about [the practical matter]. Would [specific arrangement] work for you? Thanks.",
+            share: "My Should I Text My Ex? result: keep necessary contact clear and practical."
+          };
+        }
+
+        return {
+          icon: "💌",
+          label: "THINK IT THROUGH",
+          title: "If you reach out, keep it kind and low pressure.",
+          description: "You sound more prepared to handle different outcomes, but that doesn't guarantee your ex wants to reconnect. If contact is welcome, say what you mean without demanding an answer. Send one respectful message, then let them choose whether to reply.",
+          message: "Hey. I've been thinking about you and wanted to check in. No pressure to reply if you'd rather not, but I hope you're doing well.",
+          share: "My Should I Text My Ex? result: if I reach out, I'll keep it respectful and low pressure."
+        };
+      }
+
+      function showResult() {
+        const result = decideResult();
+
+        $("quiz").classList.add("hidden");
+        $("result").classList.remove("hidden");
+        $("result-icon").textContent = result.icon;
+        $("result-label").textContent = result.label;
+        $("result-title").textContent = result.title;
+        $("result-description").textContent = result.description;
+        $("message-template").value = result.message;
+        $("message-section").classList.toggle("hidden", !result.message);
+        $("copy-status").textContent = "";
+        $("result").dataset.share = result.share;
+        $("result").dataset.title = result.title;
+
+        $("result").focus();
+        $("result").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function restart() {
+        answers.length = 0;
+        currentQuestion = 0;
+        $("result").classList.add("hidden");
+        $("quiz").classList.remove("hidden");
+        renderQuestion();
+        $("quiz").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      async function copyMessage() {
+        const field = $("message-template");
+        const text = field.value;
+
+        if (!text.trim()) return;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            field.focus();
+            field.select();
+            const copied = document.execCommand("copy");
+            if (!copied) throw new Error("Copy unavailable");
+          }
+
+          $("copy-status").textContent = "Copied! Edit it to sound like you before sending.";
+        } catch (error) {
+          field.focus();
+          field.select();
+          $("copy-status").textContent = "Your message is selected. Long press it and choose Copy.";
+        }
+      }
+
+      function shareResult() {
+        const text = $("result").dataset.share || "I took the Should I Text My Ex? reality check.";
+        const url = "https://tmi-studios.github.io/tmistudio1/shoulditextmyex/";
+        const shareText = text + "\nTake the test: " + url;
+        const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(shareText);
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      }
+
+      $("back-button").addEventListener("click", function () {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          renderQuestion();
+        }
+      });
+
+      $("restart-button").addEventListener("click", restart);
+      $("result-restart-button").addEventListener("click", restart);
+      $("copy-button").addEventListener("click", copyMessage);
+
+      $("edit-button").addEventListener("click", function () {
+        $("message-template").focus();
+        $("message-template").select();
+      });
+
+      $("share-button").addEventListener("click", shareResult);
+
+      renderQuestion();
+    })();
+  </script>
+</body>
+</html>
