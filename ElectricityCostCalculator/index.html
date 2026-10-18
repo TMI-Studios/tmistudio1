@@ -1,0 +1,956 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Electricity Cost Calculator South Africa 2026/27 | TMI Studios</title>
+<meta name="description" content="Calculate prepaid electricity units, appliance running costs and estimated electricity expenses in South Africa. Adjust your kWh tariff and fixed charges for 2026/27.">
+<meta name="keywords" content="electricity calculator South Africa, prepaid electricity units calculator, R500 electricity units, geyser electricity cost, appliance electricity usage, electricity cost per kWh, 2026 electricity tariffs">
+<meta name="author" content="TMI Studios">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0a0a">
+
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/ElectricityCostCalculator/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Electricity Cost Calculator South Africa">
+<meta property="og:description" content="Estimate prepaid electricity units and appliance costs using your own electricity tariff.">
+<meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/ElectricityCostCalculator/">
+<meta property="og:site_name" content="TMI Studios">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Electricity Cost Calculator SA">
+<meta name="twitter:description" content="Estimate prepaid units and household appliance costs in South Africa.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Electricity Cost Calculator South Africa",
+  "url": "https://tmi-studios.github.io/tmistudio1/ElectricityCostCalculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "An independent electricity calculator for estimating prepaid units and appliance energy costs using user-entered rates.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ZAR"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "TMI Studios",
+    "url": "https://tmi-studios.github.io/tmistudio1/"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many electricity units does R500 buy in South Africa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The number of units depends on your electricity rate and any fixed charges or deductions. For example, R500 at R2.85 per kWh buys approximately 175.4 kWh before fixed charges."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a 3 kW geyser cost to run?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At R2.85 per kWh, a 3 kW geyser operating at full rated power for three hours uses 9 kWh and costs approximately R25.65. Actual usage depends on heating cycles, temperature, insulation and household hot-water use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my electricity tariff differ from this calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Electricity tariffs and fixed charges differ by municipality, Eskom tariff, customer category and meter arrangement. Enter the rate and applicable charges from your own electricity account or supplier."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #151515;
+  --panel2: #0f0f0f;
+  --text: #ffffff;
+  --muted: #a4a4a4;
+  --yellow: #ffe53c;
+  --border: #292929;
+  --warning: #ffe8aa;
+  --warning-bg: #302719;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, Arial, sans-serif;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--yellow);
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: #fff29b;
+}
+
+.wrap {
+  width: min(100% - 32px, 800px);
+  margin: 0 auto;
+}
+
+header {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  color: var(--yellow);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.hero {
+  padding: 35px 0 18px;
+}
+
+.eyebrow {
+  color: var(--yellow);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 12px 0;
+  font-size: clamp(32px, 8vw, 48px);
+  line-height: 1.04;
+  letter-spacing: -1.8px;
+}
+
+h1 span {
+  color: var(--yellow);
+}
+
+h2 {
+  margin-top: 0;
+  line-height: 1.25;
+}
+
+h3 {
+  line-height: 1.35;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(16px, 4vw, 24px);
+  margin: 16px 0;
+}
+
+label {
+  display: block;
+  margin: 16px 0 5px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+  margin: 6px 0 12px;
+  border-radius: 10px;
+  border: 1px solid #383838;
+  background: #0f0f0f;
+  color: #fff;
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.field-help {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: -6px;
+}
+
+button {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--yellow);
+  color: #000;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.94);
+}
+
+.results {
+  display: none;
+  margin-top: 20px;
+}
+
+.results.visible {
+  display: block;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.box {
+  min-width: 0;
+  background: var(--panel2);
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.box span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+.box b {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(16px, 4vw, 21px);
+  overflow-wrap: anywhere;
+}
+
+.box.hl {
+  border-color: var(--yellow);
+}
+
+.box.hl b {
+  color: var(--yellow);
+}
+
+.result-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 14px;
+}
+
+.error {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #914848;
+  border-radius: 10px;
+  background: #321919;
+  color: #ffd1d1;
+  font-size: 13px;
+}
+
+.error.visible {
+  display: block;
+}
+
+.notice {
+  margin: 18px 0;
+  padding: 14px;
+  border: 1px solid #665633;
+  border-radius: 12px;
+  background: var(--warning-bg);
+  color: var(--warning);
+  font-size: 13px;
+}
+
+.notice strong {
+  color: #fff0c9;
+}
+
+details {
+  background: var(--panel2);
+  border: 1px solid #292929;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 850;
+  font-size: 15px;
+}
+
+details p,
+details li {
+  color: #c5c5c5;
+  font-size: 14px;
+}
+
+details li {
+  margin: 8px 0;
+}
+
+.step {
+  background: var(--panel);
+  border-left: 3px solid var(--yellow);
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+.content-section {
+  padding: 16px 0;
+}
+
+.content-section p,
+.content-section li {
+  color: #c5c5c5;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+table {
+  width: 100%;
+  min-width: 430px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  color: var(--yellow);
+  text-align: left;
+  background: #171717;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #292929;
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+.faq {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.faq:last-child {
+  border-bottom: 0;
+}
+
+.faq h3 {
+  font-size: 15px;
+  margin: 0 0 7px;
+}
+
+.faq p {
+  margin: 0;
+  color: #c5c5c5;
+  font-size: 14px;
+}
+
+.related-links,
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 15px 0;
+}
+
+footer {
+  margin-top: 28px;
+  padding: 25px 0 36px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer p {
+  font-size: 12px;
+}
+
+@media (min-width: 600px) {
+  .result-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-top: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="../">TMI STUDIOS</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">TMI Studios · App #8/100 · South Africa 2026/27</div>
+    <h1>Electricity <span>Cost Calculator</span></h1>
+    <p class="sub">
+      Estimate prepaid electricity units, geyser costs and the energy used
+      by everyday household appliances. Enter your own electricity rate
+      and any fixed charges that apply to your purchase.
+    </p>
+
+    <div class="notice">
+      <strong>Independent calculator in development.</strong>
+      This tool may contain errors, omissions or incomplete features.
+      Electricity tariffs vary by supplier, municipality, customer category
+      and meter arrangement. The default R2.85/kWh rate is an example only,
+      not a verified national tariff. Check your latest tariff or electricity
+      account before relying on the estimate.
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="calculator-heading">
+    <h2 id="calculator-heading">Calculate your electricity</h2>
+    <p class="sub">
+      Change the example values to match your own electricity tariff.
+    </p>
+
+    <form id="electricity-form" novalidate>
+      <label for="rand">How much are you buying? (R)</label>
+      <input id="rand" type="number" min="0" max="10000000"
+        step="0.01" value="500" required>
+
+      <label for="rate">Your energy rate per kWh (R)</label>
+      <input id="rate" type="number" min="0.01" max="10000"
+        step="0.01" value="2.85" required>
+      <div class="field-help">
+        Check your supplier's tariff. This is the rate used for the estimate.
+      </div>
+
+      <label for="fixed">Fixed charges or deductions from this purchase (R)</label>
+      <input id="fixed" type="number" min="0" max="10000000"
+        step="0.01" value="0" required>
+      <div class="field-help">
+        Enter only charges that are actually deducted from this amount.
+        Leave at R0 if none apply or if you are unsure.
+      </div>
+
+      <label for="appliance">Appliance</label>
+      <select id="appliance">
+        <option value="0">Units only — no appliance selected</option>
+        <option value="3000">Geyser — 3,000 W (3 kW)</option>
+        <option value="2000">Stove plate — 2,000 W (2 kW)</option>
+        <option value="1000">Heater — 1,000 W (1 kW)</option>
+        <option value="120">Fridge — 120 W (illustrative)</option>
+        <option value="80">TV — 80 W (illustrative)</option>
+        <option value="1500">Kettle — 1,500 W (1.5 kW)</option>
+      </select>
+
+      <label for="hours">Hours used per day</label>
+      <input id="hours" type="number" min="0" max="24"
+        step="0.1" value="3" required>
+      <div class="field-help">
+        Use 0 to skip daily appliance cost estimates.
+      </div>
+
+      <button type="submit">Calculate my electricity</button>
+      <div id="error" class="error" role="alert"></div>
+    </form>
+
+    <div class="results" id="results" aria-live="polite">
+      <div class="result-grid">
+        <div class="box hl">
+          <span>ESTIMATED UNITS AVAILABLE</span>
+          <b id="units">0 kWh</b>
+        </div>
+        <div class="box">
+          <span>MONEY LEFT FOR ENERGY</span>
+          <b id="energy-money">R0.00</b>
+        </div>
+        <div class="box">
+          <span>APPLIANCE COST PER DAY</span>
+          <b id="daily-cost">R0.00</b>
+        </div>
+        <div class="box">
+          <span>APPLIANCE COST PER 30 DAYS</span>
+          <b id="monthly-cost">R0.00</b>
+        </div>
+        <div class="box">
+          <span>ESTIMATED DAYS OF THIS APPLIANCE</span>
+          <b id="days">—</b>
+        </div>
+        <div class="box">
+          <span>ENERGY USED PER DAY</span>
+          <b id="daily-units">0 kWh</b>
+        </div>
+      </div>
+
+      <p class="result-note" id="result-note"></p>
+      <p class="result-note">
+        <strong>Estimate only:</strong> The result assumes the rate you entered
+        applies to all calculated units and does not model tiered tariffs,
+        taxes, levies, meter-specific rules, free basic electricity or changes
+        in appliance power draw.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>How many units does R500 buy?</h2>
+    <p>
+      Electricity units are measured in kilowatt-hours (kWh). The number
+      purchased depends on the energy rate and any charges deducted from
+      the amount you spend.
+    </p>
+
+    <div class="step">
+      <strong>Example: R500 at R2.85/kWh</strong><br>
+      With no fixed deductions, R500 buys approximately 175.4 kWh.
+      If R217 in applicable charges were deducted first, R283 would remain,
+      buying approximately 99.3 kWh at that same example rate.
+    </div>
+
+    <p>
+      These are mathematical examples, not a claim about what every household
+      receives. Some tariffs have block rates, fixed charges, service fees,
+      levies or other rules. Do not subtract a fixed fee unless it actually
+      applies to your account or purchase.
+    </p>
+  </section>
+
+  <details open>
+    <summary>Geyser electricity cost: what does it use?</summary>
+    <div class="step">
+      A 3 kW geyser operating at full rated power for 3 hours uses
+      9 kWh. At R2.85/kWh, that is R25.65 per day or R769.50 over 30 days.
+    </div>
+    <ol>
+      <li>
+        A 3 kW geyser running at full power for 2 hours uses 6 kWh.
+        At R2.85/kWh, that is R17.10 per day or R513 over 30 days.
+      </li>
+      <li>
+        The difference between those two illustrative schedules is
+        R256.50 over 30 days at that rate.
+      </li>
+      <li>
+        A geyser does not necessarily draw full power continuously.
+        Actual use depends on water temperature, heating cycles, insulation,
+        thermostat settings and household hot-water demand.
+      </li>
+      <li>
+        Before changing geyser settings or switching off power, consider
+        household needs, manufacturer guidance and the risk of excessively
+        hot or inadequately heated water.
+      </li>
+    </ol>
+  </details>
+
+  <details>
+    <summary>Fridge, TV, stove, kettle and heater costs</summary>
+    <p>
+      The examples below use R2.85/kWh. They are estimates based on the
+      stated wattage and schedule, not measured consumption for every model.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Appliance</th>
+            <th>Assumed power</th>
+            <th>Example cost</th>
+            <th>Assumed use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Geyser</td>
+            <td>3 kW</td>
+            <td>R8.55/hour</td>
+            <td>3 hours/day: R769.50 per 30 days</td>
+          </tr>
+          <tr>
+            <td>Stove plate</td>
+            <td>2 kW</td>
+            <td>R5.70/hour</td>
+            <td>3 hours/day: R513 per 30 days</td>
+          </tr>
+          <tr>
+            <td>Kettle</td>
+            <td>1.5 kW</td>
+            <td>R0.71 for 10 minutes</td>
+            <td>Three 10-minute boils daily: about R64.13 per 30 days</td>
+          </tr>
+          <tr>
+            <td>Heater</td>
+            <td>1 kW</td>
+            <td>R2.85/hour</td>
+            <td>3 hours/day: R256.50 per 30 days</td>
+          </tr>
+          <tr>
+            <td>Fridge</td>
+            <td>120 W</td>
+            <td>R0.34 per equivalent hour</td>
+            <td>24 hours/day at continuous rated draw: R246.24 per 30 days</td>
+          </tr>
+          <tr>
+            <td>TV</td>
+            <td>80 W</td>
+            <td>R0.23/hour</td>
+            <td>3 hours/day: about R20.52 per 30 days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Fridges cycle on and off, and appliances do not always draw their
+      rated power continuously. Actual consumption can therefore be
+      substantially different from these simple wattage calculations.
+    </p>
+  </details>
+
+  <details>
+    <summary>R100, R200, R500 and R1,000: example units</summary>
+    <p>
+      This table assumes R2.85/kWh and no fixed deductions. It does not
+      predict how many days your electricity will last; that depends on
+      household usage and the tariff that applies to you.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Purchase</th>
+            <th>Estimated units before deductions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>R100</td><td>35.1 kWh</td></tr>
+          <tr><td>R200</td><td>70.2 kWh</td></tr>
+          <tr><td>R500</td><td>175.4 kWh</td></tr>
+          <tr><td>R1,000</td><td>350.9 kWh</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>How to make your electricity last longer</summary>
+    <ol>
+      <li>Track your meter before and after using high-power appliances.</li>
+      <li>Boil only the water you need in your kettle.</li>
+      <li>Use heating and cooking appliances only as needed.</li>
+      <li>Check fridge door seals and follow the manufacturer's settings.</li>
+      <li>Compare your actual usage against appliance labels and meter readings.</li>
+      <li>
+        Check your current supplier's tariff and any applicable fixed charges
+        before comparing prepaid purchases.
+      </li>
+    </ol>
+    <p>
+      Savings depend on the appliance, your household habits and your tariff.
+      No particular saving is guaranteed.
+    </p>
+  </details>
+
+  <section class="content-section">
+    <h2>Why electricity prices differ across South Africa</h2>
+    <p>
+      Electricity pricing is not identical across South Africa. Eskom direct
+      customers and municipal customers may have different tariffs, and
+      customer categories can have different energy rates or fixed charges.
+      Some tariffs also use different rates at different usage levels.
+    </p>
+    <p>
+      Eskom publishes annual tariff changes, while NERSA publishes decisions
+      for electricity distributors. For the 2026/27 period, Eskom's published
+      changes distinguish direct-customer tariffs from municipal tariff
+      adjustments. Always check the tariff schedule that applies to your own
+      account.
+    </p>
+    <p>
+      Official references:
+      <a href="https://www.eskom.co.za/distribution/2026-2027-tariff-increase/"
+         target="_blank" rel="noopener noreferrer">Eskom 2026/27 tariff information</a>
+      and
+      <a href="https://www.nersa.org.za/regulator-decisions/150"
+         target="_blank" rel="noopener noreferrer">NERSA regulator decisions</a>.
+    </p>
+  </section>
+
+  <section class="content-section">
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq">
+      <h3>Is R2.85/kWh the official South African rate?</h3>
+      <p>
+        No. It is an editable example rate. Your actual rate may be different
+        depending on your supplier, municipality, tariff category and usage.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Does the calculator know my municipality's fixed fees?</h3>
+      <p>
+        No. Enter any applicable deduction yourself. The calculator does not
+        automatically retrieve tariffs or identify your municipality.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Does it calculate tiered electricity pricing?</h3>
+      <p>
+        Not yet. It applies one entered rate to all estimated units.
+        If your tariff uses blocks or different rates, the result may differ
+        from your actual electricity purchase.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Will the appliance estimate match my meter exactly?</h3>
+      <p>
+        Not necessarily. It uses rated power multiplied by time. Real
+        appliances may cycle, change power draw or use less energy than
+        their rated maximum.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>More TMI Studios tools</h2>
+    <div class="related-links">
+      <a href="../BudgetApp/">Budget Calculator</a>
+      <a href="../SalaryAfterTaxCalculator/">Salary After Tax Calculator</a>
+      <a href="../MashonisaVsBank/">Mashonisa vs Bank Calculator</a>
+      <a href="../">TMI Studios home</a>
+      <a href="../apps/">Browse apps</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Development and accuracy disclaimer</strong>
+    <p>
+      This is an independently developed TMI Studios tool, not an official
+      Eskom, NERSA or municipal service. It may contain errors, omissions,
+      outdated information or incomplete features. Results are estimates
+      based on user-entered values and simplified assumptions; they are
+      not guaranteed to match a bill, meter or prepaid purchase. Verify
+      important information with your electricity supplier and the applicable
+      tariff schedule before relying on it. This tool does not provide
+      professional, legal or financial advice. Nothing in this notice excludes
+      rights or protections that cannot lawfully be excluded.
+    </p>
+
+    <nav class="footer-links" aria-label="Legal and contact links">
+      <a href="../disclaimer.html">Full disclaimer</a>
+      <a href="../privacy.html">Privacy policy</a>
+      <a href="../terms.html">Terms of use</a>
+      <a href="mailto:tmistudios01@gmail.com">Contact</a>
+    </nav>
+
+    <p>© 2026 TMI Studios · Independent digital tools.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const form = document.getElementById("electricity-form");
+const randInput = document.getElementById("rand");
+const rateInput = document.getElementById("rate");
+const fixedInput = document.getElementById("fixed");
+const applianceInput = document.getElementById("appliance");
+const hoursInput = document.getElementById("hours");
+const results = document.getElementById("results");
+const errorBox = document.getElementById("error");
+
+const money = new Intl.NumberFormat("en-ZA", {
+  style: "currency",
+  currency: "ZAR",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+
+function rand(value) {
+  return money.format(Number.isFinite(value) ? value : 0);
+}
+
+function showError(message) {
+  errorBox.textContent = message;
+  errorBox.classList.add("visible");
+  results.classList.remove("visible");
+}
+
+function clearError() {
+  errorBox.textContent = "";
+  errorBox.classList.remove("visible");
+}
+
+function setText(id, value) {
+  document.getElementById(id).textContent = value;
+}
+
+function calculate() {
+  clearError();
+
+  const purchase = Number(randInput.value);
+  const rate = Number(rateInput.value);
+  const fixed = Number(fixedInput.value);
+  const watts = Number(applianceInput.value);
+  const hours = Number(hoursInput.value);
+
+  if (
+    randInput.value.trim() === "" ||
+    rateInput.value.trim() === "" ||
+    fixedInput.value.trim() === "" ||
+    hoursInput.value.trim() === "" ||
+    !Number.isFinite(purchase) ||
+    !Number.isFinite(rate) ||
+    !Number.isFinite(fixed) ||
+    !Number.isFinite(hours)
+  ) {
+    showError("Please enter a valid number in each required field.");
+    return;
+  }
+
+  if (purchase < 0 || purchase > 10000000) {
+    showError("Enter a purchase amount between R0 and R10,000,000.");
+    return;
+  }
+
+  if (rate <= 0 || rate > 10000) {
+    showError("Your rate must be greater than R0 and no more than R10,000 per kWh.");
+    return;
+  }
+
+  if (fixed < 0 || fixed > purchase) {
+    showError("Fixed charges must be zero or more, and cannot exceed your purchase amount.");
+    return;
+  }
+
+  if (hours < 0 || hours > 24) {
+    showError("Hours per day must be between 0 and 24.");
+    return;
+  }
+
+  const energyMoney = Math.max(0, purchase - fixed);
+  const units = energyMoney / rate;
+
+  const kilowatts = watts / 1000;
+  const dailyUnits = kilowatts * hours;
+  const dailyCost = dailyUnits * rate;
+  const monthlyCost = dailyCost * 30;
+
+  let days = "—";
+
+  if (watts > 0 && dailyUnits > 0) {
+    days = (units / dailyUnits).toFixed(1) + " days";
+  } else if (watts > 0 && dailyUnits === 0) {
+    days = "No daily use";
+  }
+
+  setText("units", units.toFixed(1) + " kWh");
+  setText("energy-money", rand(energyMoney));
+  setText("daily-cost", watts > 0 ? rand(dailyCost) : "—");
+  setText("monthly-cost", watts > 0 ? rand(monthlyCost) : "—");
+  setText("days", days);
+  setText("daily-units", watts > 0 ? dailyUnits.toFixed(2) + " kWh" : "—");
+
+  let note = "Estimated units are calculated from the amount left after entered fixed charges divided by your rate.";
+
+  if (fixed > 0) {
+    note += " The calculation deducts " + rand(fixed) +
+      " from your purchase before estimating units.";
+  } else {
+    note += " No fixed charge was deducted.";
+  }
+
+  if (watts > 0) {
+    note += " Appliance costs assume " + hours +
+      " hours of use per day at a constant " + watts +
+      " W and your entered rate. The actual appliance may use less or more.";
+  } else {
+    note += " Select an appliance to estimate daily and monthly running costs.";
+  }
+
+  setText("result-note", note);
+  results.classList.add("visible");
+}
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  calculate();
+});
+
+calculate();
+</script>
+</body>
+</html>
