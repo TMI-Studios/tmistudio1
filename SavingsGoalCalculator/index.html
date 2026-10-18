@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Savings Goal Calculator SA | How Much to Save Monthly</title>
+<meta name="description" content="Calculate how much to save each month or how long it will take to reach your savings goal in South Africa. Includes current savings, monthly deposits and optional interest.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/SavingsGoalCalculator/">
+<meta property="og:title" content="Savings Goal Calculator South Africa | TMI Studios">
+<meta property="og:description" content="Plan your savings goal in rands. Calculate monthly contributions, time to target and estimated interest.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/SavingsGoalCalculator/">
+<meta name="twitter:card" content="summary">
+
+<style>
+:root{--bg:#0a0a0a;--panel:#151515;--input:#0f0f0f;--border:#292929;--green:#3cffc7;--muted:#aaa;--gold:#ffd479;--red:#ff9292}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;font-family:system-ui,-apple-system,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:800px;margin:0 auto;padding:20px 16px 40px}
+.brand{font-size:11px;color:#888;letter-spacing:1.4px;font-weight:800}
+h1{font-size:clamp(30px,7vw,44px);line-height:1.08;letter-spacing:-1.3px;margin:18px 0 10px}
+h1 span{color:var(--green)}
+h2{font-size:21px;line-height:1.3;margin:0 0 12px}
+h3{font-size:16px;margin:18px 0 7px}
+p{margin:9px 0}
+.sub{color:var(--muted);font-size:15px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px 0}
+.notice{background:#101b18;border-left:3px solid var(--green);border-radius:8px;padding:12px 14px;font-size:13px;color:#d7e8e3;margin:16px 0}
+.warning{background:#21190d;border-left-color:var(--gold);color:#f4e5c8}
+label{display:block;font-size:13px;color:#ddd;font-weight:750;margin-top:12px}
+input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #393939;background:var(--input);color:#fff;font-size:16px;margin:6px 0 5px}
+input:focus,select:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.hint{font-size:12px;color:#999;margin:0 0 5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}
+.mode{padding:12px 9px;background:#101010;color:#ccc;border:1px solid #383838;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;margin:0}
+.mode.active{background:#10241e;border-color:var(--green);color:var(--green)}
+button.primary{width:100%;padding:15px;border:0;border-radius:12px;background:var(--green);color:#000;font-size:16px;font-weight:900;cursor:pointer;margin-top:18px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.box{background:#0d0d0d;border:1px solid #303030;border-radius:12px;padding:13px;min-width:0}
+.box span{display:block;font-size:10px;color:#aaa;letter-spacing:.7px;font-weight:800}
+.box b{display:block;font-size:clamp(19px,4vw,27px);overflow-wrap:anywhere;margin-top:4px}
+.highlight{border-color:var(--green)}
+.highlight b{color:var(--green)}
+.metric{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #292929;font-size:13px}
+.metric span{color:#bbb}
+.metric strong{text-align:right;overflow-wrap:anywhere}
+.progress{height:12px;background:#292929;border-radius:99px;overflow:hidden;margin:10px 0}
+.progress-fill{height:100%;width:0;background:var(--green);border-radius:99px;transition:width .2s}
+.error{color:var(--red);font-size:13px;margin-top:10px}
+.small{font-size:12px;color:#999}
+details{background:#111;border:1px solid var(--border);border-radius:14px;padding:15px 16px;margin:12px 0}
+summary{cursor:pointer;font-weight:800}
+li{font-size:14px;color:#ccc;margin:7px 0}
+a{color:var(--green)}
+footer{border-top:1px solid #282828;padding-top:18px;margin-top:28px;font-size:12px;color:#999}
+footer a{margin-right:12px}
+.ad{border:1px dashed #333;border-radius:12px;padding:18px;text-align:center;color:#666;font-size:12px;margin:18px 0}
+[hidden]{display:none!important}
+@media(max-width:520px){.wrap{padding:16px 13px 30px}.card{padding:15px}.grid{grid-template-columns:1fr}.result-grid{gap:8px}.box{padding:10px}}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Savings Goal Calculator South Africa",
+  "url":"https://tmi-studios.github.io/tmistudio1/SavingsGoalCalculator/",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"Any",
+  "description":"Calculate monthly savings contributions, time to reach a target and estimated interest in South African rand.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"ZAR"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"How much should I save each month?",
+      "acceptedAnswer":{"@type":"Answer","text":"The amount depends on your target, current savings, deadline and interest rate. Use the calculator to estimate the monthly contribution needed to reach your goal."}
+    },
+    {
+      "@type":"Question",
+      "name":"How long will it take to reach my savings goal?",
+      "acceptedAnswer":{"@type":"Answer","text":"Enter your target, current savings, monthly contribution and estimated annual interest rate. The calculator estimates the number of months needed to reach your target."}
+    },
+    {
+      "@type":"Question",
+      "name":"Is the interest guaranteed?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. The interest rate is an assumption. Actual rates, fees, taxes and account conditions can change the result."}
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+<div class="wrap">
+<div class="brand">TMI STUDIOS · APP 10/100</div>
+
+<h1>Savings Goal <span>Calculator</span></h1>
+<p class="sub">Saving for a car, a deposit, an emergency fund, a holiday or just a little breathing room? Give your goal a number and a plan.</p>
+
+<div class="notice">
+<strong>Before you start:</strong> This calculator provides estimates using the amounts and interest rate you enter. It is for educational purposes, not financial or investment advice. Verify rates, fees and important decisions independently.
+</div>
+
+<section class="card">
+<h2>What do you want to calculate?</h2>
+
+<div class="modes" role="group" aria-label="Calculation mode">
+<button type="button" class="mode active" id="modeMonthly" aria-pressed="true">Monthly amount needed</button>
+<button type="button" class="mode" id="modeTime" aria-pressed="false">Time to reach my goal</button>
+</div>
+
+<div class="grid">
+<div>
+<label for="goal">Savings target (R)</label>
+<input id="goal" type="number" min="1" step="100" value="50000" inputmode="decimal">
+<p class="hint">The total amount you want to reach.</p>
+</div>
+
+<div>
+<label for="saved">Already saved (R)</label>
+<input id="saved" type="number" min="0" step="100" value="5000" inputmode="decimal">
+<p class="hint">Money already set aside for this goal.</p>
+</div>
+
+<div>
+<label for="rate">Estimated annual interest rate (%)</label>
+<input id="rate" type="number" min="0" max="100" step="0.1" value="5" inputmode="decimal">
+<p class="hint">Enter 0 if you do not want to include interest.</p>
+</div>
+
+<div id="deadlineField">
+<label for="years">Time available (years)</label>
+<input id="years" type="number" min="0" max="100" step="1" value="2" inputmode="numeric">
+</div>
+
+<div id="monthsField">
+<label for="extraMonths">Additional months</label>
+<input id="extraMonths" type="number" min="0" max="11" step="1" value="0" inputmode="numeric">
+</div>
+
+<div id="contributionField" hidden>
+<label for="monthly">How much can you save monthly? (R)</label>
+<input id="monthly" type="number" min="0" step="50" value="1500" inputmode="decimal">
+</div>
+</div>
+
+<button type="button" class="primary" id="calculate">Calculate my savings plan</button>
+<div id="error" class="error" role="alert" aria-live="polite"></div>
+
+<div id="results" hidden aria-live="polite">
+<h2 style="margin-top:25px" id="resultHeading">Your savings plan</h2>
+
+<div class="result-grid">
+<div class="box highlight">
+<span id="mainLabel">SAVE EACH MONTH</span>
+<b id="mainResult">R0</b>
+</div>
+<div class="box">
+<span id="secondaryLabel">TIME TO GOAL</span>
+<b id="secondaryResult">0 months</b>
+</div>
+<div class="box">
+<span>ESTIMATED INTEREST EARNED</span>
+<b id="interestResult">R0</b>
+</div>
+<div class="box">
+<span>YOUR CONTRIBUTIONS</span>
+<b id="contributionsResult">R0</b>
+</div>
+</div>
+
+<h3>Progress toward your target</h3>
+<div class="progress" role="progressbar" id="progressBar" aria-label="Progress toward savings target" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<p class="small" id="progressText">0% of your target</p>
+
+<div class="metric"><span>Target amount</span><strong id="targetBreakdown">R0</strong></div>
+<div class="metric"><span>Starting savings</span><strong id="startingBreakdown">R0</strong></div>
+<div class="metric"><span>Projected final balance</span><strong id="finalBreakdown">R0</strong></div>
+<div class="metric"><span>Estimated interest</span><strong id="interestBreakdown">R0</strong></div>
+<div class="metric"><span>Estimated total contributions</span><strong id="contributionBreakdown">R0</strong></div>
+
+<div class="notice warning" id="resultNote"></div>
+
+<button type="button" class="mode" id="printPlan">Print or save this plan as PDF</button>
+</div>
+</section>
+
+<section class="card">
+<h2>How to make your savings goal happen</h2>
+<ol>
+<li><strong>Pick a specific target.</strong> Decide what you need and how much it will cost.</li>
+<li><strong>Start with what you have.</strong> Include only savings genuinely set aside for this goal.</li>
+<li><strong>Choose a realistic monthly amount.</strong> Make sure your plan leaves room for essential expenses and unexpected costs.</li>
+<li><strong>Automate it if possible.</strong> A regular transfer after payday can help you stay consistent.</li>
+<li><strong>Review the plan.</strong> Update it when your income, target or actual savings rate changes.</li>
+</ol>
+<p class="small">You can also use the calculator to compare different deadlines and monthly contribution amounts.</p>
+</section>
+
+<details>
+<summary>How is the calculation worked out?</summary>
+<p>The calculator assumes a constant annual interest rate converted to a monthly rate, with monthly deposits made at the end of each month.</p>
+<ul>
+<li><strong>Monthly amount mode:</strong> estimates the regular deposit needed to reach your target within your chosen timeframe.</li>
+<li><strong>Time-to-goal mode:</strong> adds monthly deposits and estimated interest until the target is reached.</li>
+<li><strong>At 0% interest:</strong> the calculation uses your starting savings and contributions without interest growth.</li>
+</ul>
+<p>These are simplified projections. Real accounts may calculate interest daily, apply fees or taxes, change rates, or impose withdrawal conditions.</p>
+</details>
+
+<details>
+<summary>Frequently asked questions</summary>
+
+<h3>What if I have already reached my target?</h3>
+<p>The calculator will show that no additional monthly contribution is needed. You can set a higher target if you want to keep saving.</p>
+
+<h3>What if I cannot afford the suggested monthly amount?</h3>
+<p>Try a longer timeframe or a smaller target. It is better to make a sustainable plan than to commit to an amount that puts essential expenses at risk.</p>
+
+<h3>What interest rate should I use?</h3>
+<p>Use the rate you reasonably expect from your actual savings account or product. If you are unsure, try a lower rate as well. Do not assume that an illustrative rate is guaranteed.</p>
+
+<h3>Does this include tax, fees and inflation?</h3>
+<p>No. The estimate does not automatically account for taxes, account fees, changing rates or inflation. The amount you need in the future may be higher if prices rise.</p>
+
+<h3>Is my information sent to TMI Studios?</h3>
+<p>This calculator performs its calculations locally in your browser. It does not send the amounts you enter to a calculation server or store them in an account. Your browser, hosting provider or extensions may still process ordinary website data according to their own policies.</p>
+</details>
+
+<div class="notice">
+<strong>Disclaimer:</strong> TMI Studios provides this tool for general information and educational purposes only. Results are estimates based on your inputs and assumptions, not financial, tax, investment or legal advice. Actual results may differ. We do not guarantee accuracy or future returns. Independently verify important figures and consult a qualified professional where appropriate.
+</div>
+
+<div class="ad">Advertisement space</div>
+
+<footer>
+<p><strong>TMI Studios</strong> · Independent digital tools</p>
+<p>Estimates only. Verify important figures before relying on them.</p>
+<p>
+<a href="../">Home</a>
+<a href="../apps/">All apps</a>
+<a href="../BudgetApp/">Budget Calculator</a>
+<a href="../ProfitCalculator/">Profit Calculator</a>
+<a href="../RentVsBuyCalculator/">Rent vs Buy</a>
+</p>
+<p>
+<a href="../disclaimer.html">Disclaimer</a>
+<a href="../privacy.html">Privacy</a>
+<a href="../terms.html">Terms</a>
+<a href="mailto:tmistudios01@gmail.com">Contact</a>
+</p>
+<p>© 2026 TMI Studios</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+const $ = id => document.getElementById(id);
+let mode = "monthly";
+
+function money(value){
+  if(!Number.isFinite(value)) return "Not available";
+  return "R" + Math.round(value).toLocaleString("en-ZA");
+}
+
+function number(id){
+  const raw = $(id).value.trim();
+  if(raw === "") return NaN;
+  return Number(raw);
+}
+
+function setMode(nextMode){
+  mode = nextMode;
+
+  $("modeMonthly").classList.toggle("active",mode === "monthly");
+  $("modeTime").classList.toggle("active",mode === "time");
+  $("modeMonthly").setAttribute("aria-pressed",String(mode === "monthly"));
+  $("modeTime").setAttribute("aria-pressed",String(mode === "time"));
+
+  $("deadlineField").hidden = mode !== "monthly";
+  $("monthsField").hidden = mode !== "monthly";
+  $("contributionField").hidden = mode !== "time";
+
+  $("calculate").textContent = mode === "monthly"
+    ? "Calculate monthly savings needed"
+    : "Calculate time to reach my goal";
+
+  $("results").hidden = true;
+  $("error").textContent = "";
+}
+
+function monthlyRate(annualPercent){
+  return Math.pow(1 + annualPercent / 100,1 / 12) - 1;
+}
+
+function balanceAfter(start,monthlyDeposit,rate,months){
+  if(months <= 0) return start;
+
+  if(rate === 0) return start + monthlyDeposit * months;
+
+  const growth = Math.pow(1 + rate,months);
+  return start * growth + monthlyDeposit * ((growth - 1) / rate);
+}
+
+function formatDuration(months){
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if(years === 0) return remainingMonths + (remainingMonths === 1 ? " month" : " months");
+  if(remainingMonths === 0) return years + (years === 1 ? " year" : " years");
+  return years + (years === 1 ? " year " : " years ") +
+    remainingMonths + (remainingMonths === 1 ? " month" : " months");
+}
+
+function showResults(data){
+  const {
+    target,start,finalBalance,contributions,interest,months,
+    monthlyDeposit,alreadyReached,modeled
+  } = data;
+
+  $("results").hidden = false;
+
+  $("targetBreakdown").textContent = money(target);
+  $("startingBreakdown").textContent = money(start);
+  $("finalBreakdown").textContent = money(finalBalance);
+  $("interestBreakdown").textContent = money(interest);
+  $("contributionBreakdown").textContent = money(contributions);
+
+  const progress = target > 0
+    ? Math.min(100,Math.max(0,start / target * 100))
+    : 100;
+
+  $("progressFill").style.width = progress + "%";
+  $("progressBar").setAttribute("aria-valuenow",String(Math.round(progress)));
+  $("progressText").textContent = Math.round(progress) + "% of your target is already saved.";
+
+  if(alreadyReached){
+    $("resultHeading").textContent = "You've reached your goal!";
+    $("mainLabel").textContent = "ADDITIONAL SAVING NEEDED";
+    $("mainResult").textContent = "R0";
+    $("secondaryLabel").textContent = "CURRENT SAVINGS";
+    $("secondaryResult").textContent = money(start);
+    $("resultNote").textContent = "Your current savings already meet or exceed your target. This projection does not mean that any interest or future return is guaranteed.";
+    return;
+  }
+
+  $("resultHeading").textContent = "Your savings plan";
+
+  if(mode === "monthly"){
+    $("mainLabel").textContent = "SAVE EACH MONTH";
+    $("mainResult").textContent = money(monthlyDeposit);
+    $("secondaryLabel").textContent = "TIME TO GOAL";
+    $("secondaryResult").textContent = formatDuration(months);
+    $("resultNote").textContent = "To reach your target in " + formatDuration(months) +
+      ", you need to save approximately " + money(monthlyDeposit) +
+      " at the end of each month, assuming a constant interest rate. The final deposit may be adjusted slightly for rounding.";
+  }else{
+    $("mainLabel").textContent = "TIME TO REACH GOAL";
+    $("mainResult").textContent = formatDuration(months);
+    $("secondaryLabel").textContent = "MONTHLY CONTRIBUTION";
+    $("secondaryResult").textContent = money(monthlyDeposit);
+    $("resultNote").textContent = "At a monthly contribution of " + money(monthlyDeposit) +
+      ", the projection reaches your target in " + formatDuration(months) +
+      ". Interest rates and actual account terms can change the outcome.";
+  }
+
+  if(!modeled){
+    $("resultNote").textContent += " The target could not be reached under the current assumptions.";
+  }
+}
+
+function calculate(){
+  $("error").textContent = "";
+  $("results").hidden = true;
+
+  const target = number("goal");
+  const start = number("saved");
+  const annualPercent = number("rate");
+
+  if(!Number.isFinite(target) || target <= 0){
+    $("error").textContent = "Enter a target amount greater than R0.";
+    return;
+  }
+  if(!Number.isFinite(start) || start < 0){
+    $("error").textContent = "Enter a valid current savings amount.";
+    return;
+  }
+  if(!Number.isFinite(annualPercent) || annualPercent < 0 || annualPercent > 100){
+    $("error").textContent = "Enter an annual interest rate between 0% and 100%.";
+    return;
+  }
+
+  const rate = monthlyRate(annualPercent);
+
+  if(start >= target){
+    $("interestResult").textContent = money(0);
+    $("contributionsResult").textContent = money(0);
+    showResults({
+      target,start,finalBalance:start,contributions:0,interest:0,
+      months:0,monthlyDeposit:0,alreadyReached:true,modeled:true
+    });
+    return;
+  }
+
+  if(mode === "monthly"){
+    const years = number("years");
+    const extraMonths = number("extraMonths");
+
+    if(!Number.isFinite(years) || years < 0 || years > 100 || !Number.isInteger(years)){
+      $("error").textContent = "Enter whole years from 0 to 100.";
+      return;
+    }
+    if(!Number.isFinite(extraMonths) || extraMonths < 0 || extraMonths > 11 || !Number.isInteger(extraMonths)){
+      $("error").textContent = "Enter additional months from 0 to 11.";
+      return;
+    }
+
+    const months = years * 12 + extraMonths;
+
+    if(months < 1){
+      $("error").textContent = "Choose a savings timeframe of at least one month.";
+      return;
+    }
+
+    let depositNeeded;
+
+    if(rate === 0){
+      depositNeeded = (target - start) / months;
+    }else{
+      const growth = Math.pow(1 + rate,months);
+      const startingFutureValue = start * growth;
+      depositNeeded = Math.max(0,(target - startingFutureValue) * rate / (growth - 1));
+    }
+
+    depositNeeded = Math.max(0,depositNeeded);
+
+    const projected = balanceAfter(start,depositNeeded,rate,months);
+    const contributions = depositNeeded * months;
+    const interest = Math.max(0,projected - start - contributions);
+
+    $("interestResult").textContent = money(interest);
+    $("contributionsResult").textContent = money(contributions);
+
+    showResults({
+      target,start,finalBalance:projected,contributions,interest,months,
+      monthlyDeposit:depositNeeded,alreadyReached:false,modeled:true
+    });
+    return;
+  }
+
+  const monthlyDeposit = number("monthly");
+
+  if(!Number.isFinite(monthlyDeposit) || monthlyDeposit < 0){
+    $("error").textContent = "Enter a valid monthly savings amount.";
+    return;
+  }
+
+  if(monthlyDeposit === 0 && rate === 0){
+    $("error").textContent = "With no monthly deposits and no interest, this target will not be reached. Enter a contribution or an interest rate.";
+    return;
+  }
+
+  let months = 0;
+  let balance = start;
+  const maxMonths = 1200;
+
+  while(balance < target && months < maxMonths){
+    balance = balance * (1 + rate) + monthlyDeposit;
+    months++;
+  }
+
+  if(balance < target){
+    $("error").textContent = "The target was not reached within 100 years using these assumptions. Try a higher monthly contribution or review the target and rate.";
+    return;
+  }
+
+  const contributions = monthlyDeposit * months;
+  const interest = Math.max(0,balance - start - contributions);
+
+  $("interestResult").textContent = money(interest);
+  $("contributionsResult").textContent = money(contributions);
+
+  showResults({
+    target,start,finalBalance:balance,contributions,interest,months,
+    monthlyDeposit,alreadyReached:false,modeled:true
+  });
+}
+
+$("modeMonthly").addEventListener("click",() => setMode("monthly"));
+$("modeTime").addEventListener("click",() => setMode("time"));
+$("calculate").addEventListener("click",calculate);
+$("printPlan").addEventListener("click",() => window.print());
+
+calculate();
+})();
+</script>
+
+<style>
+@media print{
+body{background:#fff;color:#111}
+.wrap{max-width:none;padding:0}
+.card,details{background:#fff;color:#111;border:1px solid #ccc}
+.notice{background:#f5f5f5;color:#111}
+footer,.ad,.brand,.modes,#calculate,#printPlan{display:none!important}
+.box{background:#fff;color:#111;border-color:#ccc}
+.box span,.metric span,.small,.sub,li{color:#333}
+a{color:#111}
+}
+</style>
+</body>
+</html>
