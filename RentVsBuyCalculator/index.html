@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Car Finance Calculator SA 2026 | Monthly Payment + Total Cost</title>
+<meta name="description" content="Calculate car loan payment, interest, balloon cost, petrol. Is buying a car worth it in SA 2026.">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0a0a0a;color:#fff;font-family:system-ui,Arial;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:18px}
+h1{font-size:32px;line-height:.95}h1 span{color:#3cffc7}
+.sub{color:#999;font-size:14px}.card{background:#151515;border:1px solid #222;border-radius:16px;padding:16px;margin:14px 0}
+input{width:100%;padding:14px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#fff;font-size:16px;margin:6px 0 12px}
+button{width:100%;padding:14px;border-radius:12px;border:0;background:#3cffc7;color:#000;font-weight:900;font-size:16px}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.box{background:#0f0f0f;border:1px solid #222;border-radius:12px;padding:12px;text-align:center}.box b{font-size:18px;display:block}
+details{background:#0f0f0f;border:1px solid #252525;border-radius:14px;padding:16px;margin:12px 0}
+summary{cursor:pointer;font-weight:800;list-style:none}summary::-webkit-details-marker{display:none}
+.step{background:#151515;border-left:3px solid #3cffc7;padding:10px 12px;border-radius:8px;margin:10px 0}
+li{color:#bbb;font-size:13.5px;margin:6px 0}.ad{border:1px dashed #333;border-radius:12px;padding:18px;text-align:center;color:#555;font-size:12px;margin:14px 0}
+a{color:#3cffc7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div style="font-size:10px;color:#555;letter-spacing:1px">TMI STUDIOS • APP 7/100</div>
+<h1>Car Finance <span>Calculator</span></h1>
+<p class="sub">Car price + balloon + petrol = real monthly cost.</p>
+<div class="card">
+<label>Car Price (R)</label><input id="car" value="200000">
+<label>Deposit (R)</label><input id="dep" value="20000">
+<label>Balloon % (0 if none)</label><input id="balloon" value="30">
+<label>Interest %</label><input id="int" value="13.5">
+<label>Years</label><input id="y" value="5">
+<label>Petrol per Month (R)</label><input id="petrol" value="2000">
+<button onclick="calc()">Calculate Real Cost</button>
+<div class="result" id="res" style="display:none">
+<div class="box"><span>MONTHLY PAYMENT</span><b id="pay">R0</b></div>
+<div class="box" style="border-color:#3cffc7"><span>WITH PETROL + INSURANCE</span><b id="real" style="color:#3cffc7">R0</b></div>
+</div>
+<div id="note" style="margin-top:10px;font-size:12px;color:#888"></div>
+</div>
+
+<details open>
+<summary>▸ FULL GUIDE: R200k Car Real Cost = R7000/month not R4000</summary>
+<div class="step">R200k -20k deposit =180k -30% balloon (R60k) = finance R120k at 13.5% 5y = <b>R4052 payment + R2000 petrol + R800 insurance + R500 service fund = R7352 real</b>. Balloon R60k due after 5 years.</div>
+<ol>
+<li>Balloon trap: Low payment now, but owe R60k after 5 years. Most refinance = pay 2nd loan.</li>
+<li>No balloon better: R180k 5y = R5115 payment but no shock at end. Saves R20k interest.</li>
+<li>Rule: Car payment + petrol <30% salary. So for R7352 real cost, need salary R24500 take home.</li>
+</ol>
+</details>
+
+<details><summary>▸ When You Should NOT Buy a Car (Earning Under R20k)</summary>
+<p>On R15k salary, car will take 50% salary. Use taxi R800 + save R3000 for 2 years = R72000 deposit, then buy cash small car R70k (Toyota Tazz). No interest, no debt.</p>
+</details>
+
+<details><summary>▸ Cheapest Cars to Own in SA 2026</summary>
+<li>Toyota Vitz R180k, fuel 5L/100km</li>
+<li>Suzuki Swift R220k, fuel 5.5L</li>
+<li>Toyota Starlet — cheap parts</li>
+<li>Avoid: BMW 1 series used — service R8000.</li>
+</details>
+
+<div class="ad">AdSense — Auto Finance High CPC</div>
+</div>
+<script>
+function calc(){
+const car=parseFloat(document.getElementById('car').value), dep=parseFloat(document.getElementById('dep').value), balP=parseFloat(document.getElementById('balloon').value)/100;
+const loan=car-dep, balloon=car*balP, finance=loan-balloon, annual=parseFloat(document.getElementById('int').value)/100, n=parseFloat(document.getElementById('y').value)*12, r=annual/12, petrol=parseFloat(document.getElementById('petrol').value);
+const pay=finance * (r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+res.style.display='grid';document.getElementById('pay').innerText='R'+pay.toFixed(0)+' + balloon R'+balloon.toFixed(0);
+document.getElementById('real').innerText='R'+(pay+petrol+800).toFixed(0);
+document.getElementById('note').innerText='Total interest R'+((pay*n+balloon)-finance).toFixed(0)+' | With no balloon payment would be R'+( (loan * (r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1)).toFixed(0) )+'.';
+}calc();
+</script>
+</body>
+</html>
