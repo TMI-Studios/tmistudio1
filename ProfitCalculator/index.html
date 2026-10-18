@@ -1,0 +1,906 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101310">
+
+<title>Profit Calculator South Africa | Selling Price & Profit Margin</title>
+<meta name="description" content="Calculate your selling price, profit per item, markup and profit margin in South African rand. Free profit calculator for small businesses, resellers, bakers and side hustlers.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/ProfitCalculator/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Profit Calculator South Africa | ProfitPal SA">
+<meta property="og:description" content="Know your costs, set smarter selling prices and calculate your profit with this free South African business calculator.">
+<meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/ProfitCalculator/">
+<meta property="og:site_name" content="TMI Studios">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ProfitPal SA - Free Profit Calculator">
+<meta name="twitter:description" content="Calculate selling prices, profit margins and markup in South African rand.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tmi-studios.github.io/tmistudio1/#organization",
+      "name": "TMI Studios",
+      "url": "https://tmi-studios.github.io/tmistudio1/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tmi-studios.github.io/tmistudio1/#website",
+      "name": "TMI Studios",
+      "url": "https://tmi-studios.github.io/tmistudio1/",
+      "publisher": {
+        "@id": "https://tmi-studios.github.io/tmistudio1/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/#webpage",
+      "url": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/",
+      "name": "Profit Calculator South Africa",
+      "description": "Free selling price, markup and profit margin calculator for South African small businesses.",
+      "isPartOf": {
+        "@id": "https://tmi-studios.github.io/tmistudio1/#website"
+      },
+      "mainEntity": {
+        "@id": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/#app"
+      },
+      "inLanguage": "en-ZA"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/#app",
+      "name": "ProfitPal SA",
+      "url": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "inLanguage": "en-ZA",
+      "description": "Calculate product costs, selling prices, profit per item, profit margin, markup and target-margin pricing in South African rand.",
+      "publisher": {
+        "@id": "https://tmi-studios.github.io/tmistudio1/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "ZAR"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "TMI Studios",
+          "item": "https://tmi-studios.github.io/tmistudio1/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "ProfitPal SA",
+          "item": "https://tmi-studios.github.io/tmistudio1/ProfitCalculator/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #101310;
+  --panel: #181d18;
+  --panel2: #202720;
+  --text: #f3f7f1;
+  --muted: #a1ada0;
+  --green: #a8ff60;
+  --green-dark: #1d3218;
+  --border: #303a30;
+  --danger: #ff8888;
+  --radius: 18px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+a { color: var(--green); }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+.container { width: min(1080px, 92%); margin: auto; }
+header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(16,19,16,.96);
+}
+.nav {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 850;
+  font-size: 1.1rem;
+  letter-spacing: -.5px;
+}
+.brand span { color: var(--green); }
+.nav-link { font-size: .88rem; text-decoration: none; }
+.hero { padding: 55px 0 34px; }
+.eyebrow {
+  color: var(--green);
+  font-size: .77rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.6px; }
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); margin: 12px 0; }
+h1 span { color: var(--green); }
+.hero p { max-width: 680px; color: var(--muted); font-size: 1.06rem; }
+.pill {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 11px;
+  background: var(--green-dark);
+  color: var(--green);
+  border-radius: 100px;
+  font-size: .8rem;
+  font-weight: 750;
+}
+.calculator-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: 20px;
+  align-items: start;
+  padding-bottom: 54px;
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(18px, 3vw, 28px);
+  min-width: 0;
+}
+.panel h2 { margin: 0 0 8px; font-size: 1.4rem; }
+.subtext { color: var(--muted); font-size: .91rem; margin: 0 0 22px; }
+.field { margin: 18px 0; }
+label {
+  display: block;
+  font-weight: 700;
+  font-size: .92rem;
+  margin-bottom: 7px;
+}
+.help { color: var(--muted); font-size: .79rem; margin-top: 5px; }
+.input-wrap { position: relative; }
+.prefix {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+input {
+  display: block;
+  width: 100%;
+  min-height: 49px;
+  background: #101410;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+}
+input.money { padding-left: 42px; }
+input::placeholder { color: #748073; }
+.section-label {
+  margin-top: 26px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--green);
+  font-size: .8rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 47px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.btn-primary { background: var(--green); color: #14200e; }
+.btn-secondary { background: var(--panel2); color: var(--text); border-color: var(--border); }
+.btn:hover { filter: brightness(1.08); }
+.button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; }
+.button-row .btn { flex: 1; }
+.results {
+  position: sticky;
+  top: 16px;
+  background: linear-gradient(145deg, #1d2b19, #181d18 70%);
+  border-color: #405537;
+}
+.results h2 { margin-bottom: 5px; }
+.result-caption { color: var(--muted); font-size: .86rem; }
+.big-result {
+  margin: 20px 0;
+  padding: 21px;
+  background: rgba(0,0,0,.2);
+  border: 1px solid #405537;
+  border-radius: 14px;
+}
+.big-result .label { color: var(--muted); font-size: .88rem; }
+.big-result .amount {
+  color: var(--green);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.metric {
+  background: rgba(0,0,0,.16);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px;
+  min-width: 0;
+}
+.metric-label { color: var(--muted); font-size: .8rem; }
+.metric-value { font-size: 1.25rem; font-weight: 850; overflow-wrap: anywhere; }
+.green { color: var(--green); }
+.breakdown { margin-top: 24px; }
+.breakdown h3 { font-size: 1rem; }
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .9rem;
+}
+.breakdown-row span:last-child { text-align: right; font-weight: 750; }
+.note { color: var(--muted); font-size: .8rem; margin-top: 18px; }
+.status { color: var(--muted); font-size: .84rem; min-height: 1.5em; margin-top: 10px; }
+.content-section { padding: 16px 0 42px; }
+.content-section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.content-section > p { color: var(--muted); max-width: 790px; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 24px 0; }
+.info-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 21px;
+}
+.info-card h3 { margin-top: 0; font-size: 1.08rem; }
+.info-card p { margin-bottom: 0; color: var(--muted); font-size: .92rem; }
+.example {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  overflow-x: auto;
+}
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 12px 10px; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-size: .83rem; }
+td { font-size: .92rem; }
+.faq { padding: 17px 0; border-bottom: 1px solid var(--border); }
+.faq h3 { font-size: 1.04rem; margin: 0 0 8px; }
+.faq p { color: var(--muted); margin: 0; }
+.related-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 45px; }
+.related-links a {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  background: var(--panel);
+}
+footer { border-top: 1px solid var(--border); padding: 25px 0; color: var(--muted); font-size: .84rem; }
+.footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+footer a { color: var(--muted); text-decoration: none; margin-right: 13px; }
+footer a:hover { color: var(--green); }
+footer p { margin: 5px 0; }
+@media (max-width: 760px) {
+  .calculator-layout { grid-template-columns: 1fr; }
+  .results { position: static; }
+  .cards { grid-template-columns: 1fr; }
+  .hero { padding-top: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="../" aria-label="TMI Studios homepage">TMI <span>STUDIOS</span></a>
+    <a class="nav-link" href="../BudgetApp/">Budget Calculator ↗</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">TMI Studios · App 4 / 100</div>
+    <h1>Price it right.<br><span>Know your profit.</span></h1>
+    <p>Running a side hustle, selling products or offering a service? Use ProfitPal SA to work out your costs, selling price, profit margin and markup in South African rand.</p>
+    <span class="pill">Free calculator · No sign-up · No API</span>
+  </section>
+
+  <section class="calculator-layout" aria-label="Profit calculator">
+    <div class="panel">
+      <h2>Let's price your product</h2>
+      <p class="subtext">Enter the cost of making or buying one item. Add any extra costs that apply to each item you sell.</p>
+
+      <form id="profitForm">
+        <div class="section-label">1. Your costs per item</div>
+
+        <div class="field">
+          <label for="productName">Product or service name (optional)</label>
+          <input id="productName" type="text" maxlength="80" placeholder="e.g. Handmade candles">
+        </div>
+
+        <div class="field">
+          <label for="productCost">Product or materials cost (R)</label>
+          <div class="input-wrap">
+            <span class="prefix">R</span>
+            <input class="money" id="productCost" type="number" min="0" max="100000000" step="0.01" value="35" required inputmode="decimal">
+          </div>
+          <div class="help">What you pay for the item or the materials needed to make it.</div>
+        </div>
+
+        <div class="field">
+          <label for="packagingCost">Packaging cost per item (R)</label>
+          <div class="input-wrap">
+            <span class="prefix">R</span>
+            <input class="money" id="packagingCost" type="number" min="0" max="100000000" step="0.01" value="5" required inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="deliveryCost">Delivery or transport cost per item (R)</label>
+          <div class="input-wrap">
+            <span class="prefix">R</span>
+            <input class="money" id="deliveryCost" type="number" min="0" max="100000000" step="0.01" value="5" required inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="otherCost">Other costs per item (R)</label>
+          <div class="input-wrap">
+            <span class="prefix">R</span>
+            <input class="money" id="otherCost" type="number" min="0" max="100000000" step="0.01" value="5" required inputmode="decimal">
+          </div>
+          <div class="help">For example, transaction fees, labels or a share of your production costs.</div>
+        </div>
+
+        <div class="section-label">2. Selling price and quantity</div>
+
+        <div class="field">
+          <label for="sellingPrice">Selling price per item (R)</label>
+          <div class="input-wrap">
+            <span class="prefix">R</span>
+            <input class="money" id="sellingPrice" type="number" min="0" max="100000000" step="0.01" value="100" required inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="quantity">Number of items sold</label>
+          <input id="quantity" type="number" min="1" max="1000000" step="1" value="10" required inputmode="numeric">
+          <div class="help">Used to estimate the total profit for this quantity.</div>
+        </div>
+
+        <div class="section-label">3. Set a target profit margin</div>
+
+        <div class="field">
+          <label for="targetMargin">Desired profit margin (%)</label>
+          <input id="targetMargin" type="number" min="1" max="99.9" step="0.1" value="40" required inputmode="decimal">
+          <div class="help">Choose a target between 1% and 99.9%. The suggested price is based on your entered costs.</div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="submit">Calculate profit</button>
+          <button class="btn btn-secondary" type="button" id="resetBtn">Reset example</button>
+        </div>
+        <p class="status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <aside class="panel results" aria-live="polite" aria-label="Calculation results">
+      <h2>Your results</h2>
+      <p class="result-caption" id="resultName">Your product</p>
+
+      <div class="big-result">
+        <div class="label">Profit per item</div>
+        <div class="amount" id="profitPerItem">R50.00</div>
+        <div class="result-caption" id="profitDescription">Your selling price minus your costs.</div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">Total cost per item</div>
+          <div class="metric-value" id="totalCost">R50.00</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Profit margin</div>
+          <div class="metric-value green" id="marginResult">50.0%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Markup</div>
+          <div class="metric-value" id="markupResult">100.0%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Total profit</div>
+          <div class="metric-value green" id="totalProfit">R500.00</div>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <h3>Price breakdown</h3>
+        <div class="breakdown-row"><span>Product/materials</span><span id="breakProduct">R35.00</span></div>
+        <div class="breakdown-row"><span>Packaging</span><span id="breakPackaging">R5.00</span></div>
+        <div class="breakdown-row"><span>Delivery/transport</span><span id="breakDelivery">R5.00</span></div>
+        <div class="breakdown-row"><span>Other costs</span><span id="breakOther">R5.00</span></div>
+        <div class="breakdown-row"><span>Revenue at this quantity</span><span id="totalRevenue">R1,000.00</span></div>
+        <div class="breakdown-row"><span>Total costs at this quantity</span><span id="totalCosts">R500.00</span></div>
+      </div>
+
+      <div class="big-result">
+        <div class="label">Suggested price for your target margin</div>
+        <div class="amount" id="suggestedPrice">R83.33</div>
+        <div class="result-caption" id="suggestedDescription">Based on your current costs and target margin.</div>
+      </div>
+
+      <p class="note">Estimates only. Your actual profit may be lower after tax, fixed overheads, refunds, discounts and costs not included above.</p>
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="button" id="copyBtn">Copy my results</button>
+      </div>
+      <p class="status" id="copyStatus" role="status" aria-live="polite"></p>
+    </aside>
+  </section>
+
+  <section class="content-section">
+    <div class="eyebrow">Understand your numbers</div>
+    <h2>How to price products for profit</h2>
+    <p>Setting a selling price is more than adding a little extra to what you paid. A good starting point is to count your costs, decide how much profit you want to make, and check whether your price makes sense for your customers.</p>
+
+    <div class="cards">
+      <article class="info-card">
+        <h3>01. Add up your costs</h3>
+        <p>Include materials or stock, packaging, delivery, payment fees and other costs that apply to each item. Don't forget to account for your own labour where appropriate.</p>
+      </article>
+      <article class="info-card">
+        <h3>02. Choose a selling price</h3>
+        <p>Your price should cover your costs and leave room for profit. Also consider customer demand, competitor prices and the value of what you offer.</p>
+      </article>
+      <article class="info-card">
+        <h3>03. Check your margin</h3>
+        <p>Profit margin shows what percentage of your selling price remains as profit before excluded costs. It helps you compare prices and make informed decisions.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>Markup vs profit margin: what's the difference?</h2>
+    <p>These two terms are related, but they are not the same. Both use profit, but they divide it by different amounts.</p>
+
+    <div class="example">
+      <table>
+        <thead>
+          <tr>
+            <th>Measure</th>
+            <th>Calculation</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cost</td>
+            <td>All included costs added together</td>
+            <td>R50</td>
+          </tr>
+          <tr>
+            <td>Selling price</td>
+            <td>Price charged to the customer</td>
+            <td>R100</td>
+          </tr>
+          <tr>
+            <td>Profit per item</td>
+            <td>Selling price minus cost</td>
+            <td>R50</td>
+          </tr>
+          <tr>
+            <td>Markup</td>
+            <td>Profit divided by cost × 100</td>
+            <td>100%</td>
+          </tr>
+          <tr>
+            <td>Profit margin</td>
+            <td>Profit divided by selling price × 100</td>
+            <td>50%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>In this example, the R50 profit is equal to 50% of the R100 selling price, giving a 50% profit margin. But the same R50 profit is 100% of the R50 cost, giving a 100% markup.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>How to calculate a selling price for a target margin</h2>
+    <p>If you know your total cost per item and the profit margin you want, you can calculate a suggested price using this formula:</p>
+
+    <div class="example">
+      <p><strong>Selling price = Total cost ÷ (1 − target margin)</strong></p>
+      <p>For a product that costs R50, with a target margin of 40%:</p>
+      <p>R50 ÷ (1 − 0.40) = R83.33</p>
+      <p>A selling price of approximately R83.33 gives a gross profit of R33.33 per item and a margin of about 40%, before any costs you have not included.</p>
+    </div>
+    <p>A target margin is a planning tool, not a guarantee of sales. Check that your price is realistic for your market and covers the expenses your business actually incurs.</p>
+  </section>
+
+  <section class="content-section">
+    <h2>Pricing tips for South African small businesses</h2>
+    <div class="faq">
+      <h3>Include the costs you might forget</h3>
+      <p>Packaging, courier charges, ingredients, payment processing, damaged stock and your time can all affect profitability. Use a sensible estimate for costs that vary per item.</p>
+    </div>
+    <div class="faq">
+      <h3>Separate item costs from fixed business expenses</h3>
+      <p>Rent, internet, equipment and monthly subscriptions may need to be allocated across your sales. The calculator only includes the costs you enter per item, so it does not automatically account for every business overhead.</p>
+    </div>
+    <div class="faq">
+      <h3>Review your prices when costs change</h3>
+      <p>Supplier prices, transport and packaging can change. Recalculate your prices periodically instead of assuming last month's numbers are still accurate.</p>
+    </div>
+    <div class="faq">
+      <h3>Remember tax and VAT</h3>
+      <p>This calculator does not calculate income tax or VAT. If your business is VAT-registered, your pricing calculations may need to account for output VAT, deductible input VAT and whether your entered costs are VAT-inclusive or VAT-exclusive. Get appropriate tax guidance for your circumstances.</p>
+    </div>
+  </section>
+
+  <section class="content-section" id="faq">
+    <h2>Frequently asked questions</h2>
+
+    <div class="faq">
+      <h3>How do I calculate profit per item?</h3>
+      <p>Add the costs you incur for one item, then subtract that total from the selling price. If you sell an item for R100 and its included costs total R60, your profit before excluded costs is R40.</p>
+    </div>
+    <div class="faq">
+      <h3>How do I calculate profit margin?</h3>
+      <p>Subtract the total included cost from the selling price. Divide that profit by the selling price and multiply by 100. If the selling price is zero, the profit margin is undefined.</p>
+    </div>
+    <div class="faq">
+      <h3>What is a good profit margin for a small business?</h3>
+      <p>There is no single ideal margin for every business. Product type, competition, operating expenses, sales volume and customer expectations all matter. Work out your costs and research your market before setting a target.</p>
+    </div>
+    <div class="faq">
+      <h3>Can I use this calculator for baking, beauty services or reselling?</h3>
+      <p>Yes. Enter the relevant materials or stock costs and include packaging, transport and other per-item costs. For services, you can include an estimated labour cost in the other-cost field.</p>
+    </div>
+    <div class="faq">
+      <h3>Does this calculator include VAT or income tax?</h3>
+      <p>No. It calculates profit based on the amounts you enter. It does not determine your tax obligations or automatically adjust prices for VAT.</p>
+    </div>
+    <div class="faq">
+      <h3>Is ProfitPal SA free?</h3>
+      <p>Yes. The calculator runs in your browser and does not require an account or an external API.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <h2>More useful tools</h2>
+    <p>Explore other free tools from TMI Studios.</p>
+    <div class="related-links">
+      <a href="../BudgetApp/">Budget Calculator ↗</a>
+      <a href="../">Explore TMI Studios ↗</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <p><strong>TMI Studios</strong> · Small tools for everyday problems.</p>
+      <p>Calculations are estimates and are not financial, tax or legal advice.</p>
+    </div>
+    <nav aria-label="Legal links">
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+      <a href="mailto:tmistudios01@gmail.com">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = (id) => document.getElementById(id);
+
+  const fields = [
+    "productName",
+    "productCost",
+    "packagingCost",
+    "deliveryCost",
+    "otherCost",
+    "sellingPrice",
+    "quantity",
+    "targetMargin"
+  ];
+
+  const currency = new Intl.NumberFormat("en-ZA", {
+    style: "currency",
+    currency: "ZAR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  const percent = new Intl.NumberFormat("en-ZA", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2
+  });
+
+  let lastResults = null;
+
+  function money(value) {
+    return currency.format(Number.isFinite(value) ? value : 0);
+  }
+
+  function numberFrom(id) {
+    return Number($(id).value);
+  }
+
+  function setText(id, value) {
+    $(id).textContent = value;
+  }
+
+  function validate() {
+    for (const id of [
+      "productCost",
+      "packagingCost",
+      "deliveryCost",
+      "otherCost",
+      "sellingPrice"
+    ]) {
+      const input = $(id);
+      const value = input.valueAsNumber;
+
+      if (
+        input.value.trim() === "" ||
+        !Number.isFinite(value) ||
+        value < 0 ||
+        value > 100000000
+      ) {
+        input.focus();
+        return "Enter a valid cost or selling price of R0 or more.";
+      }
+    }
+
+    const quantity = numberFrom("quantity");
+    if (
+      $("quantity").value.trim() === "" ||
+      !Number.isInteger(quantity) ||
+      quantity < 1 ||
+      quantity > 1000000
+    ) {
+      $("quantity").focus();
+      return "Enter a whole number of items between 1 and 1,000,000.";
+    }
+
+    const target = numberFrom("targetMargin");
+    if (
+      $("targetMargin").value.trim() === "" ||
+      !Number.isFinite(target) ||
+      target < 1 ||
+      target > 99.9
+    ) {
+      $("targetMargin").focus();
+      return "Choose a target profit margin between 1% and 99.9%.";
+    }
+
+    return "";
+  }
+
+  function calculate(event) {
+    if (event) event.preventDefault();
+
+    const error = validate();
+    if (error) {
+      setText("formStatus", error);
+      return;
+    }
+
+    const productName = $("productName").value.trim() || "Your product";
+    const product = numberFrom("productCost");
+    const packaging = numberFrom("packagingCost");
+    const delivery = numberFrom("deliveryCost");
+    const other = numberFrom("otherCost");
+    const price = numberFrom("sellingPrice");
+    const quantity = numberFrom("quantity");
+    const target = numberFrom("targetMargin") / 100;
+
+    const cost = product + packaging + delivery + other;
+    const profit = price - cost;
+    const totalRevenue = price * quantity;
+    const totalCosts = cost * quantity;
+    const totalProfit = profit * quantity;
+    const margin = price > 0 ? (profit / price) * 100 : null;
+    const markup = cost > 0 ? (profit / cost) * 100 : null;
+    const suggested = cost / (1 - target);
+    const suggestedProfit = suggested - cost;
+
+    lastResults = {
+      productName,
+      product,
+      packaging,
+      delivery,
+      other,
+      cost,
+      price,
+      quantity,
+      profit,
+      totalRevenue,
+      totalCosts,
+      totalProfit,
+      margin,
+      markup,
+      target: target * 100,
+      suggested,
+      suggestedProfit
+    };
+
+    setText("resultName", productName);
+    setText("profitPerItem", money(profit));
+    setText(
+      "profitDescription",
+      profit > 0
+        ? "Positive profit before excluded costs."
+        : profit < 0
+          ? "Your selling price is below your entered costs."
+          : "Your selling price exactly covers your entered costs."
+    );
+
+    $("profitPerItem").style.color =
+      profit < 0 ? "var(--danger)" : "var(--green)";
+
+    setText("totalCost", money(cost));
+    setText("marginResult", margin === null ? "N/A" : percent.format(margin) + "%");
+    setText("markupResult", markup === null ? "N/A" : percent.format(markup) + "%");
+    setText("totalProfit", money(totalProfit));
+
+    $("totalProfit").style.color =
+      totalProfit < 0 ? "var(--danger)" : "var(--green)";
+
+    setText("breakProduct", money(product));
+    setText("breakPackaging", money(packaging));
+    setText("breakDelivery", money(delivery));
+    setText("breakOther", money(other));
+    setText("totalRevenue", money(totalRevenue));
+    setText("totalCosts", money(totalCosts));
+
+    setText("suggestedPrice", money(suggested));
+    setText(
+      "suggestedDescription",
+      "At this price, your estimated margin is " +
+      percent.format(target * 100) +
+      "%, with a profit of " + money(suggestedProfit) +
+      " per item before excluded costs."
+    );
+
+    setText(
+      "formStatus",
+      "Calculation updated for " + quantity +
+      (quantity === 1 ? " item." : " items.")
+    );
+    setText("copyStatus", "");
+  }
+
+  function resetExample() {
+    $("productName").value = "";
+    $("productCost").value = "35";
+    $("packagingCost").value = "5";
+    $("deliveryCost").value = "5";
+    $("otherCost").value = "5";
+    $("sellingPrice").value = "100";
+    $("quantity").value = "10";
+    $("targetMargin").value = "40";
+    setText("formStatus", "");
+    setText("copyStatus", "");
+    calculate();
+  }
+
+  function buildSummary() {
+    if (!lastResults) return "";
+
+    const r = lastResults;
+    return [
+      "ProfitPal SA - TMI Studios",
+      "Product: " + r.productName,
+      "Cost per item: " + money(r.cost),
+      "Selling price per item: " + money(r.price),
+      "Profit per item: " + money(r.profit),
+      "Profit margin: " + (r.margin === null ? "N/A" : percent.format(r.margin) + "%"),
+      "Markup: " + (r.markup === null ? "N/A" : percent.format(r.markup) + "%"),
+      "Quantity: " + r.quantity,
+      "Estimated total revenue: " + money(r.totalRevenue),
+      "Estimated total costs: " + money(r.totalCosts),
+      "Estimated total profit: " + money(r.totalProfit),
+      "Suggested price for " + percent.format(r.target) +
+        "% margin: " + money(r.suggested),
+      "",
+      "Estimate only. Excludes costs and taxes not entered."
+    ].join("\n");
+  }
+
+  async function copyResults() {
+    const summary = buildSummary();
+    if (!summary) return;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(summary);
+      } else {
+        const temporary = document.createElement("textarea");
+        temporary.value = summary;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.opacity = "0";
+        document.body.appendChild(temporary);
+        temporary.select();
+        const copied = document.execCommand("copy");
+        temporary.remove();
+
+        if (!copied) throw new Error("Copy unavailable");
+      }
+
+      setText("copyStatus", "Results copied. You can paste them into a message or note.");
+    } catch (error) {
+      setText("copyStatus", "Copy is unavailable in this browser. You can select and copy the results manually.");
+    }
+  }
+
+  $("profitForm").addEventListener("submit", calculate);
+  $("resetBtn").addEventListener("click", resetExample);
+  $("copyBtn").addEventListener("click", copyResults);
+
+  fields.forEach((id) => {
+    $(id).addEventListener("input", () => {
+      if ($("profitForm").checkValidity()) calculate();
+    });
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
