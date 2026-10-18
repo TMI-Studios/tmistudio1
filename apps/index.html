@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Explore Our Apps & Tools | TMI Studios</title>
-  <meta name="description" content="Explore useful digital tools, calculators, money tools and playful apps from TMI Studios. Discover practical tools made for everyday life.">
+  <title>Free Calculators, Money Tools & Apps | TMI Studios</title>
+  <meta name="description" content="Explore South African money calculators, budgeting tools, salary after tax, car finance, rent vs buy, savings goals, cooking costs and more from TMI Studios.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/apps/">
 
-  <meta property="og:title" content="Explore Our Apps & Tools | TMI Studios">
-  <meta property="og:description" content="Useful tools, playful apps and digital experiments from TMI Studios.">
+  <meta property="og:title" content="Apps & Tools | TMI Studios">
+  <meta property="og:description" content="Explore practical calculators, money tools, community resources and digital apps from TMI Studios.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/apps/">
 
@@ -64,7 +63,7 @@
 
     header {
       border-bottom: 1px solid var(--border);
-      background: rgba(11, 0, 21, 0.86);
+      background: rgba(11, 0, 21, 0.92);
     }
 
     .nav {
@@ -125,7 +124,7 @@
     }
 
     .hero p {
-      max-width: 620px;
+      max-width: 660px;
       margin: 0 auto;
       color: var(--muted);
       font-size: 1.05rem;
@@ -385,6 +384,10 @@
       text-decoration: none;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     @media (max-width: 800px) {
       .app-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -459,9 +462,9 @@
         <div class="eyebrow">The TMI app library</div>
         <h1>Small tools.<br><span>Big main-character energy.</span></h1>
         <p>
-          From practical everyday calculators to playful digital experiments,
-          explore the tools we're building to make life a little easier,
-          more interesting, or both.
+          Practical calculators, everyday money tools and useful digital
+          resources. Find a tool, run your numbers and make your next
+          decision with a little more confidence.
         </p>
 
         <div class="search-area">
@@ -478,7 +481,9 @@
 
           <div class="filters" aria-label="Filter apps by category">
             <button class="filter active" type="button" data-filter="all" aria-pressed="true">All tools</button>
-            <button class="filter" type="button" data-filter="money" aria-pressed="false">Money &amp; Community</button>
+            <button class="filter" type="button" data-filter="money" aria-pressed="false">Money &amp; Finance</button>
+            <button class="filter" type="button" data-filter="business" aria-pressed="false">Business &amp; Cooking</button>
+            <button class="filter" type="button" data-filter="community" aria-pressed="false">Community</button>
             <button class="filter" type="button" data-filter="guides" aria-pressed="false">Guides &amp; Resources</button>
             <button class="filter" type="button" data-filter="coming" aria-pressed="false">Coming soon</button>
           </div>
@@ -490,65 +495,134 @@
       <div class="container">
         <div class="section-heading">
           <h2>Explore the collection</h2>
-          <span class="result-count" id="resultCount" aria-live="polite">4 resources</span>
+          <span class="result-count" id="resultCount" aria-live="polite">13 resources</span>
         </div>
 
         <div class="app-grid" id="appGrid">
-          <article class="app-card" data-category="money guides" data-status="live">
-            <div class="app-icon" aria-hidden="true">🤝</div>
-            <div class="category">Money &amp; Community</div>
-            <h3>Stokvel Hub</h3>
-            <p>
-              Your starting point for understanding savings clubs,
-              exploring stokvel types and accessing practical group-money tools.
-            </p>
+
+          <!-- BUDGETING AND PERSONAL FINANCE -->
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">💰</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Budget App</h3>
+            <p>Organise your budget, track your spending plan and get a clearer picture of your money.</p>
             <div class="status">Available now</div>
-            <a class="card-link" href="../stokvel/">
-              Explore Stokvel Hub <span aria-hidden="true">→</span>
-            </a>
+            <a class="card-link" href="../BudgetApp/">Open Budget App <span aria-hidden="true">→</span></a>
           </article>
 
           <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🚗</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Car Finance Calculator</h3>
+            <p>Estimate vehicle repayments and explore what a car could cost you each month.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../CarFinanceCalculator/">Calculate car finance <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">💡</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Electricity Cost Calculator</h3>
+            <p>Estimate electricity costs to better understand household or appliance usage.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../ElectricityCostCalculator/">Calculate electricity costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">⚖️</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Mashonisa vs Bank</h3>
+            <p>Compare borrowing costs and explore the differences between loan options.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../MashonisaVsBank/">Compare loan costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money business" data-status="live">
+            <div class="app-icon" aria-hidden="true">📈</div>
+            <div class="category">Money &amp; Business</div>
+            <h3>Profit Calculator</h3>
+            <p>Calculate costs, revenue and estimated profit to help price products and services.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../ProfitCalculator/">Calculate profit <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🏠</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Rent vs Buy Calculator</h3>
+            <p>Explore the financial trade-offs between renting a home and buying property.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../RentVsBuyCalculator/">Compare rent vs buy <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🧾</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Salary After Tax Calculator</h3>
+            <p>Estimate take-home pay after applicable South African tax and deductions.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../SalaryAfterTaxCalculator/">Estimate take-home pay <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🎯</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Savings Goal Calculator</h3>
+            <p>Work out how much to save regularly to reach your savings goal and plan a timeline for your target.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../SavingsGoalCalculator/">Plan your savings <span aria-hidden="true">→</span></a>
+          </article>
+
+          <!-- BUSINESS AND COOKING -->
+
+          <article class="app-card" data-category="business" data-status="live">
+            <div class="app-icon" aria-hidden="true">🍳</div>
+            <div class="category">Business &amp; Cooking</div>
+            <h3>Cook Cost Calculator</h3>
+            <p>Work out recipe costs and make more informed decisions about food pricing.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../CookCostCalculator/">Calculate cooking costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <!-- STOKVEL AND COMMUNITY RESOURCES -->
+
+          <article class="app-card" data-category="community money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🤝</div>
+            <div class="category">Money &amp; Community</div>
+            <h3>Stokvel Hub</h3>
+            <p>Your starting point for understanding savings clubs and accessing practical group-money resources.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../stokvel/">Explore Stokvel Hub <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="community money" data-status="live">
             <div class="app-icon" aria-hidden="true">🧮</div>
             <div class="category">Money &amp; Community</div>
             <h3>Stokvel Calculator</h3>
-            <p>
-              Estimate monthly group contributions, total contributions
-              over time and average contributions per member.
-            </p>
+            <p>Estimate group contributions, contributions over time and average contributions per member.</p>
             <div class="status">Available now</div>
-            <a class="card-link" href="../stokvel/calculator.html">
-              Use the calculator <span aria-hidden="true">→</span>
-            </a>
+            <a class="card-link" href="../stokvel/calculator.html">Use the calculator <span aria-hidden="true">→</span></a>
           </article>
 
-          <article class="app-card" data-category="guides money" data-status="live">
+          <article class="app-card" data-category="community guides" data-status="live">
             <div class="app-icon" aria-hidden="true">📚</div>
             <div class="category">Guides &amp; Resources</div>
             <h3>Types of Stokvels</h3>
-            <p>
-              Learn about grocery stokvels, rotating money groups,
-              burial societies and savings stokvels.
-            </p>
+            <p>Learn about grocery stokvels, rotating savings groups, burial societies and other stokvel types.</p>
             <div class="status">Available now</div>
-            <a class="card-link" href="../stokvel/types.html">
-              Read the guide <span aria-hidden="true">→</span>
-            </a>
+            <a class="card-link" href="../stokvel/types.html">Read the guide <span aria-hidden="true">→</span></a>
           </article>
 
-          <article class="app-card" data-category="guides money" data-status="coming">
+          <article class="app-card" data-category="community guides money" data-status="coming">
             <div class="app-icon" aria-hidden="true">📄</div>
             <div class="category">Guides &amp; Resources</div>
             <h3>Stokvel Constitution Template</h3>
-            <p>
-              A planned paid template to help groups document their rules,
-              member responsibilities and agreed processes.
-            </p>
+            <p>A planned template to help groups document rules, member responsibilities and agreed processes.</p>
             <div class="status soon">Coming soon</div>
-            <a class="card-link" href="../stokvel/constitution.html">
-              View product page <span aria-hidden="true">→</span>
-            </a>
+            <a class="card-link" href="../stokvel/constitution.html">View product page <span aria-hidden="true">→</span></a>
           </article>
+
         </div>
 
         <div class="empty-state" id="emptyState">
@@ -560,7 +634,7 @@
           <h2>More experiments are on the way.</h2>
           <p>
             TMI Studios is growing its collection one project at a time.
-            Some tools are ready to use; others are still in development.
+            Explore what's available today and come back as the library grows.
           </p>
           <a class="button" href="../">Meet TMI Studios</a>
         </div>
@@ -601,6 +675,7 @@
         const isComingSoon = card.dataset.status === "coming";
 
         const matchesSearch = searchableText.includes(query);
+
         const matchesFilter =
           activeFilter === "all" ||
           (activeFilter === "coming" && isComingSoon) ||
