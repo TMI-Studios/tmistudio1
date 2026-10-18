@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car Finance Calculator South Africa 2026 | TMI Studios</title>
+<meta name="description" content="Calculate estimated car finance repayments in South Africa. Compare balloon and no-balloon payments, interest, petrol, insurance and your total monthly car costs.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/CarFinanceCalculator/">
+<meta property="og:title" content="Car Finance Calculator SA | TMI Studios">
+<meta property="og:description" content="Estimate car instalments, balloon payments, interest and real monthly running costs in South Africa.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/CarFinanceCalculator/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#0a0a0a;--panel:#151515;--input:#0f0f0f;--border:#292929;--green:#3cffc7;--muted:#aaa;--danger:#ff8c8c}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#fff;font-family:system-ui,-apple-system,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:20px 16px 40px}
+.brand{font-size:11px;color:#888;letter-spacing:1.4px;font-weight:800}
+h1{font-size:clamp(30px,7vw,46px);line-height:1.08;letter-spacing:-1.5px;margin:18px 0 10px}
+h1 span{color:var(--green)}
+h2{font-size:21px;line-height:1.25;margin:0 0 12px}
+h3{font-size:16px;margin:18px 0 6px}
+p{margin:9px 0}
+.sub{color:var(--muted);font-size:15px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px 0}
+.notice{border-left:3px solid var(--green);background:#101b18;padding:12px 14px;border-radius:8px;font-size:13px;color:#d7e8e3;margin:16px 0}
+.warning{border-left-color:#ffca70;background:#20190e;color:#f5e7ce}
+label{display:block;font-size:13px;color:#ddd;font-weight:700;margin-top:10px}
+input{width:100%;padding:13px;border-radius:10px;border:1px solid #393939;background:var(--input);color:#fff;font-size:16px;margin:6px 0 8px;min-width:0}
+input:focus{outline:2px solid var(--green);outline-offset:1px}
+.hint{font-size:12px;color:#999;margin:-3px 0 7px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+button{width:100%;padding:15px;border-radius:12px;border:0;background:var(--green);color:#000;font-weight:900;font-size:16px;cursor:pointer;margin-top:14px}
+button:hover{filter:brightness(.94)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.box{background:#0d0d0d;border:1px solid #303030;border-radius:12px;padding:13px;min-width:0}
+.box span{display:block;font-size:10px;color:#aaa;letter-spacing:.7px;font-weight:800}
+.box b{display:block;font-size:clamp(18px,4vw,25px);overflow-wrap:anywhere;margin-top:4px}
+.highlight{border-color:var(--green)}
+.highlight b{color:var(--green)}
+.metric{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #292929;font-size:13px}
+.metric span:first-child{color:#bbb}
+.metric strong{text-align:right;overflow-wrap:anywhere}
+.small{font-size:12px;color:#999}
+.error{color:var(--danger);font-size:13px;margin-top:10px}
+details{background:#111;border:1px solid var(--border);border-radius:14px;padding:15px 16px;margin:12px 0}
+summary{cursor:pointer;font-weight:800}
+li{color:#ccc;font-size:14px;margin:7px 0}
+a{color:var(--green)}
+footer{border-top:1px solid #282828;padding-top:18px;margin-top:26px;font-size:12px;color:#999}
+footer a{margin-right:12px}
+.ad{border:1px dashed #333;border-radius:12px;padding:18px;text-align:center;color:#666;font-size:12px;margin:18px 0}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.wrap{padding:16px 13px 30px}.card{padding:15px}.result-grid{gap:8px}.box{padding:10px}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Car Finance Calculator South Africa",
+  "url":"https://tmi-studios.github.io/tmistudio1/CarFinanceCalculator/",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"Any",
+  "description":"Estimate South African vehicle finance instalments, balloon payments, interest and monthly running costs.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"ZAR"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"What is a balloon payment on car finance?",
+      "acceptedAnswer":{"@type":"Answer","text":"A balloon payment is a lump sum left outstanding until the end of a vehicle finance agreement. It can reduce monthly instalments, but you must plan how to settle it."}
+    },
+    {
+      "@type":"Question",
+      "name":"Does this calculator include petrol and insurance?",
+      "acceptedAnswer":{"@type":"Answer","text":"Yes. Enter your estimated monthly petrol, insurance, maintenance and other running costs to estimate your monthly car budget."}
+    },
+    {
+      "@type":"Question",
+      "name":"Is this the amount a bank will charge me?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. This calculator provides estimates based on your inputs and a simplified repayment model. A lender's quote may include fees, different interest calculations and other contract terms."}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+
+<div class="brand">TMI STUDIOS · APP 7/100</div>
+
+<h1>Car Finance <span>Calculator</span></h1>
+<p class="sub">Your instalment is only part of the cost. Estimate your repayment, balloon, interest, petrol, insurance and other monthly expenses before committing to a car.</p>
+
+<div class="notice">
+<strong>Important:</strong> This is an independent estimate, not a bank quote or financial advice. Results depend on your inputs and assumptions. Verify the figures, fees and contract terms with your finance provider before making a decision.
+</div>
+
+<section class="card">
+<h2>1. Your finance details</h2>
+
+<div class="grid">
+<div>
+<label for="car">Vehicle price (R)</label>
+<input id="car" type="number" min="1" step="1000" value="200000" inputmode="decimal">
+</div>
+<div>
+<label for="dep">Deposit (R)</label>
+<input id="dep" type="number" min="0" step="500" value="20000" inputmode="decimal">
+</div>
+<div>
+<label for="balloon">Balloon payment (% of vehicle price)</label>
+<input id="balloon" type="number" min="0" max="50" step="1" value="30" inputmode="decimal">
+<p class="hint">Enter 0 if you do not want a balloon.</p>
+</div>
+<div>
+<label for="interest">Annual interest rate (%)</label>
+<input id="interest" type="number" min="0" max="100" step="0.1" value="13.5" inputmode="decimal">
+</div>
+<div>
+<label for="years">Finance term (years)</label>
+<input id="years" type="number" min="1" max="7" step="1" value="5" inputmode="numeric">
+</div>
+<div>
+<label for="fees">Upfront finance fees (R)</label>
+<input id="fees" type="number" min="0" step="50" value="0" inputmode="decimal">
+<p class="hint">Optional. Enter fees you expect to pay separately.</p>
+</div>
+</div>
+
+<h2 style="margin-top:22px">2. Monthly running costs</h2>
+<p class="small">Use your own estimates. These expenses are separate from the finance instalment.</p>
+
+<div class="grid">
+<div>
+<label for="petrol">Petrol / diesel (R per month)</label>
+<input id="petrol" type="number" min="0" step="100" value="2000" inputmode="decimal">
+</div>
+<div>
+<label for="insurance">Insurance (R per month)</label>
+<input id="insurance" type="number" min="0" step="50" value="800" inputmode="decimal">
+</div>
+<div>
+<label for="maintenance">Maintenance and tyres (R per month)</label>
+<input id="maintenance" type="number" min="0" step="50" value="500" inputmode="decimal">
+</div>
+<div>
+<label for="other">Other running costs (R per month)</label>
+<input id="other" type="number" min="0" step="50" value="250" inputmode="decimal">
+<p class="hint">For example, parking, tolls or licence savings.</p>
+</div>
+<div>
+<label for="income">Take-home salary (R per month, optional)</label>
+<input id="income" type="number" min="0" step="500" value="" placeholder="e.g. 20000" inputmode="decimal">
+</div>
+</div>
+
+<button type="button" id="calculate">Calculate my car costs</button>
+<div id="error" class="error" role="alert" aria-live="polite"></div>
+
+<div id="results" hidden aria-live="polite">
+<h2 style="margin-top:24px">Your estimated results</h2>
+<div class="result-grid">
+<div class="box">
+<span>MONTHLY FINANCE INSTALMENT</span>
+<b id="monthly">R0</b>
+</div>
+<div class="box highlight">
+<span>MONTHLY COST INCLUDING RUNNING COSTS</span>
+<b id="real">R0</b>
+</div>
+<div class="box">
+<span>BALLOON DUE AT END</span>
+<b id="balloonResult">R0</b>
+</div>
+<div class="box">
+<span>TOTAL ESTIMATED INTEREST</span>
+<b id="interestResult">R0</b>
+</div>
+</div>
+
+<div class="notice warning" id="balloonWarning" hidden></div>
+
+<h3>Finance breakdown</h3>
+<div class="metric"><span>Vehicle price</span><strong id="priceBreakdown">R0</strong></div>
+<div class="metric"><span>Deposit</span><strong id="depositBreakdown">R0</strong></div>
+<div class="metric"><span>Amount financed</span><strong id="loanBreakdown">R0</strong></div>
+<div class="metric"><span>Total instalments over term</span><strong id="instalmentsBreakdown">R0</strong></div>
+<div class="metric"><span>Balloon plus instalments</span><strong id="repaymentsBreakdown">R0</strong></div>
+<div class="metric"><span>Deposit + fees + all finance payments</span><strong id="overallBreakdown">R0</strong></div>
+<div class="metric"><span>Running costs per month</span><strong id="runningBreakdown">R0</strong></div>
+<div class="metric"><span>Estimated monthly cost as % of take-home pay</span><strong id="incomeBreakdown">Not entered</strong></div>
+
+<p class="small" style="margin-top:12px">The overall finance figure includes the deposit, entered upfront fees, instalments and balloon. It excludes petrol, insurance, maintenance, depreciation, and any fees or charges you have not entered.</p>
+
+<h3>Compare with no balloon</h3>
+<div class="box">
+<div class="metric"><span>Estimated monthly instalment without balloon</span><strong id="noBalloonMonthly">R0</strong></div>
+<div class="metric"><span>Estimated interest without balloon</span><strong id="noBalloonInterest">R0</strong></div>
+<div class="metric"><span>Monthly instalment difference</span><strong id="paymentDifference">R0</strong></div>
+</div>
+
+<p class="small">This comparison uses the same vehicle price, deposit, interest rate and term. Actual finance offers may differ because of fees, contract terms or rate changes.</p>
+</div>
+</section>
+
+<details open>
+<summary>How balloon payments work</summary>
+<p>A balloon payment leaves a lump sum to settle at the end of your finance term. This can make monthly instalments lower, but it does not make the outstanding amount disappear. <a href="https://www.wesbank.co.za/help-centre/new-to-wesbank/more-on-balloon-payments" target="_blank" rel="noopener">Read WesBank's balloon payment explanation</a>.</p>
+<ul>
+<li>You may need to pay the balloon in cash, sell or trade in the vehicle, or apply to refinance it if the lender permits.</li>
+<li>Refinancing is not guaranteed and may create a new loan with its own costs.</li>
+<li>Compare the total cost of the deal, not just the monthly instalment.</li>
+<li>Make sure your budget can handle running costs as well as the finance payment.</li>
+</ul>
+</details>
+
+<details>
+<summary>What should I include in my car budget?</summary>
+<ul>
+<li>Finance instalment and any balloon payment you need to save towards.</li>
+<li>Comprehensive insurance if required by your finance agreement.</li>
+<li>Fuel, servicing, repairs, tyres and licence costs.</li>
+<li>Parking, tolls and other regular travel expenses.</li>
+<li>Unexpected repairs and the possibility of interest-rate changes if your agreement is linked to a variable rate.</li>
+</ul>
+<p>These costs vary by vehicle, distance travelled, insurer and personal circumstances. Use realistic estimates for your own situation.</p>
+</details>
+
+<details>
+<summary>Frequently asked questions</summary>
+<h3>Is a balloon payment always a bad idea?</h3>
+<p>Not necessarily. It reduces the regular instalment but leaves a large amount due later. Whether it suits you depends on the contract, your plans for the vehicle and your ability to settle the final amount.</p>
+
+<h3>Does the calculator include every bank fee?</h3>
+<p>No. You can enter upfront fees, but this tool does not automatically know a lender's initiation fee, monthly service fee, interim interest or other charges. Check your written quote.</p>
+
+<h3>Does this predict what my car will be worth later?</h3>
+<p>No. It does not estimate depreciation, resale value, trade-in value or the remaining balance under every lender's contract. A vehicle's future value is uncertain.</p>
+
+<h3>Can I use this for a used car?</h3>
+<p>Yes, as a rough budgeting tool. Enter the price, deposit, rate, term and running costs relevant to the used vehicle. Actual finance availability and terms depend on the lender and vehicle.</p>
+</details>
+
+<div class="notice">
+<strong>Disclaimer:</strong> TMI Studios provides this calculator for general information and educational purposes only. Figures are estimates based on the values you enter and a simplified monthly repayment model. They are not a credit offer, financial recommendation, guarantee of affordability or substitute for professional advice. We do not guarantee accuracy or completeness. Independently verify important figures with your lender before acting.
+</div>
+
+<div class="ad">Advertisement space</div>
+
+<footer>
+<p><strong>TMI Studios</strong> · Independent digital tools</p>
+<p>This tool is provided as-is. Confirm all finance terms, charges and affordability with the relevant provider.</p>
+<p>
+<a href="../">Home</a>
+<a href="../apps/">All apps</a>
+<a href="../BudgetApp/">Budget Calculator</a>
+<a href="../SalaryAfterTaxCalculator/">Salary After Tax</a>
+<a href="../MashonisaVsBank/">Loan Comparison</a>
+</p>
+<p>
+<a href="../disclaimer.html">Disclaimer</a>
+<a href="../privacy.html">Privacy</a>
+<a href="../terms.html">Terms</a>
+<a href="mailto:tmistudios01@gmail.com">Contact</a>
+</p>
+<p>© 2026 TMI Studios</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+function money(value){
+  if(!Number.isFinite(value)) return "Not available";
+  return "R" + Math.round(value).toLocaleString("en-ZA");
+}
+
+function readNumber(id){
+  const raw = $(id).value.trim();
+  if(raw === "") return null;
+  const value = Number(raw);
+  return Number.isFinite(value) ? value : NaN;
+}
+
+function repayment(principal, annualRate, months, futureBalloon){
+  if(principal < 0 || futureBalloon < 0 || months <= 0) return NaN;
+  if(annualRate === 0) return (principal - futureBalloon) / months;
+
+  const monthlyRate = annualRate / 100 / 12;
+  const discount = Math.pow(1 + monthlyRate, -months);
+  return (principal - futureBalloon * discount) *
+         monthlyRate / (1 - discount);
+}
+
+function calculate(){
+  $("error").textContent = "";
+  $("results").hidden = true;
+
+  const car = readNumber("car");
+  const deposit = readNumber("dep");
+  const balloonPercent = readNumber("balloon");
+  const annualRate = readNumber("interest");
+  const years = readNumber("years");
+  const fees = readNumber("fees");
+  const petrol = readNumber("petrol");
+  const insurance = readNumber("insurance");
+  const maintenance = readNumber("maintenance");
+  const other = readNumber("other");
+  const income = readNumber("income");
+
+  const required = [
+    ["Vehicle price",car],
+    ["Deposit",deposit],
+    ["Balloon percentage",balloonPercent],
+    ["Interest rate",annualRate],
+    ["Finance term",years],
+    ["Upfront fees",fees],
+    ["Petrol",petrol],
+    ["Insurance",insurance],
+    ["Maintenance",maintenance],
+    ["Other running costs",other]
+  ];
+
+  for(const [name,value] of required){
+    if(value === null || !Number.isFinite(value)){
+      $("error").textContent = "Please enter a valid number for " + name + ".";
+      return;
+    }
+    if(value < 0){
+      $("error").textContent = name + " cannot be negative.";
+      return;
+    }
+  }
+
+  if(income !== null && (!Number.isFinite(income) || income < 0)){
+    $("error").textContent = "Enter a valid take-home salary or leave it blank.";
+    return;
+  }
+
+  if(car <= 0){
+    $("error").textContent = "Vehicle price must be greater than zero.";
+    return;
+  }
+  if(deposit > car){
+    $("error").textContent = "Deposit cannot exceed the vehicle price.";
+    return;
+  }
+  if(balloonPercent > 50){
+    $("error").textContent = "For this estimate, enter a balloon percentage from 0 to 50.";
+    return;
+  }
+  if(annualRate > 100){
+    $("error").textContent = "Enter an annual interest rate from 0 to 100%.";
+    return;
+  }
+  if(years < 1 || years > 7 || !Number.isInteger(years)){
+    $("error").textContent = "Enter a finance term of 1 to 7 whole years.";
+    return;
+  }
+
+  const principal = car - deposit;
+  const balloon = car * balloonPercent / 100;
+  const months = years * 12;
+
+  if(balloon > principal){
+    $("error").textContent = "The balloon cannot exceed the amount financed after your deposit. Reduce the balloon or increase the deposit.";
+    return;
+  }
+
+  const monthlyPayment = repayment(principal,annualRate,months,balloon);
+  const noBalloonPayment = repayment(principal,annualRate,months,0);
+
+  if(!Number.isFinite(monthlyPayment) || !Number.isFinite(noBalloonPayment)){
+    $("error").textContent = "We could not calculate those values. Please check your inputs.";
+    return;
+  }
+
+  const totalInstalments = monthlyPayment * months;
+  const totalInterest = totalInstalments + balloon - principal;
+  const noBalloonInterest = noBalloonPayment * months - principal;
+  const runningCosts = petrol + insurance + maintenance + other;
+  const realMonthlyCost = monthlyPayment + runningCosts;
+  const totalFinanceOutlay = deposit + fees + totalInstalments + balloon;
+
+  $("monthly").textContent = money(monthlyPayment);
+  $("real").textContent = money(realMonthlyCost);
+  $("balloonResult").textContent = money(balloon);
+  $("interestResult").textContent = money(Math.max(0,totalInterest));
+
+  $("priceBreakdown").textContent = money(car);
+  $("depositBreakdown").textContent = money(deposit);
+  $("loanBreakdown").textContent = money(principal);
+  $("instalmentsBreakdown").textContent = money(totalInstalments);
+  $("repaymentsBreakdown").textContent = money(totalInstalments + balloon);
+  $("overallBreakdown").textContent = money(totalFinanceOutlay);
+  $("runningBreakdown").textContent = money(runningCosts);
+
+  if(income === null || income === 0){
+    $("incomeBreakdown").textContent = "Not entered";
+  }else{
+    $("incomeBreakdown").textContent =
+      (realMonthlyCost / income * 100).toFixed(1) + "%";
+  }
+
+  $("noBalloonMonthly").textContent = money(noBalloonPayment);
+  $("noBalloonInterest").textContent = money(Math.max(0,noBalloonInterest));
+  $("paymentDifference").textContent =
+    money(Math.max(0,noBalloonPayment - monthlyPayment));
+
+  if(balloon > 0){
+    $("balloonWarning").hidden = false;
+    $("balloonWarning").textContent =
+      "You would still owe an estimated " + money(balloon) +
+      " at the end of " + years +
+      " years. This calculator does not assume you can refinance or sell the vehicle for enough to settle it.";
+  }else{
+    $("balloonWarning").hidden = true;
+  }
+
+  $("results").hidden = false;
+}
+
+$("calculate").addEventListener("click",calculate);
+calculate();
+})();
+</script>
+</body>
+</html>
