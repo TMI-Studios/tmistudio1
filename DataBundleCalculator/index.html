@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d35">
+
+  <title>Data Bundle Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Calculate how much mobile data you can afford in South Africa. Compare your budget with the price per GB and estimate your data bundle in GB and MB.">
+  <meta name="keywords" content="data bundle calculator South Africa, data price calculator, mobile data calculator, price per GB, affordable data">
+  <meta name="author" content="TMI Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/DataBundleCalculator/">
+
+  <meta property="og:title" content="Data Bundle Calculator | TMI Studios">
+  <meta property="og:description" content="Find out how much mobile data your budget can buy.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101d35;
+      --bg-glow: #172b4c;
+      --surface: #192943;
+      --surface-2: #213550;
+      --text: #f4f8ff;
+      --muted: #a9b8ce;
+      --border: rgba(181, 207, 240, .15);
+      --accent: #67e8f9;
+      --accent-ink: #08212b;
+      --coral: #ffb17a;
+      --input: #101e34;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .22);
+      --radius: 24px;
+    }
+
+    [data-theme="light"] {
+      color-scheme: light;
+      --bg: #f3f8ff;
+      --bg-glow: #e0f6ff;
+      --surface: #ffffff;
+      --surface-2: #eaf2fc;
+      --text: #152640;
+      --muted: #5d6d83;
+      --border: rgba(29, 60, 100, .14);
+      --accent: #087e95;
+      --accent-ink: #ffffff;
+      --coral: #a34c17;
+      --input: #f6f9fd;
+      --shadow: 0 24px 70px rgba(25, 52, 85, .09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 10% 0%, var(--bg-glow), transparent 42%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .shell {
+      width: min(100% - 32px, 1080px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 22px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: 22px;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      line-height: 1.15;
+    }
+
+    .brand-name small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
+
+    .hero {
+      padding: 55px 0 40px;
+      max-width: 780px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 12px var(--coral);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 20px 0 16px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(44px, 8vw, 78px);
+      line-height: .99;
+      letter-spacing: -.065em;
+      font-weight: 800;
+    }
+
+    h1 .highlight {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 600px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+    }
+
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+      align-items: start;
+      gap: 22px;
+      padding-bottom: 50px;
+    }
+
+    .panel {
+      padding: clamp(20px, 4vw, 30px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 23px;
+    }
+
+    .panel-heading h2 {
+      margin-bottom: 5px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+
+    .panel-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step {
+      display: grid;
+      place-items: center;
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      background: var(--surface-2);
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .field {
+      margin-bottom: 21px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field-hint {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      min-height: 56px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--input);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .input-wrap:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    .input-prefix, .input-suffix {
+      padding: 0 15px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      min-width: 0;
+      height: 54px;
+      padding: 0 14px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .input-wrap input:focus-visible {
+      outline: none;
+    }
+
+    .quick-label {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .quick-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 23px;
+    }
+
+    .quick-btn {
+      min-width: 56px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .quick-btn:hover, .quick-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .primary-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 54px;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 15px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: 15px;
+      font-weight: 800;
+      transition: transform .15s, filter .15s;
+    }
+
+    .primary-btn:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .primary-btn:active {
+      transform: translateY(0);
+    }
+
+    .result-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-panel::before {
+      position: absolute;
+      top: -65px;
+      right: -65px;
+      width: 190px;
+      height: 190px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .result-label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .result-number {
+      margin-bottom: 0;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(52px, 8vw, 76px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -.07em;
+      overflow-wrap: anywhere;
+    }
+
+    .result-number span {
+      font-size: .42em;
+      letter-spacing: -.03em;
+    }
+
+    .result-subtitle {
+      margin: 8px 0 25px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .result-divider {
+      height: 1px;
+      margin: 24px 0;
+      background: var(--border);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface-2);
+    }
+
+    .stat-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stat-value {
+      display: block;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(21px, 3vw, 29px);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .stat-value small {
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .result-note {
+      margin: 21px 0 0;
+      padding: 14px;
+      border-left: 3px solid var(--coral);
+      border-radius: 0 12px 12px 0;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .copy-btn {
+      width: 100%;
+      margin-top: 16px;
+      min-height: 45px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .error {
+      margin: 14px 0 0;
+      color: #ff8f8f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .info-section {
+      padding: 15px 0 60px;
+    }
+
+    .info-section h2 {
+      margin-bottom: 15px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(28px, 5vw, 40px);
+      letter-spacing: -.05em;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: var(--surface);
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 15px;
+      border-radius: 13px;
+      background: var(--surface-2);
+      font-size: 20px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 7px;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 18px;
+    }
+
+    .info-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .faq {
+      max-width: 800px;
+      padding-bottom: 60px;
+    }
+
+    .faq h2 {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 32px;
+      letter-spacing: -.04em;
+    }
+
+    details {
+      padding: 17px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    details p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 30px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding-top: 35px;
+      }
+
+      .calculator-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .result-number {
+        font-size: clamp(58px, 15vw, 76px);
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        padding: 19px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .shell {
+        width: min(100% - 22px, 1080px);
+      }
+
+      .topbar {
+        padding: 15px 0;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .theme-toggle {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .panel {
+        padding: 19px;
+        border-radius: 20px;
+      }
+
+      .stats {
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="../" aria-label="TMI Studios home">
+      <span class="brand-mark" aria-hidden="true">↗</span>
+      <span class="brand-name">
+        TMI STUDIOS
+        <small>Small tools. Big help.</small>
+      </span>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+      <span id="themeIcon" aria-hidden="true">☀️</span>
+      <span id="themeText">Light mode</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="shell hero">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> Made for South Africa</span>
+      <h1>Your budget.<br>Your data.<br><span class="highlight">No guesswork.</span></h1>
+      <p class="hero-copy">
+        Find out how much mobile data your money can buy. Enter your budget and the price per GB to get a quick estimate in seconds.
+      </p>
+    </section>
+
+    <section class="shell calculator-layout" aria-label="Data bundle calculator">
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Let's do the maths</h2>
+            <p>Enter your budget and data price.</p>
+          </div>
+          <span class="step" aria-hidden="true">01</span>
+        </div>
+
+        <form id="calculatorForm" novalidate>
+          <div class="field">
+            <label for="budget">How much do you want to spend?</label>
+            <div class="input-wrap">
+              <span class="input-prefix">R</span>
+              <input id="budget" name="budget" type="number" inputmode="decimal" min="0.01" max="1000000" step="0.01" placeholder="50.00" value="50" required>
+            </div>
+            <span class="field-hint">Your total data budget in rand.</span>
+          </div>
+
+          <div class="quick-label">Quick budget</div>
+          <div class="quick-buttons" aria-label="Choose a quick budget">
+            <button class="quick-btn" type="button" data-budget="10">R10</button>
+            <button class="quick-btn" type="button" data-budget="20">R20</button>
+            <button class="quick-btn" type="button" data-budget="50">R50</button>
+            <button class="quick-btn" type="button" data-budget="100">R100</button>
+            <button class="quick-btn" type="button" data-budget="200">R200</button>
+          </div>
+
+          <div class="field">
+            <label for="price">What is the price per GB?</label>
+            <div class="input-wrap">
+              <span class="input-prefix">R</span>
+              <input id="price" name="price" type="number" inputmode="decimal" min="0.01" max="1000000" step="0.01" placeholder="25.00" value="25" required>
+              <span class="input-suffix">/ GB</span>
+            </div>
+            <span class="field-hint">Check your network or retailer for its current price.</span>
+          </div>
+
+          <button class="primary-btn" type="submit">
+            Calculate my data <span aria-hidden="true">→</span>
+          </button>
+
+          <p id="errorMessage" class="error hidden" role="alert"></p>
+        </form>
+      </div>
+
+      <div class="panel result-panel" aria-live="polite" aria-atomic="true">
+        <div class="panel-heading">
+          <div>
+            <h2>Your estimate</h2>
+            <p>Here's what your budget could get you.</p>
+          </div>
+          <span class="step" aria-hidden="true">02</span>
+        </div>
+
+        <p class="result-label">Estimated data</p>
+        <p class="result-number" id="resultGB">2.00 <span>GB</span></p>
+        <p class="result-subtitle" id="resultSubtitle">About 2 GB of mobile data.</p>
+
+        <div class="result-divider"></div>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">Approx. megabytes</span>
+            <span class="stat-value" id="resultMB">2,048 <small>MB</small></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Whole GB bundles</span>
+            <span class="stat-value" id="wholeGB">2 <small>GB</small></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Estimated cost</span>
+            <span class="stat-value" id="resultCost">R50.00</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Money left over</span>
+            <span class="stat-value" id="resultLeft">R0.00</span>
+          </div>
+        </div>
+
+        <p class="result-note" id="resultNote">
+          This is an estimate based on the price you entered, not a live network offer.
+        </p>
+
+        <button class="copy-btn" id="copyButton" type="button">Copy my estimate</button>
+      </div>
+    </section>
+
+    <section class="shell info-section">
+      <h2>How it works</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">💸</span>
+          <h3>Set your budget</h3>
+          <p>Choose the amount you can afford to spend on mobile data.</p>
+        </article>
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">📱</span>
+          <h3>Enter the price</h3>
+          <p>Use the price per GB from your network or the data deal you are considering.</p>
+        </article>
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">✨</span>
+          <h3>See what you get</h3>
+          <p>Compare the estimated data, whole GB amount, cost and any money left over.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell faq">
+      <h2>Quick questions</h2>
+
+      <details>
+        <summary>How do I find the price per GB?</summary>
+        <p>Check your mobile network's app, website, USSD menu or the retailer selling the bundle. If a bundle costs R30 for 2 GB, its price is R15 per GB.</p>
+      </details>
+
+      <details>
+        <summary>Why is my result an estimate?</summary>
+        <p>Data prices and promotions change between networks, bundle sizes and purchase channels. This calculator uses the price you enter and does not fetch live network offers.</p>
+      </details>
+
+      <details>
+        <summary>How many MB are in a GB?</summary>
+        <p>This calculator uses 1 GB = 1,024 MB for its conversion. Some network providers advertise data using a different rounding convention.</p>
+      </details>
+
+      <details>
+        <summary>Does this calculator buy data for me?</summary>
+        <p>No. It helps you work out an estimate before you buy. Purchase your bundle directly from your chosen network or retailer.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <span>© <span id="year"></span> TMI Studios. Made to make life a little easier.</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../">Home</a>
+        <a href="../apps/">Explore tools</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const themeText = document.getElementById("themeText");
+
+      function applyTheme(theme) {
+        const chosenTheme = theme === "light" ? "light" : "dark";
+        root.setAttribute("data-theme", chosenTheme);
+
+        const isDark = chosenTheme === "dark";
+        themeIcon.textContent = isDark ? "☀️" : "🌙";
+        themeText.textContent = isDark ? "Light mode" : "Dark mode";
+        themeToggle.setAttribute(
+          "aria-label",
+          isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeMeta) {
+          themeMeta.setAttribute("content", isDark ? "#101d35" : "#f3f8ff");
+        }
+      }
+
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem("tmi-data-calculator-theme");
+      } catch (error) {
+        savedTheme = null;
+      }
+
+      if (savedTheme !== "light" && savedTheme !== "dark") {
+        savedTheme = window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
+      }
+
+      applyTheme(savedTheme);
+
+      themeToggle.addEventListener("click", function () {
+        const nextTheme =
+          root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+        applyTheme(nextTheme);
+
+        try {
+          localStorage.setItem("tmi-data-calculator-theme", nextTheme);
+        } catch (error) {
+          // Theme switching still works if browser storage is unavailable.
+        }
+      });
+
+      const form = document.getElementById("calculatorForm");
+      const budgetInput = document.getElementById("budget");
+      const priceInput = document.getElementById("price");
+      const errorMessage = document.getElementById("errorMessage");
+      const copyButton = document.getElementById("copyButton");
+
+      const money = new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      const number = new Intl.NumberFormat("en-ZA", {
+        maximumFractionDigits: 2
+      });
+
+      let currentSummary = "";
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.classList.remove("hidden");
+      }
+
+      function clearError() {
+        errorMessage.textContent = "";
+        errorMessage.classList.add("hidden");
+      }
+
+      function calculate() {
+        clearError();
+
+        const budget = Number(budgetInput.value);
+        const price = Number(priceInput.value);
+
+        if (
+          budgetInput.value.trim() === "" ||
+          !Number.isFinite(budget) ||
+          budget <= 0 ||
+          budget > 1000000
+        ) {
+          showError("Enter a budget greater than R0 and no more than R1,000,000.");
+          budgetInput.focus();
+          return false;
+        }
+
+        if (
+          priceInput.value.trim() === "" ||
+          !Number.isFinite(price) ||
+          price <= 0 ||
+          price > 1000000
+        ) {
+          showError("Enter a price per GB greater than R0 and no more than R1,000,000.");
+          priceInput.focus();
+          return false;
+        }
+
+        const estimatedGB = budget / price;
+        const estimatedMB = estimatedGB * 1024;
+        const wholeGB = Math.floor(estimatedGB);
+        const wholeCost = wholeGB * price;
+        const moneyLeft = Math.max(0, budget - wholeCost);
+        const estimatedCost = Math.min(budget, estimatedGB * price);
+
+        document.getElementById("resultGB").innerHTML =
+          number.format(estimatedGB) + " <span>GB</span>";
+
+        document.getElementById("resultMB").innerHTML =
+          number.format(estimatedMB) + " <small>MB</small>";
+
+        document.getElementById("wholeGB").innerHTML =
+          number.format(wholeGB) + " <small>GB</small>";
+
+        document.getElementById("resultCost").textContent =
+          money.format(estimatedCost);
+
+        document.getElementById("resultLeft").textContent =
+          money.format(moneyLeft);
+
+        document.getElementById("resultSubtitle").textContent =
+          "At " + money.format(price) + " per GB.";
+
+        document.getElementById("resultNote").textContent =
+          "Estimated data assumes the price scales proportionally. Real bundles may only be sold in fixed sizes and may have expiry dates or other conditions.";
+
+        currentSummary =
+          "TMI Studios Data Bundle Calculator\n" +
+          "Budget: " + money.format(budget) + "\n" +
+          "Price per GB: " + money.format(price) + "\n" +
+          "Estimated data: " + number.format(estimatedGB) + " GB\n" +
+          "Approximate data: " + number.format(estimatedMB) + " MB\n" +
+          "Whole GB affordable: " + number.format(wholeGB) + " GB\n" +
+          "Estimated cost: " + money.format(estimatedCost) + "\n" +
+          "Money left over after whole GB: " + money.format(moneyLeft) + "\n" +
+          "Estimate only; actual bundle prices and sizes may differ.";
+
+        copyButton.textContent = "Copy my estimate";
+        return true;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        calculate();
+      });
+
+      document.querySelectorAll("[data-budget]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          budgetInput.value = button.getAttribute("data-budget");
+
+          document.querySelectorAll("[data-budget]").forEach(function (item) {
+            item.classList.toggle("active", item === button);
+          });
+
+          calculate();
+        });
+      });
+
+      [budgetInput, priceInput].forEach(function (input) {
+        input.addEventListener("input", function () {
+          document.querySelectorAll("[data-budget]").forEach(function (button) {
+            button.classList.toggle(
+              "active",
+              Number(button.getAttribute("data-budget")) === Number(budgetInput.value) &&
+              budgetInput.value.trim() !== ""
+            );
+          });
+        });
+      });
+
+      copyButton.addEventListener("click", async function () {
+        if (!currentSummary && !calculate()) return;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(currentSummary);
+          } else {
+            const temp = document.createElement("textarea");
+            temp.value = currentSummary;
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+            document.body.appendChild(temp);
+            temp.select();
+
+            const copied = document.execCommand("copy");
+            temp.remove();
+
+            if (!copied) throw new Error("Copy failed");
+          }
+
+          copyButton.textContent = "Estimate copied ✓";
+        } catch (error) {
+          copyButton.textContent = "Copy unavailable — select the result text";
+        }
+
+        window.setTimeout(function () {
+          copyButton.textContent = "Copy my estimate";
+        }, 2200);
+      });
+
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>
