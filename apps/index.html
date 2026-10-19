@@ -5,809 +5,704 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prepaid Electricity Calculator South Africa | TMI Studios</title>
-  <meta name="description" content="Calculate how many prepaid electricity units your money can buy in South Africa. Estimate kWh, daily usage and how long your electricity may last.">
-  <meta name="keywords" content="prepaid electricity calculator South Africa, electricity units calculator, how many electricity units will I get, prepaid meter calculator, kWh calculator">
-  <meta name="author" content="TMI Studios">
+  <title>20 Free Calculators & Money Tools | TMI Studios</title>
+  <meta name="description" content="Explore 20 practical South African calculators and money tools from TMI Studios. Calculate budgets, salaries, electricity units, savings goals, loan costs and more.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/PrepaidElectricityCalculator/">
-  <meta name="theme-color" content="#111d2b">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/apps/">
+
+  <meta property="og:title" content="Free Calculators & Tools | TMI Studios">
+  <meta property="og:description" content="Explore practical South African money calculators, household tools and business resources from TMI Studios.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/apps/">
+  <meta name="theme-color" content="#0b0015">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #f1f4f6;
-      --ink: #172535;
-      --muted: #687987;
-      --navy: #111d2b;
-      --panel: #1b2c3d;
-      --lime: #c8ff62;
-      --cyan: #6ce8e0;
-      --line: #dce4e9;
-      --white: #ffffff;
-      --orange: #ffbd66;
+      --bg: #0b0015;
+      --panel: #160826;
+      --panel-light: #211036;
+      --purple: #b388ff;
+      --pink: #ff9de2;
+      --text: #f7f0ff;
+      --muted: #b8a8c9;
+      --border: rgba(195, 155, 255, 0.2);
+      --green: #9df5c5;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(126, 62, 190, 0.16), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
     }
 
-    button, input, select { font: inherit; }
+    a { color: inherit; }
 
-    .topbar {
-      background: var(--navy);
-      color: white;
-      padding: 17px 5%;
+    .container {
+      width: min(1080px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 0, 21, 0.92);
+    }
+
+    .nav {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      justify-content: space-between;
+      gap: 18px;
     }
 
     .brand {
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: -.5px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
-    .brand span { color: var(--lime); }
+    .brand span { color: var(--purple); }
 
-    .top-label {
-      color: #a9bdcd;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
     }
 
-    .page {
-      width: min(1050px, 92%);
-      margin: 0 auto;
-      padding: 30px 0 60px;
-    }
+    .nav-link:hover, footer a:hover { color: var(--pink); }
 
-    .intro { margin-bottom: 25px; }
+    .hero {
+      padding: 76px 0 42px;
+      text-align: center;
+    }
 
     .eyebrow {
-      color: #387b7a;
-      font-size: 11px;
-      font-weight: 900;
+      display: inline-block;
+      color: var(--pink);
+      font-size: 0.78rem;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 14px;
     }
 
     h1 {
-      font-size: clamp(34px, 7vw, 62px);
+      margin: 0 auto 18px;
+      max-width: 780px;
+      font-size: clamp(2.4rem, 7vw, 4.6rem);
+      line-height: 1.05;
       letter-spacing: -3px;
-      line-height: 1;
-      margin: 12px 0;
     }
 
-    .intro p {
+    h1 span { color: var(--purple); }
+
+    .hero p {
+      max-width: 660px;
+      margin: 0 auto;
       color: var(--muted);
-      max-width: 600px;
-      font-size: 15px;
-      margin: 0;
+      font-size: 1.05rem;
     }
 
-    .meter {
-      position: relative;
-      overflow: hidden;
-      background: var(--navy);
-      color: white;
-      border-radius: 25px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 14px 35px rgba(17, 29, 43, .14);
+    .search-area {
+      max-width: 680px;
+      margin: 34px auto 0;
     }
 
-    .meter::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -75px;
-      top: -110px;
-      border-radius: 50%;
-      border: 1px solid rgba(200,255,98,.18);
-      box-shadow: 0 0 0 25px rgba(200,255,98,.025),
-                  0 0 0 50px rgba(200,255,98,.02);
-      pointer-events: none;
-    }
-
-    .meter-top {
+    .search-box {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 12px;
-      position: relative;
-      z-index: 1;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 5px 17px;
     }
 
-    .meter-name {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #b6c5d2;
-      font-weight: 800;
+    .search-box span {
+      color: var(--purple);
+      font-size: 1.25rem;
     }
 
-    .live-indicator {
+    .search-box input {
+      min-width: 0;
+      width: 100%;
+      padding: 15px 0;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+      outline: none;
+      font: inherit;
+    }
+
+    .search-box input::placeholder { color: #9886ab; }
+
+    .filters {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 17px;
+    }
+
+    .filter {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      padding: 9px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.84rem;
+      transition: 0.2s ease;
+    }
+
+    .filter:hover, .filter.active {
+      background: rgba(179, 136, 255, 0.15);
+      border-color: var(--purple);
+      color: var(--text);
+    }
+
+    .catalogue { padding: 20px 0 76px; }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin: 0;
+      letter-spacing: -1px;
+    }
+
+    .result-count {
+      color: var(--muted);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .app-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+      padding: 24px;
+      background: linear-gradient(145deg, var(--panel-light), var(--panel));
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(195, 155, 255, 0.65);
+    }
+
+    .app-icon {
+      display: grid;
+      place-items: center;
+      width: 49px;
+      height: 49px;
+      margin-bottom: 19px;
+      border-radius: 14px;
+      background: rgba(179, 136, 255, 0.13);
+      border: 1px solid var(--border);
+      font-size: 1.45rem;
+    }
+
+    .category {
+      color: var(--pink);
+      text-transform: uppercase;
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      margin-bottom: 7px;
+    }
+
+    .app-card h3 {
+      font-size: 1.22rem;
+      line-height: 1.3;
+      margin: 0 0 10px;
+    }
+
+    .app-card p {
+      color: var(--muted);
+      font-size: 0.91rem;
+      margin: 0 0 22px;
+      flex: 1;
+    }
+
+    .status {
+      display: inline-flex;
       align-items: center;
       gap: 7px;
-      color: var(--lime);
-      font-size: 10px;
-      letter-spacing: 1px;
-      font-weight: 900;
-      text-transform: uppercase;
+      margin-bottom: 15px;
+      color: var(--green);
+      font-size: 0.76rem;
+      font-weight: 600;
     }
 
-    .live-indicator::before {
+    .status::before {
       content: "";
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--lime);
+      background: currentColor;
     }
 
-    .meter-screen {
-      margin-top: 20px;
-      background: #0b151e;
-      border: 1px solid #344a5b;
-      border-radius: 17px;
-      padding: 24px 20px;
-      position: relative;
-      z-index: 1;
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
-    .screen-label {
-      color: #93a9b8;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 10px;
+    .card-link span {
+      color: var(--purple);
+      transition: transform 0.2s ease;
     }
 
-    .screen-number {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 7px 0;
+    .card-link:hover span { transform: translateX(4px); }
+
+    .empty-state {
+      display: none;
+      padding: 38px 20px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
     }
 
-    .screen-number strong {
-      color: var(--lime);
-      font-family: "Courier New", monospace;
-      font-size: clamp(44px, 10vw, 78px);
-      line-height: 1;
-      letter-spacing: -4px;
-      overflow-wrap: anywhere;
+    .empty-state h3 {
+      color: var(--text);
+      margin-top: 0;
     }
 
-    .screen-number span {
-      color: var(--cyan);
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .screen-sub {
-      color: #9db0bd;
-      font-size: 12px;
-    }
-
-    .meter-bars {
-      display: grid;
-      grid-template-columns: repeat(20, 1fr);
-      gap: 5px;
-      margin-top: 22px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .meter-bars span {
-      height: 7px;
-      border-radius: 3px;
-      background: #344454;
-    }
-
-    .meter-bars span.active { background: var(--lime); }
-
-    .meter-caption {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      color: #a9bdcd;
-      font-size: 10px;
-      margin-top: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr);
-      gap: 20px;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--white);
-      border: 1px solid var(--line);
+    .callout {
+      margin-top: 54px;
+      padding: 32px;
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 23px;
+      background: linear-gradient(120deg, rgba(179, 136, 255, 0.12), rgba(255, 157, 226, 0.06));
+      text-align: center;
     }
 
-    .card-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 17px;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--line);
+    .callout h2 {
+      margin: 0 0 9px;
+      font-size: 1.6rem;
     }
 
-    .heading-icon {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      background: #e7f8f4;
-      border-radius: 12px;
-      color: #267d75;
-      font-size: 20px;
-    }
-
-    .card-heading h2 {
-      margin: 0;
-      font-size: 18px;
-      letter-spacing: -.5px;
-    }
-
-    .card-heading p {
-      margin: 2px 0 0;
-      font-size: 12px;
+    .callout p {
       color: var(--muted);
+      max-width: 570px;
+      margin: 0 auto 19px;
     }
 
-    .field { margin-bottom: 19px; }
-
-    label {
-      display: block;
-      font-weight: 800;
-      font-size: 13px;
-      margin-bottom: 7px;
+    .button {
+      display: inline-block;
+      padding: 12px 19px;
+      background: var(--purple);
+      color: #18072a;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
     }
 
-    .help {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 400;
-      margin-top: 3px;
-    }
-
-    .input-shell {
-      display: flex;
-      align-items: center;
-      background: #f8fafb;
-      border: 1.5px solid #dbe4e9;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .input-shell:focus-within {
-      border-color: #39958b;
-      box-shadow: 0 0 0 3px rgba(57,149,139,.11);
-    }
-
-    .input-shell .symbol {
-      padding: 0 13px;
-      color: #607481;
-      font-weight: 900;
-      font-size: 14px;
-    }
-
-    .input-shell input, .input-shell select {
-      width: 100%;
-      min-width: 0;
-      padding: 13px 10px;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-    }
-
-    .calculate {
-      width: 100%;
-      border: 0;
-      border-radius: 12px;
-      background: var(--navy);
-      color: white;
-      font-weight: 900;
-      padding: 16px;
-      cursor: pointer;
-      margin-top: 2px;
-    }
-
-    .calculate:hover { background: #243d52; }
-
-    .results-card { padding: 23px; }
-
-    .results-title {
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-      color: #387b7a;
-      margin-bottom: 17px;
-    }
-
-    .result-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 13px 0;
-      border-bottom: 1px solid #edf0f2;
-    }
-
-    .result-line:last-of-type { border-bottom: 0; }
-
-    .result-line span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .result-line strong {
-      text-align: right;
-      font-size: 16px;
-      overflow-wrap: anywhere;
-    }
-
-    .result-line.primary {
-      background: #f0fbeb;
-      border: 1px solid #deefce;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 7px;
-    }
-
-    .result-line.primary span {
-      color: #47743b;
-      font-weight: 800;
-    }
-
-    .result-line.primary strong {
-      color: #245d2b;
-      font-size: 23px;
-      letter-spacing: -.5px;
-    }
-
-    .days-box {
-      background: #e9f9f7;
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 18px;
-    }
-
-    .days-box span {
-      display: block;
-      color: #387b7a;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .days-box strong {
-      display: block;
-      font-size: 27px;
-      margin-top: 4px;
-      letter-spacing: -1px;
-    }
-
-    .days-box p {
-      margin: 4px 0 0;
-      color: #55716f;
-      font-size: 11px;
-    }
-
-    .result-disclaimer {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 16px;
-    }
-
-    .reset {
-      display: block;
-      margin: 12px auto 0;
-      padding: 8px 10px;
-      border: 0;
-      background: transparent;
-      color: #607481;
-      text-decoration: underline;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .guide {
-      margin-top: 45px;
-      display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 30px;
-      align-items: start;
-    }
-
-    .guide h2 {
-      font-size: clamp(25px, 4vw, 36px);
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin: 10px 0;
-    }
-
-    .guide-intro {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .faq { border-top: 1px solid var(--line); }
-
-    details {
-      border-bottom: 1px solid var(--line);
-      padding: 16px 0;
-    }
-
-    summary {
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    details p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 0;
-    }
-
-    .tip {
-      margin-top: 22px;
-      padding: 17px;
-      border-radius: 14px;
-      background: #fff6e8;
-      border: 1px solid #f1e1c5;
-      color: #755b32;
-      font-size: 12px;
-    }
-
-    .tip strong { color: #5a401e; }
+    .button:hover { background: var(--pink); }
 
     footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+      color: var(--muted);
+      font-size: 0.8rem;
       text-align: center;
-      background: var(--navy);
-      color: #b8c7d3;
-      padding: 24px 15px;
-      font-size: 12px;
     }
 
-    footer a {
-      color: var(--lime);
-      text-decoration: none;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 17px;
+      margin-bottom: 10px;
     }
 
-    @media (max-width: 760px) {
-      .main-grid { grid-template-columns: 1fr; }
-      .guide { grid-template-columns: 1fr; gap: 10px; }
-      .meter { padding: 18px; }
-      .card { padding: 19px; }
-      h1 { letter-spacing: -2px; }
+    footer a { text-decoration: none; }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 800px) {
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { padding-top: 58px; }
     }
 
-    @media (max-width: 390px) {
-      .field-row { grid-template-columns: 1fr; gap: 0; }
-      .screen-number strong { letter-spacing: -2px; }
-      .top-label { font-size: 8px; }
+    @media (max-width: 540px) {
+      .container { width: min(100% - 28px, 1080px); }
+      .nav { min-height: 66px; }
+      .hero { padding: 48px 0 30px; }
+      h1 { letter-spacing: -1.8px; }
+      .app-grid { grid-template-columns: 1fr; }
+      .app-card { padding: 22px; }
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .callout { padding: 25px 19px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="brand">TMI <span>STUDIOS</span></div>
-    <div class="top-label">South African money tools</div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="../">TMI <span>Studios</span></a>
+      <a class="nav-link" href="../">← Back to home</a>
+    </div>
   </header>
 
-  <main class="page">
-    <section class="intro">
-      <div class="eyebrow">Home utility calculator</div>
-      <h1>Make every unit count. ⚡</h1>
-      <p>Find out how many prepaid electricity units your money could buy, estimate your daily usage and work out how long your electricity might last.</p>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">The TMI app library</div>
+        <h1>Small tools.<br><span>Big main-character energy.</span></h1>
+        <p>
+          Practical calculators, everyday money tools and useful digital
+          resources. Find a tool, run your numbers and make your next
+          decision with a little more confidence.
+        </p>
+
+        <div class="search-area">
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input
+              id="appSearch"
+              type="search"
+              placeholder="Search apps and tools..."
+              aria-label="Search apps and tools"
+              autocomplete="off"
+            >
+          </label>
+
+          <div class="filters" aria-label="Filter apps by category">
+            <button class="filter active" type="button" data-filter="all" aria-pressed="true">All tools</button>
+            <button class="filter" type="button" data-filter="money" aria-pressed="false">Money &amp; Finance</button>
+            <button class="filter" type="button" data-filter="business" aria-pressed="false">Business &amp; Cooking</button>
+            <button class="filter" type="button" data-filter="household" aria-pressed="false">Home &amp; Household</button>
+            <button class="filter" type="button" data-filter="community" aria-pressed="false">Community</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="meter" aria-label="Electricity meter estimate">
-      <div class="meter-top">
-        <div class="meter-name">Digital prepaid meter</div>
-        <div class="live-indicator">Estimate ready</div>
-      </div>
-
-      <div class="meter-screen">
-        <div class="screen-label">Estimated units purchased</div>
-        <div class="screen-number">
-          <strong id="meterUnits">0.0</strong>
-          <span>kWh</span>
-        </div>
-        <div class="screen-sub" id="meterSub">Enter your purchase amount and electricity tariff below.</div>
-      </div>
-
-      <div class="meter-bars" id="meterBars" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <div class="meter-caption">
-        <span>UNIT ESTIMATE</span>
-        <span id="meterPercent">Waiting for inputs</span>
-      </div>
-    </section>
-
-    <section class="main-grid">
-      <div class="card">
-        <div class="card-heading">
-          <div class="heading-icon">⚙</div>
-          <div>
-            <h2>Your electricity details</h2>
-            <p>Use the tariff on your electricity statement or vending slip.</p>
-          </div>
+    <section class="catalogue">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Explore the collection</h2>
+          <span class="result-count" id="resultCount" aria-live="polite">20 tools</span>
         </div>
 
-        <form id="electricityForm">
-          <div class="field">
-            <label for="amount">How much are you buying?
-              <span class="help">The total rand amount you plan to spend.</span>
-            </label>
-            <div class="input-shell">
-              <span class="symbol">R</span>
-              <input id="amount" type="number" min="0.01" max="1000000" step="0.01" value="200" required>
-            </div>
-          </div>
+        <div class="app-grid" id="appGrid">
 
-          <div class="field">
-            <label for="tariff">Your electricity tariff per unit
-              <span class="help">Enter the cost of one kWh in rand, not cents.</span>
-            </label>
-            <div class="input-shell">
-              <span class="symbol">R</span>
-              <input id="tariff" type="number" min="0.01" max="1000" step="0.01" value="3.50" required>
-              <span class="symbol">/kWh</span>
-            </div>
-          </div>
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">💰</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Budget App</h3>
+            <p>Plan your money, organise your expenses and get a clearer picture of your budget.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../BudgetApp/">Open Budget App <span aria-hidden="true">→</span></a>
+          </article>
 
-          <div class="field">
-            <label for="fees">Other charges deducted from this purchase
-              <span class="help">Optional. Enter any applicable fixed charge or fee in rand.</span>
-            </label>
-            <div class="input-shell">
-              <span class="symbol">R</span>
-              <input id="fees" type="number" min="0" max="1000000" step="0.01" value="0">
-            </div>
-          </div>
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🚗</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Car Finance Calculator</h3>
+            <p>Estimate vehicle repayments and explore what a car could cost you each month.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../CarFinanceCalculator/">Calculate car finance <span aria-hidden="true">→</span></a>
+          </article>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="daily">Estimated daily usage
-                <span class="help">How many units your home uses daily.</span>
-              </label>
-              <div class="input-shell">
-                <input id="daily" type="number" min="0.01" max="10000" step="0.1" value="10" required>
-                <span class="symbol">kWh</span>
-              </div>
-            </div>
+          <article class="app-card" data-category="household money" data-status="live">
+            <div class="app-icon" aria-hidden="true">👨‍👩‍👧</div>
+            <div class="category">Family &amp; Household</div>
+            <h3>Child Maintenance Calculator</h3>
+            <p>Explore an estimated contribution based on the financial details you enter.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../ChildMaintenanceCalculator/">Estimate contributions <span aria-hidden="true">→</span></a>
+          </article>
 
-            <div class="field">
-              <label for="current">Current meter balance
-                <span class="help">Optional existing units.</span>
-              </label>
-              <div class="input-shell">
-                <input id="current" type="number" min="0" max="1000000" step="0.1" value="0">
-                <span class="symbol">kWh</span>
-              </div>
-            </div>
-          </div>
+          <article class="app-card" data-category="business household" data-status="live">
+            <div class="app-icon" aria-hidden="true">🍳</div>
+            <div class="category">Business &amp; Cooking</div>
+            <h3>Cook Cost Calculator</h3>
+            <p>Work out recipe costs and make more informed decisions about food pricing.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../CookCostCalculator%20/">Calculate cooking costs <span aria-hidden="true">→</span></a>
+          </article>
 
-          <button class="calculate" type="submit">Calculate my units &rarr;</button>
-        </form>
-      </div>
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">📶</div>
+            <div class="category">Everyday Money</div>
+            <h3>Data Bundle Calculator</h3>
+            <p>Compare mobile data bundle value and estimate the cost of the data you need.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../DataBundleCalculator/">Compare data bundles <span aria-hidden="true">→</span></a>
+          </article>
 
-      <aside class="card results-card" aria-live="polite">
-        <div class="results-title">Your electricity breakdown</div>
+          <article class="app-card" data-category="household money" data-status="live">
+            <div class="app-icon" aria-hidden="true">💡</div>
+            <div class="category">Home &amp; Household</div>
+            <h3>Electricity Cost Calculator</h3>
+            <p>Estimate electricity costs to better understand household or appliance usage.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../ElectricityCostCalculator/">Calculate electricity costs <span aria-hidden="true">→</span></a>
+          </article>
 
-        <div class="result-line primary">
-          <span>Units you could buy</span>
-          <strong id="unitsResult">0.0 kWh</strong>
+          <article class="app-card" data-category="household money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🛒</div>
+            <div class="category">Home &amp; Household</div>
+            <h3>Grocery Split Calculator</h3>
+            <p>Split a grocery bill fairly between people and work out who owes whom.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../GrocerySplitCalculator/">Split grocery costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="business money" data-status="live">
+            <div class="app-icon" aria-hidden="true">⏱️</div>
+            <div class="category">Freelance &amp; Business</div>
+            <h3>Hourly Rate Calculator</h3>
+            <p>Estimate the hourly rate you need based on your income goal, expenses and billable hours.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../HourlyRateCalculator/">Calculate your hourly rate <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="community" data-status="live">
+            <div class="app-icon" aria-hidden="true">💍</div>
+            <div class="category">Culture &amp; Life</div>
+            <h3>Lobola Calculator</h3>
+            <p>Organise lobola planning estimates and keep track of the amounts you enter.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../LobolaCalculator/">Plan lobola costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">⚖️</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Mashonisa vs Bank</h3>
+            <p>Compare borrowing costs and explore the differences between loan options.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../MashonisaVsBank/">Compare loan costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money community" data-status="live">
+            <div class="app-icon" aria-hidden="true">🎓</div>
+            <div class="category">Student Money</div>
+            <h3>NSFAS Allowance Calculator</h3>
+            <p>Plan your student allowance and organise spending across your study expenses.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../NSFASAllowanceCalculator/">Plan your allowance <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="household money" data-status="live">
+            <div class="app-icon" aria-hidden="true">⚡</div>
+            <div class="category">Home &amp; Household</div>
+            <h3>Prepaid Electricity Calculator</h3>
+            <p>Estimate how many electricity units your money could buy and how long they may last.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../PrepaidElectricityCalculator/">Calculate electricity units <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="business money" data-status="live">
+            <div class="app-icon" aria-hidden="true">📈</div>
+            <div class="category">Business &amp; Finance</div>
+            <h3>Profit Calculator</h3>
+            <p>Calculate costs, revenue and estimated profit to help price products and services.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../ProfitCalculator/">Calculate profit <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money household" data-status="live">
+            <div class="app-icon" aria-hidden="true">🏠</div>
+            <div class="category">Money &amp; Housing</div>
+            <h3>Rent vs Buy Calculator</h3>
+            <p>Explore the financial trade-offs between renting a home and buying property.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../RentVsBuyCalculator/">Compare rent vs buy <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🧮</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>SASSA Grant Budget Planner</h3>
+            <p>Plan how to allocate grant money across essential expenses and monthly needs.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../SASSAGrantBudgetPlanner/">Plan your grant budget <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🧾</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Salary After Tax Calculator</h3>
+            <p>Estimate take-home pay after applicable South African tax and deductions.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../SalaryAfterTaxCalculator/">Estimate take-home pay <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🎯</div>
+            <div class="category">Money &amp; Finance</div>
+            <h3>Savings Goal Calculator</h3>
+            <p>Work out how much to save regularly to reach your target and plan a savings timeline.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../SavingsGoalCalculator/">Plan your savings <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="community money" data-status="live">
+            <div class="app-icon" aria-hidden="true">🤝</div>
+            <div class="category">Money &amp; Community</div>
+            <h3>Stokvel Hub</h3>
+            <p>Explore stokvel resources, a contribution calculator and practical group-saving information.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../stokvel/">Explore Stokvel Hub <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money household" data-status="live">
+            <div class="app-icon" aria-hidden="true">🚕</div>
+            <div class="category">Transport &amp; Budgeting</div>
+            <h3>Monthly Taxi Budget Calculator</h3>
+            <p>Estimate your monthly taxi commute costs based on your travel routine.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../TaxiBudgetCalculator/">Calculate taxi costs <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="app-card" data-category="money community" data-status="live">
+            <div class="app-icon" aria-hidden="true">🙏</div>
+            <div class="category">Giving &amp; Finance</div>
+            <h3>Tithe Calculator</h3>
+            <p>Calculate a tithe or chosen giving percentage from the income amount you enter.</p>
+            <div class="status">Available now</div>
+            <a class="card-link" href="../TitheCalculator/">Calculate your tithe <span aria-hidden="true">→</span></a>
+          </article>
+
         </div>
 
-        <div class="result-line">
-          <span>Purchase amount</span>
-          <strong id="amountResult">R 0.00</strong>
+        <div class="empty-state" id="emptyState">
+          <h3>No matching tools found</h3>
+          <p>Try a different search or choose another category.</p>
         </div>
 
-        <div class="result-line">
-          <span>Other charges</span>
-          <strong id="feesResult">R 0.00</strong>
+        <div class="callout">
+          <h2>More experiments are on the way.</h2>
+          <p>
+            TMI Studios is growing its collection one project at a time.
+            Explore what's available today and come back as the library grows.
+          </p>
+          <a class="button" href="../">Meet TMI Studios</a>
         </div>
-
-        <div class="result-line">
-          <span>Amount for electricity</span>
-          <strong id="netResult">R 0.00</strong>
-        </div>
-
-        <div class="result-line">
-          <span>Estimated cost per unit</span>
-          <strong id="tariffResult">R 0.00</strong>
-        </div>
-
-        <div class="result-line">
-          <span>Units including current balance</span>
-          <strong id="totalUnitsResult">0.0 kWh</strong>
-        </div>
-
-        <div class="days-box">
-          <span>Estimated electricity remaining</span>
-          <strong id="daysResult">0 days</strong>
-          <p id="daysNote">Based on your estimated daily usage.</p>
-        </div>
-
-        <p class="result-disclaimer">Actual units may differ because of municipal tariffs, inclining block rates, VAT treatment, fixed charges or other deductions.</p>
-
-        <button class="reset" id="resetBtn" type="button">Reset calculator</button>
-      </aside>
-    </section>
-
-    <section class="guide">
-      <div>
-        <div class="eyebrow">Know your numbers</div>
-        <h2>Electricity maths, minus the headache.</h2>
-        <p class="guide-intro">A little tariff awareness can help you plan your electricity budget and understand your household's usage.</p>
-
-        <div class="tip">
-          <strong>Quick tip:</strong> If you are unsure of your tariff, check your latest municipal bill or ask your electricity provider. Do not assume everyone in South Africa pays the same rate.
-        </div>
-      </div>
-
-      <div class="faq">
-        <details>
-          <summary>How do I calculate electricity units from rand?</summary>
-          <p>Subtract any charges that come out of your purchase amount, then divide the remaining amount by your tariff per kWh. For example, R200 at R3.50 per kWh, with no extra charges, buys about 57.1 kWh.</p>
-        </details>
-        <details>
-          <summary>What is a kWh?</summary>
-          <p>A kilowatt-hour is a unit of energy. A 1,000-watt appliance running for one hour uses 1 kWh. Actual appliance usage varies with its power rating and how long it operates.</p>
-        </details>
-        <details>
-          <summary>Why do I get fewer units than expected?</summary>
-          <p>Your purchase may include service charges, arrears or other deductions. Your electricity price may also vary by consumption block, municipality, tariff category or applicable taxes.</p>
-        </details>
-        <details>
-          <summary>How can I estimate how long my electricity will last?</summary>
-          <p>Add the units you are buying to your current meter balance, then divide the total by your estimated daily usage. This gives a rough number of days, assuming your usage stays similar.</p>
-        </details>
-        <details>
-          <summary>Does this calculator know my municipality's tariff?</summary>
-          <p>No. Enter your own tariff and any applicable charges. Tariffs can change and differ between providers, areas and customer categories, so confirm your current rate with your electricity supplier.</p>
-        </details>
       </div>
     </section>
   </main>
 
   <footer>
-    Practical tools for everyday life. <a href="https://tmi-studios.github.io/tmistudio1/">Explore TMI Studios</a>.
+    <div class="container">
+      <div class="footer-links">
+        <a href="../">Home</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../terms.html">Terms</a>
+        <a href="../disclaimer.html">Disclaimer</a>
+        <a href="mailto:tmistudios01@gmail.com">Contact</a>
+      </div>
+      <div>© <span id="year">2026</span> TMI Studios. Built with curiosity.</div>
+    </div>
   </footer>
 
   <script>
-    const form = document.getElementById("electricityForm");
+    const searchInput = document.getElementById("appSearch");
+    const filterButtons = document.querySelectorAll(".filter");
+    const appCards = document.querySelectorAll(".app-card");
+    const resultCount = document.getElementById("resultCount");
+    const emptyState = document.getElementById("emptyState");
+    const appGrid = document.getElementById("appGrid");
 
-    function money(value) {
-      return new Intl.NumberFormat("en-ZA", {
-        style: "currency",
-        currency: "ZAR",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }).format(value);
-    }
+    let activeFilter = "all";
 
-    function calculateElectricity(event) {
-      if (event) event.preventDefault();
+    function filterApps() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
 
-      const amount = Number(document.getElementById("amount").value);
-      const tariff = Number(document.getElementById("tariff").value);
-      const fees = Number(document.getElementById("fees").value || 0);
-      const daily = Number(document.getElementById("daily").value);
-      const current = Number(document.getElementById("current").value || 0);
+      appCards.forEach((card) => {
+        const searchableText = card.textContent.toLowerCase();
+        const categories = card.dataset.category.split(" ");
 
-      if (
-        !Number.isFinite(amount) || amount <= 0 || amount > 1000000 ||
-        !Number.isFinite(tariff) || tariff <= 0 || tariff > 1000 ||
-        !Number.isFinite(fees) || fees < 0 || fees > amount ||
-        !Number.isFinite(daily) || daily <= 0 || daily > 10000 ||
-        !Number.isFinite(current) || current < 0 || current > 1000000
-      ) {
-        alert("Please enter valid amounts. Charges cannot exceed your purchase amount, and your tariff and daily usage must be greater than zero.");
-        return;
-      }
+        const matchesSearch = searchableText.includes(query);
+        const matchesFilter =
+          activeFilter === "all" ||
+          categories.includes(activeFilter);
 
-      const net = amount - fees;
-      const units = net / tariff;
-      const totalUnits = units + current;
-      const days = totalUnits / daily;
+        const show = matchesSearch && matchesFilter;
+        card.hidden = !show;
 
-      document.getElementById("meterUnits").textContent = units.toLocaleString("en-ZA", {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 2
+        if (show) visibleCount++;
       });
 
-      document.getElementById("meterSub").textContent =
-        money(net) + " available for electricity at " + money(tariff) + " per kWh.";
+      resultCount.textContent =
+        visibleCount + (visibleCount === 1 ? " tool" : " tools");
 
-      document.getElementById("unitsResult").textContent =
-        units.toLocaleString("en-ZA", { maximumFractionDigits: 2 }) + " kWh";
-      document.getElementById("amountResult").textContent = money(amount);
-      document.getElementById("feesResult").textContent = money(fees);
-      document.getElementById("netResult").textContent = money(net);
-      document.getElementById("tariffResult").textContent = money(tariff) + " / kWh";
-      document.getElementById("totalUnitsResult").textContent =
-        totalUnits.toLocaleString("en-ZA", { maximumFractionDigits: 2 }) + " kWh";
-
-      let daysText;
-      if (days < 1) {
-        const hours = days * 24;
-        daysText = hours < 1
-          ? "Less than 1 hour"
-          : hours.toFixed(1) + (hours < 2 ? " hour" : " hours");
-      } else {
-        daysText = days.toFixed(1) + (days < 2 ? " day" : " days");
-      }
-
-      document.getElementById("daysResult").textContent = daysText;
-      document.getElementById("daysNote").textContent =
-        "Assumes average usage of " + daily.toFixed(1) + " kWh per day.";
-
-      const bars = document.querySelectorAll("#meterBars span");
-      const percent = Math.min(100, Math.max(0, units / 200 * 100));
-      const activeCount = Math.round(percent / 100 * bars.length);
-
-      bars.forEach((bar, index) => {
-        bar.classList.toggle("active", index < activeCount);
-      });
-
-      document.getElementById("meterPercent").textContent =
-        units >= 200 ? "200+ kWh scale" : Math.round(percent) + "% of 200 kWh scale";
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+      appGrid.style.display = visibleCount === 0 ? "none" : "grid";
     }
 
-    form.addEventListener("submit", calculateElectricity);
+    searchInput.addEventListener("input", filterApps);
 
-    document.getElementById("resetBtn").addEventListener("click", function () {
-      document.getElementById("amount").value = 200;
-      document.getElementById("tariff").value = 3.50;
-      document.getElementById("fees").value = 0;
-      document.getElementById("daily").value = 10;
-      document.getElementById("current").value = 0;
-      calculateElectricity();
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+
+        filterButtons.forEach((item) => {
+          const isActive = item === button;
+          item.classList.toggle("active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        filterApps();
+      });
     });
 
-    calculateElectricity();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    filterApps();
   </script>
 </body>
 </html>
