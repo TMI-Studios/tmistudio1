@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cook Cost Calculator South Africa | Cost Per Plate | TMI Studios</title>
+  <meta name="description" content="Calculate the estimated cost per plate of chicken curry, pap and wors, beef stew, malva pudding and bunny chow. Plan affordable meals in South Africa.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="TMI Studios">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/CookCostCalculator/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TMI Studios">
+  <meta property="og:title" content="Cook Cost Calculator South Africa | Cost Per Plate">
+  <meta property="og:description" content="Find out how much homemade South African meals may cost per plate. Calculate recipe costs, change servings and explore affordable meal ideas.">
+  <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/CookCostCalculator/">
+  <meta property="og:locale" content="en_ZA">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cook Cost Calculator South Africa">
+  <meta name="twitter:description" content="Estimate the cost per plate of popular South African meals and plan your food budget.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://tmi-studios.github.io/tmistudio1/#organization",
+        "name": "TMI Studios",
+        "url": "https://tmi-studios.github.io/tmistudio1/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://tmi-studios.github.io/tmistudio1/#website",
+        "url": "https://tmi-studios.github.io/tmistudio1/",
+        "name": "TMI Studios",
+        "publisher": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/#organization"
+        },
+        "inLanguage": "en-ZA"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/#webpage",
+        "url": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/",
+        "name": "Cook Cost Calculator South Africa",
+        "description": "Estimate the cost per serving of popular South African meals and calculate recipe costs for different serving sizes.",
+        "inLanguage": "en-ZA",
+        "isPartOf": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/#website"
+        },
+        "publisher": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/#organization"
+        },
+        "breadcrumb": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/#breadcrumb"
+        },
+        "mainEntity": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/#application"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/#application",
+        "name": "Cook Cost Calculator",
+        "url": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/",
+        "description": "A free calculator for estimating recipe costs and cost per plate for popular South African meals.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript enabled",
+        "isAccessibleForFree": true,
+        "inLanguage": "en-ZA",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "ZAR"
+        },
+        "publisher": {
+          "@id": "https://tmi-studios.github.io/tmistudio1/#organization"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "TMI Studios",
+            "item": "https://tmi-studios.github.io/tmistudio1/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Cook Cost Calculator",
+            "item": "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0a;
+      --panel: #151515;
+      --panel-dark: #0f0f0f;
+      --border: #292929;
+      --text: #f7f7f7;
+      --muted: #a3a3a3;
+      --orange: #ff9a3c;
+      --orange-light: #ffc18b;
+      --green: #a7e6ac;
+      --red: #ff9292;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--orange);
+      text-underline-offset: 4px;
+    }
+
+    a:hover {
+      color: var(--orange-light);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      background: #0d0d0d;
+    }
+
+    .header-inner,
+    .wrap,
+    .footer-inner {
+      width: min(100% - 32px, 900px);
+      margin-inline: auto;
+    }
+
+    .header-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+    }
+
+    .brand span {
+      color: var(--orange);
+    }
+
+    .header-link {
+      font-size: 0.84rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .wrap {
+      padding-top: 22px;
+      padding-bottom: 58px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: #8c8c8c;
+      font-size: 0.7rem;
+      letter-spacing: 0.13em;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 14px 0;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
+
+    h1 span {
+      color: var(--orange);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: clamp(1.35rem, 4vw, 1.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+    }
+
+    h3 {
+      line-height: 1.3;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .note {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .note strong {
+      color: var(--text);
+    }
+
+    .card {
+      margin: 18px 0;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .card-intro {
+      margin-top: -5px;
+      color: var(--muted);
+      font-size: 0.89rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-size: 0.91rem;
+      font-weight: 800;
+    }
+
+    select,
+    input {
+      display: block;
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 13px;
+      margin: 0 0 13px;
+      border: 1px solid #3a3a3a;
+      border-radius: 10px;
+      background: var(--panel-dark);
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: var(--orange);
+      outline: none;
+    }
+
+    .help {
+      display: block;
+      margin: -6px 0 12px;
+      color: #929292;
+      font-size: 0.79rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 49px;
+      padding: 13px 16px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: var(--orange);
+      color: #17100a;
+      font-weight: 900;
+      font-size: 0.97rem;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .button:hover {
+      background: #ffb16a;
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      background: #222;
+      color: var(--text);
+      border-color: #393939;
+    }
+
+    .button-secondary:hover {
+      background: #303030;
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .box {
+      min-width: 0;
+      padding: 15px 10px;
+      border: 1px solid #303030;
+      border-radius: 12px;
+      background: var(--panel-dark);
+      text-align: center;
+    }
+
+    .box.highlight {
+      border-color: var(--orange);
+    }
+
+    .box span {
+      display: block;
+      color: #a1a1a1;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+    }
+
+    .box strong {
+      display: block;
+      margin-top: 5px;
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      overflow-wrap: anywhere;
+    }
+
+    .box.highlight strong {
+      color: var(--orange);
+    }
+
+    .result-message {
+      margin-top: 15px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .breakdown {
+      margin-top: 15px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.87rem;
+    }
+
+    .breakdown-row span {
+      color: var(--muted);
+    }
+
+    .breakdown-row strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .section {
+      margin-top: 46px;
+    }
+
+    .section-intro {
+      margin-top: -4px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    details {
+      margin: 12px 0;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 0.98rem;
+      font-weight: 850;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      float: right;
+      padding-left: 10px;
+      color: var(--orange);
+      font-size: 1.15rem;
+    }
+
+    details[open] summary::after {
+      content: "−";
+    }
+
+    .step {
+      margin: 15px 0;
+      padding: 13px;
+      border-left: 3px solid var(--orange);
+      border-radius: 0 9px 9px 0;
+      background: var(--panel-dark);
+      font-size: 0.9rem;
+    }
+
+    .ingredient-list {
+      margin: 13px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ingredient-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 8px 0;
+      border-bottom: 1px solid #282828;
+      color: #c9c9c9;
+      font-size: 0.87rem;
+    }
+
+    .ingredient-list li strong {
+      color: var(--text);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .guide-copy {
+      color: #c1c1c1;
+      font-size: 0.9rem;
+    }
+
+    .guide-copy li {
+      margin: 8px 0;
+    }
+
+    .guide-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meal-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--panel);
+    }
+
+    .meal-card h3 {
+      margin: 0 0 5px;
+      font-size: 0.98rem;
+    }
+
+    .meal-card .price {
+      display: block;
+      margin: 8px 0;
+      color: var(--orange);
+      font-size: 1.35rem;
+      font-weight: 900;
+    }
+
+    .meal-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      color: #c5c5c5;
+      font-size: 0.87rem;
+      font-weight: 500;
+    }
+
+    .checklist input {
+      width: 18px;
+      min-height: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin: 3px 0 0;
+      accent-color: var(--orange);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-list details {
+      margin: 0;
+    }
+
+    .ad-placeholder {
+      margin: 28px 0;
+      padding: 22px;
+      border: 1px dashed #333;
+      border-radius: 12px;
+      color: #747474;
+      text-align: center;
+      font-size: 0.75rem;
+    }
+
+    .disclaimer {
+      margin-top: 30px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .disclaimer strong {
+      color: var(--text);
+    }
+
+    .site-footer {
+      padding: 26px 0 32px;
+      border-top: 1px solid var(--border);
+      background: #0d0d0d;
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 13px;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-size: 0.84rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-brand span {
+      color: var(--orange);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 17px;
+    }
+
+    .footer-links a {
+      color: #a7a7a7;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+      text-decoration: underline;
+    }
+
+    .copyright {
+      margin: 0;
+      color: #737373;
+      font-size: 0.78rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 560px) {
+      .header-inner,
+      .wrap,
+      .footer-inner {
+        width: min(100% - 24px, 900px);
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .meal-grid,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .wrap {
+        padding-top: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../" aria-label="TMI Studios home">
+        TMI <span>STUDIOS</span>
+      </a>
+      <a class="header-link" href="../apps/">Explore more tools &rarr;</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="eyebrow">TMI Studios · App 3 / 100</p>
+
+    <h1>Cook Cost <span>Calculator</span></h1>
+
+    <p class="hero-copy">
+      How much does it cost to cook in South Africa? Choose a dish, change the
+      number of servings and estimate the total recipe cost and price per plate.
+      Use the guides below to plan meals around your grocery budget.
+    </p>
+
+    <p class="note">
+      <strong>Price reality check:</strong> ingredient prices below are
+      illustrative estimates, not verified live supermarket prices. Actual
+      costs vary by store, location, brand, pack size, specials and date.
+      Update the ingredient prices with your own shopping receipts for a more
+      accurate result.
+    </p>
+
+    <section class="card" aria-labelledby="calculator-heading">
+      <h2 id="calculator-heading">Calculate your meal cost</h2>
+      <p class="card-intro">
+        Choose a meal and enter how many portions you want to make.
+      </p>
+
+      <form id="calculatorForm">
+        <label for="dish">What are you cooking?</label>
+        <select id="dish" name="dish">
+          <option value="curry">Chicken curry and rice</option>
+          <option value="papwors">Pap, wors and chakalaka</option>
+          <option value="stew">Beef stew and pap</option>
+          <option value="malva">Malva pudding</option>
+          <option value="bunny">Chicken bunny chow</option>
+        </select>
+
+        <label for="servings">Number of servings</label>
+        <input
+          id="servings"
+          name="servings"
+          type="number"
+          value="4"
+          min="1"
+          max="100"
+          step="1"
+          inputmode="numeric"
+          required
+          aria-describedby="servingsHelp"
+        >
+        <small class="help" id="servingsHelp">
+          For malva pudding, a serving means one slice. For bunny chow, a serving
+          means one bunny.
+        </small>
+
+        <button class="button" type="submit">Calculate Cost</button>
+      </form>
+
+      <div id="results" hidden aria-live="polite">
+        <div class="result">
+          <div class="box">
+            <span>ESTIMATED TOTAL COST</span>
+            <strong id="totalCost">R0.00</strong>
+          </div>
+          <div class="box highlight">
+            <span>ESTIMATED COST PER SERVING</span>
+            <strong id="costPerServing">R0.00</strong>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <div class="breakdown-row">
+            <span>Selected meal</span>
+            <strong id="selectedMeal">-</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Recipe batch size</span>
+            <strong id="batchSize">-</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Estimated servings</span>
+            <strong id="servingsResult">-</strong>
+          </div>
+        </div>
+
+        <p class="result-message" id="resultMessage"></p>
+        <button class="button button-secondary" type="button" id="copyButton">
+          Copy cost summary
+        </button>
+        <p id="copyMessage" class="result-message" role="status" aria-live="polite"></p>
+      </div>
+
+      <p id="formMessage" class="result-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="section" aria-labelledby="curry-heading">
+      <h2 id="curry-heading">South African meal cost guides</h2>
+      <p class="section-intro">
+        Explore the example ingredients, estimated batch costs and practical
+        cooking ideas for popular home meals.
+      </p>
+
+      <details open>
+        <summary>How much does chicken curry and rice cost for 4?</summary>
+
+        <div class="step">
+          <strong>Illustrative ingredient estimate</strong><br>
+          Example total: R126 for 4 servings, or R31.50 per serving.
+          Prices are estimates and should be checked against current local
+          supermarket prices.
+        </div>
+
+        <ul class="ingredient-list">
+          <li><span>Chicken, 1 kg</span><strong>R65</strong></li>
+          <li><span>Rice, 500 g used</span><strong>R18</strong></li>
+          <li><span>Onion</span><strong>R8</strong></li>
+          <li><span>Tomatoes</span><strong>R15</strong></li>
+          <li><span>Curry powder</span><strong>R7</strong></li>
+          <li><span>Cooking oil allocation</span><strong>R10</strong></li>
+          <li><span>Stock cube</span><strong>R3</strong></li>
+        </ul>
+
+        <p class="guide-copy">
+          <strong>Cooking idea:</strong> fry the onion with a little oil, add
+          the spices and chicken, then add tomatoes and water. Simmer until
+          the chicken is cooked through. Prepare the rice separately.
+        </p>
+
+        <ol class="guide-copy">
+          <li>Compare the price per kilogram of chicken rather than looking only at the pack price.</li>
+          <li>Freeze unused chicken promptly in suitable portions.</li>
+          <li>Measure rice according to the number of people eating.</li>
+          <li>Use your own receipts to update the calculator's example costs.</li>
+        </ol>
+
+        <p class="guide-copy">
+          <strong>Monthly illustration:</strong> at R126 per batch, cooking
+          this meal eight times would cost about R1,008 using the example
+          prices. Your actual total will depend on your ingredients and portions.
+        </p>
+      </details>
+
+      <details>
+        <summary>Cost to cook pap, wors and chakalaka for 4</summary>
+
+        <div class="step">
+          <strong>Illustrative batch estimate:</strong> R131 for 4 servings,
+          or R32.75 per serving.
+        </div>
+
+        <ul class="ingredient-list">
+          <li><span>Pap portion allocation</span><strong>R12</strong></li>
+          <li><span>Wors, 1 kg</span><strong>R89</strong></li>
+          <li><span>Chakalaka tin</span><strong>R18</strong></li>
+          <li><span>Oil and onion allocation</span><strong>R12</strong></li>
+        </ul>
+
+        <p class="guide-copy">
+          <strong>Ways to stretch the meal:</strong> serve measured portions
+          of wors with pap and chakalaka, or add beans and reduce the amount
+          of wors if that suits your household. Make sure portions remain
+          satisfying and nutritionally appropriate.
+        </p>
+
+        <ol class="guide-copy">
+          <li>Compare wors prices by weight and check the product label.</li>
+          <li>Store maize meal in a dry, sealed container.</li>
+          <li>Use leftovers safely and refrigerate them promptly.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Beef stew and pap cost estimate</summary>
+
+        <div class="step">
+          <strong>Illustrative batch estimate:</strong> R156 for 4 servings,
+          or R39 per serving.
+        </div>
+
+        <ul class="ingredient-list">
+          <li><span>Stewing beef, 1 kg</span><strong>R95</strong></li>
+          <li><span>Pap portion allocation</span><strong>R12</strong></li>
+          <li><span>Potatoes</span><strong>R20</strong></li>
+          <li><span>Carrots</span><strong>R15</strong></li>
+          <li><span>Onion</span><strong>R8</strong></li>
+          <li><span>Stock</span><strong>R6</strong></li>
+        </ul>
+
+        <p class="guide-copy">
+          <strong>Cooking idea:</strong> brown the beef, add water or stock
+          and simmer until tender. Add vegetables according to their cooking
+          times. Tougher cuts may need longer than 90 minutes.
+        </p>
+
+        <ol class="guide-copy">
+          <li>Compare stewing cuts and price per kilogram.</li>
+          <li>Use seasonal vegetables where practical.</li>
+          <li>Cool and refrigerate leftovers promptly, or freeze them in portions.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>How much does homemade malva pudding cost?</summary>
+
+        <div class="step">
+          <strong>Illustrative batch estimate:</strong> R100 for 8 slices,
+          or R12.50 per slice, excluding optional custard.
+        </div>
+
+        <ul class="ingredient-list">
+          <li><span>Flour</span><strong>R10</strong></li>
+          <li><span>Sugar</span><strong>R12</strong></li>
+          <li><span>Eggs</span><strong>R18</strong></li>
+          <li><span>Butter</span><strong>R25</strong></li>
+          <li><span>Jam</span><strong>R20</strong></li>
+          <li><span>Milk</span><strong>R10</strong></li>
+          <li><span>Vinegar and bicarbonate allocation</span><strong>R5</strong></li>
+        </ul>
+
+        <p class="guide-copy">
+          Bake using your preferred malva pudding recipe and serve in
+          consistent portions. If you serve custard, include its cost in your
+          total. Homemade and takeaway prices may differ in portion size,
+          ingredients, overheads and location.
+        </p>
+      </details>
+
+      <details>
+        <summary>How much does chicken bunny chow cost in Durban?</summary>
+
+        <div class="step">
+          <strong>Illustrative batch estimate:</strong> R83 for 2 bunnies,
+          or R41.50 each. This example assumes a loaf and a portion of chicken
+          curry; actual bread and filling costs vary.
+        </div>
+
+        <ul class="ingredient-list">
+          <li><span>White bread loaf</span><strong>R18</strong></li>
+          <li><span>Chicken curry filling allocation</span><strong>R65</strong></li>
+        </ul>
+
+        <p class="guide-copy">
+          <strong>Cooking idea:</strong> prepare a thick curry, cut the loaf
+          into portions and hollow out the centres. Fill with curry and serve
+          with the bread you removed. Adjust the filling quantity to suit
+          the size of the bread portions.
+        </p>
+
+        <p class="guide-copy">
+          Takeaway prices depend on the restaurant, portion size, filling,
+          location and current menu. Compare like-for-like portions before
+          deciding whether homemade is cheaper.
+        </p>
+      </details>
+    </section>
+
+    <section class="section" aria-labelledby="cheap-meals-heading">
+      <h2 id="cheap-meals-heading">Cheap meal ideas under R30 per serving</h2>
+      <p class="section-intro">
+        These are illustrative ideas, not guaranteed current prices. Use
+        seasonal produce, check unit prices and calculate the cost from the
+        quantities you actually use.
+      </p>
+
+      <div class="meal-grid">
+        <article class="meal-card">
+          <h3>Pap, eggs and tomato</h3>
+          <span class="price">Example: R18</span>
+          <p>Estimate per serving. Costs depend on egg size, pap portions and produce prices.</p>
+        </article>
+
+        <article class="meal-card">
+          <h3>Rice, beans and onion</h3>
+          <span class="price">Example: R22</span>
+          <p>A simple meal idea using rice, beans and onions. Include seasoning and cooking costs in your own estimate.</p>
+        </article>
+
+        <article class="meal-card">
+          <h3>Pap, half portion of wors and chakalaka</h3>
+          <span class="price">Example: R25</span>
+          <p>Estimate per serving when the ingredients and portions work out to that amount.</p>
+        </article>
+
+        <article class="meal-card">
+          <h3>Noodles with chicken</h3>
+          <span class="price">Example: R27</span>
+          <p>Include the chicken portion, noodles, vegetables and seasonings when calculating your cost.</p>
+        </article>
+
+        <article class="meal-card">
+          <h3>Chicken curry and rice</h3>
+          <span class="price">Example: R31.50</span>
+          <p>Based on the illustrative four-serving recipe above.</p>
+        </article>
+
+        <article class="meal-card">
+          <h3>Make your own meal plan</h3>
+          <span class="price">Your prices</span>
+          <p>Choose affordable ingredients you enjoy, check nutritional variety and calculate each batch using your actual prices.</p>
+        </article>
+      </div>
+
+      <div class="note" style="margin-top:15px">
+        <strong>Remember:</strong> a food budget depends on more than the
+        cost of one plate. Consider breakfast, lunch, snacks, cooking fuel,
+        household size, dietary needs and the food already in your cupboards.
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="shopping-heading">
+      <h2 id="shopping-heading">How to reduce your grocery bill</h2>
+
+      <div class="card">
+        <ul class="guide-copy">
+          <li><strong>Compare unit prices:</strong> a bigger pack is not always cheaper per kilogram or litre.</li>
+          <li><strong>Plan around what you own:</strong> check your fridge, freezer and pantry before shopping.</li>
+          <li><strong>Reuse ingredients:</strong> ingredients bought for one meal may work in another meal later in the week.</li>
+          <li><strong>Check specials carefully:</strong> compare the price, pack size, expiry date and amount you will actually use.</li>
+          <li><strong>Portion before storing:</strong> freeze suitable meat and leftovers in amounts you can use later.</li>
+          <li><strong>Track real spending:</strong> use receipts to replace the sample prices on this page with your own current prices.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="checklist-heading">
+      <h2 id="checklist-heading">Before your next grocery shop</h2>
+      <p class="section-intro">
+        Use this checklist to prepare. Your ticks are not saved after leaving
+        or refreshing the page.
+      </p>
+
+      <div class="checklist">
+        <label>
+          <input type="checkbox">
+          <span>Check what food I already have at home.</span>
+        </label>
+        <label>
+          <input type="checkbox">
+          <span>Plan meals around my available budget.</span>
+        </label>
+        <label>
+          <input type="checkbox">
+          <span>Write a list of ingredients and quantities.</span>
+        </label>
+        <label>
+          <input type="checkbox">
+          <span>Compare current prices and unit costs.</span>
+        </label>
+        <label>
+          <input type="checkbox">
+          <span>Check expiry dates and storage requirements.</span>
+        </label>
+        <label>
+          <input type="checkbox">
+          <span>Plan how to store or freeze leftovers safely.</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Cook Cost Calculator FAQs</h2>
+
+      <div class="faq-list">
+        <details>
+          <summary>How do I calculate the cost per plate?</summary>
+          <p class="guide-copy">
+            Add the cost of the ingredients used in a recipe, then divide
+            that total by the number of servings. If you are using only part
+            of a pack, calculate the cost of the quantity used rather than
+            charging the whole pack to that meal.
+          </p>
+        </details>
+
+        <details>
+          <summary>Are these current South African supermarket prices?</summary>
+          <p class="guide-copy">
+            No. The listed amounts are illustrative estimates supplied for
+            example calculations. They are not live price data or a verified
+            comparison between supermarkets. Check current shelf prices,
+            catalogues and receipts in your area.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I calculate a different number of servings?</summary>
+          <p class="guide-copy">
+            Yes. Choose the dish, enter a serving count and calculate again.
+            The calculator scales the example batch cost proportionally.
+            Actual costs may not scale perfectly because ingredients are
+            sold in fixed pack sizes and recipes may need different quantities.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does the calculator include electricity, gas or cooking oil?</summary>
+          <p class="guide-copy">
+            Some example recipes include an estimated cooking oil allocation,
+            but the calculator does not comprehensively price cooking fuel,
+            electricity, water or every seasoning. Add these costs separately
+            if you want a more complete estimate.
+          </p>
+        </details>
+
+        <details>
+          <summary>Is cooking at home always cheaper than buying takeaway?</summary>
+          <p class="guide-copy">
+            Not necessarily. It depends on the ingredients, portion size,
+            number of servings, transport, energy costs and the takeaway
+            being compared. Compare equivalent meals and include the costs
+            that matter to your household.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does this calculator save my shopping or financial data?</summary>
+          <p class="guide-copy">
+            This calculator runs in your browser and does not intentionally
+            send the values you enter to a server or store them for a future
+            visit. The calculations are not a substitute for checking actual
+            ingredient prices.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <div class="ad-placeholder" aria-label="Advertising placeholder">
+      Advertisement
+    </div>
+
+    <aside class="disclaimer">
+      <strong>Price disclaimer:</strong> All ingredient prices and meal totals
+      on this page are estimates for demonstration purposes. They are not
+      verified live prices, retailer endorsements or guarantees of savings.
+      Actual prices and serving sizes vary. Check prices at the point of
+      purchase and use your own receipts for more accurate calculations.
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">TMI <span>STUDIOS</span></div>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="../">Home</a>
+        <a href="../apps/">Apps</a>
+        <a href="../BudgetApp/">Budget Calculator</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+        <a href="../disclaimer.html">Disclaimer</a>
+        <a href="mailto:tmistudios01@gmail.com">Contact</a>
+      </nav>
+
+      <p class="copyright">
+        &copy; <span id="currentYear"></span> TMI Studios. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("calculatorForm");
+      const dishSelect = document.getElementById("dish");
+      const servingsInput = document.getElementById("servings");
+      const results = document.getElementById("results");
+      const formMessage = document.getElementById("formMessage");
+      const copyMessage = document.getElementById("copyMessage");
+
+      /*
+       * These are example batch costs, not live supermarket prices.
+       * Update them when you have verified ingredient prices.
+       *
+       * servings: the reference batch size for each recipe.
+       * unit: the label used for a serving in the results.
+       */
+      const recipes = {
+        curry: {
+          name: "Chicken curry and rice",
+          cost: 126,
+          servings: 4,
+          unit: "plates"
+        },
+        papwors: {
+          name: "Pap, wors and chakalaka",
+          cost: 131,
+          servings: 4,
+          unit: "plates"
+        },
+        stew: {
+          name: "Beef stew and pap",
+          cost: 156,
+          servings: 4,
+          unit: "plates"
+        },
+        malva: {
+          name: "Malva pudding",
+          cost: 100,
+          servings: 8,
+          unit: "slices"
+        },
+        bunny: {
+          name: "Chicken bunny chow",
+          cost: 83,
+          servings: 2,
+          unit: "bunnies"
+        }
+      };
+
+      let lastSummary = "";
+
+      function formatMoney(value) {
+        return new Intl.NumberFormat("en-ZA", {
+          style: "currency",
+          currency: "ZAR",
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+      }
+
+      function calculate() {
+        const recipe = recipes[dishSelect.value];
+        const servings = Number(servingsInput.value);
+
+        if (
+          !recipe ||
+          !Number.isInteger(servings) ||
+          servings < 1 ||
+          servings > 100
+        ) {
+          servingsInput.setAttribute("aria-invalid", "true");
+          servingsInput.focus();
+          formMessage.textContent =
+            "Please enter a whole number of servings from 1 to 100.";
+          results.hidden = true;
+          lastSummary = "";
+          copyMessage.textContent = "";
+          return;
+        }
+
+        servingsInput.removeAttribute("aria-invalid");
+
+        /*
+         * Scale the example batch cost to the requested serving count.
+         * This is a proportional estimate; actual shopping costs can differ
+         * because groceries are sold in fixed pack sizes.
+         */
+        const totalCost = recipe.cost * (servings / recipe.servings);
+        const perServing = totalCost / servings;
+
+        document.getElementById("totalCost").textContent =
+          formatMoney(totalCost);
+
+        document.getElementById("costPerServing").textContent =
+          formatMoney(perServing);
+
+        document.getElementById("selectedMeal").textContent = recipe.name;
+
+        document.getElementById("batchSize").textContent =
+          recipe.servings + " " + recipe.unit;
+
+        document.getElementById("servingsResult").textContent =
+          servings + " " + (servings === 1
+            ? recipe.unit.replace(/s$/, "")
+            : recipe.unit);
+
+        document.getElementById("resultMessage").textContent =
+          "Estimated from a " + recipe.servings + "-" + recipe.unit +
+          " example batch costing " + formatMoney(recipe.cost) +
+          ". Your actual total may differ depending on ingredient prices, pack sizes and quantities used.";
+
+        lastSummary = [
+          "COOK COST ESTIMATE",
+          "Meal: " + recipe.name,
+          "Servings: " + servings,
+          "Estimated total: " + formatMoney(totalCost),
+          "Estimated cost per serving: " + formatMoney(perServing),
+          "",
+          "These are illustrative prices, not verified live supermarket prices.",
+          "TMI Studios Cook Cost Calculator",
+          "https://tmi-studios.github.io/tmistudio1/CookCostCalculator/"
+        ].join("\n");
+
+        results.hidden = false;
+        formMessage.textContent = "Your estimated meal cost has been calculated.";
+        copyMessage.textContent = "";
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        calculate();
+      });
+
+      dishSelect.addEventListener("change", () => {
+        if (!results.hidden) {
+          calculate();
+        }
+      });
+
+      document.getElementById("copyButton").addEventListener("click", async () => {
+        if (!lastSummary) {
+          copyMessage.textContent = "Calculate a meal cost first.";
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(lastSummary);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = lastSummary;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("Copy was unsuccessful.");
+            }
+          }
+
+          copyMessage.textContent = "Cost summary copied.";
+        } catch (error) {
+          copyMessage.textContent =
+            "Copy is unavailable on this device. You can read the estimate above.";
+        }
+      });
+
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+      calculate();
+    })();
+  </script>
+</body>
+            </html>
