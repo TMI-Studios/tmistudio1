@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SASSA Grant Budget Planner South Africa | TMI Studios</title>
+<meta name="description" content="Plan your SASSA grant budget in South Africa. Allocate money for groceries, electricity, transport, rent and other essentials, and see what remains.">
+<meta name="keywords" content="SASSA grant budget planner, SASSA budget calculator, social grant budget South Africa, monthly grant expenses">
+<meta name="author" content="TMI Studios">
+<meta name="theme-color" content="#123d3b">
+<meta property="og:title" content="SASSA Grant Budget Planner | TMI Studios">
+<meta property="og:description" content="Make a plan for your grant money and see where every rand goes.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/SASSAGrantBudgetPlanner/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#102b2b;--surface:#173b39;--surface2:#204b47;
+  --text:#f7fffb;--muted:#b8d5ce;--accent:#ff947d;
+  --accentText:#34201d;--border:#39625c;--input:#122f2e;
+  --shadow:0 18px 50px rgba(0,0,0,.2);
+}
+body.light{
+  color-scheme:light;
+  --bg:#f5faf6;--surface:#fff;--surface2:#e9f3ee;
+  --text:#183a35;--muted:#627d74;--accent:#d75e49;
+  --accentText:#fff;--border:#d4e5dc;--input:#f9fcfa;
+  --shadow:0 15px 40px rgba(26,70,55,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;transition:background .2s,color .2s}
+button,input{font:inherit}
+button{cursor:pointer}
+header{max-width:1080px;margin:auto;padding:22px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:800;letter-spacing:.05em}
+.brand span{color:var(--accent)}
+.theme-btn,.secondary-btn{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:999px;padding:10px 14px}
+.hero{max-width:850px;text-align:center;margin:28px auto 30px;padding:20px}
+.eyebrow{color:var(--accent);font-size:.76rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+h1,h2,h3{font-family:'Outfit',sans-serif;line-height:1.2}
+h1{font-size:clamp(2.5rem,7vw,4.7rem);letter-spacing:-.05em;margin:15px 0}
+.hero p{color:var(--muted);max-width:640px;margin:auto;font-size:1.06rem}
+.container{max-width:1080px;margin:auto;padding:0 20px 40px}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:20px;align-items:start}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:var(--shadow);min-width:0}
+.panel h2{font-size:1.6rem;margin:0 0 8px}
+.intro{color:var(--muted);font-size:.92rem;margin:0 0 22px}
+.section-title{font-size:1.1rem;margin:0 0 14px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:.88rem;font-weight:700}
+input{width:100%;min-width:0;padding:13px 12px;border-radius:11px;border:1px solid var(--border);background:var(--input);color:var(--text);outline:none}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.hint{font-size:.78rem;color:var(--muted)}
+.divider{border:0;border-top:1px solid var(--border);margin:23px 0}
+.result-panel{position:sticky;top:15px}
+.result-label{font-size:.86rem;color:var(--muted)}
+.total{font-size:clamp(2.2rem,5vw,3rem);font-weight:800;letter-spacing:-.05em;overflow-wrap:anywhere;margin:4px 0 3px}
+.subtotal{font-size:.85rem;color:var(--muted);margin-bottom:20px}
+.summary-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.summary-row span:first-child{color:var(--muted)}
+.summary-row strong{text-align:right;overflow-wrap:anywhere}
+.status-card{background:var(--surface2);border-radius:15px;padding:17px;margin-top:19px}
+.status-card p{margin:0;color:var(--muted);font-size:.86rem}
+.status-card strong{display:block;font-size:1.7rem;overflow-wrap:anywhere;margin:4px 0}
+.status-card .status-message{font-size:.9rem;color:var(--text)}
+.progress{height:9px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .2s}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.primary-btn{border:0;border-radius:999px;padding:12px 17px;background:var(--accent);color:var(--accentText);font-weight:800}
+.secondary-btn{font-weight:700}
+.note{font-size:.82rem;color:var(--muted);margin-top:14px}
+.content{max-width:850px;margin:25px auto 0;padding:0 20px 45px}
+.content-card{padding:24px;border:1px solid var(--border);border-radius:20px;margin-bottom:16px}
+.content-card h2{margin-top:0}
+.content-card p,.content-card li{color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:25px 20px;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--accent);margin:0 8px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.result-panel{position:static;grid-row:1}.panel{padding:20px}.hero{margin-top:12px}}
+@media(max-width:420px){.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}header{padding:17px}.container{padding:0 13px 35px}.hero{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">TMI <span>STUDIOS</span></div>
+  <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode">☀️ Light mode</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">Make every rand count</div>
+    <h1>Your Grant.<br>Your Game Plan.</h1>
+    <p>A simple monthly budget planner to help you organise your grant money, prioritise essentials and see what you have left after expenses.</p>
+  </section>
+
+  <div class="container">
+    <div class="layout">
+      <section class="panel" aria-labelledby="inputsTitle">
+        <h2 id="inputsTitle">Plan your money</h2>
+        <p class="intro">Enter your actual grant amount and expected expenses. All amounts are editable and the calculations update automatically.</p>
+
+        <h3 class="section-title">Money coming in</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="grant">Monthly grant amount (R)</label>
+            <input id="grant" type="number" min="0" step="10" value="2180" inputmode="decimal">
+            <span class="hint">Use the amount you actually receive.</span>
+          </div>
+          <div class="field">
+            <label for="otherIncome">Other monthly income (R)</label>
+            <input id="otherIncome" type="number" min="0" step="10" value="0" inputmode="decimal">
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 class="section-title">Monthly essentials</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="groceries">Groceries and food (R)</label>
+            <input id="groceries" type="number" min="0" step="10" value="800" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="electricity">Electricity and water (R)</label>
+            <input id="electricity" type="number" min="0" step="10" value="200" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="transport">Transport (R)</label>
+            <input id="transport" type="number" min="0" step="10" value="200" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="rent">Rent or household contribution (R)</label>
+            <input id="rent" type="number" min="0" step="10" value="300" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="phone">Airtime and data (R)</label>
+            <input id="phone" type="number" min="0" step="10" value="100" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="health">Health and personal care (R)</label>
+            <input id="health" type="number" min="0" step="10" value="100" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="family">Children and family needs (R)</label>
+            <input id="family" type="number" min="0" step="10" value="0" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="debt">Debt repayments (R)</label>
+            <input id="debt" type="number" min="0" step="10" value="0" inputmode="decimal">
+          </div>
+          <div class="field full">
+            <label for="otherExpenses">Other expenses (R)</label>
+            <input id="otherExpenses" type="number" min="0" step="10" value="100" inputmode="decimal">
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel result-panel" aria-live="polite" aria-labelledby="resultTitle">
+        <div class="eyebrow">Your monthly snapshot</div>
+        <h2 id="resultTitle">Here's the picture</h2>
+        <div class="result-label">Total money available</div>
+        <div class="total" id="available">R2,180</div>
+        <div class="subtotal">Grant plus other income</div>
+
+        <div class="summary-row"><span>Total planned expenses</span><strong id="expenses">R1,800</strong></div>
+        <div class="summary-row"><span>Groceries and food</span><strong id="groceriesTotal">R800</strong></div>
+        <div class="summary-row"><span>Utilities</span><strong id="utilitiesTotal">R200</strong></div>
+        <div class="summary-row"><span>Transport</span><strong id="transportTotal">R200</strong></div>
+        <div class="summary-row"><span>Housing</span><strong id="rentTotal">R300</strong></div>
+        <div class="summary-row"><span>Airtime and data</span><strong id="phoneTotal">R100</strong></div>
+        <div class="summary-row"><span>Health and personal care</span><strong id="healthTotal">R100</strong></div>
+        <div class="summary-row"><span>Children and family</span><strong id="familyTotal">R0</strong></div>
+        <div class="summary-row"><span>Debt repayments</span><strong id="debtTotal">R0</strong></div>
+        <div class="summary-row"><span>Other expenses</span><strong id="otherTotal">R100</strong></div>
+
+        <div class="status-card">
+          <p id="balanceLabel">Money remaining</p>
+          <strong id="balance">R380</strong>
+          <p class="status-message" id="balanceMessage">You have money left after your planned expenses.</p>
+          <div class="progress" aria-label="Percentage of available money budgeted">
+            <div class="progress-fill" id="budgetProgress"></div>
+          </div>
+          <p id="budgetPercentage" style="margin-top:8px">82.6% of available money allocated</p>
+        </div>
+
+        <div class="actions">
+          <button class="primary-btn" id="copyBtn" type="button">Copy my budget</button>
+          <button class="secondary-btn" id="resetBtn" type="button">Reset figures</button>
+        </div>
+        <p class="note" id="copyStatus" role="status">Your budget stays in this browser while you use the page.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section class="content">
+    <article class="content-card">
+      <h2>How to use the SASSA grant budget planner</h2>
+      <ol>
+        <li>Enter your actual monthly grant amount and any other income.</li>
+        <li>Estimate your household's monthly essential expenses.</li>
+        <li>Check whether your planned expenses fit within the money available.</li>
+        <li>Adjust your figures until you have a budget that reflects your real situation.</li>
+        <li>Copy your budget summary to keep it handy or share it with someone you trust.</li>
+      </ol>
+    </article>
+
+    <article class="content-card">
+      <h2>Which grant amount should I enter?</h2>
+      <p>Grant amounts and eligibility depend on the specific grant and may change over time. Enter the amount you actually receive rather than relying on a sample amount in this planner. The example figures are only there to demonstrate how the calculator works.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>Frequently asked questions</h2>
+      <h3>Does this planner check my SASSA payments?</h3>
+      <p>No. It is a budgeting calculator and does not connect to SASSA or check your payment status.</p>
+      <h3>What if my expenses are more than my income?</h3>
+      <p>The planner will show a shortfall. You can review the expense categories to see which costs are flexible, but prioritise your essential needs and obligations.</p>
+      <h3>Does this page store my financial details?</h3>
+      <p>This page calculates figures locally in your browser and does not send them to a server. Your theme preference is saved on your device when browser storage is available.</p>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div>Made with care by TMI Studios</div>
+  <p>A simple tool for planning everyday expenses.</p>
+  <a href="../">Home</a>
+  <a href="../apps/">Apps &amp; Tools</a>
+  <a href="../privacy.html">Privacy</a>
+  <a href="../terms.html">Terms</a>
+</footer>
+
+<script>
+(function(){
+  const ids = [
+    "grant","otherIncome","groceries","electricity","transport","rent",
+    "phone","health","family","debt","otherExpenses"
+  ];
+
+  const defaults = {
+    grant:2180,otherIncome:0,groceries:800,electricity:200,transport:200,
+    rent:300,phone:100,health:100,family:0,debt:0,otherExpenses:100
+  };
+
+  const money = value => new Intl.NumberFormat("en-ZA",{
+    style:"currency",currency:"ZAR",minimumFractionDigits:0,maximumFractionDigits:2
+  }).format(value);
+
+  const get = id => {
+    const value = Number(document.getElementById(id).value);
+    if(!Number.isFinite(value) || value < 0) return 0;
+    return Math.min(value,1000000000);
+  };
+
+  const setText = (id,value) => {
+    document.getElementById(id).textContent = value;
+  };
+
+  function calculate(){
+    const grant = get("grant");
+    const otherIncome = get("otherIncome");
+    const groceries = get("groceries");
+    const electricity = get("electricity");
+    const transport = get("transport");
+    const rent = get("rent");
+    const phone = get("phone");
+    const health = get("health");
+    const family = get("family");
+    const debt = get("debt");
+    const otherExpenses = get("otherExpenses");
+
+    const available = grant + otherIncome;
+    const utilities = electricity;
+    const expenses = groceries + electricity + transport + rent + phone +
+      health + family + debt + otherExpenses;
+    const balance = available - expenses;
+    const percentage = available > 0 ? expenses / available * 100 : null;
+
+    setText("available",money(available));
+    setText("expenses",money(expenses));
+    setText("groceriesTotal",money(groceries));
+    setText("utilitiesTotal",money(utilities));
+    setText("transportTotal",money(transport));
+    setText("rentTotal",money(rent));
+    setText("phoneTotal",money(phone));
+    setText("healthTotal",money(health));
+    setText("familyTotal",money(family));
+    setText("debtTotal",money(debt));
+    setText("otherTotal",money(otherExpenses));
+    setText("balance",money(Math.abs(balance)));
+
+    if(balance < 0){
+      setText("balanceLabel","Budget shortfall");
+      setText("balanceMessage","Your planned expenses exceed the money available.");
+    }else if(balance === 0){
+      setText("balanceLabel","Money remaining");
+      setText("balanceMessage","Your planned budget uses all the money available.");
+    }else{
+      setText("balanceLabel","Money remaining");
+      setText("balanceMessage","You have money left after your planned expenses.");
+    }
+
+    const allocated = percentage === null ? 0 : percentage;
+    document.getElementById("budgetProgress").style.width =
+      Math.min(allocated,100) + "%";
+    setText("budgetPercentage",percentage === null
+      ? "Enter income to calculate your budget percentage."
+      : percentage.toLocaleString("en-ZA",{maximumFractionDigits:1}) +
+        "% of available money allocated");
+
+    return {
+      grant,otherIncome,groceries,electricity,transport,rent,phone,health,
+      family,debt,otherExpenses,available,expenses,balance,percentage
+    };
+  }
+
+  ids.forEach(id => document.getElementById(id).addEventListener("input",calculate));
+
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    ids.forEach(id => document.getElementById(id).value = defaults[id]);
+    calculate();
+    setText("copyStatus","Figures reset to the example amounts.");
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",async function(){
+    const r = calculate();
+    const report = [
+      "SASSA GRANT MONTHLY BUDGET",
+      "Grant income: " + money(r.grant),
+      "Other income: " + money(r.otherIncome),
+      "Total money available: " + money(r.available),
+      "",
+      "PLANNED EXPENSES",
+      "Groceries and food: " + money(r.groceries),
+      "Electricity and water: " + money(r.electricity),
+      "Transport: " + money(r.transport),
+      "Rent or household contribution: " + money(r.rent),
+      "Airtime and data: " + money(r.phone),
+      "Health and personal care: " + money(r.health),
+      "Children and family: " + money(r.family),
+      "Debt repayments: " + money(r.debt),
+      "Other expenses: " + money(r.otherExpenses),
+      "Total planned expenses: " + money(r.expenses),
+      "",
+      (r.balance < 0 ? "Budget shortfall: " : "Money remaining: ") + money(Math.abs(r.balance)),
+      "Budget allocated: " + (r.percentage === null ? "Not calculated" : r.percentage.toFixed(1) + "%"),
+      "",
+      "Personal budgeting estimate. Not an official SASSA payment statement."
+    ].join("\n");
+
+    try{
+      await navigator.clipboard.writeText(report);
+      setText("copyStatus","Budget copied. You can paste it into a message or note.");
+    }catch(e){
+      const area = document.createElement("textarea");
+      area.value = report;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const success = document.execCommand("copy");
+      area.remove();
+      setText("copyStatus",success ? "Budget copied." : "Copy isn't available here. You can copy the figures manually.");
+    }
+  });
+
+  const themeToggle = document.getElementById("themeToggle");
+
+  function applyTheme(theme){
+    document.body.classList.toggle("light",theme === "light");
+    themeToggle.textContent = theme === "light" ? "🌙 Dark mode" : "☀️ Light mode";
+    document.querySelector('meta[name="theme-color"]').content =
+      theme === "light" ? "#f5faf6" : "#123d3b";
+  }
+
+  let savedTheme = "dark";
+  try{savedTheme = localStorage.getItem("tmiSassaBudgetTheme") || "dark";}catch(e){}
+  applyTheme(savedTheme);
+
+  themeToggle.addEventListener("click",function(){
+    const next = document.body.classList.contains("light") ? "dark" : "light";
+    applyTheme(next);
+    try{localStorage.setItem("tmiSassaBudgetTheme",next);}catch(e){}
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
