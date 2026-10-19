@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Prepaid Electricity Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Calculate how many prepaid electricity units your money can buy in South Africa. Estimate kWh, daily usage and how long your electricity may last.">
+  <meta name="keywords" content="prepaid electricity calculator South Africa, electricity units calculator, how many electricity units will I get, prepaid meter calculator, kWh calculator">
+  <meta name="author" content="TMI Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/PrepaidElectricityCalculator/">
+  <meta name="theme-color" content="#111d2b">
+
+  <style>
+    :root {
+      --bg: #f1f4f6;
+      --ink: #172535;
+      --muted: #687987;
+      --navy: #111d2b;
+      --panel: #1b2c3d;
+      --lime: #c8ff62;
+      --cyan: #6ce8e0;
+      --line: #dce4e9;
+      --white: #ffffff;
+      --orange: #ffbd66;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 17px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .brand span { color: var(--lime); }
+
+    .top-label {
+      color: #a9bdcd;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .page {
+      width: min(1050px, 92%);
+      margin: 0 auto;
+      padding: 30px 0 60px;
+    }
+
+    .intro { margin-bottom: 25px; }
+
+    .eyebrow {
+      color: #387b7a;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(34px, 7vw, 62px);
+      letter-spacing: -3px;
+      line-height: 1;
+      margin: 12px 0;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 600px;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .meter {
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+      color: white;
+      border-radius: 25px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 14px 35px rgba(17, 29, 43, .14);
+    }
+
+    .meter::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -75px;
+      top: -110px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,255,98,.18);
+      box-shadow: 0 0 0 25px rgba(200,255,98,.025),
+                  0 0 0 50px rgba(200,255,98,.02);
+      pointer-events: none;
+    }
+
+    .meter-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meter-name {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #b6c5d2;
+      font-weight: 800;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--lime);
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .live-indicator::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    .meter-screen {
+      margin-top: 20px;
+      background: #0b151e;
+      border: 1px solid #344a5b;
+      border-radius: 17px;
+      padding: 24px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .screen-label {
+      color: #93a9b8;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+    }
+
+    .screen-number {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 7px 0;
+    }
+
+    .screen-number strong {
+      color: var(--lime);
+      font-family: "Courier New", monospace;
+      font-size: clamp(44px, 10vw, 78px);
+      line-height: 1;
+      letter-spacing: -4px;
+      overflow-wrap: anywhere;
+    }
+
+    .screen-number span {
+      color: var(--cyan);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .screen-sub {
+      color: #9db0bd;
+      font-size: 12px;
+    }
+
+    .meter-bars {
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      gap: 5px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meter-bars span {
+      height: 7px;
+      border-radius: 3px;
+      background: #344454;
+    }
+
+    .meter-bars span.active { background: var(--lime); }
+
+    .meter-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #a9bdcd;
+      font-size: 10px;
+      margin-top: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 23px;
+    }
+
+    .card-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 17px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .heading-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: #e7f8f4;
+      border-radius: 12px;
+      color: #267d75;
+      font-size: 20px;
+    }
+
+    .card-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -.5px;
+    }
+
+    .card-heading p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .field { margin-bottom: 19px; }
+
+    label {
+      display: block;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .help {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
+      margin-top: 3px;
+    }
+
+    .input-shell {
+      display: flex;
+      align-items: center;
+      background: #f8fafb;
+      border: 1.5px solid #dbe4e9;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .input-shell:focus-within {
+      border-color: #39958b;
+      box-shadow: 0 0 0 3px rgba(57,149,139,.11);
+    }
+
+    .input-shell .symbol {
+      padding: 0 13px;
+      color: #607481;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .input-shell input, .input-shell select {
+      width: 100%;
+      min-width: 0;
+      padding: 13px 10px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .calculate {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: var(--navy);
+      color: white;
+      font-weight: 900;
+      padding: 16px;
+      cursor: pointer;
+      margin-top: 2px;
+    }
+
+    .calculate:hover { background: #243d52; }
+
+    .results-card { padding: 23px; }
+
+    .results-title {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      color: #387b7a;
+      margin-bottom: 17px;
+    }
+
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    .result-line:last-of-type { border-bottom: 0; }
+
+    .result-line span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .result-line strong {
+      text-align: right;
+      font-size: 16px;
+      overflow-wrap: anywhere;
+    }
+
+    .result-line.primary {
+      background: #f0fbeb;
+      border: 1px solid #deefce;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 7px;
+    }
+
+    .result-line.primary span {
+      color: #47743b;
+      font-weight: 800;
+    }
+
+    .result-line.primary strong {
+      color: #245d2b;
+      font-size: 23px;
+      letter-spacing: -.5px;
+    }
+
+    .days-box {
+      background: #e9f9f7;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .days-box span {
+      display: block;
+      color: #387b7a;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .days-box strong {
+      display: block;
+      font-size: 27px;
+      margin-top: 4px;
+      letter-spacing: -1px;
+    }
+
+    .days-box p {
+      margin: 4px 0 0;
+      color: #55716f;
+      font-size: 11px;
+    }
+
+    .result-disclaimer {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 16px;
+    }
+
+    .reset {
+      display: block;
+      margin: 12px auto 0;
+      padding: 8px 10px;
+      border: 0;
+      background: transparent;
+      color: #607481;
+      text-decoration: underline;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .guide {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .guide h2 {
+      font-size: clamp(25px, 4vw, 36px);
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin: 10px 0;
+    }
+
+    .guide-intro {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .faq { border-top: 1px solid var(--line); }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    details p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+
+    .tip {
+      margin-top: 22px;
+      padding: 17px;
+      border-radius: 14px;
+      background: #fff6e8;
+      border: 1px solid #f1e1c5;
+      color: #755b32;
+      font-size: 12px;
+    }
+
+    .tip strong { color: #5a401e; }
+
+    footer {
+      text-align: center;
+      background: var(--navy);
+      color: #b8c7d3;
+      padding: 24px 15px;
+      font-size: 12px;
+    }
+
+    footer a {
+      color: var(--lime);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .guide { grid-template-columns: 1fr; gap: 10px; }
+      .meter { padding: 18px; }
+      .card { padding: 19px; }
+      h1 { letter-spacing: -2px; }
+    }
+
+    @media (max-width: 390px) {
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      .screen-number strong { letter-spacing: -2px; }
+      .top-label { font-size: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">TMI <span>STUDIOS</span></div>
+    <div class="top-label">South African money tools</div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <div class="eyebrow">Home utility calculator</div>
+      <h1>Make every unit count. ⚡</h1>
+      <p>Find out how many prepaid electricity units your money could buy, estimate your daily usage and work out how long your electricity might last.</p>
+    </section>
+
+    <section class="meter" aria-label="Electricity meter estimate">
+      <div class="meter-top">
+        <div class="meter-name">Digital prepaid meter</div>
+        <div class="live-indicator">Estimate ready</div>
+      </div>
+
+      <div class="meter-screen">
+        <div class="screen-label">Estimated units purchased</div>
+        <div class="screen-number">
+          <strong id="meterUnits">0.0</strong>
+          <span>kWh</span>
+        </div>
+        <div class="screen-sub" id="meterSub">Enter your purchase amount and electricity tariff below.</div>
+      </div>
+
+      <div class="meter-bars" id="meterBars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="meter-caption">
+        <span>UNIT ESTIMATE</span>
+        <span id="meterPercent">Waiting for inputs</span>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <div class="card">
+        <div class="card-heading">
+          <div class="heading-icon">⚙</div>
+          <div>
+            <h2>Your electricity details</h2>
+            <p>Use the tariff on your electricity statement or vending slip.</p>
+          </div>
+        </div>
+
+        <form id="electricityForm">
+          <div class="field">
+            <label for="amount">How much are you buying?
+              <span class="help">The total rand amount you plan to spend.</span>
+            </label>
+            <div class="input-shell">
+              <span class="symbol">R</span>
+              <input id="amount" type="number" min="0.01" max="1000000" step="0.01" value="200" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tariff">Your electricity tariff per unit
+              <span class="help">Enter the cost of one kWh in rand, not cents.</span>
+            </label>
+            <div class="input-shell">
+              <span class="symbol">R</span>
+              <input id="tariff" type="number" min="0.01" max="1000" step="0.01" value="3.50" required>
+              <span class="symbol">/kWh</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fees">Other charges deducted from this purchase
+              <span class="help">Optional. Enter any applicable fixed charge or fee in rand.</span>
+            </label>
+            <div class="input-shell">
+              <span class="symbol">R</span>
+              <input id="fees" type="number" min="0" max="1000000" step="0.01" value="0">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="daily">Estimated daily usage
+                <span class="help">How many units your home uses daily.</span>
+              </label>
+              <div class="input-shell">
+                <input id="daily" type="number" min="0.01" max="10000" step="0.1" value="10" required>
+                <span class="symbol">kWh</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="current">Current meter balance
+                <span class="help">Optional existing units.</span>
+              </label>
+              <div class="input-shell">
+                <input id="current" type="number" min="0" max="1000000" step="0.1" value="0">
+                <span class="symbol">kWh</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="calculate" type="submit">Calculate my units &rarr;</button>
+        </form>
+      </div>
+
+      <aside class="card results-card" aria-live="polite">
+        <div class="results-title">Your electricity breakdown</div>
+
+        <div class="result-line primary">
+          <span>Units you could buy</span>
+          <strong id="unitsResult">0.0 kWh</strong>
+        </div>
+
+        <div class="result-line">
+          <span>Purchase amount</span>
+          <strong id="amountResult">R 0.00</strong>
+        </div>
+
+        <div class="result-line">
+          <span>Other charges</span>
+          <strong id="feesResult">R 0.00</strong>
+        </div>
+
+        <div class="result-line">
+          <span>Amount for electricity</span>
+          <strong id="netResult">R 0.00</strong>
+        </div>
+
+        <div class="result-line">
+          <span>Estimated cost per unit</span>
+          <strong id="tariffResult">R 0.00</strong>
+        </div>
+
+        <div class="result-line">
+          <span>Units including current balance</span>
+          <strong id="totalUnitsResult">0.0 kWh</strong>
+        </div>
+
+        <div class="days-box">
+          <span>Estimated electricity remaining</span>
+          <strong id="daysResult">0 days</strong>
+          <p id="daysNote">Based on your estimated daily usage.</p>
+        </div>
+
+        <p class="result-disclaimer">Actual units may differ because of municipal tariffs, inclining block rates, VAT treatment, fixed charges or other deductions.</p>
+
+        <button class="reset" id="resetBtn" type="button">Reset calculator</button>
+      </aside>
+    </section>
+
+    <section class="guide">
+      <div>
+        <div class="eyebrow">Know your numbers</div>
+        <h2>Electricity maths, minus the headache.</h2>
+        <p class="guide-intro">A little tariff awareness can help you plan your electricity budget and understand your household's usage.</p>
+
+        <div class="tip">
+          <strong>Quick tip:</strong> If you are unsure of your tariff, check your latest municipal bill or ask your electricity provider. Do not assume everyone in South Africa pays the same rate.
+        </div>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>How do I calculate electricity units from rand?</summary>
+          <p>Subtract any charges that come out of your purchase amount, then divide the remaining amount by your tariff per kWh. For example, R200 at R3.50 per kWh, with no extra charges, buys about 57.1 kWh.</p>
+        </details>
+        <details>
+          <summary>What is a kWh?</summary>
+          <p>A kilowatt-hour is a unit of energy. A 1,000-watt appliance running for one hour uses 1 kWh. Actual appliance usage varies with its power rating and how long it operates.</p>
+        </details>
+        <details>
+          <summary>Why do I get fewer units than expected?</summary>
+          <p>Your purchase may include service charges, arrears or other deductions. Your electricity price may also vary by consumption block, municipality, tariff category or applicable taxes.</p>
+        </details>
+        <details>
+          <summary>How can I estimate how long my electricity will last?</summary>
+          <p>Add the units you are buying to your current meter balance, then divide the total by your estimated daily usage. This gives a rough number of days, assuming your usage stays similar.</p>
+        </details>
+        <details>
+          <summary>Does this calculator know my municipality's tariff?</summary>
+          <p>No. Enter your own tariff and any applicable charges. Tariffs can change and differ between providers, areas and customer categories, so confirm your current rate with your electricity supplier.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Practical tools for everyday life. <a href="https://tmi-studios.github.io/tmistudio1/">Explore TMI Studios</a>.
+  </footer>
+
+  <script>
+    const form = document.getElementById("electricityForm");
+
+    function money(value) {
+      return new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function calculateElectricity(event) {
+      if (event) event.preventDefault();
+
+      const amount = Number(document.getElementById("amount").value);
+      const tariff = Number(document.getElementById("tariff").value);
+      const fees = Number(document.getElementById("fees").value || 0);
+      const daily = Number(document.getElementById("daily").value);
+      const current = Number(document.getElementById("current").value || 0);
+
+      if (
+        !Number.isFinite(amount) || amount <= 0 || amount > 1000000 ||
+        !Number.isFinite(tariff) || tariff <= 0 || tariff > 1000 ||
+        !Number.isFinite(fees) || fees < 0 || fees > amount ||
+        !Number.isFinite(daily) || daily <= 0 || daily > 10000 ||
+        !Number.isFinite(current) || current < 0 || current > 1000000
+      ) {
+        alert("Please enter valid amounts. Charges cannot exceed your purchase amount, and your tariff and daily usage must be greater than zero.");
+        return;
+      }
+
+      const net = amount - fees;
+      const units = net / tariff;
+      const totalUnits = units + current;
+      const days = totalUnits / daily;
+
+      document.getElementById("meterUnits").textContent = units.toLocaleString("en-ZA", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 2
+      });
+
+      document.getElementById("meterSub").textContent =
+        money(net) + " available for electricity at " + money(tariff) + " per kWh.";
+
+      document.getElementById("unitsResult").textContent =
+        units.toLocaleString("en-ZA", { maximumFractionDigits: 2 }) + " kWh";
+      document.getElementById("amountResult").textContent = money(amount);
+      document.getElementById("feesResult").textContent = money(fees);
+      document.getElementById("netResult").textContent = money(net);
+      document.getElementById("tariffResult").textContent = money(tariff) + " / kWh";
+      document.getElementById("totalUnitsResult").textContent =
+        totalUnits.toLocaleString("en-ZA", { maximumFractionDigits: 2 }) + " kWh";
+
+      let daysText;
+      if (days < 1) {
+        const hours = days * 24;
+        daysText = hours < 1
+          ? "Less than 1 hour"
+          : hours.toFixed(1) + (hours < 2 ? " hour" : " hours");
+      } else {
+        daysText = days.toFixed(1) + (days < 2 ? " day" : " days");
+      }
+
+      document.getElementById("daysResult").textContent = daysText;
+      document.getElementById("daysNote").textContent =
+        "Assumes average usage of " + daily.toFixed(1) + " kWh per day.";
+
+      const bars = document.querySelectorAll("#meterBars span");
+      const percent = Math.min(100, Math.max(0, units / 200 * 100));
+      const activeCount = Math.round(percent / 100 * bars.length);
+
+      bars.forEach((bar, index) => {
+        bar.classList.toggle("active", index < activeCount);
+      });
+
+      document.getElementById("meterPercent").textContent =
+        units >= 200 ? "200+ kWh scale" : Math.round(percent) + "% of 200 kWh scale";
+    }
+
+    form.addEventListener("submit", calculateElectricity);
+
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      document.getElementById("amount").value = 200;
+      document.getElementById("tariff").value = 3.50;
+      document.getElementById("fees").value = 0;
+      document.getElementById("daily").value = 10;
+      document.getElementById("current").value = 0;
+      calculateElectricity();
+    });
+
+    calculateElectricity();
+  </script>
+</body>
+</html>
