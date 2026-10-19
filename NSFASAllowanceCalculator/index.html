@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSFAS Allowance Calculator South Africa | TMI Studios</title>
+<meta name="description" content="Plan your NSFAS student allowance with this free South African budget calculator. Track accommodation, food, transport, books, data and other expenses to see what remains.">
+<meta name="keywords" content="NSFAS allowance calculator, NSFAS budget planner, student budget South Africa, student allowance calculator">
+<meta name="author" content="TMI Studios">
+<meta name="theme-color" content="#182f70">
+<meta property="og:title" content="NSFAS Allowance Calculator | TMI Studios">
+<meta property="og:description" content="A simple student budget dashboard to help you plan your allowance and track expenses.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/NSFASAllowanceCalculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#101a36;
+  --paper:#172449;
+  --paper2:#202f58;
+  --text:#f6f7ff;
+  --muted:#aab6da;
+  --accent:#ffcf5a;
+  --accentText:#242039;
+  --border:#34436c;
+  --input:#111d3e;
+  --green:#8ee0b2;
+  --red:#ff998f;
+  --shadow:0 12px 36px rgba(0,0,0,.15);
+}
+body.light{
+  color-scheme:light;
+  --bg:#f1f3fa;
+  --paper:#ffffff;
+  --paper2:#e9edfa;
+  --text:#192447;
+  --muted:#637094;
+  --accent:#e9ae21;
+  --accentText:#251d08;
+  --border:#d7deef;
+  --input:#f7f8fd;
+  --green:#247d51;
+  --red:#bf443d;
+  --shadow:0 12px 30px rgba(32,48,95,.06);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Manrope',sans-serif;line-height:1.55;
+  transition:background .2s,color .2s
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.mono{font-family:'DM Mono',monospace}
+.topbar{
+  border-bottom:1px solid var(--border);
+  background:var(--paper)
+}
+.topbar-inner{
+  max-width:1100px;margin:auto;padding:15px 22px;
+  display:flex;justify-content:space-between;align-items:center;gap:15px
+}
+.brand{font-size:.84rem;font-weight:800;letter-spacing:.1em}
+.brand span{color:var(--accent)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.top-link{font-size:.8rem;text-decoration:none;color:var(--muted)}
+.theme-btn{
+  border:1px solid var(--border);border-radius:8px;
+  padding:8px 11px;background:var(--paper2);color:var(--text);
+  font-size:.8rem;font-weight:700
+}
+main{max-width:1100px;margin:auto;padding:30px 22px 55px}
+.page-heading{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:20px;margin-bottom:25px
+}
+.kicker{
+  text-transform:uppercase;letter-spacing:.15em;
+  font-size:.7rem;font-weight:800;color:var(--accent)
+}
+h1,h2,h3,p{margin-top:0}
+h1{
+  font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.065em;
+  line-height:1.04;margin:9px 0 10px;font-weight:800
+}
+.page-heading p{color:var(--muted);margin:0;max-width:580px;font-size:.92rem}
+.session-label{
+  flex-shrink:0;border:1px solid var(--border);
+  border-radius:7px;padding:8px 11px;color:var(--muted);
+  font-size:.72rem
+}
+.session-label span{color:var(--green)}
+.overview{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr;
+  border:1px solid var(--border);border-radius:14px;
+  background:var(--paper);overflow:hidden;margin-bottom:25px;
+  box-shadow:var(--shadow)
+}
+.overview-item{padding:20px 22px;min-width:0}
+.overview-item+.overview-item{border-left:1px solid var(--border)}
+.overview-label{
+  color:var(--muted);font-size:.73rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.07em
+}
+.big-number{
+  font-size:clamp(1.35rem,3.2vw,2.15rem);
+  font-weight:800;letter-spacing:-.055em;
+  overflow-wrap:anywhere;margin-top:7px
+}
+.overview-item:first-child .big-number{color:var(--accent)}
+.overview-note{font-size:.72rem;color:var(--muted);margin-top:4px}
+.workspace{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.7fr);
+  gap:24px;align-items:start
+}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:12px;padding-bottom:13px;border-bottom:1px solid var(--border);
+  margin-bottom:0
+}
+.section-head h2{font-size:1.25rem;letter-spacing:-.04em;margin:0}
+.section-head p{font-size:.76rem;color:var(--muted);margin:4px 0 0}
+.expense-list{
+  background:var(--paper);border:1px solid var(--border);
+  border-radius:13px;overflow:hidden;box-shadow:var(--shadow)
+}
+.expense-row{
+  padding:17px 18px;border-bottom:1px solid var(--border)
+}
+.expense-row:last-child{border-bottom:0}
+.expense-top{
+  display:grid;grid-template-columns:minmax(0,1fr) 135px;
+  align-items:center;gap:14px
+}
+.expense-name{display:flex;align-items:center;gap:11px;min-width:0}
+.category-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;
+  background:var(--paper2);font-size:1.1rem
+}
+.category-name{font-size:.88rem;font-weight:800}
+.category-description{font-size:.71rem;color:var(--muted);margin-top:2px}
+.expense-input-wrap{position:relative}
+.currency-prefix{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted)
+}
+.expense-input{
+  width:100%;padding:11px 10px 11px 29px;
+  border:1px solid var(--border);border-radius:8px;
+  background:var(--input);color:var(--text);
+  text-align:right;font-family:'DM Mono',monospace;
+  font-size:.9rem;outline:none
+}
+.expense-input:focus,.income-input:focus{border-color:var(--accent)}
+.track{
+  height:5px;border-radius:10px;background:var(--paper2);
+  margin-top:12px;overflow:hidden
+}
+.track-fill{height:100%;width:0;background:var(--accent);border-radius:10px;transition:width .2s}
+.expense-meta{
+  display:flex;justify-content:space-between;gap:10px;
+  color:var(--muted);font-size:.69rem;margin-top:6px
+}
+.custom-row{background:color-mix(in srgb,var(--paper2) 35%,var(--paper))}
+.custom-name-input{
+  width:100%;min-width:0;border:0;background:transparent;
+  color:var(--text);font:inherit;font-weight:800;outline:none
+}
+.custom-name-input:focus{border-bottom:1px solid var(--accent)}
+.add-btn{
+  margin-top:12px;width:100%;padding:12px;
+  border:1px dashed var(--border);border-radius:9px;
+  background:transparent;color:var(--muted);font-weight:700;font-size:.82rem
+}
+.add-btn:hover{border-color:var(--accent);color:var(--text)}
+.income-panel{
+  border:1px solid var(--border);border-radius:13px;
+  background:var(--paper);padding:20px;box-shadow:var(--shadow)
+}
+.income-panel h2{font-size:1.1rem;letter-spacing:-.035em;margin:0 0 5px}
+.small-copy{font-size:.77rem;color:var(--muted);margin:0 0 18px}
+.field-label{display:block;font-size:.75rem;font-weight:800;margin-bottom:7px}
+.income-input{
+  width:100%;padding:13px;border:1px solid var(--border);
+  border-radius:8px;background:var(--input);color:var(--text);
+  font-family:'DM Mono',monospace;font-size:1rem;outline:none
+}
+.income-divider{border:0;border-top:1px solid var(--border);margin:20px 0}
+.breakdown-title{font-size:.82rem;font-weight:800;margin-bottom:13px}
+.breakdown-row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:9px 0;font-size:.77rem;border-bottom:1px solid var(--border)
+}
+.breakdown-row:last-child{border-bottom:0}
+.breakdown-row span{color:var(--muted)}
+.breakdown-row strong{font-family:'DM Mono',monospace;text-align:right;overflow-wrap:anywhere}
+.status{
+  padding:13px;border-radius:9px;background:var(--paper2);margin-top:16px
+}
+.status-label{font-size:.7rem;color:var(--muted)}
+.status-text{font-size:.87rem;font-weight:800;margin-top:4px}
+.status-text.good{color:var(--green)}
+.status-text.bad{color:var(--red)}
+.tool-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.primary-btn,.secondary-btn{
+  border-radius:8px;padding:11px 13px;font-size:.79rem;font-weight:800
+}
+.primary-btn{border:0;background:var(--accent);color:var(--accentText);flex:1}
+.secondary-btn{border:1px solid var(--border);background:transparent;color:var(--text)}
+#copyStatus{font-size:.72rem;color:var(--muted);margin:12px 0 0;min-height:1.3em}
+.info-section{
+  margin-top:36px;border-top:1px solid var(--border);
+  padding-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:30px
+}
+.info-section h2{font-size:1.05rem;letter-spacing:-.025em}
+.info-section p,.info-section li{font-size:.82rem;color:var(--muted)}
+.info-section details{border-bottom:1px solid var(--border);padding:12px 0}
+.info-section summary{font-size:.82rem;font-weight:800;cursor:pointer}
+.info-section details p{margin:9px 0 0}
+footer{border-top:1px solid var(--border);padding:22px;text-align:center;color:var(--muted);font-size:.75rem}
+footer a{margin:0 7px;color:var(--muted)}
+@media(max-width:760px){
+  main{padding:23px 15px 40px}
+  .page-heading{align-items:start;flex-direction:column}
+  .overview{grid-template-columns:1fr 1fr}
+  .overview-item:first-child{grid-column:1/-1;border-bottom:1px solid var(--border)}
+  .overview-item:nth-child(3){border-left:1px solid var(--border)}
+  .overview-item:nth-child(2){border-left:0}
+  .workspace{grid-template-columns:1fr}
+  .income-panel{order:-1}
+  .info-section{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:440px){
+  .topbar-inner{padding:13px 15px}
+  .top-link{display:none}
+  .overview-item{padding:15px}
+  .expense-row{padding:14px 12px}
+  .expense-top{grid-template-columns:minmax(0,1fr) 105px;gap:8px}
+  .category-icon{width:32px;height:32px}
+  .category-name{font-size:.8rem}
+  .category-description{font-size:.66rem}
+  .expense-input{padding:10px 7px 10px 25px;font-size:.82rem}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">TMI <span>STUDIOS</span> / STUDENT TOOLS</div>
+    <div class="top-actions">
+      <a class="top-link" href="../apps/">Explore more tools ↗</a>
+      <button class="theme-btn" id="themeToggle" type="button">☀️ Light mode</button>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="page-heading">
+    <div>
+      <div class="kicker">Student money desk / No. 015</div>
+      <h1>Make your allowance<br>make sense.</h1>
+      <p>Enter the money you have for this budgeting period, list your expenses, and see what's left. Built for real student budgets, not perfect ones.</p>
+    </div>
+    <div class="session-label"><span>●</span> Local calculator · No account needed</div>
+  </section>
+
+  <section class="overview" aria-live="polite" aria-label="Budget overview">
+    <div class="overview-item">
+      <div class="overview-label">Money available</div>
+      <div class="big-number mono" id="totalIncome">R3,500</div>
+      <div class="overview-note">Allowance and additional funds combined</div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-label">Planned spending</div>
+      <div class="big-number mono" id="totalSpent">R2,600</div>
+      <div class="overview-note" id="spentNote">74.3% of your available money</div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-label">Still available</div>
+      <div class="big-number mono" id="totalLeft">R900</div>
+      <div class="overview-note" id="leftNote">After planned expenses</div>
+    </div>
+  </section>
+
+  <div class="workspace">
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Your expense ledger</h2>
+          <p>Update the amounts to match your own budget.</p>
+        </div>
+        <span class="mono" style="font-size:.7rem;color:var(--muted)">ZAR / R</span>
+      </div>
+
+      <div class="expense-list" id="expenseList">
+        <div class="expense-row" data-id="accommodation">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">🏠</div>
+              <div><div class="category-name">Accommodation</div><div class="category-description">Residence or rent contribution</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-accommodation" type="number" min="0" step="10" value="1200" inputmode="decimal" aria-label="Accommodation expense"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-accommodation"></div></div>
+          <div class="expense-meta"><span id="share-accommodation">34.3% of funds</span><span id="value-accommodation">R1,200</span></div>
+        </div>
+
+        <div class="expense-row" data-id="food">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">🥗</div>
+              <div><div class="category-name">Food and groceries</div><div class="category-description">Meals, snacks and basics</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-food" type="number" min="0" step="10" value="700" inputmode="decimal" aria-label="Food and groceries expense"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-food"></div></div>
+          <div class="expense-meta"><span id="share-food">20% of funds</span><span id="value-food">R700</span></div>
+        </div>
+
+        <div class="expense-row" data-id="transport">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">🚌</div>
+              <div><div class="category-name">Transport</div><div class="category-description">Taxi, bus or train fares</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-transport" type="number" min="0" step="10" value="300" inputmode="decimal" aria-label="Transport expense"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-transport"></div></div>
+          <div class="expense-meta"><span id="share-transport">8.6% of funds</span><span id="value-transport">R300</span></div>
+        </div>
+
+        <div class="expense-row" data-id="data">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">📱</div>
+              <div><div class="category-name">Data and airtime</div><div class="category-description">Connectivity and study access</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-data" type="number" min="0" step="10" value="150" inputmode="decimal" aria-label="Data and airtime expense"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-data"></div></div>
+          <div class="expense-meta"><span id="share-data">4.3% of funds</span><span id="value-data">R150</span></div>
+        </div>
+
+        <div class="expense-row" data-id="study">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">📚</div>
+              <div><div class="category-name">Books and study costs</div><div class="category-description">Printing, stationery and supplies</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-study" type="number" min="0" step="10" value="100" inputmode="decimal" aria-label="Books and study expenses"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-study"></div></div>
+          <div class="expense-meta"><span id="share-study">2.9% of funds</span><span id="value-study">R100</span></div>
+        </div>
+
+        <div class="expense-row" data-id="personal">
+          <div class="expense-top">
+            <div class="expense-name">
+              <div class="category-icon">🧴</div>
+              <div><div class="category-name">Personal care</div><div class="category-description">Toiletries and personal essentials</div></div>
+            </div>
+            <div class="expense-input-wrap"><span class="currency-prefix">R</span><input class="expense-input" id="expense-personal" type="number" min="0" step="10" value="150" inputmode="decimal" aria-label="Personal care expenses"></div>
+          </div>
+          <div class="track"><div class="track-fill" id="bar-personal"></div></div>
+          <div class="expense-meta"><span id="share-personal">4.3% of funds</span><span id="value-personal">R150</span></div>
+        </div>
+      </div>
+
+      <div id="customExpenses"></div>
+      <button class="add-btn" id="addExpense" type="button">+ Add another expense category</button>
+    </section>
+
+    <aside class="income-panel">
+      <div class="kicker">Step 01 / Funds</div>
+      <h2>What money do you have?</h2>
+      <p class="small-copy">Enter your actual amounts for the period you're planning. This calculator doesn't fetch or verify official NSFAS payment rates.</p>
+
+      <label class="field-label" for="allowance">Allowance available (R)</label>
+      <input class="income-input" id="allowance" type="number" min="0" step="50" value="3500" inputmode="decimal">
+
+      <div style="height:13px"></div>
+      <label class="field-label" for="extraFunds">Other money available (R)</label>
+      <input class="income-input" id="extraFunds" type="number" min="0" step="50" value="0" inputmode="decimal">
+
+      <hr class="income-divider">
+
+      <div class="breakdown-title">Your spending breakdown</div>
+      <div class="breakdown-row"><span>Biggest expense</span><strong id="biggestExpense">Accommodation</strong></div>
+      <div class="breakdown-row"><span>Number of categories</span><strong id="categoryCount">6</strong></div>
+      <div class="breakdown-row"><span>Unallocated funds</span><strong id="unallocated">R900</strong></div>
+
+      <div class="status">
+        <div class="status-label">Budget check</div>
+        <div class="status-text good" id="budgetStatus">You're within budget.</div>
+      </div>
+
+      <div class="tool-actions">
+        <button class="primary-btn" id="copyBtn" type="button">Copy budget summary</button>
+        <button class="secondary-btn" id="resetBtn" type="button">Reset</button>
+      </div>
+      <p id="copyStatus" role="status">Your figures are calculated in this browser.</p>
+    </aside>
+  </div>
+
+  <section class="info-section">
+    <article>
+      <div class="kicker">A quick guide</div>
+      <h2>How to use this planner</h2>
+      <ol>
+        <li>Enter the allowance amount available for your chosen budgeting period.</li>
+        <li>Add any other money you want to include in the plan.</li>
+        <li>Enter your expected spending beside each category.</li>
+        <li>Add more categories if you need them.</li>
+        <li>Review your remaining balance and copy the summary for reference.</li>
+      </ol>
+      <p>Use the period that makes sense for your payment schedule. If you are budgeting for a month, make sure the income and all expenses cover that same month.</p>
+    </article>
+    <article>
+      <div class="kicker">Good to know</div>
+      <h2>Frequently asked questions</h2>
+      <details>
+        <summary>Does this use official NSFAS allowance amounts?</summary>
+        <p>No. You enter your own amount. Allowances and funding arrangements can vary by student, institution, accommodation and funding rules.</p>
+      </details>
+      <details>
+        <summary>Can I use it for a weekly budget?</summary>
+        <p>Yes. Enter the money available for the week and only include expenses for that same week.</p>
+      </details>
+      <details>
+        <summary>Are my financial details uploaded?</summary>
+        <p>No. The calculator performs its calculations in your browser and does not send your figures to a server. The appearance preference is saved on your device when browser storage is available.</p>
+      </details>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>Made for student life by TMI Studios.</p>
+  <a href="../">Home</a>
+  <a href="../apps/">Apps &amp; Tools</a>
+  <a href="../privacy.html">Privacy</a>
+  <a href="../terms.html">Terms</a>
+</footer>
+
+<script>
+(function(){
+  const defaults = {
+    allowance:3500,
+    extraFunds:0,
+    accommodation:1200,
+    food:700,
+    transport:300,
+    data:150,
+    study:100,
+    personal:150
+  };
+
+  const baseCategories = [
+    {id:"accommodation",name:"Accommodation"},
+    {id:"food",name:"Food and groceries"},
+    {id:"transport",name:"Transport"},
+    {id:"data",name:"Data and airtime"},
+    {id:"study",name:"Books and study costs"},
+    {id:"personal",name:"Personal care"}
+  ];
+
+  const customCategories = [];
+  let nextCustomId = 1;
+
+  const money = value => new Intl.NumberFormat("en-ZA",{
+    style:"currency",
+    currency:"ZAR",
+    minimumFractionDigits:0,
+    maximumFractionDigits:2
+  }).format(value);
+
+  function number(id){
+    const el = document.getElementById(id);
+    if(!el) return 0;
+    const n = Number(el.value);
+    if(!Number.isFinite(n) || n < 0) return 0;
+    return Math.min(n,1000000000);
+  }
+
+  function allCategories(){
+    return baseCategories.concat(customCategories);
+  }
+
+  function createCustomExpense(){
+    const id = "custom" + nextCustomId++;
+    const category = {id,name:"Other expense",custom:true};
+    customCategories.push(category);
+
+    const row = document.createElement("div");
+    row.className = "expense-row custom-row";
+    row.dataset.id = id;
+    row.innerHTML = `
+      <div class="expense-top">
+        <div class="expense-name">
+          <div class="category-icon">✏️</div>
+          <div style="min-width:0;flex:1">
+            <input class="custom-name-input" id="name-${id}" maxlength="45" value="Other expense" aria-label="Custom expense category name">
+            <div class="category-description">Your additional budget category</div>
+          </div>
+        </div>
+        <div class="expense-input-wrap">
+          <span class="currency-prefix">R</span>
+          <input class="expense-input" id="expense-${id}" type="number" min="0" step="10" value="0" inputmode="decimal" aria-label="Custom expense amount">
+        </div>
+      </div>
+      <div class="track"><div class="track-fill" id="bar-${id}"></div></div>
+      <div class="expense-meta">
+        <span id="share-${id}">0% of funds</span>
+        <button type="button" data-remove="${id}" style="background:none;border:0;color:var(--muted);padding:0;font-size:.7rem">Remove</button>
+      </div>`;
+    document.getElementById("customExpenses").appendChild(row);
+
+    document.getElementById("expense-" + id).addEventListener("input",calculate);
+    document.getElementById("name-" + id).addEventListener("input",function(){
+      category.name = this.value.trim() || "Other expense";
+      calculate();
+    });
+    row.querySelector("[data-remove]").addEventListener("click",function(){
+      const index = customCategories.findIndex(item => item.id === id);
+      if(index !== -1) customCategories.splice(index,1);
+      row.remove();
+      calculate();
+    });
+    calculate();
+  }
+
+  function calculate(){
+    const available = number("allowance") + number("extraFunds");
+    const categories = allCategories().map(category => ({
+      ...category,
+      amount:number("expense-" + category.id)
+    }));
+
+    const spent = categories.reduce((sum,category) => sum + category.amount,0);
+    const left = available - spent;
+    const percentage = available > 0 ? spent / available * 100 : null;
+
+    document.getElementById("totalIncome").textContent = money(available);
+    document.getElementById("totalSpent").textContent = money(spent);
+    document.getElementById("totalLeft").textContent = money(Math.abs(left));
+
+    document.getElementById("spentNote").textContent = percentage === null
+      ? "Enter funds to calculate spending"
+      : percentage.toLocaleString("en-ZA",{maximumFractionDigits:1}) + "% of your available money";
+
+    document.getElementById("leftNote").textContent = left < 0
+      ? "Over budget by this amount"
+      : "After planned expenses";
+
+    const leftNumber = document.getElementById("totalLeft");
+    leftNumber.style.color = left < 0 ? "var(--red)" : "var(--green)";
+
+    categories.forEach(category => {
+      const bar = document.getElementById("bar-" + category.id);
+      const share = document.getElementById("share-" + category.id);
+      const value = document.getElementById("value-" + category.id);
+
+      if(bar){
+        const part = available > 0 ? category.amount / available * 100 : 0;
+        bar.style.width = Math.min(part,100) + "%";
+      }
+      if(share){
+        const part = available > 0 ? category.amount / available * 100 : 0;
+        share.textContent = part.toLocaleString("en-ZA",{maximumFractionDigits:1}) + "% of funds";
+      }
+      if(value) value.textContent = money(category.amount);
+    });
+
+    const biggest = categories.reduce((best,item) => item.amount > best.amount ? item : best,
+      {name:"None yet",amount:0});
+    document.getElementById("biggestExpense").textContent =
+      biggest.amount > 0 ? biggest.name : "None yet";
+    document.getElementById("categoryCount").textContent = categories.length;
+    document.getElementById("unallocated").textContent = money(Math.max(left,0));
+
+    const status = document.getElementById("budgetStatus");
+    if(left < 0){
+      status.textContent = "You're over budget by " + money(Math.abs(left)) + ".";
+      status.className = "status-text bad";
+    }else if(left === 0){
+      status.textContent = "Every rand has been allocated.";
+      status.className = "status-text";
+    }else{
+      status.textContent = "You're within budget. " + money(left) + " remains.";
+      status.className = "status-text good";
+    }
+
+    return {available,spent,left,percentage,categories};
+  }
+
+  ["allowance","extraFunds"].forEach(id =>
+    document.getElementById(id).addEventListener("input",calculate)
+  );
+
+  document.querySelectorAll(".expense-input").forEach(input =>
+    input.addEventListener("input",calculate)
+  );
+
+  document.getElementById("addExpense").addEventListener("click",createCustomExpense);
+
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    document.getElementById("allowance").value = defaults.allowance;
+    document.getElementById("extraFunds").value = defaults.extraFunds;
+
+    baseCategories.forEach(category => {
+      document.getElementById("expense-" + category.id).value = defaults[category.id];
+    });
+
+    customCategories.length = 0;
+    document.getElementById("customExpenses").innerHTML = "";
+    calculate();
+    document.getElementById("copyStatus").textContent = "Budget reset to the example figures.";
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",async function(){
+    const result = calculate();
+    const lines = [
+      "NSFAS ALLOWANCE BUDGET",
+      "Money available: " + money(result.available),
+      "",
+      "EXPENSES",
+      ...result.categories.map(category => category.name + ": " + money(category.amount)),
+      "",
+      "Total planned spending: " + money(result.spent),
+      (result.left < 0 ? "Over budget: " : "Money remaining: ") + money(Math.abs(result.left)),
+      "",
+      "Personal estimate only. Enter your own allowance and expenses."
+    ];
+    const report = lines.join("\n");
+
+    try{
+      await navigator.clipboard.writeText(report);
+      document.getElementById("copyStatus").textContent = "Budget copied. Paste it into your notes or a message.";
+    }catch(error){
+      const area = document.createElement("textarea");
+      area.value = report;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const success = document.execCommand("copy");
+      area.remove();
+      document.getElementById("copyStatus").textContent = success
+        ? "Budget copied."
+        : "Copy isn't available here. Please copy the figures manually.";
+    }
+  });
+
+  const themeToggle = document.getElementById("themeToggle");
+
+  function applyTheme(theme){
+    document.body.classList.toggle("light",theme === "light");
+    themeToggle.textContent = theme === "light" ? "🌙 Dark mode" : "☀️ Light mode";
+    document.querySelector('meta[name="theme-color"]').content =
+      theme === "light" ? "#f1f3fa" : "#182f70";
+  }
+
+  let savedTheme = "dark";
+  try{
+    savedTheme = localStorage.getItem("tmiNSFASTheme") || "dark";
+  }catch(error){}
+  applyTheme(savedTheme);
+
+  themeToggle.addEventListener("click",function(){
+    const next = document.body.classList.contains("light") ? "dark" : "light";
+    applyTheme(next);
+    try{localStorage.setItem("tmiNSFASTheme",next);}catch(error){}
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
