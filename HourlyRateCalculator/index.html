@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hourly Rate Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Calculate your ideal hourly rate as a freelancer or side hustler. Estimate the rate you need based on your income goal, business expenses, working hours and tax reserve.">
+  <meta name="keywords" content="hourly rate calculator South Africa, freelancer rates, freelance pricing calculator, side hustle calculator, consulting rate calculator">
+  <meta name="author" content="TMI Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/HourlyRateCalculator/">
+  <meta name="theme-color" content="#17162e">
+
+  <style>
+    :root {
+      --ink: #17162e;
+      --paper: #f8f6f0;
+      --white: #ffffff;
+      --purple: #7864ee;
+      --lime: #d7ff70;
+      --muted: #77768a;
+      --line: #e7e4ee;
+      --soft: #efecff;
+      --green: #176c4b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+
+    a { color: inherit; }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 6%;
+      background: var(--ink);
+      color: white;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand span { color: var(--lime); }
+
+    .header-note {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #c5c1dc;
+    }
+
+    .page {
+      width: min(1080px, 92%);
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--purple);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 23px;
+      height: 3px;
+      background: var(--purple);
+    }
+
+    .hero {
+      padding: 18px 0 30px;
+      max-width: 760px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 8vw, 78px);
+      line-height: .99;
+      letter-spacing: -5px;
+      margin: 17px 0;
+      font-weight: 900;
+    }
+
+    h1 em {
+      color: var(--purple);
+      font-style: normal;
+    }
+
+    .hero p {
+      max-width: 590px;
+      color: #5e5c70;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .tool {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, .82fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .calculator {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(23, 22, 46, .04);
+    }
+
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 20px;
+    }
+
+    .section-top h2 {
+      font-size: 18px;
+      margin: 0;
+      letter-spacing: -.5px;
+    }
+
+    .step {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .field { margin-bottom: 21px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .hint {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 3px;
+    }
+
+    .input-wrap {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #dedbe9;
+      border-radius: 12px;
+      background: #fcfbff;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .input-wrap:focus-within {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(120, 100, 238, .12);
+    }
+
+    .prefix, .suffix {
+      padding: 0 13px;
+      color: #77748d;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .input-wrap input, .input-wrap select {
+      width: 100%;
+      min-width: 0;
+      padding: 13px 10px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field-grid .field { min-width: 0; }
+
+    .section-label {
+      margin: 26px 0 15px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple);
+      font-weight: 900;
+    }
+
+    .calculate-btn, .copy-btn, .reset-btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 12px;
+      font-weight: 900;
+      transition: transform .15s, opacity .15s;
+    }
+
+    .calculate-btn:hover, .copy-btn:hover, .reset-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .calculate-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--purple);
+      color: white;
+      font-size: 15px;
+      margin-top: 2px;
+    }
+
+    .result-panel {
+      background: var(--ink);
+      color: white;
+      border-radius: 22px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+    }
+
+    .result-panel::after {
+      content: "R";
+      position: absolute;
+      right: -17px;
+      top: 80px;
+      font-size: 200px;
+      line-height: 1;
+      color: rgba(255,255,255,.035);
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    .result-kicker {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      color: #c5c1dc;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .rate-display {
+      position: relative;
+      z-index: 1;
+      padding: 28px 0 23px;
+      border-bottom: 1px solid #3c3a56;
+    }
+
+    .rate-display .currency {
+      font-size: 18px;
+      color: var(--lime);
+      font-weight: 900;
+    }
+
+    .rate-number {
+      font-size: clamp(43px, 7vw, 68px);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+      margin: 5px 0 4px;
+    }
+
+    .rate-unit {
+      color: #c5c1dc;
+      font-size: 13px;
+    }
+
+    .rate-badge {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--lime);
+      color: var(--ink);
+      padding: 6px 10px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .5px;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 21px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-stat {
+      background: #24223f;
+      border: 1px solid #3b3956;
+      border-radius: 13px;
+      padding: 14px;
+    }
+
+    .mini-stat span {
+      display: block;
+      color: #c5c1dc;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    .mini-stat strong {
+      font-size: 20px;
+      letter-spacing: -.6px;
+      overflow-wrap: anywhere;
+    }
+
+    .rate-breakdown {
+      border-top: 1px solid #3c3a56;
+      padding-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .breakdown-title {
+      font-size: 11px;
+      color: #c5c1dc;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 0 0 13px;
+      font-weight: 800;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      margin: 11px 0;
+    }
+
+    .breakdown-row span { color: #c5c1dc; }
+    .breakdown-row strong { text-align: right; }
+
+    .result-note {
+      margin-top: auto;
+      padding-top: 22px;
+      font-size: 11px;
+      color: #b7b3cf;
+      position: relative;
+      z-index: 1;
+    }
+
+    .copy-btn {
+      margin-top: 16px;
+      width: 100%;
+      padding: 14px;
+      color: var(--ink);
+      background: var(--lime);
+      position: relative;
+      z-index: 1;
+    }
+
+    .reset-btn {
+      margin-top: 9px;
+      padding: 10px;
+      background: transparent;
+      color: #d4d0e8;
+      font-size: 12px;
+      text-decoration: underline;
+      align-self: center;
+    }
+
+    .insight {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      background: var(--soft);
+      border-radius: 15px;
+      padding: 18px;
+      margin-top: 22px;
+    }
+
+    .insight-icon {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--purple);
+      color: white;
+      font-weight: 900;
+    }
+
+    .insight strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .insight p {
+      margin: 0;
+      color: #5e5c70;
+      font-size: 12px;
+    }
+
+    .below {
+      margin-top: 58px;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .below h2 {
+      font-size: clamp(27px, 4vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin: 12px 0;
+    }
+
+    .below-intro {
+      color: #666478;
+      font-size: 14px;
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--line);
+    }
+
+    details {
+      border-bottom: 1px solid var(--line);
+      padding: 17px 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    details p {
+      color: #666478;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .disclaimer {
+      margin-top: 28px;
+      border-left: 3px solid var(--purple);
+      padding: 12px 15px;
+      background: #f0edf9;
+      color: #656176;
+      font-size: 12px;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: #c5c1dc;
+      text-align: center;
+      padding: 24px 15px;
+      font-size: 12px;
+    }
+
+    .footer a {
+      color: var(--lime);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .page { padding-top: 23px; }
+      .tool { grid-template-columns: 1fr; }
+      .calculator, .result-panel { padding: 21px; }
+      .result-panel { min-height: 0; }
+      .below { grid-template-columns: 1fr; gap: 14px; margin-top: 44px; }
+      h1 { letter-spacing: -2.5px; }
+      .header-note { font-size: 9px; letter-spacing: 1px; }
+    }
+
+    @media (max-width: 390px) {
+      .field-grid { grid-template-columns: 1fr; gap: 0; }
+      .mini-stat strong { font-size: 17px; }
+      .calculator, .result-panel { padding: 17px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="brand">TMI <span>STUDIOS</span></div>
+    <div class="header-note">Tools for your next move</div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Freelancer money toolkit</div>
+      <h1>Your time has a <em>price.</em></h1>
+      <p>Stop guessing what to charge. Work backwards from your income goal to estimate the hourly rate your freelance business needs to bring in.</p>
+    </section>
+
+    <section class="tool" aria-label="Hourly rate calculator">
+      <div>
+        <div class="calculator">
+          <div class="section-top">
+            <h2>Build your rate</h2>
+            <span class="step">01 / YOUR NUMBERS</span>
+          </div>
+
+          <form id="rateForm">
+            <div class="field">
+              <label for="income">Monthly personal income goal
+                <span class="hint">What you want to take home each month, in rand.</span>
+              </label>
+              <div class="input-wrap">
+                <span class="prefix">R</span>
+                <input id="income" type="number" min="0" max="100000000" step="100" value="20000" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="expenses">Monthly business expenses
+                <span class="hint">Internet, software, transport, supplies and other work costs.</span>
+              </label>
+              <div class="input-wrap">
+                <span class="prefix">R</span>
+                <input id="expenses" type="number" min="0" max="100000000" step="50" value="2500" required>
+              </div>
+            </div>
+
+            <div class="section-label">Your working reality</div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="hours">Billable hours per week
+                  <span class="hint">Hours clients actually pay for.</span>
+                </label>
+                <div class="input-wrap">
+                  <input id="hours" type="number" min="1" max="100" step="1" value="20" required>
+                  <span class="suffix">hrs</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="weeks">Working weeks per year
+                  <span class="hint">Allow for holidays and time off.</span>
+                </label>
+                <div class="input-wrap">
+                  <input id="weeks" type="number" min="1" max="52" step="1" value="46" required>
+                  <span class="suffix">weeks</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="reserve">Tax and safety reserve
+                <span class="hint">A planning buffer for tax and unexpected costs. This is not a tax calculation.</span>
+              </label>
+              <div class="input-wrap">
+                <select id="reserve">
+                  <option value="0">0% - no reserve</option>
+                  <option value="10">10% - light buffer</option>
+                  <option value="15" selected>15% - planning buffer</option>
+                  <option value="20">20% - bigger buffer</option>
+                  <option value="25">25% - cautious buffer</option>
+                  <option value="30">30% - extra cautious</option>
+                  <option value="35">35% - high buffer</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="calculate-btn" type="submit">Calculate my hourly rate &rarr;</button>
+          </form>
+        </div>
+
+        <div class="insight">
+          <div class="insight-icon">i</div>
+          <div>
+            <strong>Billable hours are not all your work hours.</strong>
+            <p>Admin, marketing, quoting and chasing invoices take time too. Only count the hours you realistically expect to earn money from.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="result-panel" aria-live="polite">
+        <div class="result-kicker">Your estimated minimum</div>
+        <div class="rate-display">
+          <div class="currency">ZAR / HOUR</div>
+          <div class="rate-number" id="hourlyRate">R 0</div>
+          <div class="rate-unit">Suggested baseline before quoting clients</div>
+          <div class="rate-badge" id="rateBadge">YOUR STARTING POINT</div>
+        </div>
+
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <span>Full 8-hour day</span>
+            <strong id="dailyRate">R 0</strong>
+          </div>
+          <div class="mini-stat">
+            <span>Monthly revenue goal</span>
+            <strong id="monthlyRevenue">R 0</strong>
+          </div>
+        </div>
+
+        <div class="rate-breakdown">
+          <p class="breakdown-title">The numbers behind your rate</p>
+          <div class="breakdown-row">
+            <span>Annual income goal</span>
+            <strong id="annualIncome">R 0</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Annual business costs</span>
+            <strong id="annualExpenses">R 0</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Annual reserve allowance</span>
+            <strong id="annualReserve">R 0</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Billable hours per year</span>
+            <strong id="annualHours">0 hrs</strong>
+          </div>
+          <div class="breakdown-row">
+            <span>Revenue needed per year</span>
+            <strong id="annualRevenue">R 0</strong>
+          </div>
+        </div>
+
+        <p class="result-note">This is a planning estimate, not a guaranteed income or an exact tax-adjusted rate. Adjust your numbers as your business changes.</p>
+        <button class="copy-btn" type="button" id="copyBtn">Copy my rate summary</button>
+        <button class="reset-btn" type="button" id="resetBtn">Reset to example numbers</button>
+      </aside>
+    </section>
+
+    <section class="below">
+      <div>
+        <div class="eyebrow">Price with intention</div>
+        <h2>Charge for the business you want.</h2>
+        <p class="below-intro">Your hourly rate should help cover the life you want to live and the real costs of running your work. It is a starting point, not a limit on your value.</p>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>How is my hourly rate calculated?</summary>
+          <p>The calculator adds your annual personal income goal to your annual business expenses, then accounts for your chosen reserve. It divides that amount by your expected billable hours per year to estimate the hourly revenue you need.</p>
+        </details>
+        <details>
+          <summary>What if I cannot bill 40 hours every week?</summary>
+          <p>That is normal. Client work is only part of running a business. Enter a realistic number of billable hours, not all the hours you spend working. Fewer billable hours usually means you need a higher hourly rate.</p>
+        </details>
+        <details>
+          <summary>Does this calculate South African income tax?</summary>
+          <p>No. The reserve is a percentage you choose for planning. Actual tax depends on your circumstances, taxable income, deductions and applicable SARS rules. Speak to a qualified tax practitioner for a proper estimate.</p>
+        </details>
+        <details>
+          <summary>Should I charge every client this exact rate?</summary>
+          <p>Use it as a baseline. You may price fixed projects, packages, retainers or urgent work differently. Compare your rate with your market, experience, the value you deliver and the time each project is likely to take.</p>
+        </details>
+        <details>
+          <summary>Can I use this for a side hustle?</summary>
+          <p>Yes. Enter the extra income you want to earn, your side-hustle expenses and the hours you can realistically bill. The result estimates the rate needed to reach that goal.</p>
+        </details>
+      </div>
+    </section>
+
+    <div class="disclaimer">
+      <strong>Important:</strong> This calculator provides general financial planning estimates only. It does not account for VAT, specific tax rules, unpaid invoices, platform fees or every possible business cost. Consider these separately when setting your prices.
+    </div>
+  </main>
+
+  <footer class="footer">
+    Made for people building their next thing. <a href="https://tmi-studios.github.io/tmistudio1/">Explore more tools at TMI Studios</a>.
+  </footer>
+
+  <script>
+    const form = document.getElementById("rateForm");
+    const money = value => new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      maximumFractionDigits: 0
+    }).format(Number.isFinite(value) ? value : 0);
+
+    let currentSummary = "";
+
+    function calculateRate(event) {
+      if (event) event.preventDefault();
+
+      const income = Number(document.getElementById("income").value);
+      const expenses = Number(document.getElementById("expenses").value);
+      const hours = Number(document.getElementById("hours").value);
+      const weeks = Number(document.getElementById("weeks").value);
+      const reservePercent = Number(document.getElementById("reserve").value);
+
+      const values = [income, expenses, hours, weeks, reservePercent];
+      if (values.some(v => !Number.isFinite(v) || v < 0) ||
+          income > 100000000 || expenses > 100000000 ||
+          hours < 1 || hours > 100 || weeks < 1 || weeks > 52) {
+        alert("Please enter valid numbers. Hours must be 1 to 100 per week and working weeks must be 1 to 52 per year.");
+        return;
+      }
+
+      const annualIncome = income * 12;
+      const annualExpenses = expenses * 12;
+      const baseAmount = annualIncome + annualExpenses;
+      const reserveRate = reservePercent / 100;
+      const revenueNeeded = reserveRate >= 1 ? baseAmount : baseAmount / (1 - reserveRate);
+      const reserveAmount = revenueNeeded - baseAmount;
+      const billableHours = hours * weeks;
+      const hourly = revenueNeeded / billableHours;
+      const daily = hourly * 8;
+      const monthlyRevenue = revenueNeeded / 12;
+
+      document.getElementById("hourlyRate").textContent = money(hourly);
+      document.getElementById("dailyRate").textContent = money(daily);
+      document.getElementById("monthlyRevenue").textContent = money(monthlyRevenue);
+      document.getElementById("annualIncome").textContent = money(annualIncome);
+      document.getElementById("annualExpenses").textContent = money(annualExpenses);
+      document.getElementById("annualReserve").textContent = money(reserveAmount);
+      document.getElementById("annualHours").textContent = billableHours.toLocaleString("en-ZA") + " hrs";
+      document.getElementById("annualRevenue").textContent = money(revenueNeeded);
+
+      document.getElementById("rateBadge").textContent =
+        reservePercent === 0 ? "NO RESERVE INCLUDED" : reservePercent + "% RESERVE INCLUDED";
+
+      currentSummary =
+        "MY HOURLY RATE PLAN - TMI STUDIOS\n\n" +
+        "Estimated hourly rate: " + money(hourly) + "\n" +
+        "Suggested 8-hour day rate: " + money(daily) + "\n" +
+        "Monthly revenue goal: " + money(monthlyRevenue) + "\n" +
+        "Annual personal income goal: " + money(annualIncome) + "\n" +
+        "Annual business expenses: " + money(annualExpenses) + "\n" +
+        "Annual reserve allowance: " + money(reserveAmount) + "\n" +
+        "Billable hours per year: " + billableHours + "\n\n" +
+        "Planning estimate only. This is not an exact tax calculation.";
+    }
+
+    form.addEventListener("submit", calculateRate);
+
+    document.getElementById("copyBtn").addEventListener("click", async function () {
+      if (!currentSummary) calculateRate();
+
+      try {
+        await navigator.clipboard.writeText(currentSummary);
+        this.textContent = "Copied!";
+      } catch (error) {
+        const area = document.createElement("textarea");
+        area.value = currentSummary;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        const copied = document.execCommand("copy");
+        area.remove();
+        this.textContent = copied ? "Copied!" : "Copy not supported";
+      }
+
+      setTimeout(() => {
+        this.textContent = "Copy my rate summary";
+      }, 1800);
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      document.getElementById("income").value = 20000;
+      document.getElementById("expenses").value = 2500;
+      document.getElementById("hours").value = 20;
+      document.getElementById("weeks").value = 46;
+      document.getElementById("reserve").value = 15;
+      calculateRate();
+    });
+
+    calculateRate();
+  </script>
+</body>
+</html>
