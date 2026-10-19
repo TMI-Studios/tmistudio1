@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taxi Budget Calculator South Africa | TMI Studios</title>
+<meta name="description" content="Calculate your weekly and monthly taxi commuting costs in South Africa. Estimate daily fares, commuting days, extra transport expenses and the percentage of your income spent on transport.">
+<meta name="keywords" content="taxi budget calculator, South Africa taxi fare budget, monthly transport costs, commuting calculator, taxi costs">
+<meta name="author" content="TMI Studios">
+<meta name="theme-color" content="#153d30">
+<meta property="og:title" content="Monthly Taxi Budget Calculator | TMI Studios">
+<meta property="og:description" content="Plan your monthly taxi costs and see how transport fits into your budget.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/TaxiBudgetCalculator/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#101e19;
+  --surface:#19352a;
+  --surface2:#224637;
+  --text:#f4fff8;
+  --muted:#b6d0c0;
+  --accent:#f4d35e;
+  --accentText:#1d291e;
+  --border:#355a49;
+  --input:#142b22;
+  --shadow:0 18px 50px rgba(0,0,0,.2);
+}
+body.light{
+  color-scheme:light;
+  --bg:#f5faf2;
+  --surface:#ffffff;
+  --surface2:#e7f2e4;
+  --text:#183a2b;
+  --muted:#617c6c;
+  --accent:#b68b00;
+  --accentText:#ffffff;
+  --border:#d3e3d5;
+  --input:#f8fcf7;
+  --shadow:0 15px 40px rgba(30,70,45,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;line-height:1.6;
+  transition:background .2s,color .2s
+}
+button,input{font:inherit}
+button{cursor:pointer}
+header{
+  max-width:1080px;margin:auto;padding:22px 20px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px
+}
+.brand{font-weight:700;letter-spacing:.05em}
+.brand span{color:var(--accent)}
+.theme-btn,.secondary-btn{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border);border-radius:999px;
+  padding:10px 14px
+}
+.hero{max-width:850px;text-align:center;margin:30px auto;padding:20px}
+.eyebrow{
+  color:var(--accent);font-size:.76rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.17em
+}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.2}
+h1{font-size:clamp(2.5rem,7vw,4.8rem);letter-spacing:-.055em;margin:15px 0}
+.hero p{color:var(--muted);max-width:640px;margin:auto;font-size:1.06rem}
+.container{max-width:1050px;margin:auto;padding:0 20px 40px}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:20px;align-items:start}
+.panel{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;padding:24px;box-shadow:var(--shadow);min-width:0
+}
+.panel h2{font-size:1.6rem;margin:0 0 8px}
+.intro{color:var(--muted);font-size:.92rem;margin:0 0 22px}
+.section-title{font-size:1.1rem;margin:0 0 14px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:.88rem;font-weight:600}
+input{
+  width:100%;min-width:0;padding:13px 12px;border-radius:11px;
+  border:1px solid var(--border);background:var(--input);
+  color:var(--text);outline:none
+}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.hint{font-size:.78rem;color:var(--muted)}
+.divider{border:0;border-top:1px solid var(--border);margin:23px 0}
+.result-panel{position:sticky;top:15px}
+.result-label{font-size:.86rem;color:var(--muted)}
+.total{font-size:clamp(2.1rem,5vw,3rem);font-weight:700;letter-spacing:-.05em;overflow-wrap:anywhere;margin:4px 0 3px}
+.subtotal{color:var(--muted);font-size:.85rem;margin-bottom:20px}
+.summary-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.summary-row span:first-child{color:var(--muted)}
+.summary-row strong{text-align:right;overflow-wrap:anywhere}
+.income-card{background:var(--surface2);border-radius:15px;padding:17px;margin-top:19px}
+.income-card p{color:var(--muted);margin:0;font-size:.86rem}
+.income-card strong{display:block;font-size:1.65rem;margin:4px 0;overflow-wrap:anywhere}
+.progress{height:9px;border-radius:99px;background:var(--border);overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .2s}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.primary-btn{border:0;border-radius:999px;padding:12px 17px;background:var(--accent);color:var(--accentText);font-weight:700}
+.secondary-btn{font-weight:600}
+.note{font-size:.82rem;color:var(--muted);margin-top:14px}
+.content{max-width:850px;margin:25px auto 0;padding:0 20px 45px}
+.content-card{padding:24px;border:1px solid var(--border);border-radius:20px;margin-bottom:16px}
+.content-card h2{margin-top:0}
+.content-card p,.content-card li{color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:25px 20px;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--accent);margin:0 8px}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .result-panel{position:static;grid-row:1}
+  .panel{padding:20px}
+  .hero{margin-top:12px}
+}
+@media(max-width:420px){
+  .field-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  header{padding:17px}
+  .container{padding:0 13px 35px}
+  .hero{padding:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">TMI <span>STUDIOS</span></div>
+  <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode">☀️ Light mode</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">Every rand has a route</div>
+    <h1>Where's Your<br>Taxi Money Going?</h1>
+    <p>Work out your daily, weekly and monthly commuting costs. Give your transport budget a little more direction before the month takes off.</p>
+  </section>
+
+  <div class="container">
+    <div class="layout">
+      <section class="panel" aria-labelledby="inputsTitle">
+        <h2 id="inputsTitle">Your commute</h2>
+        <p class="intro">Use the fares you actually pay. Your estimate updates automatically as you change the numbers.</p>
+
+        <h3 class="section-title">Daily travel</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="oneWay">One-way taxi fare (R)</label>
+            <input id="oneWay" type="number" min="0" step="0.50" value="18" inputmode="decimal">
+            <span class="hint">Fare for one leg of your journey.</span>
+          </div>
+          <div class="field">
+            <label for="trips">One-way trips per day</label>
+            <input id="trips" type="number" min="0" max="20" step="1" value="2" inputmode="numeric">
+            <span class="hint">Usually 2 for a return commute, or more if you change taxis.</span>
+          </div>
+          <div class="field">
+            <label for="days">Commuting days per week</label>
+            <input id="days" type="number" min="0" max="7" step="1" value="5" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="weeks">Budgeting weeks per month</label>
+            <input id="weeks" type="number" min="0" max="5" step="0.1" value="4.33" inputmode="decimal">
+            <span class="hint">4.33 weeks approximates an average month.</span>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 class="section-title">Other transport costs</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="extraDaily">Extra transport per commute day (R)</label>
+            <input id="extraDaily" type="number" min="0" step="1" value="0" inputmode="decimal">
+            <span class="hint">For buses, trains or connecting rides.</span>
+          </div>
+          <div class="field">
+            <label for="extraMonthly">Other monthly transport (R)</label>
+            <input id="extraMonthly" type="number" min="0" step="10" value="0" inputmode="decimal">
+            <span class="hint">For occasional trips or other travel.</span>
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 class="section-title">Your income (optional)</h3>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="income">Monthly take-home income (R)</label>
+            <input id="income" type="number" min="0" step="100" value="8000" inputmode="decimal">
+            <span class="hint">Enter zero if you don't want to compare transport against income.</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel result-panel" aria-live="polite" aria-labelledby="resultTitle">
+        <div class="eyebrow">Your transport snapshot</div>
+        <h2 id="resultTitle">The monthly damage</h2>
+        <div class="result-label">Estimated monthly transport cost</div>
+        <div class="total" id="monthlyTotal">R1,169.70</div>
+        <div class="subtotal" id="dailyTotal">R36 per commuting day</div>
+
+        <div class="summary-row"><span>Daily taxi fares</span><strong id="dailyTaxi">R36</strong></div>
+        <div class="summary-row"><span>Weekly taxi fares</span><strong id="weeklyTaxi">R180</strong></div>
+        <div class="summary-row"><span>Monthly taxi fares</span><strong id="monthlyTaxi">R779.40</strong></div>
+        <div class="summary-row"><span>Extra daily transport / month</span><strong id="monthlyExtraDaily">R0</strong></div>
+        <div class="summary-row"><span>Other monthly transport</span><strong id="monthlyExtra">R0</strong></div>
+
+        <div class="income-card">
+          <p>Share of your take-home income</p>
+          <strong id="incomeShare">14.6%</strong>
+          <p id="incomeMessage">Your estimate compared with your monthly income.</p>
+          <div class="progress" aria-label="Percentage of income spent on transport">
+            <div class="progress-fill" id="incomeProgress"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary-btn" id="copyBtn" type="button">Copy my budget</button>
+          <button class="secondary-btn" id="resetBtn" type="button">Reset figures</button>
+        </div>
+        <p class="note" id="copyStatus" role="status">These are estimates based on the fares and schedule you enter.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section class="content">
+    <article class="content-card">
+      <h2>How to calculate your monthly taxi budget</h2>
+      <ol>
+        <li>Enter the fare for one journey, not a full return trip.</li>
+        <li>Enter how many one-way taxi trips you take on a typical commuting day.</li>
+        <li>Add your commuting days per week and your preferred monthly multiplier.</li>
+        <li>Include other transport expenses and optionally your take-home income.</li>
+      </ol>
+      <p>The calculator estimates a typical month by multiplying your weekly commute by the number of weeks you select, then adding any other monthly costs.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>How much should you budget for taxis each month?</h2>
+      <p>Your monthly transport budget depends on your route, fare, how many taxis you take and how often you travel. For a regular commute, estimating costs from your actual daily fares is usually more useful than relying on a generic national fare. Remember to allow for occasional extra trips where appropriate.</p>
+    </article>
+
+    <article class="content-card">
+      <h2>Frequently asked questions</h2>
+      <h3>Does this calculator use live taxi fares?</h3>
+      <p>No. Enter your own current fares. The calculator does not fetch live route prices.</p>
+      <h3>Why use 4.33 weeks per month?</h3>
+      <p>A year has 52 weeks and 12 months, which averages about 4.33 weeks per month. You can change this value to fit your own budgeting method.</p>
+      <h3>Does the calculator save my income or travel details?</h3>
+      <p>No personal budgeting details are uploaded by this page. Your calculations happen locally in your browser. The theme preference is saved on your device when browser storage is available.</p>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div>Made with care by TMI Studios</div>
+  <p>Small tools for everyday South African life.</p>
+  <a href="../">Home</a>
+  <a href="../apps/">Apps &amp; Tools</a>
+  <a href="../privacy.html">Privacy</a>
+  <a href="../terms.html">Terms</a>
+</footer>
+
+<script>
+(function(){
+  const ids = ["oneWay","trips","days","weeks","extraDaily","extraMonthly","income"];
+  const defaults = {
+    oneWay:18,trips:2,days:5,weeks:4.33,
+    extraDaily:0,extraMonthly:0,income:8000
+  };
+
+  const money = value => new Intl.NumberFormat("en-ZA",{
+    style:"currency",currency:"ZAR",
+    minimumFractionDigits:0,maximumFractionDigits:2
+  }).format(value);
+
+  const get = id => {
+    const value = Number(document.getElementById(id).value);
+    if(!Number.isFinite(value) || value < 0) return 0;
+    return Math.min(value,1000000000);
+  };
+
+  const setText = (id,value) => {
+    document.getElementById(id).textContent = value;
+  };
+
+  function calculate(){
+    const fare = get("oneWay");
+    const trips = Math.floor(get("trips"));
+    const days = Math.floor(get("days"));
+    const weeks = get("weeks");
+    const extraDaily = get("extraDaily");
+    const extraMonthly = get("extraMonthly");
+    const income = get("income");
+
+    const dailyTaxi = fare * trips;
+    const weeklyTaxi = dailyTaxi * days;
+    const monthlyTaxi = weeklyTaxi * weeks;
+    const monthlyExtraDaily = extraDaily * days * weeks;
+    const total = monthlyTaxi + monthlyExtraDaily + extraMonthly;
+    const share = income > 0 ? total / income * 100 : null;
+
+    setText("dailyTaxi",money(dailyTaxi));
+    setText("weeklyTaxi",money(weeklyTaxi));
+    setText("monthlyTaxi",money(monthlyTaxi));
+    setText("monthlyExtraDaily",money(monthlyExtraDaily));
+    setText("monthlyExtra",money(extraMonthly));
+    setText("monthlyTotal",money(total));
+    setText("dailyTotal",money(dailyTaxi + extraDaily) + " per commuting day");
+
+    if(share === null){
+      setText("incomeShare","Not calculated");
+      setText("incomeMessage","Enter your monthly take-home income to compare.");
+      document.getElementById("incomeProgress").style.width = "0%";
+    }else{
+      setText("incomeShare",share.toLocaleString("en-ZA",{maximumFractionDigits:1}) + "%");
+      setText("incomeMessage",share > 100
+        ? "Your estimated transport costs exceed your entered income."
+        : share > 25
+          ? "Transport takes a sizeable share of the income you entered."
+          : "Your estimate compared with your monthly income.");
+      document.getElementById("incomeProgress").style.width = Math.min(share,100) + "%";
+    }
+
+    return {fare,trips,days,weeks,extraDaily,extraMonthly,income,dailyTaxi,weeklyTaxi,monthlyTaxi,monthlyExtraDaily,total,share};
+  }
+
+  ids.forEach(id => document.getElementById(id).addEventListener("input",calculate));
+
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    ids.forEach(id => document.getElementById(id).value = defaults[id]);
+    calculate();
+    setText("copyStatus","Figures reset to the example amounts.");
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",async function(){
+    const r = calculate();
+    const report = [
+      "MONTHLY TAXI BUDGET",
+      "One-way fare: " + money(r.fare),
+      "One-way trips per day: " + r.trips,
+      "Commuting days per week: " + r.days,
+      "Budgeting weeks per month: " + r.weeks,
+      "Daily taxi fares: " + money(r.dailyTaxi),
+      "Weekly taxi fares: " + money(r.weeklyTaxi),
+      "Monthly taxi fares: " + money(r.monthlyTaxi),
+      "Extra daily transport per month: " + money(r.monthlyExtraDaily),
+      "Other monthly transport: " + money(r.extraMonthly),
+      "Estimated monthly transport total: " + money(r.total),
+      "Monthly take-home income: " + (r.income > 0 ? money(r.income) : "Not entered"),
+      "Income spent on transport: " + (r.share === null ? "Not calculated" : r.share.toFixed(1) + "%")
+    ].join("\n");
+
+    try{
+      await navigator.clipboard.writeText(report);
+      setText("copyStatus","Budget copied. You can paste it into a message or note.");
+    }catch(e){
+      const area = document.createElement("textarea");
+      area.value = report;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const success = document.execCommand("copy");
+      area.remove();
+      setText("copyStatus",success ? "Budget copied." : "Copy isn't available here. Please copy the figures manually.");
+    }
+  });
+
+  const themeToggle = document.getElementById("themeToggle");
+
+  function applyTheme(theme){
+    document.body.classList.toggle("light",theme === "light");
+    themeToggle.textContent = theme === "light" ? "🌙 Dark mode" : "☀️ Light mode";
+    document.querySelector('meta[name="theme-color"]').content =
+      theme === "light" ? "#f5faf2" : "#153d30";
+  }
+
+  let savedTheme = "dark";
+  try{savedTheme = localStorage.getItem("tmiTaxiBudgetTheme") || "dark";}catch(e){}
+  applyTheme(savedTheme);
+
+  themeToggle.addEventListener("click",function(){
+    const next = document.body.classList.contains("light") ? "dark" : "light";
+    applyTheme(next);
+    try{localStorage.setItem("tmiTaxiBudgetTheme",next);}catch(e){}
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
