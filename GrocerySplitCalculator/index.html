@@ -1,0 +1,1330 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Grocery Split Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Split grocery bills between friends, couples, families or housemates. Add items, assign costs, track who paid and calculate who owes whom with this free grocery split calculator.">
+  <meta name="keywords" content="grocery split calculator South Africa, split grocery bill, shared shopping calculator, housemate grocery costs, grocery bill splitter">
+  <meta name="author" content="TMI Studios">
+  <meta name="theme-color" content="#f6f0e5">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/GrocerySplitCalculator/">
+
+  <style>
+    :root {
+      --bg: #f6f0e5;
+      --paper: #fffdf8;
+      --ink: #262920;
+      --muted: #77796e;
+      --line: #e5ddcf;
+      --orange: #d9683b;
+      --orange-dark: #a84625;
+      --green: #47664b;
+      --green-light: #e1eadb;
+      --yellow: #f1d88c;
+      --red-light: #f8e3da;
+      --shadow: 0 12px 35px rgba(60, 48, 30, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      max-width: 1160px;
+      margin: auto;
+      padding: 22px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 950;
+      letter-spacing: -.06em;
+    }
+
+    .brand span { color: var(--orange); }
+
+    .top-note {
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: auto;
+      padding: 25px 25px 65px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin: 12px 0 35px;
+    }
+
+    .hero-copy { max-width: 720px; }
+
+    .eyebrow {
+      color: var(--orange-dark);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 13px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      letter-spacing: -.065em;
+      line-height: .95;
+      font-size: clamp(3rem, 7vw, 6rem);
+    }
+
+    h1 span { color: var(--orange); }
+
+    .hero p {
+      max-width: 590px;
+      color: var(--muted);
+      font-size: .98rem;
+      margin: 0;
+    }
+
+    .basket-stamp {
+      flex: 0 0 120px;
+      width: 120px;
+      height: 120px;
+      border: 2px dashed var(--orange);
+      color: var(--orange-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transform: rotate(8deg);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .basket-stamp strong { font-size: 2rem; }
+    .basket-stamp small { font-size: .63rem; text-transform: uppercase; letter-spacing: .1em; }
+
+    .app-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(300px, .8fr);
+      gap: 25px;
+      align-items: start;
+    }
+
+    .left-column { min-width: 0; }
+
+    .people-card {
+      padding: 23px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 17px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 1.55rem;
+      letter-spacing: -.04em;
+    }
+
+    .step-label {
+      color: var(--muted);
+      font-size: .67rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .8rem;
+      font-weight: 850;
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: .75rem;
+      margin: -2px 0 10px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 44px;
+      border: 1px solid #dcd4c6;
+      border-radius: 8px;
+      background: #fffefa;
+      color: var(--ink);
+      padding: 10px 11px;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(217,104,59,.1);
+    }
+
+    .people-input {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .people-input button { margin-bottom: 0; }
+
+    .people-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .person-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-light);
+      color: #2d4931;
+      padding: 7px 10px;
+      border-radius: 100px;
+      font-size: .78rem;
+      font-weight: 850;
+    }
+
+    .person-chip button {
+      border: 0;
+      background: transparent;
+      color: #2d4931;
+      padding: 0;
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      min-height: 43px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: .8rem;
+      font-weight: 900;
+    }
+
+    .btn-orange { background: var(--orange); color: white; }
+    .btn-orange:hover { background: var(--orange-dark); }
+    .btn-dark { background: var(--ink); color: white; }
+    .btn-dark:hover { background: #424638; }
+    .btn-outline { border-color: var(--line); background: transparent; color: var(--ink); }
+    .btn-outline:hover { background: #f4ede1; }
+    .btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+    .basket-paper {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .basket-heading {
+      padding: 24px 23px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .basket-heading h2 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 1.7rem;
+      letter-spacing: -.04em;
+    }
+
+    .basket-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .77rem;
+    }
+
+    .basket-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      border-radius: 12px;
+      font-size: 1.4rem;
+      flex: 0 0 auto;
+    }
+
+    .items-header {
+      display: grid;
+      grid-template-columns: minmax(110px, 1.3fr) 65px 95px 36px;
+      gap: 8px;
+      padding: 12px 20px;
+      color: var(--muted);
+      background: #f7f2e9;
+      text-transform: uppercase;
+      font-size: .64rem;
+      letter-spacing: .08em;
+      font-weight: 900;
+    }
+
+    .items-list { padding: 0 20px; }
+
+    .item-row {
+      display: grid;
+      grid-template-columns: minmax(110px, 1.3fr) 65px 95px 36px;
+      gap: 8px;
+      align-items: center;
+      padding: 13px 0;
+      border-bottom: 1px dashed #ded5c7;
+    }
+
+    .item-row input {
+      padding: 9px 8px;
+      min-height: 42px;
+      font-size: .82rem;
+    }
+
+    .item-row .item-price { text-align: right; }
+
+    .remove-item {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--red-light);
+      color: var(--orange-dark);
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .remove-item:hover { background: #f2d1c4; }
+
+    .empty-state {
+      padding: 38px 15px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--ink);
+      font-family: Georgia, serif;
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+
+    .empty-state span { font-size: .8rem; }
+
+    .basket-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding: 18px 20px 21px;
+    }
+
+    .item-controls {
+      border-top: 1px solid var(--line);
+      padding: 21px;
+      background: #fbf7ef;
+    }
+
+    .item-controls h3 {
+      margin: 0 0 4px;
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+    }
+
+    .item-controls > p {
+      margin: 0 0 17px;
+      font-size: .77rem;
+      color: var(--muted);
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 120px;
+      gap: 12px;
+    }
+
+    .control-grid .wide { grid-column: 1 / -1; }
+
+    .control-grid label { margin-bottom: 6px; }
+    .control-grid input, .control-grid select { background: white; }
+
+    .item-add-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 17px;
+    }
+
+    .item-add-row small { color: var(--muted); font-size: .73rem; }
+
+    .receipt {
+      position: sticky;
+      top: 15px;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      padding: 26px 24px 30px;
+    }
+
+    .receipt::after {
+      content: "";
+      display: block;
+      height: 10px;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, var(--bg) 25%, transparent 25%) -5px 0 / 10px 10px,
+                  linear-gradient(225deg, var(--bg) 25%, transparent 25%) -5px 0 / 10px 10px;
+    }
+
+    .receipt-top {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #cfc5b4;
+    }
+
+    .receipt-symbol { font-size: 1.65rem; }
+    .receipt-top h2 {
+      margin: 5px 0;
+      font-family: "Courier New", monospace;
+      font-size: 1.3rem;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .receipt-top p { color: var(--muted); font-size: .7rem; margin: 0; }
+
+    .receipt-total {
+      padding: 22px 0 18px;
+      text-align: center;
+      border-bottom: 1px dashed #cfc5b4;
+    }
+
+    .receipt-total small {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .receipt-total strong {
+      display: block;
+      margin-top: 5px;
+      font-family: "Courier New", monospace;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -.08em;
+      overflow-wrap: anywhere;
+    }
+
+    .receipt-total span {
+      color: var(--muted);
+      font-size: .73rem;
+    }
+
+    .receipt-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px dashed #ded5c7;
+      font-size: .82rem;
+    }
+
+    .receipt-line span { color: var(--muted); }
+    .receipt-line strong { text-align: right; }
+
+    .receipt-subhead {
+      margin: 24px 0 9px;
+      font-size: .68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--orange-dark);
+    }
+
+    .people-totals { display: grid; gap: 9px; }
+
+    .person-total {
+      padding: 13px;
+      background: #f6f1e7;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .person-total .name {
+      font-size: .82rem;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+    }
+
+    .person-total .caption {
+      display: block;
+      color: var(--muted);
+      font-size: .69rem;
+      font-weight: 400;
+      margin-top: 3px;
+    }
+
+    .person-total .amount {
+      font-family: "Courier New", monospace;
+      font-size: .95rem;
+      font-weight: 900;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .person-total .amount.positive { color: var(--green); }
+    .person-total .amount.negative { color: var(--orange-dark); }
+
+    .settlement-box {
+      margin-top: 19px;
+      background: var(--green-light);
+      padding: 16px;
+      border-radius: 10px;
+    }
+
+    .settlement-box h3 {
+      margin: 0 0 9px;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .settlement-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(71,102,75,.16);
+      font-size: .77rem;
+    }
+
+    .settlement-line:last-child { border-bottom: 0; }
+    .settlement-line strong { text-align: right; }
+
+    .settlement-empty {
+      color: #506651;
+      font-size: .78rem;
+    }
+
+    .receipt-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 21px;
+    }
+
+    .receipt-actions .btn { width: 100%; }
+
+    .fine-print {
+      color: var(--muted);
+      font-size: .69rem;
+      text-align: center;
+      margin: 16px 0 0;
+    }
+
+    .tips {
+      margin-top: 35px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .tip {
+      background: rgba(255,253,248,.7);
+      border: 1px solid var(--line);
+      padding: 19px;
+      border-radius: 12px;
+    }
+
+    .tip .emoji { font-size: 1.5rem; }
+    .tip h3 { margin: 8px 0 5px; font-size: .9rem; }
+    .tip p { color: var(--muted); font-size: .78rem; margin: 0; }
+
+    .faq {
+      max-width: 800px;
+      margin: 65px auto 10px;
+    }
+
+    .faq h2 {
+      font-family: Georgia, serif;
+      font-size: 2.3rem;
+      letter-spacing: -.05em;
+      margin: 8px 0 20px;
+    }
+
+    details { border-top: 1px solid var(--line); padding: 17px 0; }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 850; font-size: .9rem; }
+    details p { color: var(--muted); font-size: .84rem; }
+
+    footer {
+      padding: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: .77rem;
+    }
+
+    footer a { color: var(--orange-dark); text-decoration: none; font-weight: 900; }
+
+    @media (max-width: 900px) {
+      main { padding: 18px 17px 50px; }
+      .topbar { padding: 19px 17px; }
+      .app-layout { grid-template-columns: 1fr; }
+      .receipt { position: static; }
+      .hero { align-items: center; }
+      .tips { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 540px) {
+      .top-note { font-size: .58rem; }
+      .hero { align-items: flex-start; }
+      .basket-stamp { width: 78px; height: 78px; flex-basis: 78px; }
+      .basket-stamp strong { font-size: 1.4rem; }
+      .basket-stamp small { font-size: .48rem; }
+      h1 { font-size: 3.2rem; }
+      .people-card { padding: 17px; }
+      .people-input { grid-template-columns: 1fr; }
+      .people-input button { width: 100%; }
+      .items-header { display: none; }
+      .items-list { padding: 0 14px; }
+      .item-row {
+        grid-template-columns: minmax(0, 1fr) 70px 34px;
+        gap: 7px;
+        padding: 14px 0;
+      }
+      .item-row .item-name { grid-column: 1 / -1; }
+      .item-row .item-qty { grid-column: 1; }
+      .item-row .item-price { grid-column: 2; grid-row: 2; }
+      .item-row .remove-item { grid-column: 3; grid-row: 2; }
+      .control-grid { grid-template-columns: minmax(0, 1fr) 95px; }
+      .item-add-row { align-items: stretch; flex-direction: column; }
+      .item-add-row button { width: 100%; }
+      .receipt { padding: 22px 18px 30px; }
+      .receipt-actions { grid-template-columns: 1fr; }
+      .section-title h2 { font-size: 1.35rem; }
+    }
+
+    @media print {
+      body { background: white; }
+      .topbar, .hero, .people-card, .basket-paper, .tips, .faq, footer, .receipt-actions { display: none !important; }
+      main { padding: 0; }
+      .app-layout { display: block; }
+      .receipt { position: static; box-shadow: none; border: 0; }
+      .receipt::after { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">TMI <span>Studios.</span></div>
+    <div class="top-note">Shared shopping, less drama</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Housemates · Families · Friends</div>
+        <h1>Who bought the <span>groceries?</span></h1>
+        <p>Build your shopping basket, split shared items fairly, and work out who owes whom. Because nobody wants a R47.50 argument over milk.</p>
+      </div>
+      <div class="basket-stamp" aria-label="Free grocery splitting tool">
+        <strong>R</strong>
+        <small>Let's split it</small>
+      </div>
+    </section>
+
+    <div class="app-layout">
+      <div class="left-column">
+        <section class="people-card">
+          <div class="section-title">
+            <h2>Who's in this shop?</h2>
+            <span class="step-label">01 / People</span>
+          </div>
+          <label for="personName">Add everyone sharing the groceries</label>
+          <p class="help">Enter names one at a time. You need at least two people to split a bill.</p>
+          <div class="people-input">
+            <input id="personName" type="text" maxlength="35" placeholder="e.g. Buyi, Sam, Thando" autocomplete="off">
+            <button type="button" class="btn btn-dark" id="addPersonButton">+ Add person</button>
+          </div>
+          <div class="people-chips" id="peopleChips"></div>
+        </section>
+
+        <section class="basket-paper">
+          <div class="basket-heading">
+            <div>
+              <div class="step-label">02 / Your shopping</div>
+              <h2>The basket</h2>
+              <p>Add each item with its price and quantity.</p>
+            </div>
+            <div class="basket-icon" aria-hidden="true">🛒</div>
+          </div>
+
+          <div class="items-header">
+            <span>Item</span>
+            <span>Qty</span>
+            <span>Price each</span>
+            <span></span>
+          </div>
+
+          <div class="items-list" id="itemsList">
+            <div class="empty-state" id="emptyState">
+              <strong>Your basket is waiting.</strong>
+              <span>Add your first grocery item below.</span>
+            </div>
+          </div>
+
+          <div class="basket-actions">
+            <button type="button" class="btn btn-outline" id="clearItemsButton">Clear basket</button>
+          </div>
+
+          <div class="item-controls">
+            <h3>Add a grocery item</h3>
+            <p>Choose who the item is for and who paid for it.</p>
+
+            <div class="control-grid">
+              <div class="wide">
+                <label for="newItemName">Item name</label>
+                <input id="newItemName" type="text" maxlength="70" placeholder="e.g. Milk, rice, washing powder">
+              </div>
+
+              <div>
+                <label for="newItemQty">Quantity</label>
+                <input id="newItemQty" type="number" min="1" max="999" step="1" value="1">
+              </div>
+
+              <div>
+                <label for="newItemPrice">Price each (R)</label>
+                <input id="newItemPrice" type="number" min="0" max="10000000" step="0.01" placeholder="0.00" inputmode="decimal">
+              </div>
+
+              <div class="wide">
+                <label for="newItemShare">Who is this item for?</label>
+                <select id="newItemShare">
+                  <option value="everyone">Everyone shares it equally</option>
+                </select>
+              </div>
+
+              <div class="wide">
+                <label for="newItemPayer">Who paid for it?</label>
+                <select id="newItemPayer">
+                  <option value="">Choose who paid</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="item-add-row">
+              <small>Item total: <strong id="newItemTotal">R 0.00</strong></small>
+              <button type="button" class="btn btn-orange" id="addItemButton">Add to basket +</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="receipt">
+        <div class="receipt-top">
+          <div class="receipt-symbol">✳</div>
+          <h2>The split receipt</h2>
+          <p>YOUR SHOPPING, SORTED.</p>
+        </div>
+
+        <div class="receipt-total">
+          <small>Total grocery bill</small>
+          <strong id="grandTotal">R 0.00</strong>
+          <span id="itemCount">0 items in your basket</span>
+        </div>
+
+        <div class="receipt-line">
+          <span>People sharing</span>
+          <strong id="peopleCount">2 people</strong>
+        </div>
+        <div class="receipt-line">
+          <span>Equal split per person</span>
+          <strong id="equalSplit">R 0.00</strong>
+        </div>
+
+        <div class="receipt-subhead">Everyone's share</div>
+        <div class="people-totals" id="peopleTotals">
+          <div class="settlement-empty">Add people and groceries to see each person's share.</div>
+        </div>
+
+        <div class="receipt-subhead">Who pays whom?</div>
+        <div class="settlement-box">
+          <h3>Settle the bill</h3>
+          <div id="settlements">
+            <div class="settlement-empty">Add items and choose who paid to calculate settlements.</div>
+          </div>
+        </div>
+
+        <div class="receipt-actions">
+          <button type="button" class="btn btn-orange" id="copySummaryButton">Copy summary</button>
+          <button type="button" class="btn btn-outline" id="printButton">Print / PDF</button>
+        </div>
+        <p class="fine-print">Calculated from the items and people you enter. No account needed.</p>
+      </aside>
+    </div>
+
+    <section class="tips">
+      <article class="tip">
+        <div class="emoji">🥦</div>
+        <h3>Shared essentials</h3>
+        <p>Milk, bread, rice and other common groceries can be divided equally among everyone.</p>
+      </article>
+      <article class="tip">
+        <div class="emoji">🍫</div>
+        <h3>Personal treats</h3>
+        <p>Assign a personal snack or product to one person so it doesn't get split across the household.</p>
+      </article>
+      <article class="tip">
+        <div class="emoji">🧾</div>
+        <h3>Track who paid</h3>
+        <p>Record the person who covered each item. The settlement section estimates how to balance the bill.</p>
+      </article>
+    </section>
+
+    <section class="faq">
+      <div class="eyebrow">A little clarity</div>
+      <h2>How the split works</h2>
+
+      <details>
+        <summary>How are shared groceries divided?</summary>
+        <p>Each item marked for everyone is split equally among the people in the group. For example, a R90 shared item split between three people adds R30 to each person's share.</p>
+      </details>
+
+      <details>
+        <summary>Can I assign something to just one person?</summary>
+        <p>Yes. When adding an item, choose one person under "Who is this item for?" That person is assigned the full cost of that item.</p>
+      </details>
+
+      <details>
+        <summary>What does "who pays whom" mean?</summary>
+        <p>The calculator compares each person's assigned share with the amount they paid for the items. It then suggests transfers to help balance the bill. These are estimates based on the information entered.</p>
+      </details>
+
+      <details>
+        <summary>Can I split a grocery item between only two people in a larger group?</summary>
+        <p>This version splits shared items equally among everyone, or assigns an item to one person. To split an item between a custom subset of people, add separate entries for the relevant portions.</p>
+      </details>
+
+      <details>
+        <summary>Is my shopping information saved?</summary>
+        <p>No. This tool calculates in your browser and does not send your shopping list to a server or save it for later. Copy your summary if you want to keep a record.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    Shared bills, simplified by <a href="https://tmi-studios.github.io/tmistudio1/">TMI Studios</a>.
+  </footer>
+
+  <script>
+    (() => {
+      const people = ["Person 1", "Person 2"];
+      let items = [];
+      let nextItemId = 1;
+
+      const $ = id => document.getElementById(id);
+
+      const money = amount => new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(Number.isFinite(amount) ? amount : 0);
+
+      const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+
+      function updateItemPreview() {
+        const quantity = Math.max(1, Math.min(999, Math.floor(Number($("newItemQty").value) || 1)));
+        const price = Math.max(0, Number($("newItemPrice").value) || 0);
+        $("newItemTotal").textContent = money(quantity * price);
+      }
+
+      function updatePersonOptions() {
+        const shareSelect = $("newItemShare");
+        const payerSelect = $("newItemPayer");
+        const currentShare = shareSelect.value;
+        const currentPayer = payerSelect.value;
+
+        shareSelect.innerHTML = '<option value="everyone">Everyone shares it equally</option>' +
+          people.map((person, index) =>
+            '<option value="' + index + '">' + escapeHTML(person) + ' only</option>'
+          ).join("");
+
+        payerSelect.innerHTML = '<option value="">Choose who paid</option>' +
+          people.map((person, index) =>
+            '<option value="' + index + '">' + escapeHTML(person) + '</option>'
+          ).join("");
+
+        if ([...shareSelect.options].some(option => option.value === currentShare)) {
+          shareSelect.value = currentShare;
+        }
+
+        if ([...payerSelect.options].some(option => option.value === currentPayer)) {
+          payerSelect.value = currentPayer;
+        } else {
+          payerSelect.value = "";
+        }
+      }
+
+      function renderPeople() {
+        $("peopleChips").innerHTML = people.map((person, index) =>
+          '<span class="person-chip">' +
+            escapeHTML(person) +
+            '<button type="button" aria-label="Remove ' + escapeHTML(person) + '" data-remove-person="' + index + '">×</button>' +
+          '</span>'
+        ).join("");
+
+        $("peopleCount").textContent = people.length + (people.length === 1 ? " person" : " people");
+        updatePersonOptions();
+        renderItems();
+        renderResults();
+      }
+
+      function addPerson() {
+        const input = $("personName");
+        const name = input.value.trim();
+
+        if (!name) {
+          input.focus();
+          input.setCustomValidity("Enter a name first.");
+          input.reportValidity();
+          input.setCustomValidity("");
+          return;
+        }
+
+        if (people.some(person => person.toLowerCase() === name.toLowerCase())) {
+          alert("That person is already in the group.");
+          return;
+        }
+
+        if (people.length >= 20) {
+          alert("This calculator supports up to 20 people in one group.");
+          return;
+        }
+
+        people.push(name);
+        input.value = "";
+        renderPeople();
+        input.focus();
+      }
+
+      function removePerson(index) {
+        if (people.length <= 1) {
+          alert("Keep at least one person in the group.");
+          return;
+        }
+
+        const removedName = people[index];
+        const isUsed = items.some(item =>
+          item.payer === index || (item.share !== "everyone" && Number(item.share) === index)
+        );
+
+        if (isUsed && !confirm(
+          removedName + " is assigned to one or more items. Removing them will clear those assignments. Continue?"
+        )) return;
+
+        people.splice(index, 1);
+
+        items = items.map(item => {
+          if (item.payer === index) item.payer = null;
+          else if (item.payer !== null && item.payer > index) item.payer--;
+
+          if (item.share !== "everyone") {
+            const shareIndex = Number(item.share);
+            if (shareIndex === index) item.share = "everyone";
+            else if (shareIndex > index) item.share = String(shareIndex - 1);
+          }
+          return item;
+        });
+
+        renderPeople();
+      }
+
+      function addItem() {
+        const name = $("newItemName").value.trim();
+        const quantity = Number($("newItemQty").value);
+        const price = Number($("newItemPrice").value);
+        const share = $("newItemShare").value;
+        const payerValue = $("newItemPayer").value;
+
+        if (!name) {
+          $("newItemName").setCustomValidity("Enter a grocery item name.");
+          $("newItemName").reportValidity();
+          $("newItemName").setCustomValidity("");
+          $("newItemName").focus();
+          return;
+        }
+
+        if (!Number.isInteger(quantity) || quantity < 1 || quantity > 999) {
+          alert("Quantity must be a whole number between 1 and 999.");
+          $("newItemQty").focus();
+          return;
+        }
+
+        if ($("newItemPrice").value.trim() === "" || !Number.isFinite(price) || price < 0 || price > 10000000) {
+          alert("Enter a valid price of R0 or more.");
+          $("newItemPrice").focus();
+          return;
+        }
+
+        if (items.length >= 200) {
+          alert("This basket supports up to 200 item entries.");
+          return;
+        }
+
+        items.push({
+          id: nextItemId++,
+          name,
+          quantity,
+          price,
+          share,
+          payer: payerValue === "" ? null : Number(payerValue)
+        });
+
+        $("newItemName").value = "";
+        $("newItemQty").value = "1";
+        $("newItemPrice").value = "";
+        $("newItemName").focus();
+        updateItemPreview();
+        renderItems();
+        renderResults();
+      }
+
+      function renderItems() {
+        const list = $("itemsList");
+        $("emptyState").style.display = items.length ? "none" : "block";
+
+        list.querySelectorAll(".item-row").forEach(row => row.remove());
+
+        items.forEach(item => {
+          const row = document.createElement("div");
+          row.className = "item-row";
+          row.dataset.itemId = item.id;
+
+          row.innerHTML =
+            '<input class="item-name" type="text" maxlength="70" aria-label="Item name" value="' + escapeHTML(item.name) + '">' +
+            '<input class="item-qty" type="number" min="1" max="999" step="1" aria-label="Quantity" value="' + item.quantity + '">' +
+            '<input class="item-price" type="number" min="0" max="10000000" step="0.01" aria-label="Price each in rand" value="' + item.price + '">' +
+            '<button class="remove-item" type="button" aria-label="Remove item">×</button>';
+
+          row.querySelector(".item-name").addEventListener("change", event => {
+            item.name = event.target.value.trim() || "Grocery item";
+            renderResults();
+          });
+
+          row.querySelector(".item-qty").addEventListener("change", event => {
+            const value = Number(event.target.value);
+            if (!Number.isInteger(value) || value < 1 || value > 999) {
+              event.target.value = item.quantity;
+              alert("Quantity must be a whole number between 1 and 999.");
+              return;
+            }
+            item.quantity = value;
+            renderResults();
+          });
+
+          row.querySelector(".item-price").addEventListener("change", event => {
+            const value = Number(event.target.value);
+            if (event.target.value.trim() === "" || !Number.isFinite(value) || value < 0 || value > 10000000) {
+              event.target.value = item.price;
+              alert("Enter a valid price of R0 or more.");
+              return;
+            }
+            item.price = value;
+            renderResults();
+          });
+
+          row.querySelector(".remove-item").addEventListener("click", () => {
+            items = items.filter(entry => entry.id !== item.id);
+            renderItems();
+            renderResults();
+          });
+
+          list.appendChild(row);
+        });
+      }
+
+      function calculate() {
+        const total = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+        const shares = people.map(() => 0);
+        const paid = people.map(() => 0);
+
+        items.forEach(item => {
+          const amount = item.quantity * item.price;
+
+          if (item.share === "everyone") {
+            const eachShare = amount / people.length;
+            shares.forEach((_, index) => shares[index] += eachShare);
+          } else {
+            const index = Number(item.share);
+            if (index >= 0 && index < shares.length) shares[index] += amount;
+            else {
+              const eachShare = amount / people.length;
+              shares.forEach((_, personIndex) => shares[personIndex] += eachShare);
+            }
+          }
+
+          if (item.payer !== null && item.payer >= 0 && item.payer < paid.length) {
+            paid[item.payer] += amount;
+          }
+        });
+
+        const net = paid.map((amount, index) => amount - shares[index]);
+        return { total, shares, paid, net };
+      }
+
+      function makeSettlements(net) {
+        const debtors = [];
+        const creditors = [];
+
+        net.forEach((amount, index) => {
+          if (amount < -0.005) debtors.push({ index, amount: -amount });
+          if (amount > 0.005) creditors.push({ index, amount });
+        });
+
+        const transfers = [];
+        let d = 0;
+        let c = 0;
+
+        while (d < debtors.length && c < creditors.length) {
+          const amount = Math.min(debtors[d].amount, creditors[c].amount);
+
+          if (amount > 0.005) {
+            transfers.push({
+              from: debtors[d].index,
+              to: creditors[c].index,
+              amount
+            });
+          }
+
+          debtors[d].amount -= amount;
+          creditors[c].amount -= amount;
+
+          if (debtors[d].amount < 0.005) d++;
+          if (creditors[c].amount < 0.005) c++;
+        }
+
+        return transfers;
+      }
+
+      function renderResults() {
+        const { total, shares, paid, net } = calculate();
+
+        $("grandTotal").textContent = money(total);
+        $("itemCount").textContent = items.length + (items.length === 1 ? " item in your basket" : " items in your basket");
+        $("equalSplit").textContent = money(people.length ? total / people.length : 0);
+
+        if (!items.length) {
+          $("peopleTotals").innerHTML = '<div class="settlement-empty">Add groceries to see each person\\'s share.</div>';
+          $("settlements").innerHTML = '<div class="settlement-empty">Add items and choose who paid to calculate settlements.</div>';
+          $("copySummaryButton").dataset.summary = "";
+          return;
+        }
+
+        $("peopleTotals").innerHTML = people.map((person, index) => {
+          const balance = net[index];
+          const amountClass = balance > 0.005 ? "positive" : balance < -0.005 ? "negative" : "";
+          const caption = balance > 0.005
+            ? "Paid more than their share"
+            : balance < -0.005
+              ? "Still owes their share"
+              : "Paid their share";
+
+          return '<div class="person-total">' +
+            '<div><div class="name">' + escapeHTML(person) + '</div>' +
+            '<span class="caption">Share: ' + money(shares[index]) + ' · Paid: ' + money(paid[index]) + '</span></div>' +
+            '<div class="amount ' + amountClass + '">' + (balance > 0.005 ? "+" : "") + money(balance) + '</div>' +
+          '</div>';
+        }).join("");
+
+        const transfers = makeSettlements(net);
+
+        if (!transfers.length) {
+          $("settlements").innerHTML = '<div class="settlement-empty">Everyone is settled up, or no payer has been recorded for the items yet.</div>';
+        } else {
+          $("settlements").innerHTML = transfers.map(transfer =>
+            '<div class="settlement-line"><span>' +
+            escapeHTML(people[transfer.from]) + ' pays ' + escapeHTML(people[transfer.to]) +
+            '</span><strong>' + money(transfer.amount) + '</strong></div>'
+          ).join("");
+        }
+
+        const summaryLines = [
+          "GROCERY SPLIT SUMMARY",
+          "",
+          "Total grocery bill: " + money(total),
+          "People: " + people.join(", "),
+          "Equal split reference: " + money(total / people.length),
+          "",
+          "ITEMS:"
+        ];
+
+        items.forEach(item => {
+          const assignment = item.share === "everyone"
+            ? "Shared by everyone"
+            : "For " + (people[Number(item.share)] || "one person");
+          const payer = item.payer === null ? "Payer not recorded" : "Paid by " + people[item.payer];
+
+          summaryLines.push(
+            "- " + item.name + " x" + item.quantity + " at " + money(item.price) +
+            " = " + money(item.quantity * item.price) + " | " + assignment + " | " + payer
+          );
+        });
+
+        summaryLines.push("", "SHARES AND PAYMENTS:");
+        people.forEach((person, index) => {
+          summaryLines.push(
+            person + ": share " + money(shares[index]) +
+            ", paid " + money(paid[index]) +
+            ", balance " + money(net[index])
+          );
+        });
+
+        summaryLines.push("", "SUGGESTED SETTLEMENTS:");
+        if (!transfers.length) {
+          summaryLines.push("No transfers calculated.");
+        } else {
+          transfers.forEach(transfer => {
+            summaryLines.push(
+              people[transfer.from] + " pays " + people[transfer.to] + ": " + money(transfer.amount)
+            );
+          });
+        }
+
+        summaryLines.push("", "Calculated using the items and assignments entered.");
+        $("copySummaryButton").dataset.summary = summaryLines.join("\\n");
+      }
+
+      $("addPersonButton").addEventListener("click", addPerson);
+      $("personName").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          addPerson();
+        }
+      });
+
+      $("peopleChips").addEventListener("click", event => {
+        const button = event.target.closest("[data-remove-person]");
+        if (button) removePerson(Number(button.dataset.removePerson));
+      });
+
+      $("addItemButton").addEventListener("click", addItem);
+
+      ["newItemQty", "newItemPrice"].forEach(id => {
+        $(id).addEventListener("input", updateItemPreview);
+      });
+
+      $("newItemName").addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          addItem();
+        }
+      });
+
+      $("clearItemsButton").addEventListener("click", () => {
+        if (!items.length) return;
+        if (confirm("Clear all grocery items from this basket?")) {
+          items = [];
+          renderItems();
+          renderResults();
+        }
+      });
+
+      $("copySummaryButton").addEventListener("click", async () => {
+        const summary = $("copySummaryButton").dataset.summary || "";
+        if (!summary) {
+          alert("Add at least one grocery item before copying a summary.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(summary);
+          } else {
+            const temp = document.createElement("textarea");
+            temp.value = summary;
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+            document.body.appendChild(temp);
+            temp.select();
+            const copied = document.execCommand("copy");
+            temp.remove();
+            if (!copied) throw new Error("Copy unavailable");
+          }
+
+          const button = $("copySummaryButton");
+          button.textContent = "Copied ✓";
+          setTimeout(() => button.textContent = "Copy summary", 1800);
+        } catch (error) {
+          window.prompt("Copy your grocery summary:", summary);
+        }
+      });
+
+      $("printButton").addEventListener("click", () => window.print());
+
+      renderPeople();
+      updateItemPreview();
+    })();
+  </script>
+</body>
+</html>
