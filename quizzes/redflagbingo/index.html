@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100817">
+
+  <title>Red Flag Bingo | TMI Studios</title>
+  <meta name="description" content="Ready for Red Flag Bingo? Play the savage Sip or Skip game with your friends and test your instincts about dating red flags.">
+
+  <meta property="og:title" content="Red Flag Bingo | TMI Studios">
+  <meta property="og:description" content="Questionable behaviour, savage questions and a Sip or Skip game. Ready to play?">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tmi-studios.github.io/tmistudio1/quizzes/red-flag-bingo/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #100817;
+      --panel: #1e1129;
+      --pink: #ff72bd;
+      --purple: #bd91ff;
+      --cyan: #79f1e3;
+      --text: #fff8ff;
+      --muted: #c3b3ca;
+      --border: rgba(255,255,255,.13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(189,145,255,.16), transparent 35%),
+        radial-gradient(ellipse at 95% 30%, rgba(255,114,189,.12), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--pink); }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .back:hover { color: var(--cyan); }
+
+    main {
+      width: min(100% - 32px, 1000px);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 72px 0 52px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--cyan);
+      border: 1px solid rgba(121,241,227,.3);
+      border-radius: 999px;
+      padding: 6px 13px;
+      margin-bottom: 20px;
+      font-size: .76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0 auto 20px;
+      font-size: clamp(2.8rem, 8vw, 5.7rem);
+      letter-spacing: -3px;
+    }
+
+    .gradient {
+      background: linear-gradient(100deg, var(--pink), var(--purple), var(--cyan));
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 21px;
+      border-radius: 13px;
+      background: var(--pink);
+      color: #240b1d;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .button.secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .hero-art {
+      max-width: 660px;
+      margin: 42px auto 0;
+      padding: 32px 20px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,114,189,.10), rgba(189,145,255,.08), rgba(121,241,227,.06));
+      box-shadow: 0 24px 70px rgba(0,0,0,.2);
+    }
+
+    .flag-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: clamp(2rem, 7vw, 3.5rem);
+    }
+
+    .hero-art p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    section { padding: 34px 0; }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      letter-spacing: -1px;
+    }
+
+    .section-copy {
+      max-width: 680px;
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 23px;
+      background: rgba(30,17,41,.86);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .feature .icon {
+      display: block;
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+
+    .feature h3 {
+      margin: 0 0 9px;
+      font-size: 1.08rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .callout {
+      margin: 28px 0 55px;
+      padding: 28px;
+      text-align: center;
+      border-radius: 22px;
+      border: 1px solid rgba(255,114,189,.25);
+      background: linear-gradient(120deg, rgba(255,114,189,.09), rgba(189,145,255,.08));
+    }
+
+    .callout h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+    }
+
+    .callout p {
+      max-width: 610px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 24px 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .84rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    @media (max-width: 700px) {
+      .features { grid-template-columns: 1fr; }
+      .hero { padding-top: 55px; }
+      h1 { letter-spacing: -1.7px; }
+      .feature { padding: 20px; }
+      .callout { padding: 23px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../../index.html">TMI <span>Studios</span></a>
+      <a class="back" href="../index.html">← All quizzes</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="eyebrow">Dating chaos meets game night</span>
+      <h1>Red Flag <span class="gradient">Bingo.</span></h1>
+      <p>
+        Because sometimes the red flag isn't a flag. It's a whole parade.
+        Gather your people, brace yourselves, and decide whether the behaviour
+        deserves a sip or a skip.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="game.html">🚩 Play Red Flag Bingo</a>
+        <a class="button secondary" href="../index.html">Explore other quizzes</a>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="Playful red flag game artwork">
+        <div class="flag-row" aria-hidden="true">
+          <span>🚩</span><span>💋</span><span>🥂</span><span>👀</span><span>🚩</span>
+        </div>
+        <p>Messy stories. Questionable choices. Excellent group-chat material.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="features-heading">
+      <h2 class="section-title" id="features-heading">What's the vibe?</h2>
+      <p class="section-copy">
+        Red Flag Bingo turns familiar dating drama into a playful group game.
+        Keep it light, keep your boundaries, and let the stories begin.
+      </p>
+
+      <div class="features">
+        <article class="feature">
+          <span class="icon" aria-hidden="true">🥂</span>
+          <h3>Sip or Skip</h3>
+          <p>React to each scenario and keep track of your score as you play.</p>
+        </article>
+
+        <article class="feature">
+          <span class="icon" aria-hidden="true">🚧</span>
+          <h3>Boundary Check</h3>
+          <p>Explore situations that raise questions about respect, honesty and boundaries.</p>
+        </article>
+
+        <article class="feature">
+          <span class="icon" aria-hidden="true">💸</span>
+          <h3>Finance &amp; Finesse</h3>
+          <p>Talk through money habits, dating expectations and questionable decisions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="callout">
+      <h2>Ready to call a red flag a red flag?</h2>
+      <p>
+        Grab your friends and start the game. This is entertainment, not relationship
+        advice or a substitute for taking unsafe behaviour seriously.
+      </p>
+      <div class="actions">
+        <a class="button" href="game.html">Start playing →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year">2026</span> TMI Studios</p>
+    <p>
+      <a href="../../index.html">Home</a>
+      <a href="../index.html">All quizzes</a>
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
