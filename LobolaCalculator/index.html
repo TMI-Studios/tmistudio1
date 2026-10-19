@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lobola Calculator South Africa | Estimate Lobola Costs</title>
+<meta name="description" content="Estimate your lobola costs in South Africa. Calculate cattle, customary gifts, celebrations, payments already made and your outstanding balance in rands.">
+<meta name="keywords" content="lobola calculator South Africa, lobola costs, lobola budget, lobola cows price, lobola estimator">
+<meta name="author" content="TMI Studios">
+<meta name="theme-color" content="#35152f">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/LobolaCalculator/">
+<meta property="og:title" content="Lobola Calculator | TMI Studios">
+<meta property="og:description" content="Plan your lobola budget with a flexible South African lobola cost calculator.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --bg:#1d101e;
+  --surface:#35152f;
+  --surface2:#47203e;
+  --text:#fff6f5;
+  --muted:#d4b9cc;
+  --accent:#e7bd83;
+  --accentText:#28131f;
+  --border:#63415b;
+  --input:#261526;
+  --success:#b7e4c7;
+  --shadow:0 18px 55px rgba(0,0,0,.22);
+}
+body.light {
+  color-scheme:light;
+  --bg:#fff8f4;
+  --surface:#ffffff;
+  --surface2:#f7e9ee;
+  --text:#32182e;
+  --muted:#795e72;
+  --accent:#9a6337;
+  --accentText:#ffffff;
+  --border:#ead5df;
+  --input:#fffaf8;
+  --success:#246b45;
+  --shadow:0 18px 45px rgba(70,25,50,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;line-height:1.6;
+  transition:background .2s,color .2s
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+header{
+  max-width:1100px;margin:auto;padding:22px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px
+}
+.brand{font-weight:700;letter-spacing:.04em}
+.brand span{color:var(--accent)}
+.theme-btn,.secondary-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text);border-radius:999px;padding:10px 14px
+}
+.hero{max-width:850px;margin:28px auto 30px;padding:20px;text-align:center}
+.eyebrow{
+  color:var(--accent);font-size:.76rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase
+}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.2}
+h1{font-size:clamp(2.5rem,7vw,4.8rem);margin:15px 0}
+.hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:1.06rem}
+.container{max-width:1050px;margin:0 auto;padding:0 20px 45px}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:20px;align-items:start}
+.panel{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:22px;padding:24px;box-shadow:var(--shadow);min-width:0
+}
+.panel h2{font-size:1.65rem;margin:0 0 8px}
+.intro{color:var(--muted);font-size:.92rem;margin:0 0 22px}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:.88rem;font-weight:600}
+input{
+  width:100%;min-width:0;padding:13px 12px;border-radius:11px;
+  background:var(--input);color:var(--text);
+  border:1px solid var(--border);outline:none
+}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.hint{font-size:.78rem;color:var(--muted)}
+.divider{border:0;border-top:1px solid var(--border);margin:24px 0}
+.section-title{font-size:1.2rem;margin:0 0 15px}
+.result-panel{position:sticky;top:15px}
+.result-label{color:var(--muted);font-size:.86rem}
+.total{font-size:clamp(2rem,5vw,2.8rem);font-weight:700;letter-spacing:-.04em;margin:3px 0 15px;overflow-wrap:anywhere}
+.total small{font-size:.9rem;letter-spacing:0;color:var(--muted);font-weight:500}
+.summary-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.summary-row span:first-child{color:var(--muted)}
+.summary-row strong{text-align:right;overflow-wrap:anywhere}
+.balance{
+  margin-top:18px;padding:17px;border-radius:15px;
+  background:var(--surface2)
+}
+.balance .amount{font-size:1.65rem;font-weight:700;overflow-wrap:anywhere}
+.balance p{margin:0;color:var(--muted);font-size:.86rem}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.primary-btn{
+  border:0;border-radius:999px;padding:12px 16px;
+  background:var(--accent);color:var(--accentText);font-weight:700
+}
+.secondary-btn{font-weight:600}
+.note{font-size:.83rem;color:var(--muted);margin-top:14px}
+.content{max-width:850px;margin:25px auto 0;padding:0 20px 45px}
+.content-card{padding:24px;border:1px solid var(--border);border-radius:20px;margin-bottom:16px}
+.content-card h2{margin-top:0}
+.content-card p,.content-card li{color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:25px 20px;text-align:center;color:var(--muted);font-size:.85rem}
+footer a{margin:0 8px}
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr}
+  .result-panel{position:static;grid-row:1}
+  .panel{padding:20px}
+  .hero{margin-top:12px}
+}
+@media(max-width:420px){
+  .field-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  header{padding:17px}
+  .container{padding:0 13px 35px}
+  .hero{padding:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">TMI <span>STUDIOS</span></div>
+  <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle light and dark mode">☀️ Light mode</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">Love, family and planning</div>
+    <h1>Your Lobola<br>Budget Planner</h1>
+    <p>Bring the numbers together, plan with intention and see what your estimated lobola budget looks like. Your family, your agreement, your figures.</p>
+  </section>
+
+  <div class="container">
+    <div class="layout">
+      <section class="panel" aria-labelledby="inputsTitle">
+        <h2 id="inputsTitle">Build your estimate</h2>
+        <p class="intro">Enter your family's agreed figures or your best estimates. Change any field whenever your plans change.</p>
+
+        <h3 class="section-title">Cattle estimate</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="cows">Number of cattle</label>
+            <input id="cows" type="number" min="0" max="1000" step="1" value="10" inputmode="numeric">
+            <span class="hint">Enter the agreed or estimated number.</span>
+          </div>
+          <div class="field">
+            <label for="cowPrice">Estimated price per animal (R)</label>
+            <input id="cowPrice" type="number" min="0" step="100" value="8000" inputmode="decimal">
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 class="section-title">Other costs</h3>
+        <div class="field-grid">
+          <div class="field">
+            <label for="gifts">Gifts and customary items (R)</label>
+            <input id="gifts" type="number" min="0" step="100" value="3000" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="travel">Travel and transport (R)</label>
+            <input id="travel" type="number" min="0" step="100" value="1500" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="celebration">Food and celebration (R)</label>
+            <input id="celebration" type="number" min="0" step="100" value="5000" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="other">Other expenses (R)</label>
+            <input id="other" type="number" min="0" step="100" value="0" inputmode="decimal">
+          </div>
+        </div>
+
+        <hr class="divider">
+        <h3 class="section-title">Payments so far</h3>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="paid">Amount already paid or contributed (R)</label>
+            <input id="paid" type="number" min="0" step="100" value="0" inputmode="decimal">
+            <span class="hint">This is deducted from your estimated total to calculate the remaining amount.</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel result-panel" aria-live="polite" aria-labelledby="resultTitle">
+        <div class="eyebrow">Your estimate</div>
+        <h2 id="resultTitle">The big picture</h2>
+        <div class="result-label">Estimated total budget</div>
+        <div class="total" id="grandTotal">R95,000</div>
+
+        <div class="summary-row"><span>Cattle</span><strong id="cattleTotal">R80,000</strong></div>
+        <div class="summary-row"><span>Gifts and customary items</span><strong id="giftsTotal">R3,000</strong></div>
+        <div class="summary-row"><span>Travel and transport</span><strong id="travelTotal">R1,500</strong></div>
+        <div class="summary-row"><span>Food and celebration</span><strong id="celebrationTotal">R5,000</strong></div>
+        <div class="summary-row"><span>Other expenses</span><strong id="otherTotal">R0</strong></div>
+        <div class="summary-row"><span>Already paid</span><strong id="paidTotal">−R0</strong></div>
+
+        <div class="balance">
+          <p id="balanceLabel">Estimated balance remaining</p>
+          <div class="amount" id="balanceTotal">R95,000</div>
+          <p id="balanceNote">Based on the figures you entered.</p>
+        </div>
+
+        <div class="actions">
+          <button class="primary-btn" id="copyBtn" type="button">Copy estimate</button>
+          <button class="secondary-btn" id="resetBtn" type="button">Reset figures</button>
+        </div>
+        <p class="note" id="copyStatus" role="status">Your calculations update as you type. No information is uploaded.</p>
+      </aside>
+    </div>
+  </div>
+
+  <section class="content">
+    <article class="content-card">
+      <h2>How to use this lobola calculator</h2>
+      <ol>
+        <li>Enter the number of cattle and your estimated cost per animal, if applicable to your agreement.</li>
+        <li>Add any gifts, customary items, travel, celebration and other expenses you want to budget for.</li>
+        <li>Enter contributions or payments already made to see the estimated balance.</li>
+        <li>Copy your estimate to share or use as a starting point for a family budget discussion.</li>
+      </ol>
+    </article>
+    <article class="content-card">
+      <h2>How much does lobola cost in South Africa?</h2>
+      <p>There is no single price that applies to every family. Lobola discussions and agreements can vary by family, community, tradition and individual circumstances. Cattle may be part of an agreement, or families may agree on other arrangements. This calculator does not set a customary price; it simply adds the figures you choose to enter.</p>
+    </article>
+    <article class="content-card">
+      <h2>Frequently asked questions</h2>
+      <h3>Is this an official lobola price list?</h3>
+      <p>No. It is a budgeting tool, not an official tariff or a statement of what any family should request or pay.</p>
+      <h3>Can I calculate lobola without cattle?</h3>
+      <p>Yes. Set the number of cattle to zero and enter any other costs relevant to your own agreement.</p>
+      <h3>Does the calculator save my information?</h3>
+      <p>Your figures are calculated in your browser and are not sent to a server by this page. The light or dark appearance preference is saved on your device when browser storage is available.</p>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div>Made with care by TMI Studios</div>
+  <p>Plan thoughtfully. Discuss respectfully. Every family's agreement is different.</p>
+  <a href="../">Home</a>
+  <a href="../apps/">Apps &amp; Tools</a>
+  <a href="../privacy.html">Privacy</a>
+  <a href="../terms.html">Terms</a>
+</footer>
+
+<script>
+(function(){
+  const ids = ["cows","cowPrice","gifts","travel","celebration","other","paid"];
+  const defaults = {
+    cows:10, cowPrice:8000, gifts:3000, travel:1500,
+    celebration:5000, other:0, paid:0
+  };
+  const money = value => new Intl.NumberFormat("en-ZA",{
+    style:"currency",currency:"ZAR",maximumFractionDigits:2,
+    minimumFractionDigits:0
+  }).format(value);
+  const get = id => {
+    const input = document.getElementById(id);
+    const value = Number(input.value);
+    if (!Number.isFinite(value) || value < 0) return 0;
+    return Math.min(value, 1000000000);
+  };
+  const setText = (id,value) => {
+    document.getElementById(id).textContent = value;
+  };
+
+  function calculate(){
+    const cows = Math.floor(get("cows"));
+    const cattle = cows * get("cowPrice");
+    const gifts = get("gifts");
+    const travel = get("travel");
+    const celebration = get("celebration");
+    const other = get("other");
+    const paid = get("paid");
+    const total = cattle + gifts + travel + celebration + other;
+    const balance = total - paid;
+
+    setText("cattleTotal",money(cattle));
+    setText("giftsTotal",money(gifts));
+    setText("travelTotal",money(travel));
+    setText("celebrationTotal",money(celebration));
+    setText("otherTotal",money(other));
+    setText("paidTotal","−" + money(paid));
+    setText("grandTotal",money(total));
+    setText("balanceTotal",money(Math.abs(balance)));
+    setText("balanceLabel",balance < 0 ? "Amount paid above this estimate" : "Estimated balance remaining");
+    setText("balanceNote",balance < 0
+      ? "The amount entered as paid exceeds the estimated total."
+      : balance === 0
+        ? "Your estimated total has been covered."
+        : "Based on the figures you entered.");
+    return {cows,cattle,gifts,travel,celebration,other,paid,total,balance};
+  }
+
+  ids.forEach(id => {
+    document.getElementById(id).addEventListener("input",calculate);
+  });
+
+  document.getElementById("resetBtn").addEventListener("click",function(){
+    ids.forEach(id => document.getElementById(id).value = defaults[id]);
+    calculate();
+    setText("copyStatus","Figures reset to the example amounts.");
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",async function(){
+    const r = calculate();
+    const report = [
+      "LOBOLA BUDGET ESTIMATE",
+      "Cattle: " + r.cows + " × " + money(get("cowPrice")) + " = " + money(r.cattle),
+      "Gifts and customary items: " + money(r.gifts),
+      "Travel and transport: " + money(r.travel),
+      "Food and celebration: " + money(r.celebration),
+      "Other expenses: " + money(r.other),
+      "Estimated total: " + money(r.total),
+      "Already paid: " + money(r.paid),
+      (r.balance < 0 ? "Paid above estimate: " : "Estimated balance remaining: ") + money(Math.abs(r.balance)),
+      "",
+      "Personal estimate only. Family agreements and customs vary."
+    ].join("\n");
+    try{
+      await navigator.clipboard.writeText(report);
+      setText("copyStatus","Estimate copied. You can now paste it into a message or note.");
+    }catch(error){
+      const area = document.createElement("textarea");
+      area.value = report;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const success = document.execCommand("copy");
+      area.remove();
+      setText("copyStatus",success ? "Estimate copied." : "Copy is unavailable here. You can select and copy the figures manually.");
+    }
+  });
+
+  const themeToggle = document.getElementById("themeToggle");
+  function applyTheme(theme){
+    document.body.classList.toggle("light",theme === "light");
+    themeToggle.textContent = theme === "light" ? "🌙 Dark mode" : "☀️ Light mode";
+    document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#fff8f4" : "#35152f";
+  }
+  let savedTheme = "dark";
+  try { savedTheme = localStorage.getItem("tmiLobolaTheme") || "dark"; } catch(e){}
+  applyTheme(savedTheme);
+  themeToggle.addEventListener("click",function(){
+    const next = document.body.classList.contains("light") ? "dark" : "light";
+    applyTheme(next);
+    try { localStorage.setItem("tmiLobolaTheme",next); } catch(e){}
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
