@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Child Maintenance Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Estimate how child-related monthly expenses could be shared between parents using income and expense details. Free South African child maintenance calculator.">
+  <meta name="keywords" content="child maintenance calculator South Africa, child support calculator, child expenses, parenting costs, maintenance estimate">
+  <meta name="author" content="TMI Studios">
+  <meta name="theme-color" content="#f8f4ec">
+  <meta property="og:title" content="Child Maintenance Calculator | TMI Studios">
+  <meta property="og:description" content="Build a clearer picture of monthly child expenses and a possible income-based contribution.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/ChildMaintenanceCalculator/">
+  <style>
+    :root {
+      --paper: #f8f4ec;
+      --card: #fffdf8;
+      --ink: #28231f;
+      --muted: #756d64;
+      --line: #e5ddd0;
+      --wine: #873f49;
+      --wine-dark: #642b35;
+      --rose: #f1dadd;
+      --sage: #dce6d8;
+      --gold: #e5bd72;
+      --shadow: 0 14px 38px rgba(59, 39, 29, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 1100px;
+      margin: auto;
+      padding: 22px 24px;
+    }
+
+    .brand {
+      font-weight: 850;
+      letter-spacing: -.04em;
+      font-size: 1.12rem;
+    }
+
+    .brand span { color: var(--wine); }
+
+    .top-note {
+      font-size: .76rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 750;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 25px 24px 70px;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 12px 0 35px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--wine);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: .72rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 25px;
+      height: 2px;
+      background: var(--wine);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 6.6vw, 5rem);
+      line-height: .99;
+      letter-spacing: -.055em;
+      font-weight: 500;
+      max-width: 730px;
+      margin: 18px 0;
+    }
+
+    h1 em { color: var(--wine); font-weight: 400; }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 630px;
+      font-size: 1.02rem;
+      margin: 0;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: 235px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .steps {
+      position: sticky;
+      top: 18px;
+      padding: 21px 17px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .steps-label {
+      margin: 0 0 17px;
+      color: var(--muted);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+    }
+
+    .step-link {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 9px;
+      border-radius: 12px;
+      color: var(--muted);
+      transition: background .2s;
+    }
+
+    .step-link.active { background: var(--rose); color: var(--wine-dark); }
+    .step-link.done .step-number { background: var(--wine); color: white; }
+
+    .step-number {
+      width: 29px;
+      height: 29px;
+      flex: 0 0 29px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--card);
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .step-link strong { display: block; font-size: .87rem; }
+    .step-link small { display: block; font-size: .72rem; margin-top: 2px; }
+
+    .side-help {
+      margin-top: 22px;
+      padding: 15px;
+      background: #f4eee3;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .side-help strong { display: block; color: var(--ink); margin-bottom: 5px; }
+
+    .workspace {
+      min-width: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .progress-track { height: 5px; background: #eee6db; }
+    .progress-fill {
+      width: 25%;
+      height: 100%;
+      background: var(--wine);
+      transition: width .25s ease;
+    }
+
+    .panel { padding: clamp(22px, 4vw, 43px); }
+    .panel[hidden] { display: none; }
+
+    .step-count {
+      color: var(--wine);
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 2.65rem);
+      letter-spacing: -.04em;
+      line-height: 1.08;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+
+    .panel-desc { color: var(--muted); margin: 0 0 27px; max-width: 620px; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .84rem;
+      font-weight: 750;
+    }
+
+    .hint { color: var(--muted); font-size: .76rem; margin: -2px 0 8px; }
+
+    .input-wrap { position: relative; }
+    .currency {
+      position: absolute;
+      top: 50%;
+      left: 13px;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: .88rem;
+      pointer-events: none;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      border: 1px solid #dcd3c6;
+      border-radius: 10px;
+      background: #fffefa;
+      color: var(--ink);
+      outline: none;
+    }
+
+    input.money { padding-left: 43px; }
+    input:focus, select:focus { border-color: var(--wine); box-shadow: 0 0 0 3px rgba(135,63,73,.1); }
+
+    .section-label {
+      grid-column: 1 / -1;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+      margin-top: 5px;
+      font-size: .74rem;
+      color: var(--wine);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .notice {
+      margin-top: 23px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--gold);
+      background: #faf3e3;
+      color: #655744;
+      font-size: .82rem;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      margin-top: 32px;
+      padding-top: 23px;
+    }
+
+    .btn {
+      min-height: 47px;
+      padding: 12px 19px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: .88rem;
+    }
+
+    .btn-primary { background: var(--wine); color: white; }
+    .btn-primary:hover { background: var(--wine-dark); }
+    .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .btn-secondary:hover { background: #f4eee5; }
+    .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    .nav-hint { font-size: .76rem; color: var(--muted); }
+
+    .expense-list { display: grid; gap: 14px; }
+    .expense-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 165px;
+      align-items: center;
+      gap: 18px;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee7dc;
+    }
+
+    .expense-row:last-child { border-bottom: 0; }
+    .expense-row label { margin-bottom: 3px; }
+    .expense-row .hint { margin: 0; }
+
+    .expense-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px;
+      background: var(--sage);
+      border-radius: 12px;
+      margin-top: 22px;
+    }
+
+    .expense-total span { font-size: .84rem; font-weight: 750; }
+    .expense-total strong { font-size: 1.4rem; letter-spacing: -.04em; }
+
+    .result-panel { padding: clamp(22px, 4vw, 43px); }
+    .result-banner {
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--wine);
+      color: #fff9f2;
+    }
+
+    .result-banner .eyebrow { color: #f4d7b6; }
+    .result-banner .eyebrow::before { background: #f4d7b6; }
+    .result-banner h2 { max-width: 570px; }
+    .result-label { color: #f0dfe0; font-size: .83rem; margin-top: 23px; }
+    .result-number {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      letter-spacing: -.055em;
+      line-height: 1.12;
+      overflow-wrap: anywhere;
+    }
+    .result-sub { color: #f0dfe0; font-size: .8rem; margin-top: 5px; }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin: 18px 0;
+    }
+
+    .result-card {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 18px;
+      min-width: 0;
+    }
+
+    .result-card small { display: block; color: var(--muted); font-size: .76rem; }
+    .result-card strong { display: block; margin-top: 7px; font-size: 1.35rem; letter-spacing: -.04em; overflow-wrap: anywhere; }
+    .result-card p { color: var(--muted); font-size: .76rem; margin: 5px 0 0; }
+
+    .share-title { margin: 28px 0 12px; font-weight: 850; }
+    .share-bar {
+      height: 12px;
+      border-radius: 100px;
+      background: #e9e0d5;
+      overflow: hidden;
+      display: flex;
+    }
+    .share-a { height: 100%; width: 50%; background: var(--wine); }
+    .share-b { height: 100%; width: 50%; background: #c8d6c1; }
+    .share-legend { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: .78rem; margin-top: 10px; color: var(--muted); }
+    .legend-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; background: var(--wine); }
+    .legend-dot.b { background: #a8bd9d; }
+
+    .result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .fine-print { margin-top: 24px; font-size: .78rem; color: var(--muted); }
+
+    .faq { max-width: 780px; margin: 60px auto 0; }
+    .faq h2 { margin-bottom: 22px; }
+    details { border-top: 1px solid var(--line); padding: 17px 0; }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 800; }
+    details p { color: var(--muted); font-size: .9rem; margin-bottom: 0; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 23px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    footer a { color: var(--wine); text-decoration: none; }
+
+    @media (max-width: 760px) {
+      .topbar { padding: 18px 18px; }
+      main { padding: 18px 16px 50px; }
+      .calculator { grid-template-columns: 1fr; gap: 15px; }
+      .steps { position: static; padding: 12px; }
+      .steps-label, .side-help { display: none; }
+      .step-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+      .step-link { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 9px 3px; }
+      .step-link strong { font-size: .68rem; line-height: 1.2; }
+      .step-link small { display: none; }
+      .step-number { width: 26px; height: 26px; flex-basis: 26px; }
+      .fields { gap: 15px; }
+      .expense-row { grid-template-columns: minmax(0, 1fr) 130px; gap: 12px; }
+      .nav-hint { display: none; }
+      .result-banner { padding: 22px; }
+      .faq { margin-top: 44px; }
+    }
+
+    @media (max-width: 420px) {
+      .top-note { font-size: .62rem; }
+      .fields { grid-template-columns: 1fr; }
+      .field.full, .section-label { grid-column: auto; }
+      .expense-row { grid-template-columns: minmax(0, 1fr) 112px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .expense-total { align-items: flex-start; flex-direction: column; }
+      .btn { padding: 11px 14px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .topbar, .intro, .steps, .progress-track, .nav-row, .faq, footer, .result-actions { display: none !important; }
+      main { padding: 0; }
+      .calculator { display: block; }
+      .workspace { border: 0; box-shadow: none; }
+      .panel { display: none !important; }
+      #results { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">TMI <span>Studios.</span></div>
+    <div class="top-note">Everyday tools, made clearer</div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="eyebrow">Family finances · South Africa</div>
+      <h1>A clearer picture of <em>child maintenance.</em></h1>
+      <p>Start with the real costs of raising a child, then explore an illustrative way those costs could be shared based on each parent's income.</p>
+    </section>
+
+    <section class="calculator" aria-label="Child maintenance estimate calculator">
+      <aside class="steps">
+        <p class="steps-label">Your calculation</p>
+        <div class="step-list">
+          <div class="step-link active" data-step-link="0">
+            <span class="step-number">1</span>
+            <span><strong>Parents</strong><small>Income details</small></span>
+          </div>
+          <div class="step-link" data-step-link="1">
+            <span class="step-number">2</span>
+            <span><strong>Child's costs</strong><small>Monthly expenses</small></span>
+          </div>
+          <div class="step-link" data-step-link="2">
+            <span class="step-number">3</span>
+            <span><strong>Contributions</strong><small>What is paid now</small></span>
+          </div>
+          <div class="step-link" data-step-link="3">
+            <span class="step-number">4</span>
+            <span><strong>Your estimate</strong><small>Review the picture</small></span>
+          </div>
+        </div>
+        <div class="side-help">
+          <strong>Keep it realistic.</strong>
+          Use monthly take-home income and a reasonable share of household costs for the child. You can change the numbers at any time.
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+        <form id="maintenanceForm">
+          <section class="panel" data-panel="0">
+            <div class="step-count">Step 01 / 04</div>
+            <h2>Let's start with the parents.</h2>
+            <p class="panel-desc">Enter the monthly take-home income for each parent. If a parent has irregular income, use a reasonable monthly average.</p>
+
+            <div class="fields">
+              <div class="section-label">Parent 1</div>
+              <div class="field">
+                <label for="parent1Name">Name or label</label>
+                <input id="parent1Name" type="text" maxlength="40" value="Parent 1" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="income1">Monthly take-home income</label>
+                <div class="input-wrap"><span class="currency">R</span><input class="money" id="income1" type="number" min="0" max="100000000" step="0.01" placeholder="e.g. 18000" required></div>
+              </div>
+
+              <div class="section-label">Parent 2</div>
+              <div class="field">
+                <label for="parent2Name">Name or label</label>
+                <input id="parent2Name" type="text" maxlength="40" value="Parent 2" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="income2">Monthly take-home income</label>
+                <div class="input-wrap"><span class="currency">R</span><input class="money" id="income2" type="number" min="0" max="100000000" step="0.01" placeholder="e.g. 24000" required></div>
+              </div>
+
+              <div class="field full">
+                <label for="childrenCount">Number of children covered by these expenses</label>
+                <select id="childrenCount">
+                  <option value="1">1 child</option>
+                  <option value="2">2 children</option>
+                  <option value="3">3 children</option>
+                  <option value="4">4 children</option>
+                  <option value="5">5 or more children</option>
+                </select>
+                <p class="hint">Enter combined expenses for the children you select in the next step.</p>
+              </div>
+            </div>
+
+            <div class="notice">This calculator does not decide who should pay what. Income is one factor among several that may be considered when working out a fair arrangement.</div>
+
+            <div class="nav-row">
+              <span class="nav-hint">Your entries stay in this page.</span>
+              <button class="btn btn-primary" type="button" data-next>Next: child costs →</button>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="1" hidden>
+            <div class="step-count">Step 02 / 04</div>
+            <h2>What does your child need each month?</h2>
+            <p class="panel-desc">Estimate the child's reasonable monthly costs. For shared household expenses, include only the portion you think fairly relates to the child or children.</p>
+
+            <div class="expense-list">
+              <div class="expense-row">
+                <div><label for="school">School and education</label><p class="hint">Fees, stationery, uniforms, school activities</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="school" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="food">Food and household essentials</label><p class="hint">Child's share of groceries and toiletries</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="food" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="housing">Housing and utilities</label><p class="hint">A reasonable share of rent, water and electricity</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="housing" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="health">Healthcare</label><p class="hint">Medical aid share, medicine, doctor visits</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="health" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="transport">Transport</label><p class="hint">School transport and child-related travel</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="transport" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="clothing">Clothing and personal care</label><p class="hint">Average the cost across the year</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="clothing" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="care">Childcare and activities</label><p class="hint">Aftercare, sports, child-related activities</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="care" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="expense-row">
+                <div><label for="other">Other child-related expenses</label><p class="hint">Any reasonable costs not listed above</p></div>
+                <div class="input-wrap"><span class="currency">R</span><input class="money expense" id="other" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+            </div>
+
+            <div class="expense-total">
+              <span>Estimated total monthly child expenses</span>
+              <strong id="expenseTotal">R 0.00</strong>
+            </div>
+
+            <div class="notice">For costs that happen once or twice a year, such as uniforms, divide the expected yearly amount by 12 to estimate a monthly average.</div>
+
+            <div class="nav-row">
+              <button class="btn btn-secondary" type="button" data-back>← Back</button>
+              <button class="btn btn-primary" type="button" data-next>Next: current contributions →</button>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="2" hidden>
+            <div class="step-count">Step 03 / 04</div>
+            <h2>What is already being contributed?</h2>
+            <p class="panel-desc">Include regular money paid towards the child's needs. This helps show the difference between an illustrative share and what each parent currently contributes.</p>
+
+            <div class="fields">
+              <div class="field full">
+                <label for="paid1">Monthly contribution already made by Parent 1</label>
+                <p class="hint">Include regular payments towards the expenses entered in the previous step.</p>
+                <div class="input-wrap"><span class="currency">R</span><input class="money" id="paid1" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="field full">
+                <label for="paid2">Monthly contribution already made by Parent 2</label>
+                <p class="hint">Include regular payments towards the same expenses, not unrelated household costs.</p>
+                <div class="input-wrap"><span class="currency">R</span><input class="money" id="paid2" type="number" min="0" max="100000000" step="0.01" value="0"></div>
+              </div>
+              <div class="field full">
+                <label for="careArrangement">Current care arrangement (optional)</label>
+                <select id="careArrangement">
+                  <option value="Not specified">Prefer not to specify</option>
+                  <option value="Mostly with Parent 1">Child mostly lives with Parent 1</option>
+                  <option value="Mostly with Parent 2">Child mostly lives with Parent 2</option>
+                  <option value="Shared care">Shared care arrangement</option>
+                  <option value="Other arrangement">Another arrangement</option>
+                </select>
+                <p class="hint">Care arrangements can affect real-world costs, but this selection does not change the estimate.</p>
+              </div>
+            </div>
+
+            <div class="notice">If a parent pays school fees, medical costs or other bills directly, consider how those payments fit into the expense list and existing contributions. Avoid counting the same cost twice.</div>
+
+            <div class="nav-row">
+              <button class="btn btn-secondary" type="button" data-back>← Back</button>
+              <button class="btn btn-primary" type="button" id="calculateButton">Show my estimate →</button>
+            </div>
+          </section>
+        </form>
+
+        <section class="result-panel" id="results" hidden aria-live="polite">
+          <div class="step-count">Step 04 / 04 · Your estimate</div>
+          <h2>Here is the monthly picture.</h2>
+          <p class="panel-desc">Use this as a starting point for a calm, evidence-based conversation about the child's needs.</p>
+
+          <div class="result-banner">
+            <div class="eyebrow">Illustrative income-based share</div>
+            <h2 id="resultHeading">A starting point for discussion.</h2>
+            <div class="result-label" id="suggestedLabel">Parent 1's estimated share of monthly expenses</div>
+            <div class="result-number" id="suggestedAmount">R 0.00</div>
+            <div class="result-sub" id="resultSub">Before considering the full circumstances.</div>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-card">
+              <small>Total monthly child expenses</small>
+              <strong id="resultExpenses">R 0.00</strong>
+              <p>Based on the expenses you entered.</p>
+            </div>
+            <div class="result-card">
+              <small>Combined monthly take-home income</small>
+              <strong id="resultIncome">R 0.00</strong>
+              <p>Income entered for both parents.</p>
+            </div>
+            <div class="result-card">
+              <small>Parent 1's illustrative share</small>
+              <strong id="resultShare1">R 0.00</strong>
+              <p id="resultPercent1">0% of combined income.</p>
+            </div>
+            <div class="result-card">
+              <small>Parent 2's illustrative share</small>
+              <strong id="resultShare2">R 0.00</strong>
+              <p id="resultPercent2">0% of combined income.</p>
+            </div>
+          </div>
+
+          <div class="share-title">How the illustrative split looks</div>
+          <div class="share-bar" role="img" aria-label="Illustrative split based on entered incomes">
+            <div class="share-a" id="shareBar1"></div>
+            <div class="share-b" id="shareBar2"></div>
+          </div>
+          <div class="share-legend">
+            <span><i class="legend-dot"></i><span id="legend1">Parent 1</span></span>
+            <span><i class="legend-dot b"></i><span id="legend2">Parent 2</span></span>
+          </div>
+
+          <div class="result-grid" style="margin-top:20px">
+            <div class="result-card">
+              <small>Parent 1's existing contribution</small>
+              <strong id="resultPaid1">R 0.00</strong>
+              <p id="difference1">Compared with the illustrative share.</p>
+            </div>
+            <div class="result-card">
+              <small>Parent 2's existing contribution</small>
+              <strong id="resultPaid2">R 0.00</strong>
+              <p id="difference2">Compared with the illustrative share.</p>
+            </div>
+          </div>
+
+          <div class="notice" id="resultNotice">This is an estimate only, not a prescribed maintenance amount.</div>
+
+          <div class="result-actions">
+            <button class="btn btn-primary" id="copyButton" type="button">Copy summary</button>
+            <button class="btn btn-secondary" id="printButton" type="button">Print / save PDF</button>
+            <button class="btn btn-secondary" id="editButton" type="button">Edit answers</button>
+            <button class="btn btn-secondary" id="restartButton" type="button">Start again</button>
+          </div>
+
+          <p class="fine-print">Important: This calculator provides a simple illustration using the figures entered. It is not legal, financial or professional advice and does not determine a legally appropriate maintenance amount. A fair arrangement can depend on the child's needs, each parent's financial circumstances, care arrangements and other relevant factors. For guidance on your circumstances, contact the South African Maintenance Court or a qualified legal professional.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="eyebrow">Good to know</div>
+      <h2>Questions, answered.</h2>
+
+      <details>
+        <summary>Is child maintenance a fixed percentage of a parent's salary?</summary>
+        <p>No single percentage from this calculator should be treated as a legal rule. A real maintenance decision can consider the child's reasonable needs and both parents' financial circumstances, among other relevant factors. This tool only demonstrates a simple income-proportional starting point.</p>
+      </details>
+      <details>
+        <summary>What if one parent earns much more than the other?</summary>
+        <p>This illustration allocates a larger share of the listed expenses to the parent with the larger share of combined take-home income. That is only a simplified example, not a determination of what a court or the parents should agree to.</p>
+      </details>
+      <details>
+        <summary>Do school fees or medical aid count?</summary>
+        <p>They can be relevant child-related expenses. Enter reasonable monthly amounts, and remember to avoid double-counting a bill if it is already included in another category or in the contribution figures.</p>
+      </details>
+      <details>
+        <summary>Can this calculator change an existing court order?</summary>
+        <p>No. The result does not change a court order or an existing agreement. If circumstances have changed, seek appropriate guidance about the process for reviewing the arrangement.</p>
+      </details>
+      <details>
+        <summary>Is my information saved or sent anywhere?</summary>
+        <p>This page performs the calculation in your browser. It does not send your entries to a server or store them for later use. Avoid using a shared device if you do not want others to see information you have entered.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div>Made for everyday life by <a href="https://tmi-studios.github.io/tmistudio1/">TMI Studios</a>.</div>
+    <div style="margin-top:5px">Estimates for information only · Not legal advice</div>
+  </footer>
+
+  <script>
+    (() => {
+      const panels = Array.from(document.querySelectorAll("[data-panel]"));
+      const stepLinks = Array.from(document.querySelectorAll("[data-step-link]"));
+      const progressFill = document.getElementById("progressFill");
+      const form = document.getElementById("maintenanceForm");
+      const results = document.getElementById("results");
+      let currentStep = 0;
+
+      const money = value => new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(Number.isFinite(value) ? value : 0);
+
+      const valueOf = id => {
+        const field = document.getElementById(id);
+        const value = field ? Number(field.value) : 0;
+        return Number.isFinite(value) && value > 0 ? value : 0;
+      };
+
+      const safeName = (id, fallback) => {
+        const value = document.getElementById(id).value.trim();
+        return value || fallback;
+      };
+
+      const getExpenseTotal = () =>
+        Array.from(document.querySelectorAll(".expense"))
+          .reduce((sum, input) => sum + Math.max(0, Number(input.value) || 0), 0);
+
+      const updateExpenseTotal = () => {
+        document.getElementById("expenseTotal").textContent = money(getExpenseTotal());
+      };
+
+      function showStep(step) {
+        currentStep = Math.max(0, Math.min(3, step));
+        panels.forEach((panel, index) => {
+          panel.hidden = index !== currentStep;
+        });
+        results.hidden = true;
+        progressFill.style.width = ((currentStep + 1) * 25) + "%";
+
+        stepLinks.forEach((link, index) => {
+          link.classList.toggle("active", index === currentStep);
+          link.classList.toggle("done", index < currentStep);
+          const number = link.querySelector(".step-number");
+          number.textContent = index < currentStep ? "✓" : String(index + 1);
+        });
+
+        document.querySelector(".workspace").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function validateStep(step) {
+        if (step !== 0) return true;
+
+        const income1 = document.getElementById("income1");
+        const income2 = document.getElementById("income2");
+        [income1, income2].forEach(input => input.setCustomValidity(""));
+
+        if (income1.value.trim() === "" || income2.value.trim() === "") {
+          const missing = income1.value.trim() === "" ? income1 : income2;
+          missing.setCustomValidity("Please enter both parents' monthly take-home income. Enter 0 if there is no income.");
+          missing.reportValidity();
+          missing.setCustomValidity("");
+          return false;
+        }
+
+        if (Number(income1.value) < 0 || Number(income2.value) < 0) {
+          alert("Income cannot be negative. Enter 0 if there is no income.");
+          return false;
+        }
+        return true;
+      }
+
+      document.querySelectorAll("[data-next]").forEach(button => {
+        button.addEventListener("click", () => {
+          if (validateStep(currentStep)) showStep(currentStep + 1);
+        });
+      });
+
+      document.querySelectorAll("[data-back]").forEach(button => {
+        button.addEventListener("click", () => showStep(currentStep - 1));
+      });
+
+      document.querySelectorAll(".expense").forEach(input => {
+        input.addEventListener("input", updateExpenseTotal);
+      });
+
+      function calculate() {
+        const income1 = valueOf("income1");
+        const income2 = valueOf("income2");
+        const totalIncome = income1 + income2;
+        const totalExpenses = getExpenseTotal();
+        const share1 = totalIncome > 0 ? income1 / totalIncome : 0.5;
+        const share2 = totalIncome > 0 ? income2 / totalIncome : 0.5;
+        const amount1 = totalExpenses * share1;
+        const amount2 = totalExpenses * share2;
+        const paid1 = valueOf("paid1");
+        const paid2 = valueOf("paid2");
+        const name1 = safeName("parent1Name", "Parent 1");
+        const name2 = safeName("parent2Name", "Parent 2");
+        const children = document.getElementById("childrenCount").value;
+        const care = document.getElementById("careArrangement").value;
+
+        document.getElementById("suggestedLabel").textContent =
+          totalIncome > 0
+            ? name1 + "'s illustrative share of monthly expenses"
+            : "Illustrative share when income details are unavailable";
+
+        document.getElementById("suggestedAmount").textContent = money(amount1);
+        document.getElementById("resultHeading").textContent =
+          totalIncome > 0
+            ? "An income-based starting point."
+            : "Income details need context.";
+
+        document.getElementById("resultSub").textContent =
+          totalIncome > 0
+            ? "Not a legal maintenance amount or a recommendation."
+            : "Both income figures are zero, so the estimate uses an even split for illustration only.";
+
+        document.getElementById("resultExpenses").textContent = money(totalExpenses);
+        document.getElementById("resultIncome").textContent = money(totalIncome);
+        document.getElementById("resultShare1").textContent = money(amount1);
+        document.getElementById("resultShare2").textContent = money(amount2);
+        document.getElementById("resultPercent1").textContent = (share1 * 100).toFixed(1) + "% of combined income.";
+        document.getElementById("resultPercent2").textContent = (share2 * 100).toFixed(1) + "% of combined income.";
+        document.getElementById("resultPaid1").textContent = money(paid1);
+        document.getElementById("resultPaid2").textContent = money(paid2);
+        document.getElementById("difference1").textContent =
+          paid1 < amount1 ? money(amount1 - paid1) + " below the illustrative share." :
+          paid1 > amount1 ? money(paid1 - amount1) + " above the illustrative share." :
+          "Matches the illustrative share.";
+        document.getElementById("difference2").textContent =
+          paid2 < amount2 ? money(amount2 - paid2) + " below the illustrative share." :
+          paid2 > amount2 ? money(paid2 - amount2) + " above the illustrative share." :
+          "Matches the illustrative share.";
+
+        document.getElementById("legend1").textContent = name1 + " · " + (share1 * 100).toFixed(1) + "%";
+        document.getElementById("legend2").textContent = name2 + " · " + (share2 * 100).toFixed(1) + "%";
+        document.getElementById("shareBar1").style.width = (share1 * 100) + "%";
+        document.getElementById("shareBar2").style.width = (share2 * 100) + "%";
+
+        const notice = document.getElementById("resultNotice");
+        if (totalExpenses === 0) {
+          notice.textContent = "No child expenses were entered. Go back and add reasonable monthly costs for a more useful illustration.";
+        } else if (totalIncome === 0) {
+          notice.textContent = "Neither parent has a positive income figure entered. The equal split shown is only a mathematical placeholder and may not reflect either parent's circumstances.";
+        } else {
+          notice.textContent = "The income-based shares above are a simplified illustration. Existing contributions, care arrangements, special needs and each parent's full circumstances may change what is fair or appropriate.";
+        }
+
+        const summary =
+          "CHILD MAINTENANCE ESTIMATE — TMI STUDIOS\n\n" +
+          "Children covered: " + children + (children === "5" ? " or more" : "") + "\n" +
+          "Care arrangement: " + care + "\n" +
+          "Monthly child expenses: " + money(totalExpenses) + "\n" +
+          "Combined monthly take-home income: " + money(totalIncome) + "\n\n" +
+          name1 + " income: " + money(income1) + "\n" +
+          name1 + " illustrative share: " + money(amount1) + " (" + (share1 * 100).toFixed(1) + "%)\n" +
+          name1 + " current contribution: " + money(paid1) + "\n\n" +
+          name2 + " income: " + money(income2) + "\n" +
+          name2 + " illustrative share: " + money(amount2) + " (" + (share2 * 100).toFixed(1) + "%)\n" +
+          name2 + " current contribution: " + money(paid2) + "\n\n" +
+          "IMPORTANT: This is a simplified estimate for information and discussion only, not legal advice or a prescribed maintenance amount. Seek appropriate guidance for your circumstances.";
+
+        results.dataset.summary = summary;
+        panels.forEach(panel => panel.hidden = true);
+        results.hidden = false;
+        progressFill.style.width = "100%";
+        stepLinks.forEach((link, index) => {
+          link.classList.toggle("active", index === 3);
+          link.classList.toggle("done", index < 3);
+          link.querySelector(".step-number").textContent = index < 3 ? "✓" : "4";
+        });
+        document.querySelector(".workspace").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      document.getElementById("calculateButton").addEventListener("click", () => {
+        if (validateStep(0)) calculate();
+      });
+
+      document.getElementById("editButton").addEventListener("click", () => showStep(0));
+
+      document.getElementById("restartButton").addEventListener("click", () => {
+        form.reset();
+        document.getElementById("parent1Name").value = "Parent 1";
+        document.getElementById("parent2Name").value = "Parent 2";
+        document.querySelectorAll(".expense").forEach(input => input.value = "0");
+        document.getElementById("paid1").value = "0";
+        document.getElementById("paid2").value = "0";
+        updateExpenseTotal();
+        showStep(0);
+      });
+
+      document.getElementById("copyButton").addEventListener("click", async () => {
+        const text = results.dataset.summary || "";
+        const button = document.getElementById("copyButton");
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const temporary = document.createElement("textarea");
+            temporary.value = text;
+            temporary.style.position = "fixed";
+            temporary.style.opacity = "0";
+            document.body.appendChild(temporary);
+            temporary.select();
+            const copied = document.execCommand("copy");
+            temporary.remove();
+            if (!copied) throw new Error("Copy unavailable");
+          }
+          button.textContent = "Summary copied ✓";
+          setTimeout(() => button.textContent = "Copy summary", 1800);
+        } catch (error) {
+          window.prompt("Copy your summary below:", text);
+        }
+      });
+
+      document.getElementById("printButton").addEventListener("click", () => window.print());
+
+      updateExpenseTotal();
+      showStep(0);
+    })();
+  </script>
+</body>
+</html>
