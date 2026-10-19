@@ -1,0 +1,1038 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tithe Calculator South Africa | Free Giving Planner | TMI Studios</title>
+  <meta name="description" content="Calculate your tithe, offerings and remaining income with this free South African tithe calculator. Choose your income frequency and giving percentage.">
+  <meta name="keywords" content="tithe calculator South Africa, tithe calculator, 10 percent tithe, offering calculator, church giving planner">
+  <meta name="author" content="TMI Studios">
+  <meta name="theme-color" content="#f5f0e7">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/TitheCalculator/">
+
+  <style>
+    :root {
+      --bg: #f5f0e7;
+      --paper: #fffdf8;
+      --ink: #242a21;
+      --muted: #70776a;
+      --line: #deded0;
+      --green: #345b43;
+      --green-dark: #244330;
+      --lime: #d8e7a7;
+      --gold: #d8b46b;
+      --soft: #e8eee0;
+      --shadow: 0 12px 36px rgba(39, 54, 35, .07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .top {
+      max-width: 1160px;
+      margin: auto;
+      padding: 23px 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: -.05em;
+    }
+
+    .logo span { color: var(--green); }
+
+    .top-label {
+      font-size: .72rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    main {
+      max-width: 1160px;
+      margin: auto;
+      padding: 25px 26px 65px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: end;
+      gap: 30px;
+      margin: 16px 0 36px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: .72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 13px 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.1rem, 7vw, 6.2rem);
+      line-height: .92;
+      letter-spacing: -.065em;
+      font-weight: 400;
+    }
+
+    h1 em {
+      display: block;
+      color: var(--green);
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      max-width: 550px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .verse-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--green);
+      color: #fffdf5;
+      padding: 25px;
+      border-radius: 4px 42px 4px 4px;
+      min-height: 185px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .verse-card::after {
+      content: "✳";
+      position: absolute;
+      right: 12px;
+      top: -35px;
+      font-size: 9rem;
+      color: rgba(255,255,255,.08);
+      line-height: 1;
+    }
+
+    .verse-card .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 3rem;
+      color: var(--lime);
+      line-height: .7;
+    }
+
+    .verse-card p {
+      position: relative;
+      z-index: 1;
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      line-height: 1.35;
+      margin: 12px 0 18px;
+    }
+
+    .verse-card small {
+      position: relative;
+      z-index: 1;
+      color: #d8e7d6;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .67rem;
+    }
+
+    .planner {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .settings {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: clamp(22px, 3.5vw, 36px);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding-bottom: 17px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 23px;
+    }
+
+    .section-head h2 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 1.8rem;
+      letter-spacing: -.04em;
+      margin: 0;
+    }
+
+    .step-tag {
+      background: var(--soft);
+      color: var(--green);
+      padding: 6px 10px;
+      border-radius: 100px;
+      white-space: nowrap;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .field { margin-bottom: 23px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 800;
+      font-size: .83rem;
+    }
+
+    .help {
+      font-size: .76rem;
+      color: var(--muted);
+      margin: -3px 0 9px;
+    }
+
+    .money-input {
+      position: relative;
+    }
+
+    .money-input span {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 49px;
+      padding: 12px 14px;
+      background: #fffefa;
+      border: 1px solid #d8d8ca;
+      border-radius: 8px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    input.with-currency { padding-left: 40px; }
+
+    input:focus, select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(52,91,67,.1);
+    }
+
+    .frequency {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .frequency button {
+      min-height: 43px;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      border-radius: 8px;
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .frequency button.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .percentage-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 11px 0;
+    }
+
+    .percent-btn {
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: #fffefa;
+      padding: 8px 14px;
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 850;
+    }
+
+    .percent-btn.active {
+      background: var(--lime);
+      border-color: #c7d694;
+      color: #31452b;
+    }
+
+    .range-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    input[type="range"] {
+      min-height: auto;
+      padding: 0;
+      accent-color: var(--green);
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .range-value {
+      min-width: 62px;
+      text-align: right;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--green);
+    }
+
+    .extra-line {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 12px;
+      align-items: center;
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+
+    .extra-line label { margin-bottom: 4px; }
+    .extra-line .help { margin: 0; }
+
+    .toggle-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 22px;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .toggle-line input {
+      width: 17px;
+      height: 17px;
+      min-height: 17px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+      accent-color: var(--green);
+    }
+
+    .results {
+      position: relative;
+      overflow: hidden;
+      background: var(--green);
+      color: #fffdf5;
+      padding: clamp(22px, 3.5vw, 36px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .results::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 50%;
+      right: -130px;
+      top: -100px;
+      box-shadow: 0 0 0 25px rgba(255,255,255,.025),
+                  0 0 0 50px rgba(255,255,255,.025);
+      pointer-events: none;
+    }
+
+    .results > * { position: relative; z-index: 1; }
+
+    .results .section-head {
+      border-color: rgba(255,255,255,.2);
+    }
+
+    .results .section-head h2 { color: #fffdf5; }
+    .results .step-tag { background: var(--lime); color: var(--green-dark); }
+
+    .big-label {
+      font-size: .76rem;
+      color: #d8e7d6;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .big-number {
+      margin: 5px 0 0;
+      font-family: Georgia, serif;
+      font-size: clamp(2.8rem, 6vw, 4.6rem);
+      letter-spacing: -.06em;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+
+    .period-line {
+      color: #d8e7d6;
+      font-size: .8rem;
+      margin-top: 9px;
+    }
+
+    .ring-area {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin: 28px 0;
+      padding: 22px 0;
+      border-top: 1px solid rgba(255,255,255,.2);
+      border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+
+    .ring {
+      width: 116px;
+      height: 116px;
+      flex: 0 0 116px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: conic-gradient(var(--lime) 0deg 36deg, rgba(255,255,255,.16) 36deg 360deg);
+      position: relative;
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .ring-inner {
+      position: relative;
+      text-align: center;
+    }
+
+    .ring-inner strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .ring-inner small {
+      display: block;
+      font-size: .62rem;
+      color: #d8e7d6;
+      margin-top: 4px;
+    }
+
+    .ring-copy strong { display: block; font-size: 1rem; }
+    .ring-copy p { margin: 5px 0 0; font-size: .78rem; color: #d8e7d6; }
+
+    .breakdown { display: grid; gap: 0; }
+
+    .break-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    .break-row:last-child { border-bottom: 0; }
+
+    .break-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .break-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-top: 5px;
+      flex: 0 0 10px;
+      background: var(--lime);
+    }
+
+    .break-dot.offering { background: var(--gold); }
+    .break-dot.remaining { background: #fffdf5; }
+
+    .break-name { font-size: .85rem; font-weight: 800; }
+    .break-desc { font-size: .7rem; color: #d8e7d6; margin-top: 2px; }
+    .break-amount { font-weight: 850; font-size: .9rem; white-space: nowrap; }
+
+    .remaining-card {
+      margin-top: auto;
+      padding: 20px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.17);
+      border-radius: 12px;
+    }
+
+    .remaining-card span {
+      display: block;
+      font-size: .74rem;
+      color: #d8e7d6;
+      font-weight: 800;
+    }
+
+    .remaining-card strong {
+      display: block;
+      margin-top: 5px;
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      letter-spacing: -.04em;
+      overflow-wrap: anywhere;
+    }
+
+    .remaining-card p {
+      font-size: .74rem;
+      color: #d8e7d6;
+      margin: 5px 0 0;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      min-height: 44px;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-weight: 850;
+      font-size: .8rem;
+    }
+
+    .btn-light { background: var(--lime); color: var(--green-dark); }
+    .btn-light:hover { background: #e6f0c6; }
+    .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,.4); }
+    .btn-outline:hover { background: rgba(255,255,255,.08); }
+
+    .annual {
+      margin-top: 25px;
+      padding: 25px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .annual h2 {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 1.6rem;
+      letter-spacing: -.03em;
+      margin: 0 0 5px;
+    }
+
+    .annual p { color: var(--muted); font-size: .8rem; margin: 0; }
+    .annual-total { text-align: right; }
+    .annual-total small { display: block; color: var(--muted); font-size: .72rem; }
+    .annual-total strong { font-size: 1.7rem; color: var(--green); letter-spacing: -.04em; }
+
+    .note {
+      margin-top: 25px;
+      padding: 16px 19px;
+      border-left: 3px solid var(--gold);
+      background: #f0e8d8;
+      color: #665a45;
+      font-size: .8rem;
+    }
+
+    .faq {
+      max-width: 850px;
+      margin: 65px auto 10px;
+    }
+
+    .faq h2 {
+      font-family: Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 400;
+      letter-spacing: -.04em;
+      margin: 8px 0 24px;
+    }
+
+    details { padding: 17px 0; border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 850; font-size: .9rem; }
+    details p { color: var(--muted); font-size: .85rem; margin-bottom: 0; }
+
+    footer {
+      padding: 25px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    footer a { color: var(--green); text-decoration: none; font-weight: 800; }
+
+    @media (max-width: 850px) {
+      main { padding: 18px 18px 50px; }
+      .top { padding: 20px 18px; }
+      .hero { grid-template-columns: 1fr; gap: 22px; }
+      .verse-card { min-height: 155px; }
+      .planner { grid-template-columns: 1fr; }
+      .results { min-height: 600px; }
+    }
+
+    @media (max-width: 480px) {
+      .top-label { font-size: .58rem; }
+      h1 { font-size: 3.4rem; }
+      .extra-line { grid-template-columns: 1fr; }
+      .ring-area { gap: 15px; }
+      .ring { width: 94px; height: 94px; flex-basis: 94px; }
+      .ring-inner strong { font-size: 1.4rem; }
+      .annual { grid-template-columns: 1fr; }
+      .annual-total { text-align: left; }
+      .annual-total strong { font-size: 1.5rem; }
+      .break-amount { font-size: .8rem; }
+    }
+
+    @media print {
+      body { background: white; }
+      .top, .hero, .settings, .faq, footer, .action-row { display: none !important; }
+      main { padding: 0; }
+      .planner { display: block; }
+      .results { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .annual { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo">TMI <span>Studios.</span></div>
+    <div class="top-label">A little clarity for your money</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Giving planner · Free calculator</div>
+        <h1>Give with <em>intention.</em></h1>
+        <p class="hero-copy">Plan your tithe, add an offering if you wish, and see what remains from your income. Simple numbers, so you can make your own decisions with clarity.</p>
+      </div>
+
+      <aside class="verse-card">
+        <div class="quote-mark">“</div>
+        <p>Each of you should give what you have decided in your heart to give.</p>
+        <small>2 Corinthians 9:7 · NIV</small>
+      </aside>
+    </section>
+
+    <section class="planner">
+      <section class="settings">
+        <div class="section-head">
+          <h2>Your giving plan</h2>
+          <span class="step-tag">01 · Set it up</span>
+        </div>
+
+        <div class="field">
+          <label for="income">How much income do you receive?</label>
+          <p class="help">Use the amount you want to base your giving on.</p>
+          <div class="money-input">
+            <span>R</span>
+            <input class="with-currency" id="income" type="number" min="0" max="1000000000" step="0.01" value="15000" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How often do you receive it?</label>
+          <div class="frequency" role="group" aria-label="Income frequency">
+            <button type="button" data-frequency="weekly">Weekly</button>
+            <button type="button" data-frequency="fortnightly">Fortnightly</button>
+            <button type="button" data-frequency="monthly" class="active">Monthly</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="basis">Calculate from</label>
+          <select id="basis">
+            <option value="takehome">Take-home income</option>
+            <option value="gross">Gross income before deductions</option>
+          </select>
+          <p class="help">Choose the income amount that matches your personal or faith practice.</p>
+        </div>
+
+        <div class="field">
+          <label for="tithePercent">Tithe percentage</label>
+          <p class="help">10% is a common reference point. You can choose another amount.</p>
+          <div class="percentage-row">
+            <button type="button" class="percent-btn" data-percent="5">5%</button>
+            <button type="button" class="percent-btn active" data-percent="10">10%</button>
+            <button type="button" class="percent-btn" data-percent="15">15%</button>
+            <button type="button" class="percent-btn" data-percent="20">20%</button>
+          </div>
+          <div class="range-row">
+            <input id="tithePercent" type="range" min="0" max="100" step="0.5" value="10" aria-label="Tithe percentage">
+            <output class="range-value" id="tithePercentOutput" for="tithePercent">10%</output>
+          </div>
+        </div>
+
+        <div class="extra-line">
+          <div>
+            <label for="offeringPercent">Additional offering</label>
+            <p class="help">Optional percentage of the same income.</p>
+          </div>
+          <div class="range-row">
+            <input id="offeringPercent" type="range" min="0" max="50" step="0.5" value="0" aria-label="Additional offering percentage">
+            <output class="range-value" id="offeringPercentOutput" for="offeringPercent">0%</output>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:22px; margin-bottom:0">
+          <label for="otherGiving">Other regular giving (optional)</label>
+          <p class="help">A fixed amount per selected income period, if applicable.</p>
+          <div class="money-input">
+            <span>R</span>
+            <input class="with-currency" id="otherGiving" type="number" min="0" max="1000000000" step="0.01" value="0" inputmode="decimal">
+          </div>
+        </div>
+
+        <label class="toggle-line">
+          <input type="checkbox" id="showAnnual" checked>
+          <span>Include an annual giving estimate based on this income pattern.</span>
+        </label>
+      </section>
+
+      <section class="results" aria-live="polite">
+        <div class="section-head">
+          <h2>Your giving snapshot</h2>
+          <span class="step-tag">02 · Your numbers</span>
+        </div>
+
+        <div class="big-label">Tithe per income period</div>
+        <div class="big-number" id="mainTithe">R 1,500.00</div>
+        <div class="period-line" id="periodLabel">Based on monthly income</div>
+
+        <div class="ring-area">
+          <div class="ring" id="givingRing" role="img" aria-label="10 percent of income allocated to tithe">
+            <div class="ring-inner">
+              <strong id="givingRingPercent">10%</strong>
+              <small>tithe</small>
+            </div>
+          </div>
+          <div class="ring-copy">
+            <strong id="totalGivingTitle">Your planned giving</strong>
+            <p id="totalGivingDescription">Tithe plus any offering and other giving you entered.</p>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <div class="break-row">
+            <div class="break-left">
+              <span class="break-dot"></span>
+              <div>
+                <div class="break-name">Tithe</div>
+                <div class="break-desc" id="titheBreakDesc">10% of selected income</div>
+              </div>
+            </div>
+            <div class="break-amount" id="titheBreakAmount">R 1,500.00</div>
+          </div>
+
+          <div class="break-row">
+            <div class="break-left">
+              <span class="break-dot offering"></span>
+              <div>
+                <div class="break-name">Additional offering</div>
+                <div class="break-desc" id="offeringBreakDesc">Optional offering</div>
+              </div>
+            </div>
+            <div class="break-amount" id="offeringBreakAmount">R 0.00</div>
+          </div>
+
+          <div class="break-row">
+            <div class="break-left">
+              <span class="break-dot remaining"></span>
+              <div>
+                <div class="break-name">Other regular giving</div>
+                <div class="break-desc">Fixed amount per income period</div>
+              </div>
+            </div>
+            <div class="break-amount" id="otherBreakAmount">R 0.00</div>
+          </div>
+        </div>
+
+        <div class="remaining-card">
+          <span id="remainingLabel">Income remaining after planned giving</span>
+          <strong id="remainingAmount">R 13,500.00</strong>
+          <p id="remainingDescription">Before bills, savings and other expenses.</p>
+        </div>
+
+        <div class="action-row">
+          <button type="button" class="btn btn-light" id="copyButton">Copy my plan</button>
+          <button type="button" class="btn btn-outline" id="printButton">Print / save PDF</button>
+          <button type="button" class="btn btn-outline" id="resetButton">Reset</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="annual" id="annualCard">
+      <div>
+        <h2>Your giving over a year</h2>
+        <p id="annualDescription">If your income and giving stay the same for 12 months.</p>
+      </div>
+      <div class="annual-total">
+        <small>Estimated annual giving</small>
+        <strong id="annualTotal">R 18,000.00</strong>
+      </div>
+    </section>
+
+    <div class="note">
+      This calculator is a planning tool, not financial or religious advice. Different faith communities and individuals interpret tithing and giving differently. Choose the method that reflects your own beliefs and circumstances.
+    </div>
+
+    <section class="faq">
+      <div class="eyebrow">A few helpful answers</div>
+      <h2>Frequently asked questions</h2>
+
+      <details>
+        <summary>How do I calculate 10% of my salary?</summary>
+        <p>Multiply the income amount you have chosen by 0.10. For example, 10% of R15,000 is R1,500. This calculator updates the amount when you change your income or percentage.</p>
+      </details>
+
+      <details>
+        <summary>Should I calculate tithe from gross or take-home pay?</summary>
+        <p>Practices differ between people and faith communities. This tool lets you choose the income amount you want to use. It does not decide which approach is religiously correct.</p>
+      </details>
+
+      <details>
+        <summary>Can I calculate a tithe for weekly or fortnightly pay?</summary>
+        <p>Yes. Choose weekly, fortnightly or monthly, then enter the income you receive at that frequency. The annual estimate assumes 52 weekly payments, 26 fortnightly payments or 12 monthly payments per year.</p>
+      </details>
+
+      <details>
+        <summary>What is the difference between a tithe and an offering?</summary>
+        <p>Terminology and practices vary across faith traditions and congregations. This calculator treats the tithe percentage and any additional offering as separate planning entries so you can customise them.</p>
+      </details>
+
+      <details>
+        <summary>Does this calculator save my salary?</summary>
+        <p>No. The calculation runs in your browser. The page does not send your entered income to a server or save it for later use.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    Made with intention by <a href="https://tmi-studios.github.io/tmistudio1/">TMI Studios</a>.
+  </footer>
+
+  <script>
+    (() => {
+      const incomeInput = document.getElementById("income");
+      const basisSelect = document.getElementById("basis");
+      const titheSlider = document.getElementById("tithePercent");
+      const offeringSlider = document.getElementById("offeringPercent");
+      const otherGivingInput = document.getElementById("otherGiving");
+      const showAnnual = document.getElementById("showAnnual");
+
+      let frequency = "monthly";
+
+      const money = value => new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(Number.isFinite(value) ? value : 0);
+
+      function positiveNumber(input) {
+        const n = Number(input.value);
+        return Number.isFinite(n) && n > 0 ? n : 0;
+      }
+
+      function update() {
+        const income = positiveNumber(incomeInput);
+        const tithePercent = Number(titheSlider.value) || 0;
+        const offeringPercent = Number(offeringSlider.value) || 0;
+        const otherGiving = positiveNumber(otherGivingInput);
+
+        const tithe = income * tithePercent / 100;
+        const offering = income * offeringPercent / 100;
+        const totalGiving = tithe + offering + otherGiving;
+        const remaining = income - totalGiving;
+
+        const periodNames = {
+          weekly: "weekly",
+          fortnightly: "fortnightly",
+          monthly: "monthly"
+        };
+
+        const annualPeriods = {
+          weekly: 52,
+          fortnightly: 26,
+          monthly: 12
+        };
+
+        document.getElementById("tithePercentOutput").textContent = tithePercent + "%";
+        document.getElementById("offeringPercentOutput").textContent = offeringPercent + "%";
+        document.getElementById("mainTithe").textContent = money(tithe);
+        document.getElementById("periodLabel").textContent =
+          "Based on " + periodNames[frequency] + " " +
+          (basisSelect.value === "gross" ? "gross income" : "take-home income");
+
+        document.getElementById("givingRingPercent").textContent = tithePercent + "%";
+        document.getElementById("givingRing").setAttribute(
+          "aria-label",
+          tithePercent + " percent of income allocated to tithe"
+        );
+
+        const degrees = Math.min(360, Math.max(0, tithePercent / 100 * 360));
+        document.getElementById("givingRing").style.background =
+          "conic-gradient(var(--lime) 0deg " + degrees + "deg, rgba(255,255,255,.16) " + degrees + "deg 360deg)";
+
+        document.getElementById("totalGivingTitle").textContent =
+          totalGiving > 0 ? "Your planned giving" : "Your giving starts here";
+        document.getElementById("totalGivingDescription").textContent =
+          totalGiving > 0
+            ? "Tithe, offering and other giving combined for this income period."
+            : "Choose a percentage or enter an additional amount to create a plan.";
+
+        document.getElementById("titheBreakDesc").textContent = tithePercent + "% of selected income";
+        document.getElementById("titheBreakAmount").textContent = money(tithe);
+        document.getElementById("offeringBreakDesc").textContent = offeringPercent + "% additional offering";
+        document.getElementById("offeringBreakAmount").textContent = money(offering);
+        document.getElementById("otherBreakAmount").textContent = money(otherGiving);
+        document.getElementById("remainingAmount").textContent = money(remaining);
+        document.getElementById("remainingLabel").textContent =
+          remaining >= 0
+            ? "Income remaining after planned giving"
+            : "Planned giving exceeds entered income";
+        document.getElementById("remainingDescription").textContent =
+          remaining >= 0
+            ? "Before bills, savings and other expenses."
+            : "Consider adjusting your amounts to fit your budget.";
+
+        const annualTotal = totalGiving * annualPeriods[frequency];
+        document.getElementById("annualTotal").textContent = money(annualTotal);
+        document.getElementById("annualDescription").textContent =
+          "Based on " + annualPeriods[frequency] + " " + periodNames[frequency] +
+          " income periods, assuming the amounts stay the same.";
+
+        document.getElementById("annualCard").style.display = showAnnual.checked ? "grid" : "none";
+
+        document.querySelectorAll("[data-percent]").forEach(button => {
+          button.classList.toggle("active", Number(button.dataset.percent) === tithePercent);
+        });
+
+        const summary =
+          "MY TITHE AND GIVING PLAN\n\n" +
+          "Income frequency: " + periodNames[frequency] + "\n" +
+          "Income basis: " + (basisSelect.value === "gross" ? "Gross income" : "Take-home income") + "\n" +
+          "Income per period: " + money(income) + "\n\n" +
+          "Tithe (" + tithePercent + "%): " + money(tithe) + "\n" +
+          "Additional offering (" + offeringPercent + "%): " + money(offering) + "\n" +
+          "Other regular giving: " + money(otherGiving) + "\n" +
+          "Total planned giving per period: " + money(totalGiving) + "\n" +
+          "Income remaining after planned giving: " + money(remaining) + "\n" +
+          "Estimated annual giving: " + money(annualTotal) + "\n\n" +
+          "Planning estimate only. Choose the giving approach that reflects your beliefs and circumstances.";
+
+        document.getElementById("copyButton").dataset.summary = summary;
+      }
+
+      document.querySelectorAll("[data-frequency]").forEach(button => {
+        button.addEventListener("click", () => {
+          frequency = button.dataset.frequency;
+          document.querySelectorAll("[data-frequency]").forEach(item => {
+            item.classList.toggle("active", item === button);
+          });
+          update();
+        });
+      });
+
+      document.querySelectorAll("[data-percent]").forEach(button => {
+        button.addEventListener("click", () => {
+          titheSlider.value = button.dataset.percent;
+          update();
+        });
+      });
+
+      [incomeInput, basisSelect, titheSlider, offeringSlider, otherGivingInput, showAnnual]
+        .forEach(input => {
+          input.addEventListener("input", update);
+          input.addEventListener("change", update);
+        });
+
+      document.getElementById("copyButton").addEventListener("click", async () => {
+        const summary = document.getElementById("copyButton").dataset.summary || "";
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(summary);
+          } else {
+            const temp = document.createElement("textarea");
+            temp.value = summary;
+            temp.style.position = "fixed";
+            temp.style.opacity = "0";
+            document.body.appendChild(temp);
+            temp.select();
+            const copied = document.execCommand("copy");
+            temp.remove();
+            if (!copied) throw new Error("Copy unavailable");
+          }
+
+          const button = document.getElementById("copyButton");
+          button.textContent = "Plan copied ✓";
+          setTimeout(() => button.textContent = "Copy my plan", 1800);
+        } catch (error) {
+          window.prompt("Copy your giving plan:", summary);
+        }
+      });
+
+      document.getElementById("printButton").addEventListener("click", () => window.print());
+
+      document.getElementById("resetButton").addEventListener("click", () => {
+        incomeInput.value = "15000";
+        basisSelect.value = "takehome";
+        titheSlider.value = "10";
+        offeringSlider.value = "0";
+        otherGivingInput.value = "0";
+        showAnnual.checked = true;
+        frequency = "monthly";
+
+        document.querySelectorAll("[data-frequency]").forEach(button => {
+          button.classList.toggle("active", button.dataset.frequency === "monthly");
+        });
+
+        update();
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
