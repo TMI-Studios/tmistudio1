@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#38594d">
+<title>Baby Budget Planner South Africa | TMI Studios</title>
+<meta name="description" content="Plan for your new arrival with a free South African baby budget calculator. Estimate newborn setup costs, monthly baby expenses and your savings target.">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/baby-budget/">
+<style>
+:root {
+  --green: #38594d;
+  --green-dark: #243e34;
+  --sage: #dce8dc;
+  --sage-light: #f0f5ed;
+  --peach: #f3c6ad;
+  --cream: #fffaf3;
+  --white: #ffffff;
+  --ink: #29372f;
+  --muted: #788078;
+  --line: #e0e8dc;
+  --orange: #a65b36;
+  --red: #a23d46;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.55;
+}
+button, input, select { font: inherit; }
+.top-strip {
+  height: 6px;
+  background: linear-gradient(90deg, var(--green), #8aa88d, var(--peach));
+}
+header {
+  background: var(--green);
+  color: white;
+  padding: 30px 18px 38px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before, header::after {
+  content: "✳";
+  position: absolute;
+  color: #ffffff19;
+  font-size: 100px;
+  pointer-events: none;
+}
+header::before { left: -10px; top: -28px; }
+header::after { right: -5px; bottom: -40px; }
+.brand {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #dce8dc;
+  margin-bottom: 16px;
+  position: relative;
+}
+header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 7vw, 52px);
+  line-height: 1.12;
+  font-weight: normal;
+  margin: 0 auto 13px;
+  position: relative;
+}
+header p {
+  max-width: 500px;
+  margin: auto;
+  color: #edf3e9;
+  font-size: 15px;
+  position: relative;
+}
+.header-symbol { font-size: 27px; margin: 13px 0 5px; position: relative; }
+main { max-width: 1050px; margin: auto; padding: 25px 15px 42px; }
+.intro { text-align: center; max-width: 650px; margin: 0 auto 23px; }
+.intro h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--green);
+  font-weight: normal;
+  font-size: 27px;
+  margin: 0 0 5px;
+}
+.intro p { color: var(--muted); font-size: 14px; margin: 0; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 17px;
+}
+.summary-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 17px 13px;
+  min-width: 0;
+}
+.summary-card .label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.summary-card strong {
+  display: block;
+  font-size: clamp(17px, 4vw, 26px);
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+.summary-card small { color: var(--muted); font-size: 11px; }
+.status {
+  border-radius: 11px;
+  background: var(--sage-light);
+  color: var(--green);
+  padding: 13px 15px;
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.status.warn { background: #fff0e6; color: #874823; }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, .85fr);
+  gap: 18px;
+  align-items: start;
+}
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 20px;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.panel h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  color: var(--green);
+  font-size: 23px;
+  margin: 0 0 5px;
+}
+.panel-intro { color: var(--muted); font-size: 13px; margin: 0 0 17px; }
+.field { margin-bottom: 15px; min-width: 0; }
+.field label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 6px; }
+.field input, .field select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d5e0d3;
+  border-radius: 9px;
+  background: #fffefa;
+  padding: 11px 12px;
+  color: var(--ink);
+}
+.field input:focus, .field select:focus, .cost-row input:focus {
+  outline: 2px solid #9db89a;
+  border-color: var(--green);
+}
+.field small { display: block; font-size: 11px; color: var(--muted); margin-top: 5px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--green);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+  margin: 22px 0 13px;
+}
+.cost-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(100px, .72fr);
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.cost-row label { font-size: 13px; font-weight: bold; }
+.cost-row label small { display: block; font-weight: normal; font-size: 11px; color: var(--muted); }
+.cost-row input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #d5e0d3;
+  border-radius: 9px;
+  background: #fffefa;
+}
+.currency { position: relative; }
+.currency::before {
+  content: "R";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.currency input { padding-left: 25px; }
+.note {
+  background: #fff5eb;
+  border-left: 3px solid var(--peach);
+  padding: 11px 12px;
+  border-radius: 0 8px 8px 0;
+  color: #78533c;
+  font-size: 12px;
+  margin-top: 13px;
+}
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid #edf1e9;
+  font-size: 13px;
+}
+.result-row span:first-child { color: var(--muted); }
+.result-row strong { text-align: right; overflow-wrap: anywhere; }
+.result-row.total {
+  border-top: 2px solid var(--green);
+  border-bottom: 0;
+  margin-top: 7px;
+  padding-top: 15px;
+  font-size: 16px;
+}
+.result-row.total strong, .result-row.total span { color: var(--green); font-weight: bold; }
+.mini-heading { color: var(--green); font-size: 14px; font-weight: bold; margin: 21px 0 10px; }
+.progress-track { height: 10px; background: #edf1e9; border-radius: 20px; overflow: hidden; margin: 11px 0 7px; }
+.progress-bar { height: 100%; width: 0; background: #84a78a; border-radius: 20px; transition: width .2s; }
+.progress-caption { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--muted); }
+.big-number { font-family: Georgia, "Times New Roman", serif; color: var(--green); font-size: 29px; overflow-wrap: anywhere; }
+.primary-btn, .secondary-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 15px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.primary-btn { background: var(--green); color: white; }
+.primary-btn:hover { background: var(--green-dark); }
+.secondary-btn { background: var(--sage-light); color: var(--green); }
+.secondary-btn:hover { background: var(--sage); }
+.button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.button-grid button { margin-top: 10px; }
+.tips { padding-left: 18px; font-size: 12px; color: var(--muted); }
+.tips li { margin-bottom: 9px; }
+footer {
+  padding: 23px 15px;
+  background: #edf3e9;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 13px; }
+.footer-links a { color: var(--green); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+footer details { max-width: 720px; margin: 12px auto; text-align: left; line-height: 1.7; }
+footer summary { text-align: center; cursor: pointer; color: var(--green); }
+.copyright { margin-top: 15px; }
+@media(max-width:720px) {
+  .layout { grid-template-columns: 1fr; }
+  .summary-grid { gap: 7px; }
+  .summary-card { padding: 13px 9px; }
+  .summary-card .label { font-size: 9px; letter-spacing: .5px; }
+  .panel { padding: 16px; }
+}
+@media(max-width:380px) {
+  .two-col { grid-template-columns: 1fr; gap: 0; }
+  .cost-row { grid-template-columns: minmax(0, 1fr) 105px; gap: 7px; }
+}
+@media print {
+  body { background: white; }
+  header { background: white; color: var(--green); border-bottom: 2px solid var(--green); padding: 15px; }
+  header p, .brand { color: var(--green); }
+  main { max-width: 100%; padding: 10px; }
+  .layout { grid-template-columns: 1fr 1fr; }
+  .panel, .summary-card { break-inside: avoid; }
+  .no-print, footer details { display: none !important; }
+  footer { background: white; }
+}
+</style>
+</head>
+<body>
+<div class="top-strip"></div>
+<header>
+  <div class="brand">TMI Studios · A little tool for a big change</div>
+  <h1>Little One, Big Plans</h1>
+  <div class="header-symbol">♡</div>
+  <p>Get ready for your newest little love with a baby budget that fits your real life.</p>
+</header>
+
+<main>
+  <div class="intro">
+    <h2>Prepare with a little more peace of mind</h2>
+    <p>Estimate what you'll need before baby arrives, then see what everyday baby care could cost each month.</p>
+  </div>
+
+  <div class="summary-grid" aria-live="polite">
+    <div class="summary-card">
+      <span class="label">Baby setup costs</span>
+      <strong id="setupCard">R0</strong>
+      <small>Once-off purchases</small>
+    </div>
+    <div class="summary-card">
+      <span class="label">Monthly essentials</span>
+      <strong id="monthlyCard">R0</strong>
+      <small>Estimated ongoing costs</small>
+    </div>
+    <div class="summary-card">
+      <span class="label">Starter fund target</span>
+      <strong id="targetCard">R0</strong>
+      <small>Setup plus chosen reserve</small>
+    </div>
+  </div>
+
+  <div class="status" id="status" role="status" aria-live="polite">Add your estimates to build your baby budget.</div>
+
+  <div class="layout">
+    <div>
+      <section class="panel">
+        <h2>Your starting point</h2>
+        <p class="panel-intro">A few details help calculate your savings plan.</p>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="babyName">Baby's nickname (optional)</label>
+            <input id="babyName" type="text" maxlength="60" placeholder="e.g. Little Bean">
+          </div>
+          <div class="field">
+            <label for="dueDate">Due date (optional)</label>
+            <input id="dueDate" type="date">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="months">Months until baby arrives</label>
+            <input id="months" type="number" min="0" max="60" step="1" value="6" inputmode="numeric">
+            <small>Use 0 if baby is already here or due this month.</small>
+          </div>
+          <div class="field">
+            <label for="saved">Savings set aside (R)</label>
+            <input id="saved" type="number" min="0" max="1000000000" step="500" value="3000" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="reserveMonths">Monthly expenses to reserve</label>
+            <select id="reserveMonths">
+              <option value="1">1 month</option>
+              <option value="2" selected>2 months</option>
+              <option value="3">3 months</option>
+              <option value="6">6 months</option>
+            </select>
+            <small>How many months of baby expenses you'd like to have set aside.</small>
+          </div>
+          <div class="field">
+            <label for="buffer">Extra safety buffer</label>
+            <select id="buffer">
+              <option value="0">0%</option>
+              <option value="5">5%</option>
+              <option value="10" selected>10%</option>
+              <option value="15">15%</option>
+              <option value="20">20%</option>
+            </select>
+            <small>Applied to your setup and reserve estimate.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Before baby arrives</h2>
+        <p class="panel-intro">Estimated once-off setup costs. Enter what you plan to buy, not what you feel pressured to buy.</p>
+
+        <div class="section-label">Sleep, travel and home</div>
+        <div class="cost-row">
+          <label for="cot">Cot, bassinet or safe sleep space</label>
+          <div class="currency"><input id="cot" type="number" min="0" max="1000000000" step="100" value="1500" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="pram">Pram or baby carrier</label>
+          <div class="currency"><input id="pram" type="number" min="0" max="1000000000" step="100" value="1200" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="carseat">Car seat, if needed</label>
+          <div class="currency"><input id="carseat" type="number" min="0" max="1000000000" step="100" value="1500" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="bedding">Bedding, blankets and towels</label>
+          <div class="currency"><input id="bedding" type="number" min="0" max="1000000000" step="100" value="700" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="clothes">Newborn clothes and essentials</label>
+          <div class="currency"><input id="clothes" type="number" min="0" max="1000000000" step="100" value="1000" inputmode="decimal"></div>
+        </div>
+
+        <div class="section-label">Feeding, bathing and care</div>
+        <div class="cost-row">
+          <label for="feeding">Feeding supplies<small>Bottles, storage or other planned items</small></label>
+          <div class="currency"><input id="feeding" type="number" min="0" max="1000000000" step="100" value="500" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="bath">Bathing and changing supplies</label>
+          <div class="currency"><input id="bath" type="number" min="0" max="1000000000" step="100" value="400" inputmode="numeric"></div>
+        </div>
+        <div class="cost-row">
+          <label for="health">First-aid and care essentials</label>
+          <div class="currency"><input id="health" type="number" min="0" max="1000000000" step="100" value="350" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="hospital">Hospital, birth and recovery costs<small>Your expected out-of-pocket amount, if applicable</small></label>
+          <div class="currency"><input id="hospital" type="number" min="0" max="1000000000" step="500" value="0" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="onceOther">Other once-off costs</label>
+          <div class="currency"><input id="onceOther" type="number" min="0" max="1000000000" step="100" value="500" inputmode="decimal"></div>
+        </div>
+
+        <div class="note">You may be able to borrow, reuse or buy certain items second-hand. For safety-critical products, check their condition, suitability and current safety guidance before using them.</div>
+      </section>
+
+      <section class="panel">
+        <h2>Every month with baby</h2>
+        <p class="panel-intro">Estimate recurring costs. Actual spending can change as your baby grows.</p>
+
+        <div class="section-label">Everyday essentials</div>
+        <div class="cost-row">
+          <label for="nappies">Nappies</label>
+          <div class="currency"><input id="nappies" type="number" min="0" max="1000000000" step="50" value="700" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="wipes">Wipes and changing supplies</label>
+          <div class="currency"><input id="wipes" type="number" min="0" max="1000000000" step="50" value="200" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="feedingMonthly">Feeding costs<small>Formula or other purchased supplies, if applicable</small></label>
+          <div class="currency"><input id="feedingMonthly" type="number" min="0" max="1000000000" step="50" value="400" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="toiletries">Baby toiletries and laundry</label>
+          <div class="currency"><input id="toiletries" type="number" min="0" max="1000000000" step="50" value="200" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="clothesMonthly">Clothes and replacements</label>
+          <div class="currency"><input id="clothesMonthly" type="number" min="0" max="1000000000" step="50" value="250" inputmode="decimal"></div>
+        </div>
+
+        <div class="section-label">Care and other costs</div>
+        <div class="cost-row">
+          <label for="childcare">Childcare or creche</label>
+          <div class="currency"><input id="childcare" type="number" min="0" max="1000000000" step="100" value="0" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="medical">Medical aid, visits or health costs<small>Estimated baby-related share or out-of-pocket amount</small></label>
+          <div class="currency"><input id="medical" type="number" min="0" max="1000000000" step="100" value="300" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="transport">Extra transport</label>
+          <div class="currency"><input id="transport" type="number" min="0" max="1000000000" step="50" value="200" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="monthlyOther">Other monthly costs</label>
+          <div class="currency"><input id="monthlyOther" type="number" min="0" max="1000000000" step="50" value="150" inputmode="decimal"></div>
+        </div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="panel">
+        <h2>Your baby budget</h2>
+        <p class="panel-intro">Your estimate updates as you change the amounts.</p>
+
+        <div class="result-row"><span>Once-off setup</span><strong id="setupResult">R0</strong></div>
+        <div class="result-row"><span>Monthly essentials</span><strong id="monthlyResult">R0</strong></div>
+        <div class="result-row"><span>Chosen expense reserve</span><strong id="reserveResult">R0</strong></div>
+        <div class="result-row"><span>Safety buffer</span><strong id="bufferResult">R0</strong></div>
+        <div class="result-row total"><span>Starter fund target</span><strong id="targetResult">R0</strong></div>
+
+        <div class="mini-heading">Your savings progress</div>
+        <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="progress-caption"><span id="progressPercent">0% saved</span><span id="gapLabel">Still to save</span></div>
+
+        <div class="mini-heading">Still to save</div>
+        <div class="big-number" id="gapResult">R0</div>
+        <p class="panel-intro" id="gapNote">Your savings gap will appear here.</p>
+
+        <div class="mini-heading">Suggested monthly saving</div>
+        <div class="big-number" id="monthlySaving">R0</div>
+        <p class="panel-intro" id="savingNote">Based on your time until baby arrives.</p>
+
+        <button class="primary-btn no-print" id="shareBtn" type="button">Share my baby budget</button>
+        <button class="secondary-btn no-print" id="printBtn" type="button">Print / save as PDF</button>
+        <div class="button-grid no-print">
+          <button class="secondary-btn" id="exampleBtn" type="button">Load example</button>
+          <button class="secondary-btn" id="resetBtn" type="button">Reset budget</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>A gentle reminder</h2>
+        <p class="panel-intro">You don't have to buy everything at once.</p>
+        <ul class="tips">
+          <li>Start with essentials and add nice-to-haves only if your budget allows.</li>
+          <li>Ask family and friends about hand-me-downs or shared purchases.</li>
+          <li>Check what your medical aid or other benefits cover, if applicable.</li>
+          <li>Compare prices and include delivery fees when shopping online.</li>
+          <li>Review your estimates regularly as your plans become clearer.</li>
+        </ul>
+        <div class="note">This is a budgeting tool, not a medical checklist. Ask your healthcare professional about your baby's individual needs.</div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <nav class="footer-links" aria-label="Legal and site links">
+    <a href="../index.html">TMI Studios Home</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+  </nav>
+  <details>
+    <summary>Important information about this planner</summary>
+    <p>This planner provides general budgeting estimates only and is not financial, medical or insurance advice. Costs vary by family, location, provider, baby and personal circumstances. Enter your own estimates and verify prices and coverage directly with relevant providers. The planner does not determine medical needs or recommend a particular feeding or care method. TMI Studios does not guarantee the accuracy of user-entered estimates and is not responsible for decisions made using this tool.</p>
+  </details>
+  <div class="copyright">Made with care by TMI Studios · Small tools for real life.</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const setupIds = [
+    "cot", "pram", "carseat", "bedding", "clothes",
+    "feeding", "bath", "health", "hospital", "onceOther"
+  ];
+
+  const monthlyIds = [
+    "nappies", "wipes", "feedingMonthly", "toiletries",
+    "clothesMonthly", "childcare", "medical", "transport", "monthlyOther"
+  ];
+
+  const inputIds = [
+    "babyName", "dueDate", "months", "saved", "reserveMonths", "buffer",
+    ...setupIds, ...monthlyIds
+  ];
+
+  const $ = id => document.getElementById(id);
+
+  function value(id) {
+    const n = Number($(id).value);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  }
+
+  function money(n) {
+    return "R" + Math.round(Number.isFinite(n) ? n : 0).toLocaleString("en-ZA");
+  }
+
+  function calculate() {
+    const setup = setupIds.reduce((sum, id) => sum + value(id), 0);
+    const monthly = monthlyIds.reduce((sum, id) => sum + value(id), 0);
+    const reserve = monthly * value("reserveMonths");
+    const buffer = (setup + reserve) * value("buffer") / 100;
+    const target = setup + reserve + buffer;
+    const saved = value("saved");
+    const gap = Math.max(0, target - saved);
+    const months = value("months");
+    const monthlyTarget = months > 0 ? gap / months : gap;
+    const progress = target > 0 ? Math.min(100, saved / target * 100) : 0;
+
+    $("setupCard").textContent = money(setup);
+    $("monthlyCard").textContent = money(monthly);
+    $("targetCard").textContent = money(target);
+
+    $("setupResult").textContent = money(setup);
+    $("monthlyResult").textContent = money(monthly);
+    $("reserveResult").textContent = money(reserve);
+    $("bufferResult").textContent = money(buffer);
+    $("targetResult").textContent = money(target);
+    $("gapResult").textContent = money(gap);
+    $("monthlySaving").textContent = money(monthlyTarget);
+
+    $("progressBar").style.width = progress + "%";
+    $("progressPercent").textContent = Math.round(progress) + "% of target saved";
+    $("gapLabel").textContent = gap === 0 ? "Target reached" : "Still to save";
+
+    $("gapNote").textContent = gap === 0
+      ? "Your current savings cover this estimated starter fund."
+      : "This is the difference between your current savings and the starter fund target.";
+
+    $("savingNote").textContent = months > 0
+      ? "Save about " + money(monthlyTarget) + " each month for " + months + " month(s) to reach your target."
+      : (gap > 0
+        ? "Your target date is this month. You still need " + money(gap) + " to reach your estimated starter fund."
+        : "Your estimated starter fund is covered. Consider keeping an emergency reserve.");
+
+    const status = $("status");
+    status.className = "status";
+    if (gap === 0) {
+      status.textContent = "Lovely! Your current savings cover the estimated starter fund. Your monthly baby costs are estimated at " + money(monthly) + ".";
+    } else if (months === 0) {
+      status.classList.add("warn");
+      status.textContent = "Your estimated starter fund is " + money(target) + ". You still need " + money(gap) + " to reach it.";
+    } else {
+      status.textContent = "Your estimated starter fund is " + money(target) + ". Saving about " + money(monthlyTarget) + " per month could help you reach it before baby arrives.";
+    }
+  }
+
+  function report() {
+    const setup = setupIds.reduce((sum, id) => sum + value(id), 0);
+    const monthly = monthlyIds.reduce((sum, id) => sum + value(id), 0);
+    const reserve = monthly * value("reserveMonths");
+    const buffer = (setup + reserve) * value("buffer") / 100;
+    const target = setup + reserve + buffer;
+    const gap = Math.max(0, target - value("saved"));
+    const months = value("months");
+    const name = $("babyName").value.trim();
+    const dueDate = $("dueDate").value;
+    const lines = [
+      "MY BABY BUDGET",
+      name ? "Baby nickname: " + name : "",
+      dueDate ? "Due date: " + dueDate : "",
+      "",
+      "ONCE-OFF SETUP COSTS"
+    ];
+
+    setupIds.forEach(id => {
+      const label = document.querySelector('label[for="' + id + '"]');
+      lines.push((label ? label.childNodes[0].textContent.trim() : id) + ": " + money(value(id)));
+    });
+
+    lines.push("", "MONTHLY COSTS");
+    monthlyIds.forEach(id => {
+      const label = document.querySelector('label[for="' + id + '"]');
+      lines.push((label ? label.childNodes[0].textContent.trim() : id) + ": " + money(value(id)));
+    });
+
+    lines.push(
+      "",
+      "Total once-off setup: " + money(setup),
+      "Estimated monthly costs: " + money(monthly),
+      "Chosen expense reserve: " + money(reserve),
+      "Safety buffer: " + money(buffer),
+      "Starter fund target: " + money(target),
+      "Savings already set aside: " + money(value("saved")),
+      "Still to save: " + money(gap),
+      "Months until arrival: " + months,
+      "Suggested monthly savings: " + money(months > 0 ? gap / months : gap),
+      "",
+      "Created with the TMI Studios Baby Budget Planner.",
+      "All amounts are estimates. Check actual costs with providers."
+    );
+    return lines.filter(line => line !== "").join("\n");
+  }
+
+  async function shareBudget() {
+    const text = report();
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "My Baby Budget", text: text });
+        return;
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        $("status").className = "status";
+        $("status").textContent = "Budget summary copied. You can paste it into WhatsApp or your notes.";
+        return;
+      } catch (error) {}
+    }
+
+    window.prompt("Copy your baby budget summary:", text);
+  }
+
+  inputIds.forEach(id => {
+    $(id).addEventListener("input", calculate);
+    $(id).addEventListener("change", calculate);
+  });
+
+  $("shareBtn").addEventListener("click", shareBudget);
+  $("printBtn").addEventListener("click", () => window.print());
+
+  const defaults = {
+    months: 6, saved: 3000, reserveMonths: 2, buffer: 10,
+    cot: 1500, pram: 1200, carseat: 1500, bedding: 700,
+    clothes: 1000, feeding: 500, bath: 400, health: 350,
+    hospital: 0, onceOther: 500,
+    nappies: 700, wipes: 200, feedingMonthly: 400,
+    toiletries: 200, clothesMonthly: 250, childcare: 0,
+    medical: 300, transport: 200, monthlyOther: 150
+  };
+
+  $("exampleBtn").addEventListener("click", () => {
+    const example = {
+      months: 4, saved: 5000, reserveMonths: 3, buffer: 10,
+      cot: 2200, pram: 1800, carseat: 2000, bedding: 850,
+      clothes: 1200, feeding: 650, bath: 450, health: 400,
+      hospital: 2500, onceOther: 700,
+      nappies: 850, wipes: 250, feedingMonthly: 650,
+      toiletries: 250, clothesMonthly: 300, childcare: 0,
+      medical: 450, transport: 300, monthlyOther: 200
+    };
+    Object.keys(example).forEach(id => { $(id).value = example[id]; });
+    calculate();
+    $("status").textContent = "Example budget loaded. Change any figure to make it yours.";
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    if (!window.confirm("Reset the budget to its starter values?")) return;
+    $("babyName").value = "";
+    $("dueDate").value = "";
+    Object.keys(defaults).forEach(id => { $(id).value = defaults[id]; });
+    calculate();
+  });
+
+  calculate();
+})();
+</script>
+</body>
+</html>
