@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shisanyama Profit Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Calculate shisanyama plate costs, selling prices, daily sales and estimated profit. Free South African braai business calculator.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b0015">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/shisanyama/">
+  <style>
+    :root {
+      --bg: #0b0015;
+      --panel: #170b27;
+      --panel2: #241535;
+      --purple: #b388ff;
+      --pink: #ff9bd2;
+      --text: #f8f3ff;
+      --muted: #c4b6d7;
+      --border: #3b2852;
+      --green: #8cf0bd;
+      --gold: #ffe1a6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top, #28133d, var(--bg) 58%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 35px 18px 25px;
+      text-align: center;
+    }
+
+    .brand {
+      color: var(--pink);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 14px auto 10px;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.15;
+    }
+
+    header p {
+      max-width: 660px;
+      margin: auto;
+      color: var(--muted);
+    }
+
+    main {
+      width: min(100% - 28px, 900px);
+      margin: 0 auto 45px;
+    }
+
+    .card {
+      padding: clamp(18px, 4vw, 28px);
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(23, 11, 39, .96);
+    }
+
+    h2 { margin: 0 0 8px; font-size: 1.35rem; }
+    h3 { margin: 20px 0 6px; color: var(--pink); font-size: 1rem; }
+    .intro, .muted { color: var(--muted); font-size: .94rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .field { min-width: 0; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 47px;
+      padding: 11px 12px;
+      border: 1px solid #58416f;
+      border-radius: 10px;
+      background: #10071b;
+      color: var(--text);
+      font: inherit;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    button {
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary {
+      flex: 1 1 170px;
+      background: var(--purple);
+      color: #160725;
+    }
+
+    .secondary {
+      background: #30203f;
+      color: var(--text);
+      border: 1px solid #58416f;
+    }
+
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+
+    .hero {
+      padding: 22px;
+      margin-bottom: 14px;
+      border: 1px solid #76569b;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #34204d, #211333);
+    }
+
+    .hero small { color: var(--muted); }
+
+    .amount {
+      color: var(--green);
+      font-size: clamp(1.9rem, 7vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel2);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.16rem;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      padding: 14px;
+      margin-top: 16px;
+      border-left: 3px solid var(--purple);
+      border-radius: 0 10px 10px 0;
+      background: #241535;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .warning {
+      border-color: #d9a64c;
+      background: #352616;
+      color: var(--gold);
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      color: #ffaaaa;
+    }
+
+    .error.show { display: block; }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: .92rem;
+    }
+
+    th, td {
+      padding: 11px 8px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th { color: var(--pink); }
+    td:last-child, th:last-child { text-align: right; }
+
+    .faq {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq:last-child { border-bottom: 0; }
+    .faq h3 { margin-top: 0; }
+
+    a { color: var(--purple); }
+
+    footer {
+      padding: 25px 14px 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin: 12px 0;
+    }
+
+    footer a { text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 540px) {
+      .grid, .metrics { grid-template-columns: 1fr; }
+      header { padding-top: 28px; }
+    }
+
+    @media print {
+      body { background: white; color: black; }
+      header, main > .card:not(#calculator), .buttons, footer { display: none !important; }
+      main { width: 100%; }
+      #calculator, .hero, .metric { background: white; color: black; border: 1px solid #aaa; }
+      .muted, .intro, .hero small, .metric span { color: #333; }
+      .amount { color: black; }
+      .results { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">TMI Studios</div>
+    <h1>Shisanyama Profit Calculator</h1>
+    <p>Price your plates, estimate your daily sales and see what your braai business could make after expenses.</p>
+  </header>
+
+  <main>
+    <section class="card" id="calculator">
+      <h2>Calculate your plate and daily profit</h2>
+      <p class="intro">Enter your own ingredient costs and selling prices. The example amounts are placeholders, so replace them with your actual costs.</p>
+
+      <form id="profitForm">
+        <h3>Plate and sales</h3>
+        <div class="grid">
+          <div class="field">
+            <label for="platePrice">Selling price per plate (R)</label>
+            <input id="platePrice" type="number" min="0.01" step="0.01" value="100" required>
+          </div>
+          <div class="field">
+            <label for="plates">Plates sold per day</label>
+            <input id="plates" type="number" min="0" step="1" value="40" required>
+          </div>
+          <div class="field">
+            <label for="meat">Meat cost per plate (R)</label>
+            <input id="meat" type="number" min="0" step="0.01" value="35" required>
+          </div>
+          <div class="field">
+            <label for="sides">Pap, chakalaka and sides per plate (R)</label>
+            <input id="sides" type="number" min="0" step="0.01" value="12" required>
+          </div>
+          <div class="field">
+            <label for="seasoning">Seasoning and sauces per plate (R)</label>
+            <input id="seasoning" type="number" min="0" step="0.01" value="3" required>
+          </div>
+          <div class="field">
+            <label for="packaging">Packaging and serving items per plate (R)</label>
+            <input id="packaging" type="number" min="0" step="0.01" value="2" required>
+          </div>
+        </div>
+
+        <h3>Daily operating expenses</h3>
+        <div class="grid">
+          <div class="field">
+            <label for="charcoal">Charcoal, wood or gas per day (R)</label>
+            <input id="charcoal" type="number" min="0" step="0.01" value="250" required>
+          </div>
+          <div class="field">
+            <label for="staff">Staff wages per day (R)</label>
+            <input id="staff" type="number" min="0" step="0.01" value="400" required>
+          </div>
+          <div class="field">
+            <label for="rent">Daily rent or stall fee (R)</label>
+            <input id="rent" type="number" min="0" step="0.01" value="150" required>
+          </div>
+          <div class="field">
+            <label for="transport">Transport and delivery per day (R)</label>
+            <input id="transport" type="number" min="0" step="0.01" value="100" required>
+          </div>
+          <div class="field">
+            <label for="other">Other daily expenses (R)</label>
+            <input id="other" type="number" min="0" step="0.01" value="100" required>
+          </div>
+          <div class="field">
+            <label for="days">Trading days per month</label>
+            <input id="days" type="number" min="1" max="31" step="1" value="26" required>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button class="primary" type="submit">Calculate profit</button>
+          <button class="secondary" type="button" id="resetBtn">Reset estimates</button>
+        </div>
+        <p class="error" id="error" role="alert"></p>
+      </form>
+
+      <div class="results" id="results" aria-live="polite">
+        <div class="hero">
+          <small>Estimated daily profit after entered costs</small>
+          <div class="amount" id="dailyProfit">R0.00</div>
+          <div class="muted" id="profitMessage"></div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><span>Revenue per day</span><strong id="revenue">R0.00</strong></div>
+          <div class="metric"><span>Variable food and serving cost per plate</span><strong id="plateCost">R0.00</strong></div>
+          <div class="metric"><span>Profit contribution per plate before daily expenses</span><strong id="contribution">R0.00</strong></div>
+          <div class="metric"><span>Total daily operating expenses</span><strong id="dailyExpenses">R0.00</strong></div>
+          <div class="metric"><span>Estimated monthly profit</span><strong id="monthlyProfit">R0.00</strong></div>
+          <div class="metric"><span>Break-even plates per day</span><strong id="breakEven">0 plates</strong></div>
+          <div class="metric"><span>Estimated profit margin</span><strong id="margin">0%</strong></div>
+          <div class="metric"><span>Estimated monthly revenue</span><strong id="monthlyRevenue">R0.00</strong></div>
+        </div>
+
+        <h3>Daily cost breakdown</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Estimated cost</th></tr></thead>
+            <tbody id="breakdown"></tbody>
+          </table>
+        </div>
+
+        <div class="notice warning">
+          This is estimated operating profit before tax, loan repayments, owner drawings, spoilage not included in your inputs, equipment replacement and other unentered costs. Actual results may differ.
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="secondary" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How to price shisanyama plates</h2>
+      <p class="muted">Start with the cost of the meat portion, sides, seasoning and serving materials. Add up the daily expenses that keep the business running, then compare your selling price with the total cost. Use actual portion sizes and supplier prices for a useful estimate.</p>
+
+      <h3>Know your contribution per plate</h3>
+      <p class="muted">The selling price minus the ingredients and serving cost gives the amount available to cover daily expenses. Once those expenses are covered, the remainder is estimated operating profit.</p>
+
+      <h3>Plan for quieter days</h3>
+      <p class="muted">Sales can change with the weather, location, weekends and events. Test a lower daily sales figure to see whether your business can still cover its costs.</p>
+
+      <h3>Watch food waste</h3>
+      <p class="muted">Track what you buy, what you prepare, what you sell and what remains. Waste, spoilage and oversized portions can reduce profit even when sales look strong.</p>
+    </section>
+
+    <section class="card">
+      <h2>Shisanyama business FAQs</h2>
+
+      <div class="faq">
+        <h3>How much profit can a shisanyama make per day?</h3>
+        <p class="muted">Profit depends on selling prices, portion sizes, daily sales and expenses. Enter your real numbers to estimate a result for your own operation.</p>
+      </div>
+
+      <div class="faq">
+        <h3>How do I calculate the cost of one plate?</h3>
+        <p class="muted">Add the cost of all ingredients and serving materials used for one plate. Include realistic portions of meat, sides, sauces and packaging.</p>
+      </div>
+
+      <div class="faq">
+        <h3>What is break-even sales?</h3>
+        <p class="muted">Break-even is the number of plates you need to sell to cover the daily operating expenses included in the calculator. It is an estimate, not a sales guarantee.</p>
+      </div>
+
+      <div class="faq">
+        <h3>Does the calculator include tax?</h3>
+        <p class="muted">No. It estimates operating profit from the costs entered. It does not calculate income tax, VAT, loan interest or other obligations.</p>
+      </div>
+
+      <div class="faq">
+        <h3>Can I use this for a food stall or braai business?</h3>
+        <p class="muted">Yes. The tool can help with basic plate costing for a braai stall or similar food business. Change the inputs to match your menu and expenses.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Disclaimer</h2>
+      <p class="muted">This calculator provides estimates for general information and planning only. Example values are not market-price recommendations. Results depend on the accuracy and completeness of your inputs and do not guarantee business performance. The calculator does not provide accounting, tax or financial advice. TMI Studios accepts no liability for decisions made using these estimates.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>Small tools for everyday South African life.</div>
+    <div class="footer-links">
+      <a href="../index.html">TMI Studios Home</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+    </div>
+    <div>© <span id="year"></span> TMI Studios</div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("profitForm");
+    const results = document.getElementById("results");
+    const errorBox = document.getElementById("error");
+
+    const money = value => new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR"
+    }).format(Number.isFinite(value) ? value : 0);
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      errorBox.classList.remove("show");
+
+      const ids = [
+        "platePrice", "plates", "meat", "sides", "seasoning", "packaging",
+        "charcoal", "staff", "rent", "transport", "other", "days"
+      ];
+
+      const values = {};
+      ids.forEach(id => {
+        values[id] = Number(document.getElementById(id).value);
+      });
+
+      if (Object.values(values).some(value => !Number.isFinite(value) || value < 0) ||
+          values.platePrice <= 0 ||
+          !Number.isInteger(values.plates) ||
+          !Number.isInteger(values.days) ||
+          values.days < 1 || values.days > 31) {
+        errorBox.textContent = "Enter valid non-negative amounts, a selling price greater than zero, whole plates sold and 1 to 31 trading days.";
+        errorBox.classList.add("show");
+        results.classList.remove("show");
+        return;
+      }
+
+      const unitCost = values.meat + values.sides + values.seasoning + values.packaging;
+      const contribution = values.platePrice - unitCost;
+      const revenue = values.platePrice * values.plates;
+      const variableCosts = unitCost * values.plates;
+
+      const expenses = [
+        ["Meat, sides, seasoning and packaging", variableCosts],
+        ["Charcoal, wood or gas", values.charcoal],
+        ["Staff wages", values.staff],
+        ["Rent or stall fee", values.rent],
+        ["Transport and delivery", values.transport],
+        ["Other expenses", values.other]
+      ];
+
+      const dailyFixedCosts =
+        values.charcoal + values.staff + values.rent +
+        values.transport + values.other;
+
+      const totalCosts = variableCosts + dailyFixedCosts;
+      const profit = revenue - totalCosts;
+      const monthlyRevenue = revenue * values.days;
+      const monthlyProfit = profit * values.days;
+      const margin = revenue > 0 ? profit / revenue * 100 : 0;
+
+      let breakEven;
+      if (contribution > 0) {
+        breakEven = Math.ceil(dailyFixedCosts / contribution);
+      } else {
+        breakEven = null;
+      }
+
+      document.getElementById("dailyProfit").textContent = money(profit);
+      document.getElementById("profitMessage").textContent =
+        profit > 0 ? "Your entered figures show an operating profit." :
+        profit === 0 ? "Your entered figures are at break-even for the day." :
+        "Your entered figures show a daily operating loss.";
+      document.getElementById("revenue").textContent = money(revenue);
+      document.getElementById("plateCost").textContent = money(unitCost);
+      document.getElementById("contribution").textContent = money(contribution);
+      document.getElementById("dailyExpenses").textContent = money(totalCosts);
+      document.getElementById("monthlyProfit").textContent = money(monthlyProfit);
+      document.getElementById("monthlyRevenue").textContent = money(monthlyRevenue);
+      document.getElementById("breakEven").textContent =
+        breakEven === null ? "Not reached at this price" : breakEven + " plates";
+      document.getElementById("margin").textContent =
+        margin.toLocaleString("en-ZA", { maximumFractionDigits: 1 }) + "%";
+
+      const tbody = document.getElementById("breakdown");
+      tbody.replaceChildren();
+
+      expenses.forEach(([label, value]) => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("td");
+        const amountCell = document.createElement("td");
+        nameCell.textContent = label;
+        amountCell.textContent = money(value);
+        row.append(nameCell, amountCell);
+        tbody.appendChild(row);
+      });
+
+      const totalRow = document.createElement("tr");
+      const totalLabel = document.createElement("th");
+      const totalValue = document.createElement("th");
+      totalLabel.textContent = "Total daily costs";
+      totalValue.textContent = money(totalCosts);
+      totalRow.append(totalLabel, totalValue);
+      tbody.appendChild(totalRow);
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      form.reset();
+      errorBox.classList.remove("show");
+      results.classList.remove("show");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
