@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#252525">
+<title>Side Hustle Pricing Calculator South Africa | TMI Studios</title>
+<meta name="description" content="Calculate what to charge for your side hustle in South Africa. Work out materials, labour, overheads, profit margins and monthly income goals for free.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/side-hustle/">
+<style>
+:root {
+  --ink:#252525;
+  --paper:#fffdf8;
+  --bg:#f5f1eb;
+  --coral:#ff735e;
+  --coral-dark:#d94f3c;
+  --muted:#77736f;
+  --line:#e8e0d8;
+  --green:#267456;
+  --red:#b83f38;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.5;
+}
+a { color:inherit; }
+button,input,select { font:inherit; }
+header {
+  background:var(--ink);
+  color:white;
+  padding:18px 18px 43px;
+  border-bottom:6px solid var(--coral);
+}
+.nav,.wrap { max-width:1040px; margin:auto; }
+.nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.brand { font-size:14px; font-weight:900; letter-spacing:1.5px; }
+.brand span { color:var(--coral); }
+.nav a { color:#fff; font-size:13px; text-decoration:none; }
+.hero { max-width:820px; margin:39px auto 0; }
+.kicker {
+  display:inline-block;
+  background:var(--coral);
+  color:var(--ink);
+  padding:5px 9px;
+  border-radius:4px;
+  font-size:10px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+}
+h1 {
+  font-size:clamp(39px,8vw,76px);
+  line-height:.99;
+  letter-spacing:-3px;
+  margin:17px 0;
+  font-weight:900;
+}
+h1 span { color:var(--coral); }
+.hero p { color:#d7d3ce; max-width:580px; margin:0; font-size:15px; }
+.wrap { padding:24px 15px 46px; }
+.tip {
+  border:1px solid #e4b5a8;
+  background:#fff0e9;
+  padding:14px 16px;
+  border-radius:10px;
+  font-size:13px;
+  margin-bottom:20px;
+}
+.layout {
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);
+  gap:20px;
+  align-items:start;
+}
+.card {
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:18px;
+}
+.heading {
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:7px;
+}
+.num {
+  background:var(--coral);
+  color:var(--ink);
+  min-width:35px;
+  height:35px;
+  border-radius:7px;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+  font-weight:900;
+}
+h2 { margin:2px 0; font-size:19px; }
+.intro { margin:0 0 18px; color:var(--muted); font-size:13px; }
+.field { margin-top:15px; }
+.field label {
+  display:block;
+  margin-bottom:6px;
+  font-size:13px;
+  font-weight:800;
+}
+.field small {
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:normal;
+  margin-top:4px;
+}
+input,select {
+  width:100%;
+  min-width:0;
+  border:1px solid #d9d0c7;
+  border-radius:8px;
+  background:white;
+  color:var(--ink);
+  padding:11px 12px;
+}
+input:focus,select:focus,button:focus-visible,a:focus-visible,summary:focus-visible {
+  outline:3px solid #f4a79b;
+  outline-offset:2px;
+}
+.two {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.currency { position:relative; }
+.currency:before {
+  content:"R";
+  position:absolute;
+  top:11px;
+  left:12px;
+  color:var(--muted);
+  font-size:14px;
+  pointer-events:none;
+}
+.currency input { padding-left:29px; }
+.percent { position:relative; }
+.percent:after {
+  content:"%";
+  position:absolute;
+  top:11px;
+  right:12px;
+  color:var(--muted);
+  pointer-events:none;
+}
+.percent input { padding-right:29px; }
+.examples {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:13px;
+}
+.examples button {
+  background:#f3eee7;
+  border:1px solid #e4dacf;
+  color:var(--ink);
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+.examples button:hover { background:#ffe1d9; }
+.summary {
+  position:sticky;
+  top:12px;
+  background:var(--ink);
+  color:white;
+  border-radius:15px;
+  padding:23px;
+}
+.sum-kicker {
+  color:var(--coral);
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:900;
+  letter-spacing:1.6px;
+}
+.price {
+  font-size:clamp(40px,7vw,57px);
+  font-weight:900;
+  letter-spacing:-2px;
+  line-height:1.1;
+  overflow-wrap:anywhere;
+  margin:7px 0 4px;
+}
+.sum-note { color:#c9c4bd; font-size:12px; margin-bottom:19px; }
+.stat {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0;
+  border-top:1px solid #ffffff20;
+  font-size:13px;
+}
+.stat strong { text-align:right; }
+.highlight {
+  background:var(--coral);
+  color:var(--ink);
+  border-radius:10px;
+  padding:15px;
+  margin-top:16px;
+}
+.highlight .small { font-size:12px; font-weight:800; }
+.highlight .big {
+  font-size:29px;
+  line-height:1.15;
+  font-weight:900;
+  margin:5px 0;
+  overflow-wrap:anywhere;
+}
+.highlight p { margin:0; font-size:12px; }
+.message {
+  margin-top:14px;
+  border:1px solid #ffffff24;
+  border-radius:9px;
+  padding:12px;
+  font-size:12px;
+  color:#e4dfd8;
+}
+.actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:17px; }
+button {
+  border:0;
+  background:var(--coral);
+  color:var(--ink);
+  border-radius:8px;
+  padding:12px 14px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:12px;
+}
+button.secondary {
+  background:transparent;
+  border:1px solid #827d76;
+  color:white;
+}
+.guide {
+  display:grid;
+  gap:12px;
+  margin-top:15px;
+}
+.guide-item {
+  padding:12px;
+  background:#f5f1eb;
+  border-radius:8px;
+  font-size:12px;
+}
+.guide-item strong { display:block; margin-bottom:3px; }
+details {
+  margin-top:14px;
+  padding:12px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:9px;
+}
+summary { cursor:pointer; font-size:12px; font-weight:900; }
+details p,details li { font-size:12px; color:#615d58; }
+details ul { padding-left:18px; }
+footer {
+  background:#1c1c1c;
+  color:#d8d3cc;
+  text-align:center;
+  padding:25px 16px;
+  font-size:12px;
+}
+footer p { margin:8px 0; }
+.footer-links {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:9px 18px;
+  margin:15px auto 0;
+}
+.footer-links a {
+  color:var(--coral);
+  text-decoration:none;
+}
+.footer-links a:hover { text-decoration:underline; }
+@media(max-width:740px) {
+  .layout { grid-template-columns:1fr; }
+  .summary { position:static; }
+  .card { padding:17px; }
+  h1 { letter-spacing:-1.7px; }
+}
+@media(max-width:380px) {
+  .two { grid-template-columns:1fr; gap:0; }
+}
+@media print {
+  header { padding:15px; }
+  .layout { display:block; }
+  .summary { position:static; background:white; color:black; border:1px solid #aaa; }
+  .sum-kicker,.sum-note { color:#333; }
+  .message { color:#333; }
+  .highlight { border:1px solid #aaa; }
+  .actions,.examples,footer { display:none; }
+  body { background:white; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">TMI <span>STUDIOS</span></div>
+    <a href="../index.html">← Main site</a>
+  </div>
+  <div class="hero">
+    <div class="kicker">Your hustle deserves profit</div>
+    <h1>Stop guessing.<br><span>Price like a boss.</span></h1>
+    <p>Work out what it really costs to deliver your service, set a price that makes sense and see how your side hustle could contribute to your monthly income goal.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="tip">
+    <strong>Quick reminder:</strong> Your materials aren't the only cost. Your time, electricity, travel, packaging and other business expenses count too.
+  </div>
+
+  <div class="layout">
+    <div>
+      <section class="card">
+        <div class="heading">
+          <div class="num">01</div>
+          <div>
+            <h2>What are you selling?</h2>
+            <p class="intro">Choose a service or product to help label your plan.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="business">Business or service name</label>
+          <input id="business" type="text" maxlength="100" placeholder="e.g. B's Beauty Studio">
+        </div>
+        <div class="field">
+          <label for="service">Type of hustle</label>
+          <select id="service">
+            <option value="Nails">Nails</option>
+            <option value="Makeup">Makeup</option>
+            <option value="Lashes">Lashes</option>
+            <option value="Hair and wigs">Hair and wigs</option>
+            <option value="Baking">Baking</option>
+            <option value="Photography">Photography</option>
+            <option value="Freelance service">Freelance service</option>
+            <option value="Cleaning">Cleaning</option>
+            <option value="Handmade products">Handmade products</option>
+            <option value="Other service or product">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="materials">Materials or ingredients per job (R)</label>
+          <div class="currency"><input id="materials" type="number" min="0" step="5" value="100"></div>
+          <small>Include products, ingredients, packaging and consumables used for this job.</small>
+        </div>
+        <div class="field">
+          <label for="extra">Other direct costs per job (R)</label>
+          <div class="currency"><input id="extra" type="number" min="0" step="5" value="20"></div>
+          <small>For example, delivery, travel or payment fees attributable to this job.</small>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="heading">
+          <div class="num">02</div>
+          <div>
+            <h2>Pay yourself too</h2>
+            <p class="intro">Your time is part of the cost of doing business.</p>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field">
+            <label for="hours">Hours per job</label>
+            <input id="hours" type="number" min="0" step="0.25" value="2">
+          </div>
+          <div class="field">
+            <label for="hourly">Your hourly rate (R)</label>
+            <div class="currency"><input id="hourly" type="number" min="0" step="5" value="100"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="overhead">Overhead allocated per job (R)</label>
+          <div class="currency"><input id="overhead" type="number" min="0" step="5" value="20"></div>
+          <small>Share of rent, electricity, internet, equipment and other running costs. Estimate this using your expected number of jobs.</small>
+        </div>
+        <div class="field">
+          <label for="margin">Target profit margin (%)</label>
+          <div class="percent"><input id="margin" type="number" min="0" max="90" step="1" value="30"></div>
+          <small>Margin is the share of your selling price left after the costs entered above. It is not the same as adding 30% to your costs.</small>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="heading">
+          <div class="num">03</div>
+          <div>
+            <h2>Compare your price</h2>
+            <p class="intro">See whether your current price covers your costs and target margin.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="current">What do you charge right now? (R)</label>
+          <div class="currency"><input id="current" type="number" min="0" step="10" value="350"></div>
+        </div>
+        <div class="field">
+          <label for="jobs">Jobs or items sold per month</label>
+          <input id="jobs" type="number" min="0" step="1" value="20">
+        </div>
+        <div class="field">
+          <label for="goal">Monthly profit goal (R)</label>
+          <div class="currency"><input id="goal" type="number" min="0" step="100" value="5000"></div>
+          <small>Profit here means sales minus the costs entered, including your labour allowance. It is not your personal take-home after tax.</small>
+        </div>
+        <div class="examples">
+          <button type="button" data-example="nails">Try nails</button>
+          <button type="button" data-example="baking">Try baking</button>
+          <button type="button" data-example="makeup">Try makeup</button>
+        </div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="summary" aria-live="polite">
+        <div class="sum-kicker">Your pricing game plan</div>
+        <div class="sum-note" id="serviceLabel">Nails · estimated per job</div>
+        <div class="sum-note">Suggested selling price</div>
+        <div class="price" id="suggested">R0</div>
+        <div class="stat"><span>Total cost per job</span><strong id="totalCost">R0</strong></div>
+        <div class="stat"><span>Materials and direct costs</span><strong id="directCost">R0</strong></div>
+        <div class="stat"><span>Labour allowance</span><strong id="labourCost">R0</strong></div>
+        <div class="stat"><span>Allocated overhead</span><strong id="overheadCost">R0</strong></div>
+        <div class="stat"><span>Profit at suggested price</span><strong id="targetProfit">R0</strong></div>
+        <div class="highlight">
+          <div class="small">Profit at your current price</div>
+          <div class="big" id="currentProfit">R0</div>
+          <p id="currentMessage">Enter your costs and current price.</p>
+        </div>
+        <div class="stat"><span>Estimated monthly profit</span><strong id="monthlyProfit">R0</strong></div>
+        <div class="stat"><span>Jobs needed for profit goal</span><strong id="jobsNeeded">—</strong></div>
+        <div class="message" id="goalMessage">Your results will update as you change the figures.</div>
+        <div class="actions">
+          <button type="button" id="share">Share results</button>
+          <button type="button" class="secondary" id="print">Print / Save PDF</button>
+          <button type="button" class="secondary" id="reset">Reset</button>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:18px">
+        <h2>Price with purpose</h2>
+        <div class="guide">
+          <div class="guide-item">
+            <strong>1. Know your costs</strong>
+            Count the supplies you use, your time and a fair share of running costs.
+          </div>
+          <div class="guide-item">
+            <strong>2. Check your market</strong>
+            Research comparable offers, quality and what your customers value. A calculator cannot tell you what every customer will pay.
+          </div>
+          <div class="guide-item">
+            <strong>3. Review regularly</strong>
+            Supplier prices, travel costs and demand can change. Revisit your pricing when your costs change.
+          </div>
+        </div>
+        <details>
+          <summary>Disclaimer and calculation notes</summary>
+          <p>This calculator is an independent planning tool from TMI Studios. It does not provide financial, accounting, tax or legal advice, and it does not guarantee sales, profit or a particular income.</p>
+          <p>Results depend on the accuracy and completeness of the figures entered. The tool does not automatically include tax, VAT, refunds, unsold stock, loan repayments, unexpected costs or every possible business expense. Add relevant costs to your estimates.</p>
+          <p>The suggested price is a mathematical estimate based on the costs and margin entered. It is not a market valuation or a recommendation that customers will accept that price.</p>
+          <p>Profit shown is before any unentered costs and taxes. The hourly labour amount is included as a cost of the job, so the displayed profit is what remains after that labour allowance.</p>
+        </details>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div><strong>TMI Studios</strong> · Build the hustle. Know your numbers.</div>
+  <p>Independent business-planning tool. Estimates only; no results are guaranteed.</p>
+  <nav class="footer-links" aria-label="Legal and site links">
+    <a href="../index.html">Home</a>
+    <a href="../privacy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms of Use</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  const ids = [
+    "materials", "extra", "hours", "hourly", "overhead",
+    "margin", "current", "jobs", "goal"
+  ];
+
+  function val(id) {
+    const value = Number(document.getElementById(id).value);
+    return Number.isFinite(value) ? Math.max(0, value) : 0;
+  }
+
+  function money(value) {
+    const rounded = Math.round(value);
+    return (rounded < 0 ? "−R" : "R") +
+      Math.abs(rounded).toLocaleString("en-ZA");
+  }
+
+  function calculate() {
+    const materials = val("materials");
+    const extra = val("extra");
+    const hours = val("hours");
+    const hourly = val("hourly");
+    const overhead = val("overhead");
+    const margin = Math.min(90, val("margin"));
+    const current = val("current");
+    const jobs = Math.floor(val("jobs"));
+    const goal = val("goal");
+
+    const direct = materials + extra;
+    const labour = hours * hourly;
+    const cost = direct + labour + overhead;
+    const targetPrice = margin >= 100 ? cost : cost / (1 - margin / 100);
+    const targetProfit = targetPrice - cost;
+    const profitAtCurrent = current - cost;
+    const monthlyProfit = profitAtCurrent * jobs;
+
+    document.getElementById("serviceLabel").textContent =
+      document.getElementById("service").value + " · estimated per job";
+    document.getElementById("suggested").textContent = money(targetPrice);
+    document.getElementById("totalCost").textContent = money(cost);
+    document.getElementById("directCost").textContent = money(direct);
+    document.getElementById("labourCost").textContent = money(labour);
+    document.getElementById("overheadCost").textContent = money(overhead);
+    document.getElementById("targetProfit").textContent = money(targetProfit);
+    document.getElementById("currentProfit").textContent = money(profitAtCurrent);
+    document.getElementById("monthlyProfit").textContent = money(monthlyProfit);
+
+    const currentMessage = document.getElementById("currentMessage");
+    if (profitAtCurrent < 0) {
+      currentMessage.textContent = "Your current price is below the costs entered.";
+    } else if (profitAtCurrent === 0) {
+      currentMessage.textContent = "Your current price covers your entered costs, but leaves no profit.";
+    } else if (current < targetPrice) {
+      currentMessage.textContent = "You have a positive balance after costs, but are below your target margin.";
+    } else {
+      currentMessage.textContent = "Your current price meets or exceeds your target price.";
+    }
+
+    const jobsNeeded = document.getElementById("jobsNeeded");
+    if (goal === 0) {
+      jobsNeeded.textContent = "0";
+    } else if (profitAtCurrent <= 0) {
+      jobsNeeded.textContent = "Not achievable at current price";
+    } else {
+      jobsNeeded.textContent = Math.ceil(goal / profitAtCurrent).toLocaleString("en-ZA");
+    }
+
+    const goalMessage = document.getElementById("goalMessage");
+    if (jobs === 0) {
+      goalMessage.textContent = "Enter the number of jobs you expect to complete each month to estimate monthly profit.";
+    } else if (monthlyProfit < 0) {
+      goalMessage.textContent = "At your current price, this workload would leave you " +
+        money(Math.abs(monthlyProfit)) + " below your entered costs each month.";
+    } else if (monthlyProfit < goal) {
+      goalMessage.textContent = "At this price and workload, you are " +
+        money(goal - monthlyProfit) + " below your monthly profit goal.";
+    } else {
+      goalMessage.textContent = "At this price and workload, your estimated profit reaches your monthly goal. Actual results may vary.";
+    }
+  }
+
+  ids.forEach(function (id) {
+    const el = document.getElementById(id);
+    el.addEventListener("input", calculate);
+    el.addEventListener("change", function () {
+      if (el.value !== "" && Number(el.value) < 0) el.value = 0;
+      if (id === "margin" && Number(el.value) > 90) el.value = 90;
+      calculate();
+    });
+  });
+
+  document.getElementById("service").addEventListener("change", calculate);
+
+  const examples = {
+    nails: {
+      service:"Nails", materials:100, extra:20, hours:2,
+      hourly:100, overhead:20, margin:30, current:350, jobs:20, goal:5000
+    },
+    baking: {
+      service:"Baking", materials:180, extra:30, hours:3,
+      hourly:100, overhead:35, margin:30, current:600, jobs:15, goal:5000
+    },
+    makeup: {
+      service:"Makeup", materials:120, extra:40, hours:2,
+      hourly:150, overhead:30, margin:35, current:600, jobs:15, goal:7000
+    }
+  };
+
+  document.querySelectorAll("[data-example]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const example = examples[button.dataset.example];
+      Object.keys(example).forEach(function (key) {
+        document.getElementById(key).value = example[key];
+      });
+      calculate();
+    });
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    document.getElementById("business").value = "";
+    document.getElementById("service").value = "Nails";
+    document.getElementById("materials").value = 100;
+    document.getElementById("extra").value = 20;
+    document.getElementById("hours").value = 2;
+    document.getElementById("hourly").value = 100;
+    document.getElementById("overhead").value = 20;
+    document.getElementById("margin").value = 30;
+    document.getElementById("current").value = 350;
+    document.getElementById("jobs").value = 20;
+    document.getElementById("goal").value = 5000;
+    calculate();
+  });
+
+  document.getElementById("print").addEventListener("click", function () {
+    window.print();
+  });
+
+  document.getElementById("share").addEventListener("click", async function () {
+    const business = document.getElementById("business").value.trim();
+    const text = [
+      "TMI Studios — Side Hustle Pricing Calculator",
+      business ? "Business: " + business : "",
+      "Service: " + document.getElementById("service").value,
+      "Suggested price: " + document.getElementById("suggested").textContent,
+      "Cost per job: " + document.getElementById("totalCost").textContent,
+      "Profit at current price: " + document.getElementById("currentProfit").textContent,
+      "Estimated monthly profit: " + document.getElementById("monthlyProfit").textContent,
+      "Estimate only; actual business results may vary."
+    ].filter(Boolean).join("\n");
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title:"Side Hustle Pricing Plan", text:text });
+      } catch (error) {
+        if (error.name !== "AbortError") copyText(text);
+      }
+    } else {
+      copyText(text);
+    }
+  });
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        function () { alert("Your summary has been copied."); },
+        function () { window.prompt("Copy your pricing summary:", text); }
+      );
+    } else {
+      window.prompt("Copy your pricing summary:", text);
+    }
+  }
+
+  calculate();
+})();
+</script>
+</body>
+</html>
