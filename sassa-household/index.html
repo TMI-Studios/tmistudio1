@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#243b32">
+<title>SASSA Household Grant Planner | TMI Studios</title>
+<meta name="description" content="Free South African household grant income planner. Estimate monthly grant income, add household expenses and see your budget gap.">
+<style>
+:root {
+  --green: #243b32;
+  --green2: #355c49;
+  --cream: #f7f4eb;
+  --paper: #fffdf7;
+  --gold: #e9b949;
+  --ink: #222b25;
+  --muted: #6d776f;
+  --line: #e4e4d9;
+  --red: #a6443c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+header {
+  background: var(--green);
+  color: white;
+  padding: 18px 20px 48px;
+  border-bottom: 5px solid var(--gold);
+}
+.nav, .wrap { max-width: 1000px; margin: auto; }
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.brand { font-weight: 800; letter-spacing: .4px; }
+.brand span { color: var(--gold); }
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+}
+.hero { max-width: 760px; margin: 38px auto 0; }
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: bold;
+}
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: clamp(34px, 7vw, 57px);
+  line-height: 1.08;
+  margin: 12px 0;
+}
+.hero p { max-width: 580px; color: #e0e8e1; margin-bottom: 0; }
+.wrap { padding: 24px 16px 48px; }
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 20px;
+  align-items: start;
+}
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px #263d2c08;
+}
+h2 { font-size: 19px; margin: 0 0 5px; }
+.intro { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+.grant {
+  display: grid;
+  grid-template-columns: 24px 1fr 112px;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.grant:last-child { border-bottom: 0; }
+.grant input[type="checkbox"] {
+  width: 18px; height: 18px; accent-color: var(--green2);
+}
+.grant-name { font-size: 14px; font-weight: 700; }
+.grant-note { display: block; color: var(--muted); font-size: 11px; }
+input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d7dbd0;
+  background: white;
+  border-radius: 9px;
+  padding: 11px 9px;
+  font: inherit;
+  color: var(--ink);
+}
+.amount { text-align: right; }
+.field { margin-top: 15px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.field small { color: var(--muted); font-weight: normal; }
+.summary {
+  background: var(--green);
+  color: white;
+  border-radius: 16px;
+  padding: 23px;
+  position: sticky;
+  top: 12px;
+}
+.summary .label { color: #d7e1d8; font-size: 13px; }
+.big {
+  font-size: clamp(30px, 6vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 4px 0 20px;
+  overflow-wrap: anywhere;
+}
+.stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #ffffff2b;
+  padding: 12px 0;
+  font-size: 13px;
+}
+.stat strong { text-align: right; }
+.result {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #ffffff12;
+}
+.result .big { font-size: 28px; margin: 3px 0; }
+.result p { font-size: 12px; color: #e0e8e1; margin: 0; }
+button, .button {
+  display: inline-block;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background: var(--gold);
+  color: #26372c;
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+button.secondary { background: transparent; border: 1px solid #b8c6b9; color: white; }
+.links { display: grid; gap: 10px; margin-top: 15px; }
+.links a { color: var(--green2); font-weight: bold; font-size: 14px; }
+.notice {
+  margin-top: 18px;
+  padding: 15px;
+  background: #f1ead7;
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  font-size: 12px;
+  color: #514a3b;
+}
+footer {
+  background: #1b2c24;
+  color: #dce5dc;
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 12px;
+}
+footer a { color: var(--gold); }
+@media (max-width: 720px) {
+  .layout { grid-template-columns: 1fr; }
+  .summary { position: static; }
+  .grant { grid-template-columns: 22px 1fr 100px; gap: 8px; }
+  .card { padding: 17px; }
+  .hero { margin-top: 30px; }
+}
+@media print {
+  header { padding: 18px; }
+  .actions, footer, .links { display: none; }
+  .layout { display: block; }
+  .summary { position: static; background: white; color: black; border: 1px solid #ccc; }
+  .summary .label, .result p { color: #333; }
+  .result { background: #eee; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">TMI <span>STUDIOS</span></div>
+    <a href="../../index.html">← Main site</a>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">Your money, made clearer</div>
+    <h1>Make your household budget make sense.</h1>
+    <p>Plan around your household's possible grant income, everyday expenses and what may be left at the end of the month.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="layout">
+    <div>
+      <section class="card">
+        <h2>01 — Monthly grant income</h2>
+        <p class="intro">Select the grants your household receives or wants to include in a planning estimate. Change any amount if needed.</p>
+
+        <div class="grant">
+          <input type="checkbox" id="old" class="grant-check">
+          <label for="old"><span class="grant-name">Older Persons Grant</span><span class="grant-note">Age 60 and older</span></label>
+          <input class="amount grant-amount" id="oldAmount" type="number" min="0" step="10" value="2400" aria-label="Older Persons Grant monthly amount">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="disability" class="grant-check">
+          <label for="disability"><span class="grant-name">Disability Grant</span><span class="grant-note">Subject to assessment and rules</span></label>
+          <input class="amount grant-amount" id="disabilityAmount" type="number" min="0" step="10" value="2400" aria-label="Disability Grant monthly amount">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="care" class="grant-check">
+          <label for="care"><span class="grant-name">Care Dependency Grant</span><span class="grant-note">For qualifying care-dependent children</span></label>
+          <input class="amount grant-amount" id="careAmount" type="number" min="0" step="10" value="2400" aria-label="Care Dependency Grant monthly amount">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="child" class="grant-check">
+          <label for="child"><span class="grant-name">Child Support Grant</span><span class="grant-note">Enter the number of children below</span></label>
+          <input class="amount grant-amount" id="childAmount" type="number" min="0" step="10" value="580" aria-label="Child Support Grant amount per child">
+        </div>
+        <div class="field">
+          <label for="children">Number of Child Support Grants to include</label>
+          <input type="number" id="children" min="0" max="50" step="1" value="1">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="foster" class="grant-check">
+          <label for="foster"><span class="grant-name">Foster Child Grant</span><span class="grant-note">For a qualifying court-placed foster child</span></label>
+          <input class="amount grant-amount" id="fosterAmount" type="number" min="0" step="10" value="1290" aria-label="Foster Child Grant amount">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="srd" class="grant-check">
+          <label for="srd"><span class="grant-name">SRD Grant</span><span class="grant-note">Social Relief of Distress</span></label>
+          <input class="amount grant-amount" id="srdAmount" type="number" min="0" step="10" value="370" aria-label="SRD Grant amount">
+        </div>
+        <div class="grant">
+          <input type="checkbox" id="otherGrant" class="grant-check">
+          <label for="otherGrant"><span class="grant-name">Other grant / support</span><span class="grant-note">Use for another amount you want to plan with</span></label>
+          <input class="amount grant-amount" id="otherAmount" type="number" min="0" step="10" value="0" aria-label="Other monthly support amount">
+        </div>
+        <div class="notice">These are planning amounts, not an eligibility test. Grant rules differ. Check current rules with SASSA, and do not assume that selecting multiple grants means one person can receive them all.</div>
+      </section>
+
+      <section class="card">
+        <h2>02 — Other household income</h2>
+        <p class="intro">Add money coming in from work, family contributions or other sources.</p>
+        <div class="field">
+          <label for="income">Other monthly income (R)</label>
+          <input type="number" id="income" min="0" step="50" value="0">
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>03 — Monthly household expenses</h2>
+        <p class="intro">Use your actual amounts where possible. Estimates are fine for an initial plan.</p>
+        <div class="field"><label for="rent">Rent / housing (R)</label><input type="number" id="rent" min="0" step="50" value="0"></div>
+        <div class="field"><label for="food">Food and groceries (R)</label><input type="number" id="food" min="0" step="50" value="0"></div>
+        <div class="field"><label for="electricity">Electricity and water (R)</label><input type="number" id="electricity" min="0" step="50" value="0"></div>
+        <div class="field"><label for="transport">Transport (R)</label><input type="number" id="transport" min="0" step="50" value="0"></div>
+        <div class="field"><label for="school">School and childcare (R)</label><input type="number" id="school" min="0" step="50" value="0"></div>
+        <div class="field"><label for="airtime">Airtime and data (R)</label><input type="number" id="airtime" min="0" step="20" value="0"></div>
+        <div class="field"><label for="health">Health and personal care (R)</label><input type="number" id="health" min="0" step="50" value="0"></div>
+        <div class="field"><label for="debt">Debt repayments (R)</label><input type="number" id="debt" min="0" step="50" value="0"></div>
+        <div class="field"><label for="otherExpenses">Other expenses (R)</label><input type="number" id="otherExpenses" min="0" step="50" value="0"></div>
+        <div class="actions">
+          <button type="button" id="reset">Reset planner</button>
+          <button type="button" class="secondary" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="summary" aria-live="polite">
+        <div class="label">Estimated monthly household income</div>
+        <div class="big" id="totalIncome">R0</div>
+        <div class="stat"><span>Selected grants</span><strong id="grantTotal">R0</strong></div>
+        <div class="stat"><span>Other income</span><strong id="otherIncomeTotal">R0</strong></div>
+        <div class="stat"><span>Monthly expenses</span><strong id="expenseTotal">R0</strong></div>
+        <div class="result">
+          <div class="label">Your estimated monthly balance</div>
+          <div class="big" id="balance">R0</div>
+          <p id="balanceMessage">Add your income and expenses to start planning.</p>
+        </div>
+        <div class="actions">
+          <button type="button" id="share">Share summary</button>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:18px">
+        <h2>Useful official resources</h2>
+        <p class="intro">Confirm eligibility, current amounts and application details directly with SASSA.</p>
+        <div class="links">
+          <a href="https://services.sassa.gov.za/portal/r/sassa/sassa/grants-information" target="_blank" rel="noopener noreferrer">Grant types and eligibility ↗</a>
+          <a href="https://services.sassa.gov.za/portal/r/sassa/sassa/home" target="_blank" rel="noopener noreferrer">SASSA services portal ↗</a>
+          <a href="https://www.gov.za/" target="_blank" rel="noopener noreferrer">South African Government ↗</a>
+        </div>
+        <div class="notice">Never pay someone who promises to approve a grant. Keep your PIN, passwords and one-time codes private.</div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div><strong>TMI Studios</strong> · Practical tools for everyday South African life</div>
+  <p>This planner provides estimates only. It is not affiliated with SASSA and does not determine eligibility or guarantee payment.</p>
+  <a href="../../index.html">Explore more tools</a>
+</footer>
+
+<script>
+(function () {
+  const grantChecks = Array.from(document.querySelectorAll(".grant-check"));
+  const grantAmounts = Array.from(document.querySelectorAll(".grant-amount"));
+  const expenseIds = ["rent", "food", "electricity", "transport", "school", "airtime", "health", "debt", "otherExpenses"];
+  const incomeInput = document.getElementById("income");
+  const childCount = document.getElementById("children");
+
+  function amount(id) {
+    const el = document.getElementById(id);
+    const n = Number(el.value);
+    return Number.isFinite(n) ? Math.max(0, n) : 0;
+  }
+
+  function money(value) {
+    return "R" + Math.round(value).toLocaleString("en-ZA");
+  }
+
+  function calculate() {
+    let grants = 0;
+
+    grantChecks.forEach(function (check) {
+      if (!check.checked) return;
+      const suffix = check.id === "otherGrant" ? "otherAmount" : check.id + "Amount";
+      let count = 1;
+      if (check.id === "child") {
+        count = Math.floor(amount("children"));
+      }
+      grants += amount(suffix) * count;
+    });
+
+    const otherIncome = amount("income");
+    const expenses = expenseIds.reduce((sum, id) => sum + amount(id), 0);
+    const totalIncome = grants + otherIncome;
+    const balance = totalIncome - expenses;
+
+    document.getElementById("grantTotal").textContent = money(grants);
+    document.getElementById("otherIncomeTotal").textContent = money(otherIncome);
+    document.getElementById("totalIncome").textContent = money(totalIncome);
+    document.getElementById("expenseTotal").textContent = money(expenses);
+    document.getElementById("balance").textContent = (balance < 0 ? "−" : "") + money(Math.abs(balance));
+
+    const message = document.getElementById("balanceMessage");
+    if (totalIncome === 0 && expenses === 0) {
+      message.textContent = "Select any grants you want to include and enter your household figures.";
+    } else if (balance < 0) {
+      message.textContent = "Your expenses are " + money(Math.abs(balance)) + " more than your estimated income each month.";
+    } else if (balance === 0) {
+      message.textContent = "Your estimated income exactly matches your listed expenses.";
+    } else {
+      message.textContent = "You have an estimated " + money(balance) + " left after the expenses entered.";
+    }
+  }
+
+  grantChecks.forEach(el => el.addEventListener("change", calculate));
+  grantAmounts.forEach(el => el.addEventListener("input", calculate));
+  document.querySelectorAll('input[type="number"]').forEach(el => {
+    el.addEventListener("input", calculate);
+  });
+
+  document.getElementById("reset").addEventListener("click", function () {
+    grantChecks.forEach(el => el.checked = false);
+    document.getElementById("oldAmount").value = 2400;
+    document.getElementById("disabilityAmount").value = 2400;
+    document.getElementById("careAmount").value = 2400;
+    document.getElementById("childAmount").value = 580;
+    document.getElementById("fosterAmount").value = 1290;
+    document.getElementById("srdAmount").value = 370;
+    document.getElementById("otherAmount").value = 0;
+    document.getElementById("children").value = 1;
+    document.querySelectorAll("#income, #rent, #food, #electricity, #transport, #school, #airtime, #health, #debt, #otherExpenses").forEach(el => el.value = 0);
+    calculate();
+  });
+
+  document.getElementById("share").addEventListener("click", async function () {
+    const summary = [
+      "TMI Studios — SASSA Household Grant Planner",
+      "Estimated monthly income: " + document.getElementById("totalIncome").textContent,
+      "Estimated monthly expenses: " + document.getElementById("expenseTotal").textContent,
+      "Estimated balance: " + document.getElementById("balance").textContent,
+      "Planning estimate only; not a SASSA eligibility decision."
+    ].join("\n");
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Household Budget Summary", text: summary });
+      } catch (err) {
+        if (err.name !== "AbortError") copySummary(summary);
+      }
+    } else {
+      copySummary(summary);
+    }
+  });
+
+  function copySummary(summary) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(summary).then(
+        () => alert("Summary copied. You can paste it into a message or note."),
+        () => window.prompt("Copy your summary:", summary)
+      );
+    } else {
+      window.prompt("Copy your summary:", summary);
+    }
+  }
+
+  calculate();
+})();
+</script>
+</body>
+</html>
