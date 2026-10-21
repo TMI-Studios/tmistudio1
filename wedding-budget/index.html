@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#512d43">
+<title>Wedding Budget Planner South Africa | TMI Studios</title>
+<meta name="description" content="Plan your South African wedding budget with an editable wedding cost calculator, guest expenses, traditional wedding costs and savings planner.">
+<link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/wedding-budget/">
+<style>
+:root {
+  --plum: #512d43;
+  --plum-dark: #321b2a;
+  --rose: #d99aab;
+  --rose-pale: #f8e9ed;
+  --cream: #fffaf5;
+  --paper: #ffffff;
+  --ink: #342a30;
+  --muted: #81727b;
+  --line: #eadde2;
+  --green: #28664f;
+  --red: #a83c4b;
+  --gold: #c79d5b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.55;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { color: var(--plum); }
+.topline { height: 5px; background: linear-gradient(90deg, var(--plum), var(--rose), var(--gold)); }
+header {
+  background: var(--plum);
+  color: white;
+  padding: 30px 18px 36px;
+  text-align: center;
+}
+.brand {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #f0cbd6;
+  margin-bottom: 15px;
+}
+header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: clamp(32px, 7vw, 52px);
+  line-height: 1.1;
+  margin: 0 auto 12px;
+}
+header p {
+  max-width: 530px;
+  margin: auto;
+  color: #f5e9ee;
+  font-size: 15px;
+}
+.ornament { color: #e6bf82; font-size: 20px; margin: 13px 0 5px; }
+main { max-width: 1050px; margin: auto; padding: 22px 15px 40px; }
+.intro {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 22px;
+}
+.intro h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--plum);
+  font-size: 27px;
+  font-weight: normal;
+  margin: 0 0 5px;
+}
+.intro p { color: var(--muted); font-size: 14px; margin: 0; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0;
+}
+.summary {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 17px 12px;
+  min-width: 0;
+}
+.summary .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+.summary strong {
+  display: block;
+  color: var(--plum);
+  font-size: clamp(16px, 3.7vw, 25px);
+  overflow-wrap: anywhere;
+}
+.summary small { color: var(--muted); font-size: 11px; }
+.status {
+  border-radius: 12px;
+  padding: 13px 15px;
+  margin: 0 0 20px;
+  background: var(--rose-pale);
+  color: var(--plum);
+  font-size: 14px;
+  text-align: center;
+}
+.status.over { background: #fae8e9; color: var(--red); }
+.status.good { background: #e8f4ed; color: var(--green); }
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(260px, .85fr);
+  gap: 18px;
+  align-items: start;
+}
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 20px;
+  margin-bottom: 16px;
+  min-width: 0;
+}
+.panel h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: 23px;
+  color: var(--plum);
+  margin: 0 0 5px;
+}
+.panel-intro { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+.field { margin-bottom: 15px; min-width: 0; }
+.field label {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.field input, .field select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid #ddcbd3;
+  background: #fffdfd;
+  border-radius: 9px;
+  color: var(--ink);
+  outline: none;
+}
+.field input:focus, .field select:focus {
+  border-color: var(--plum);
+  box-shadow: 0 0 0 3px #512d4317;
+}
+.field small { display: block; font-size: 11px; color: var(--muted); margin-top: 5px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.section-label {
+  color: var(--plum);
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 22px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--line);
+}
+.cost-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(105px, .75fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.cost-row label { font-size: 13px; font-weight: bold; }
+.cost-row small { display: block; color: var(--muted); font-size: 11px; font-weight: normal; }
+.cost-row input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #ddcbd3;
+  border-radius: 9px;
+  background: #fffdfd;
+}
+.cost-row input:focus { outline: 2px solid #d99aab66; border-color: var(--rose); }
+.currency-input { position: relative; }
+.currency-input::before {
+  content: "R";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 12px;
+  pointer-events: none;
+}
+.currency-input input { padding-left: 25px; }
+.note {
+  background: #fff7ec;
+  border-left: 3px solid var(--gold);
+  padding: 11px 12px;
+  color: #70563a;
+  font-size: 12px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 12px;
+}
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0e7eb;
+  font-size: 13px;
+}
+.breakdown-row span:first-child { color: var(--muted); }
+.breakdown-row strong { text-align: right; overflow-wrap: anywhere; }
+.breakdown-row.total {
+  border-bottom: 0;
+  border-top: 2px solid var(--plum);
+  margin-top: 6px;
+  padding-top: 15px;
+  font-size: 16px;
+}
+.breakdown-row.total span, .breakdown-row.total strong { color: var(--plum); font-weight: bold; }
+.progress-track {
+  background: #f0e6eb;
+  border-radius: 20px;
+  height: 10px;
+  overflow: hidden;
+  margin: 12px 0 7px;
+}
+.progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 20px;
+  background: var(--rose);
+  transition: width .2s ease;
+}
+.progress-caption { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; color: var(--muted); }
+.big-number {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  color: var(--plum);
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+.primary-btn, .secondary-btn {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.primary-btn { background: var(--plum); color: white; }
+.primary-btn:hover { background: var(--plum-dark); }
+.secondary-btn { background: var(--rose-pale); color: var(--plum); }
+.secondary-btn:hover { background: #f2dce4; }
+.button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 10px; }
+.button-grid button { margin-top: 0; }
+.mini-heading { font-size: 14px; color: var(--plum); font-weight: bold; margin: 20px 0 10px; }
+.tips { padding-left: 18px; color: var(--muted); font-size: 12px; }
+.tips li { margin-bottom: 8px; }
+footer {
+  background: #f5e9ee;
+  border-top: 1px solid var(--line);
+  padding: 22px 15px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; }
+.footer-links a { color: var(--plum); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+footer details { max-width: 720px; margin: 12px auto; text-align: left; }
+footer summary { cursor: pointer; color: var(--plum); text-align: center; }
+footer details p { line-height: 1.7; }
+footer .copyright { margin-top: 14px; }
+@media (max-width: 720px) {
+  .layout { grid-template-columns: 1fr; }
+  .summary-grid { gap: 7px; }
+  .summary { padding: 13px 9px; }
+  .summary .label { font-size: 9px; letter-spacing: .6px; }
+  .panel { padding: 16px; }
+}
+@media (max-width: 380px) {
+  .two-col { grid-template-columns: 1fr; gap: 0; }
+  .cost-row { grid-template-columns: minmax(0, 1fr) 112px; gap: 7px; }
+}
+@media print {
+  body { background: white; }
+  header { background: white; color: var(--plum); border-bottom: 2px solid var(--plum); padding: 15px; }
+  header p, .brand { color: var(--plum); }
+  main { max-width: 100%; padding: 12px; }
+  .layout { grid-template-columns: 1fr 1fr; }
+  .panel, .summary { break-inside: avoid; }
+  .no-print, footer details { display: none !important; }
+  footer { background: white; }
+}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header>
+  <div class="brand">TMI Studios · Your planning companion</div>
+  <h1>Our Wedding, Our Budget</h1>
+  <div class="ornament">✦ &nbsp; ♡ &nbsp; ✦</div>
+  <p>A little less money stress, a little more happily ever after. Build a wedding budget that works for you.</p>
+</header>
+
+<main>
+  <div class="intro">
+    <h2>Make the numbers say "I do"</h2>
+    <p>Start with your budget, add your plans, and adjust the numbers until they feel right for your day.</p>
+  </div>
+
+  <div class="summary-grid" aria-live="polite">
+    <div class="summary">
+      <span class="label">Estimated wedding</span>
+      <strong id="totalCard">R0</strong>
+      <small>Including contingency</small>
+    </div>
+    <div class="summary">
+      <span class="label">Budget remaining</span>
+      <strong id="remainingCard">R0</strong>
+      <small id="remainingNote">Set your budget below</small>
+    </div>
+    <div class="summary">
+      <span class="label">Per guest</span>
+      <strong id="perGuestCard">R0</strong>
+      <small>Estimated total divided by guests</small>
+    </div>
+  </div>
+
+  <div class="status" id="status" role="status" aria-live="polite">Add your budget and costs to get started.</div>
+
+  <div class="layout">
+    <div>
+      <section class="panel">
+        <h2>The big picture</h2>
+        <p class="panel-intro">Tell us about your wedding and the money you have available.</p>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="weddingName">Couple's names (optional)</label>
+            <input id="weddingName" type="text" maxlength="80" placeholder="e.g. Thandi & Sam">
+          </div>
+          <div class="field">
+            <label for="weddingDate">Wedding date (optional)</label>
+            <input id="weddingDate" type="date">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="guestCount">Number of guests</label>
+            <input id="guestCount" type="number" min="0" max="100000" step="1" value="80" inputmode="numeric">
+          </div>
+          <div class="field">
+            <label for="budget">Maximum total budget (R)</label>
+            <input id="budget" type="number" min="0" max="1000000000" step="1000" value="80000" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="saved">Money already saved (R)</label>
+            <input id="saved" type="number" min="0" max="1000000000" step="500" value="10000" inputmode="decimal">
+          </div>
+          <div class="field">
+            <label for="months">Months until the wedding</label>
+            <input id="months" type="number" min="0" max="600" step="1" value="12" inputmode="numeric">
+            <small>Use 0 if the wedding is this month.</small>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="contingency">Contingency buffer</label>
+          <select id="contingency">
+            <option value="0">No extra buffer</option>
+            <option value="5">5% extra</option>
+            <option value="10" selected>10% extra (recommended)</option>
+            <option value="15">15% extra</option>
+            <option value="20">20% extra</option>
+          </select>
+          <small>An allowance for surprises, price changes and last-minute costs.</small>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Build your wedding budget</h2>
+        <p class="panel-intro">Enter your own estimates. Put R0 for anything that doesn't apply.</p>
+
+        <div class="section-label">Traditional celebrations</div>
+        <div class="cost-row">
+          <label for="lobola">Lobola / customary negotiations<small>Enter the amount your family agrees on</small></label>
+          <div class="currency-input"><input id="lobola" type="number" min="0" max="1000000000" step="500" value="0" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="traditional">Traditional ceremony / celebration<small>Venue, food and arrangements</small></label>
+          <div class="currency-input"><input id="traditional" type="number" min="0" max="1000000000" step="500" value="5000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="attire">Traditional attire and accessories<small>For the couple and any planned outfits</small></label>
+          <div class="currency-input"><input id="attire" type="number" min="0" max="1000000000" step="500" value="4000" inputmode="decimal"></div>
+        </div>
+
+        <div class="section-label">The ceremony and reception</div>
+        <div class="cost-row">
+          <label for="venue">Venue hire<small>Church, hall, garden or event space</small></label>
+          <div class="currency-input"><input id="venue" type="number" min="0" max="1000000000" step="500" value="10000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="food">Food and catering<small>Total estimate for all guests</small></label>
+          <div class="currency-input"><input id="food" type="number" min="0" max="1000000000" step="500" value="12000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="drinks">Drinks and refreshments</label>
+          <div class="currency-input"><input id="drinks" type="number" min="0" max="1000000000" step="500" value="3000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="decor">Decor, flowers and tables</label>
+          <div class="currency-input"><input id="decor" type="number" min="0" max="1000000000" step="500" value="5000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="cake">Wedding cake and desserts</label>
+          <div class="currency-input"><input id="cake" type="number" min="0" max="1000000000" step="500" value="2000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="outfits">Wedding dress, suit and alterations</label>
+          <div class="currency-input"><input id="outfits" type="number" min="0" max="1000000000" step="500" value="7000" inputmode="decimal"></div>
+        </div>
+
+        <div class="section-label">The details that make it yours</div>
+        <div class="cost-row">
+          <label for="photo">Photography and video</label>
+          <div class="currency-input"><input id="photo" type="number" min="0" max="1000000000" step="500" value="5000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="music">DJ, music and entertainment</label>
+          <div class="currency-input"><input id="music" type="number" min="0" max="1000000000" step="500" value="3000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="beauty">Hair, makeup and grooming</label>
+          <div class="currency-input"><input id="beauty" type="number" min="0" max="1000000000" step="500" value="2000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="rings">Rings and jewellery</label>
+          <div class="currency-input"><input id="rings" type="number" min="0" max="1000000000" step="500" value="3000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="transport">Transport and accommodation</label>
+          <div class="currency-input"><input id="transport" type="number" min="0" max="1000000000" step="500" value="2000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="stationery">Invitations, printing and favours</label>
+          <div class="currency-input"><input id="stationery" type="number" min="0" max="1000000000" step="100" value="1000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="admin">Marriage paperwork and admin<small>Confirm actual fees with the relevant offices or service providers</small></label>
+          <div class="currency-input"><input id="admin" type="number" min="0" max="1000000000" step="100" value="1000" inputmode="decimal"></div>
+        </div>
+        <div class="cost-row">
+          <label for="other">Other costs</label>
+          <div class="currency-input"><input id="other" type="number" min="0" max="1000000000" step="100" value="1000" inputmode="decimal"></div>
+        </div>
+
+        <div class="note">Lobola arrangements, customary practices and family expectations vary. This planner does not assume a standard lobola amount or that lobola is required for every marriage.</div>
+      </section>
+    </div>
+
+    <aside>
+      <section class="panel">
+        <h2>Your money snapshot</h2>
+        <p class="panel-intro">A live estimate based on the figures you enter.</p>
+
+        <div class="breakdown-row"><span>Costs before buffer</span><strong id="baseTotal">R0</strong></div>
+        <div class="breakdown-row"><span>Contingency allowance</span><strong id="bufferTotal">R0</strong></div>
+        <div class="breakdown-row total"><span>Estimated total</span><strong id="grandTotal">R0</strong></div>
+        <div class="breakdown-row"><span>Your total budget</span><strong id="budgetLine">R0</strong></div>
+        <div class="breakdown-row"><span>Over / under budget</span><strong id="difference">R0</strong></div>
+
+        <div class="mini-heading">Budget used</div>
+        <div class="progress-track"><div class="progress-bar" id="budgetBar"></div></div>
+        <div class="progress-caption"><span id="budgetPercent">0% of budget</span><span id="budgetCap">R0 available</span></div>
+
+        <div class="mini-heading">Savings plan</div>
+        <div class="breakdown-row"><span>Already saved</span><strong id="savedLine">R0</strong></div>
+        <div class="breakdown-row"><span>Still to save</span><strong id="toSave">R0</strong></div>
+        <div class="breakdown-row"><span>Save each month</span><strong id="monthlySave">R0</strong></div>
+        <p class="panel-intro" id="savingsNote">Your monthly target will appear here.</p>
+
+        <button class="primary-btn no-print" id="shareBtn" type="button">Share my budget</button>
+        <button class="secondary-btn no-print" id="printBtn" type="button">Print / save as PDF</button>
+        <div class="button-grid no-print">
+          <button class="secondary-btn" id="exampleBtn" type="button">Load example</button>
+          <button class="secondary-btn" id="resetBtn" type="button">Reset all</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Planning notes</h2>
+        <p class="panel-intro">A few ways to protect your budget.</p>
+        <ul class="tips">
+          <li>Ask vendors for written quotes and confirm what is included.</li>
+          <li>Check deposits, cancellation rules and payment deadlines before paying.</li>
+          <li>Agree on your guest list early. Guest numbers can change catering and venue costs.</li>
+          <li>Decide which expenses matter most to you as a couple.</li>
+          <li>Keep contingency money aside for costs you haven't anticipated.</li>
+          <li>Update your estimates when you receive real quotes.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <nav class="footer-links" aria-label="Legal and site links">
+    <a href="../index.html">TMI Studios Home</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+  </nav>
+  <details>
+    <summary>Important information about this planner</summary>
+    <p>This free planner is for general budgeting and educational purposes only. It does not provide financial, legal or marriage advice, and it does not guarantee actual wedding costs. All amounts are estimates entered by you and should be checked against current quotes and applicable requirements. Customary practices and lobola arrangements vary by family and community. Confirm marriage requirements and any relevant fees with the appropriate South African authorities or qualified professionals. TMI Studios is not responsible for decisions made using these estimates.</p>
+  </details>
+  <div class="copyright">Made with care by TMI Studios · Small tools for real life.</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const moneyIds = [
+    "lobola", "traditional", "attire", "venue", "food", "drinks",
+    "decor", "cake", "outfits", "photo", "music", "beauty",
+    "rings", "transport", "stationery", "admin", "other"
+  ];
+
+  const allInputIds = [
+    "weddingName", "weddingDate", "guestCount", "budget", "saved",
+    "months", "contingency", ...moneyIds
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const money = (value) => {
+    const safe = Number.isFinite(value) ? value : 0;
+    return "R" + Math.round(safe).toLocaleString("en-ZA");
+  };
+
+  function num(id) {
+    const value = Number($(id).value);
+    return Number.isFinite(value) && value > 0 ? value : 0;
+  }
+
+  function update() {
+    const base = moneyIds.reduce((sum, id) => sum + num(id), 0);
+    const bufferRate = num("contingency") / 100;
+    const buffer = base * bufferRate;
+    const total = base + buffer;
+    const budget = num("budget");
+    const saved = num("saved");
+    const guests = num("guestCount");
+    const months = num("months");
+    const remaining = budget - total;
+    const stillToSave = Math.max(0, total - saved);
+    const monthly = months > 0 ? stillToSave / months : stillToSave;
+    const percent = budget > 0 ? (total / budget) * 100 : 0;
+
+    $("totalCard").textContent = money(total);
+    $("remainingCard").textContent = (remaining < 0 ? "-" : "") + money(Math.abs(remaining));
+    $("remainingNote").textContent = budget <= 0 ? "Enter a budget to compare" :
+      remaining < 0 ? "Over your planned budget" : "Left in your planned budget";
+    $("perGuestCard").textContent = guests > 0 ? money(total / guests) : "N/A";
+
+    $("baseTotal").textContent = money(base);
+    $("bufferTotal").textContent = money(buffer);
+    $("grandTotal").textContent = money(total);
+    $("budgetLine").textContent = money(budget);
+    $("difference").textContent = (remaining < 0 ? "-" : "") + money(Math.abs(remaining));
+    $("difference").style.color = remaining < 0 ? "var(--red)" : "var(--green)";
+    $("savedLine").textContent = money(saved);
+    $("toSave").textContent = money(stillToSave);
+    $("monthlySave").textContent = money(monthly);
+
+    $("budgetBar").style.width = Math.min(100, Math.max(0, percent)) + "%";
+    $("budgetBar").style.background = percent > 100 ? "var(--red)" : "var(--rose)";
+    $("budgetPercent").textContent = budget > 0 ? Math.round(percent) + "% of budget" : "Set a budget";
+    $("budgetCap").textContent = budget > 0 && remaining >= 0 ? money(remaining) + " available" :
+      budget > 0 ? money(Math.abs(remaining)) + " over" : "No budget set";
+
+    const status = $("status");
+    status.className = "status";
+    if (budget <= 0) {
+      status.textContent = "Enter a maximum budget to see whether your plans fit.";
+    } else if (remaining < 0) {
+      status.classList.add("over");
+      status.textContent = "Your estimate is " + money(Math.abs(remaining)) +
+        " over budget. Try adjusting a few costs or increasing your budget.";
+    } else {
+      status.classList.add("good");
+      status.textContent = "Looking good! Your estimate is within budget, with " +
+        money(remaining) + " left before any changes.";
+    }
+
+    if (months === 0) {
+      $("savingsNote").textContent = stillToSave > 0
+        ? "You have " + money(stillToSave) + " left to save. Your target date is this month, so plan how to cover the gap."
+        : "Your saved amount covers your current estimate.";
+    } else {
+      $("savingsNote").textContent = stillToSave > 0
+        ? "Save about " + money(monthly) + " per month for " + months + " month(s) to cover the estimate, based on your current savings."
+        : "Your saved amount already covers your current estimate. Keep some money aside for unexpected costs.";
+    }
+  }
+
+  function getReport() {
+    const base = moneyIds.reduce((sum, id) => sum + num(id), 0);
+    const total = base * (1 + num("contingency") / 100);
+    const budget = num("budget");
+    const saved = num("saved");
+    const guests = num("guestCount");
+    const months = num("months");
+    const gap = Math.max(0, total - saved);
+    const name = $("weddingName").value.trim();
+    const date = $("weddingDate").value;
+    const lines = [
+      "OUR WEDDING BUDGET",
+      name ? "Couple: " + name : "",
+      date ? "Wedding date: " + date : "",
+      "Guests: " + guests,
+      "",
+      "Estimated costs:"
+    ];
+    moneyIds.forEach(id => {
+      const label = document.querySelector('label[for="' + id + '"]');
+      const title = label ? label.childNodes[0].textContent.trim() : id;
+      lines.push(title + ": " + money(num(id)));
+    });
+    lines.push(
+      "",
+      "Costs before contingency: " + money(base),
+      "Contingency: " + money(total - base),
+      "Estimated total: " + money(total),
+      "Maximum budget: " + money(budget),
+      "Over / under budget: " + (budget - total < 0 ? "-" : "") + money(Math.abs(budget - total)),
+      "Already saved: " + money(saved),
+      "Still to save: " + money(gap),
+      "Months remaining: " + months,
+      "Monthly savings target: " + money(months > 0 ? gap / months : gap),
+      "",
+      "Created with the TMI Studios Wedding Budget Planner.",
+      "Estimates only. Confirm actual costs and requirements."
+    );
+    return lines.filter(line => line !== "").join("\n");
+  }
+
+  allInputIds.forEach(id => {
+    $(id).addEventListener("input", update);
+    $(id).addEventListener("change", update);
+  });
+
+  $("printBtn").addEventListener("click", () => window.print());
+
+  $("shareBtn").addEventListener("click", async () => {
+    const report = getReport();
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Our Wedding Budget", text: report });
+      } catch (error) {
+        if (error && error.name !== "AbortError") {
+          copyReport(report);
+        }
+      }
+    } else {
+      copyReport(report);
+    }
+  });
+
+  function copyReport(report) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(report).then(() => {
+        $("status").className = "status good";
+        $("status").textContent = "Your budget summary was copied. You can paste it into WhatsApp or your notes.";
+      }).catch(() => showReport(report));
+    } else {
+      showReport(report);
+    }
+  }
+
+  function showReport(report) {
+    const w = window.open("", "_blank");
+    if (!w) {
+      window.prompt("Copy your wedding budget summary:", report);
+      return;
+    }
+    const pre = w.document.createElement("pre");
+    pre.style.whiteSpace = "pre-wrap";
+    pre.style.fontFamily = "Arial, sans-serif";
+    pre.style.padding = "20px";
+    pre.textContent = report;
+    w.document.body.appendChild(pre);
+  }
+
+  $("exampleBtn").addEventListener("click", () => {
+    const example = {
+      guestCount: 100, budget: 120000, saved: 25000, months: 10,
+      contingency: 10, lobola: 15000, traditional: 8000, attire: 5000,
+      venue: 12000, food: 18000, drinks: 4000, decor: 6000, cake: 2500,
+      outfits: 9000, photo: 6500, music: 3500, beauty: 2500, rings: 4000,
+      transport: 3000, stationery: 1200, admin: 1000, other: 2000
+    };
+    Object.keys(example).forEach(id => { $(id).value = example[id]; });
+    update();
+    $("status").textContent = "Example loaded. Change any amount to match your own plans.";
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    if (!window.confirm("Reset all wedding details and costs to the starter example?")) return;
+    $("weddingName").value = "";
+    $("weddingDate").value = "";
+    $("guestCount").value = 80;
+    $("budget").value = 80000;
+    $("saved").value = 10000;
+    $("months").value = 12;
+    $("contingency").value = 10;
+    const defaults = {
+      lobola: 0, traditional: 5000, attire: 4000, venue: 10000,
+      food: 12000, drinks: 3000, decor: 5000, cake: 2000,
+      outfits: 7000, photo: 5000, music: 3000, beauty: 2000,
+      rings: 3000, transport: 2000, stationery: 1000, admin: 1000, other: 1000
+    };
+    Object.keys(defaults).forEach(id => { $(id).value = defaults[id]; });
+    update();
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
