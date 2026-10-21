@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f4ec">
+
+<title>Funeral Cost Planner South Africa | TMI Studios</title>
+<meta name="description" content="Plan funeral expenses in South Africa with a free funeral cost calculator. Estimate expenses, compare available savings and funeral cover, and calculate your funding shortfall.">
+
+<style>
+:root{
+  --paper:#f7f4ec;
+  --white:#fffefa;
+  --green:#234c3c;
+  --green-dark:#183729;
+  --gold:#b58b48;
+  --ink:#202c25;
+  --muted:#72786f;
+  --line:#e5e0d5;
+  --soft:#e9eee5;
+  --warning:#8b542a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif;
+  line-height:1.6;
+}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:var(--green)}
+.container{width:min(100% - 32px,980px);margin:auto}
+.sans{font-family:Arial,Helvetica,sans-serif}
+.topbar{
+  border-bottom:1px solid var(--line);
+  padding:15px 0;
+}
+.topbar-inner{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.brand{
+  color:var(--green);font-size:14px;font-weight:800;
+  letter-spacing:1.6px;text-decoration:none;
+}
+.brand span{color:var(--gold)}
+.top-link{font-size:13px;text-decoration:none}
+.hero{
+  padding:44px 0 32px;
+  background:radial-gradient(ellipse at 85% 10%,#e6e8d8 0%,transparent 45%);
+}
+.eyebrow{
+  font:700 11px Arial,sans-serif;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);
+}
+h1,h2,h3,p{margin-top:0}
+h1{
+  font-size:clamp(37px,7vw,66px);
+  line-height:1.04;letter-spacing:-1.8px;
+  color:var(--green-dark);max-width:760px;margin-bottom:18px;
+}
+h1 em{font-weight:400;color:var(--gold)}
+.hero-copy{
+  font-size:17px;color:#586158;max-width:630px;
+}
+.hero-note{
+  display:flex;align-items:flex-start;gap:12px;
+  max-width:660px;margin-top:24px;
+  border-left:3px solid var(--gold);padding:4px 0 4px 15px;
+  font:13px/1.7 Arial,sans-serif;color:#60675e;
+}
+.section-heading{margin-bottom:18px}
+.section-heading h2{
+  color:var(--green-dark);font-size:clamp(24px,4vw,32px);
+  letter-spacing:-.6px;margin-bottom:7px;
+}
+.section-heading p{color:var(--muted);font:14px/1.7 Arial,sans-serif}
+.planner{padding:22px 0 50px}
+.layout{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:20px;align-items:start;
+}
+.panel{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:18px;padding:23px;
+  box-shadow:0 5px 24px rgba(35,55,40,.035);
+}
+.panel h3{font-size:20px;color:var(--green-dark);margin-bottom:6px}
+.panel-intro{font:13px/1.6 Arial,sans-serif;color:var(--muted);margin-bottom:22px}
+.field{margin:0 0 17px}
+.field label{
+  display:block;font:700 13px Arial,sans-serif;margin-bottom:7px;
+}
+.field input,.field select{
+  width:100%;min-height:47px;border:1px solid #d8d8cd;
+  background:#fffefa;color:var(--ink);border-radius:9px;
+  padding:11px 12px;outline:none;
+}
+.field input:focus,.field select:focus{
+  border-color:var(--green);box-shadow:0 0 0 3px #234c3c18;
+}
+.hint{font:11px/1.6 Arial,sans-serif;color:var(--muted);margin:6px 0 0}
+.subhead{
+  margin:25px 0 14px;padding-bottom:9px;
+  border-bottom:1px solid var(--line);
+  font:700 11px Arial,sans-serif;letter-spacing:1.3px;
+  text-transform:uppercase;color:var(--gold);
+}
+.expense-row{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,.7fr);
+  align-items:center;gap:12px;margin-bottom:13px;
+}
+.expense-row label{font:13px/1.45 Arial,sans-serif}
+.expense-row input{
+  width:100%;min-width:0;min-height:43px;
+  border:1px solid #d8d8cd;border-radius:8px;
+  padding:9px;background:#fffefa;color:var(--ink);
+}
+.expense-row input:focus{
+  outline:2px solid #234c3c55;border-color:var(--green);
+}
+.btn{
+  display:inline-flex;justify-content:center;align-items:center;
+  gap:8px;width:100%;border:0;border-radius:10px;
+  padding:14px 17px;min-height:49px;
+  background:var(--green);color:white;
+  font:700 14px Arial,sans-serif;cursor:pointer;
+}
+.btn:hover{background:var(--green-dark)}
+.btn-secondary{
+  background:transparent;color:var(--green);
+  border:1px solid #b9c7b8;margin-top:10px;
+}
+.btn-secondary:hover{background:var(--soft);color:var(--green-dark)}
+.summary{
+  position:sticky;top:16px;
+  background:var(--green-dark);color:#fff;
+  border-radius:18px;padding:24px;overflow:hidden;
+}
+.summary .eyebrow{color:#dfc28e}
+.summary h2{font-size:26px;line-height:1.2;margin:10px 0 7px}
+.summary-intro{font:13px/1.7 Arial,sans-serif;color:#d5ded6}
+.total-box{
+  background:#ffffff0c;border:1px solid #ffffff24;
+  border-radius:12px;padding:18px;margin:21px 0;
+}
+.total-label{
+  font:11px Arial,sans-serif;letter-spacing:1px;
+  text-transform:uppercase;color:#d1d8cf;
+}
+.total-amount{
+  font:700 clamp(29px,5vw,39px) Arial,sans-serif;
+  letter-spacing:-1px;margin:7px 0;color:#fff;
+  overflow-wrap:anywhere;
+}
+.total-caption{font:12px/1.6 Arial,sans-serif;color:#c5d2c7}
+.result-row{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:12px 0;border-bottom:1px solid #ffffff24;
+  font:13px/1.5 Arial,sans-serif;
+}
+.result-row span{color:#d1d9d1}
+.result-row strong{text-align:right;overflow-wrap:anywhere}
+.result-row:last-of-type{border-bottom:0}
+.gap-box{
+  border-radius:12px;background:#ffffff0c;
+  padding:16px;margin-top:20px;
+}
+.gap-box .gap-number{
+  display:block;font:700 27px Arial,sans-serif;
+  margin:6px 0;color:#f0d19a;overflow-wrap:anywhere;
+}
+.gap-box p{font:12px/1.6 Arial,sans-serif;color:#d5ded6;margin:0}
+.status{
+  display:inline-block;border-radius:20px;
+  padding:5px 10px;background:#ffffff15;
+  font:700 11px Arial,sans-serif;color:#fff;
+}
+.result-message{
+  margin-top:16px;font:13px/1.7 Arial,sans-serif;color:#e3e9e2;
+}
+.save-box{
+  margin-top:18px;padding-top:17px;border-top:1px solid #ffffff24;
+}
+.save-box label{display:block;font:12px Arial,sans-serif;color:#d1d9d1;margin-bottom:8px}
+.save-box select{
+  width:100%;background:#fffefa;color:var(--ink);
+  border:0;border-radius:8px;padding:10px;
+}
+.save-result{font:700 22px Arial,sans-serif;margin:12px 0 4px}
+.save-note{font:11px/1.6 Arial,sans-serif;color:#c5d2c7}
+.breakdown{margin-top:18px}
+.breakdown-row{
+  display:flex;justify-content:space-between;gap:12px;
+  font:12px Arial,sans-serif;padding:9px 0;
+  border-bottom:1px solid #ffffff19;
+}
+.breakdown-row span:first-child{color:#d1d9d1}
+.breakdown-row span:last-child{text-align:right;font-weight:700}
+.content-section{padding:38px 0;border-top:1px solid var(--line)}
+.content-section h2{
+  font-size:clamp(25px,4vw,34px);
+  line-height:1.2;color:var(--green-dark);
+}
+.content-section p,.content-section li{
+  color:#596158;font-size:15px;line-height:1.8;
+}
+.content-section h3{color:var(--green);font-size:19px;margin-top:26px}
+.tip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.tip{
+  padding:18px;background:#eeece3;border-radius:12px;
+}
+.tip .number{
+  font:700 11px Arial,sans-serif;color:var(--gold);
+  letter-spacing:1px;
+}
+.tip h3{font-size:16px;margin:9px 0}
+.tip p{font:13px/1.7 Arial,sans-serif;color:#60675e;margin:0}
+.disclaimer{
+  background:#eeece3;border-radius:12px;
+  padding:18px;font:12px/1.8 Arial,sans-serif;color:#5f665d;
+}
+.footer{
+  padding:27px 0 38px;border-top:1px solid var(--line);
+  font:12px/1.8 Arial,sans-serif;color:var(--muted);
+}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer a{color:var(--green);margin-right:12px}
+@media(max-width:740px){
+  .layout{grid-template-columns:1fr}
+  .summary{position:static;grid-row:1}
+  .panel{padding:19px}
+  .hero{padding-top:34px}
+  .tip-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+  <div class="container topbar-inner sans">
+    <a class="brand" href="../../index.html">TMI <span>STUDIOS</span></a>
+    <a class="top-link" href="../index.html">Explore tools ↗</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow">A little planning. Less uncertainty.</div>
+      <h1>Give your family<br>a <em>clearer plan.</em></h1>
+      <p class="hero-copy">
+        Estimate funeral expenses, see how much money may be available,
+        and work out the gap your family might still need to cover.
+      </p>
+      <div class="hero-note sans">
+        <span aria-hidden="true">✳</span>
+        <span>
+          A free South African funeral budget planner. No sign-up,
+          no personal details and no insurance sales pitch.
+          Your calculations stay in this page.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="planner">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Let's work out your numbers.</h2>
+        <p>Start with your best estimates. You can change any amount.</p>
+      </div>
+
+      <div class="layout">
+        <section class="panel">
+          <h3 class="sans">Your funeral budget</h3>
+          <p class="panel-intro">
+            Enter the expenses you expect. Leave an item at zero if
+            it doesn't apply to your family's plans.
+          </p>
+
+          <form id="plannerForm">
+            <div class="subhead">01 / Funeral expenses</div>
+
+            <div class="expense-row">
+              <label for="coffin">Coffin or cremation</label>
+              <input id="coffin" type="number" min="0" max="100000000" step="100" value="10000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="services">Funeral parlour and services</label>
+              <input id="services" type="number" min="0" max="100000000" step="100" value="8000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="burial">Burial plot or cremation fees</label>
+              <input id="burial" type="number" min="0" max="100000000" step="100" value="4000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="transport">Transport</label>
+              <input id="transport" type="number" min="0" max="100000000" step="100" value="2500" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="venue">Tent, chairs or venue</label>
+              <input id="venue" type="number" min="0" max="100000000" step="100" value="3000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="food">Food and refreshments</label>
+              <input id="food" type="number" min="0" max="100000000" step="100" value="5000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="cultural">Cultural and family arrangements</label>
+              <input id="cultural" type="number" min="0" max="100000000" step="100" value="3000" inputmode="decimal">
+            </div>
+            <div class="expense-row">
+              <label for="other">Other expenses</label>
+              <input id="other" type="number" min="0" max="100000000" step="100" value="1500" inputmode="decimal">
+            </div>
+
+            <div class="field">
+              <label for="buffer">Extra budget for unexpected costs</label>
+              <select id="buffer">
+                <option value="0">No extra buffer</option>
+                <option value="5" selected>5% buffer</option>
+                <option value="10">10% buffer</option>
+                <option value="15">15% buffer</option>
+                <option value="20">20% buffer</option>
+              </select>
+              <p class="hint">This is a planning allowance, not a prediction.</p>
+            </div>
+
+            <div class="subhead">02 / Money already available</div>
+
+            <div class="field">
+              <label for="savings">Funeral savings you can access (R)</label>
+              <input id="savings" type="number" min="0" max="100000000" step="100" value="5000" inputmode="decimal">
+              <p class="hint">Include only money you expect to be available for this funeral.</p>
+            </div>
+
+            <div class="field">
+              <label for="cover">Relevant funeral benefit (R)</label>
+              <input id="cover" type="number" min="0" max="100000000" step="100" value="30000" inputmode="decimal">
+              <p class="hint">
+                Enter a benefit you expect may apply. Check the policy,
+                insured person, beneficiary, waiting period and exclusions.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="otherFunds">Other confirmed contributions or assistance (R)</label>
+              <input id="otherFunds" type="number" min="0" max="100000000" step="100" value="0" inputmode="decimal">
+              <p class="hint">For example, a confirmed family contribution or eligible benefit.</p>
+            </div>
+
+            <button type="submit" class="btn">Calculate my funeral plan ↗</button>
+            <button type="button" id="resetBtn" class="btn btn-secondary">Reset example amounts</button>
+          </form>
+        </section>
+
+        <aside class="summary" aria-live="polite" aria-atomic="true">
+          <div class="eyebrow">Your planning snapshot</div>
+          <h2>Know the gap<br>before it surprises you.</h2>
+          <p class="summary-intro">
+            Your estimate updates when you calculate your plan.
+            These figures are for budgeting, not a quote.
+          </p>
+
+          <div class="total-box">
+            <div class="total-label">Estimated funeral budget</div>
+            <div class="total-amount" id="totalCost">R40,425.00</div>
+            <div class="total-caption" id="bufferCaption">Includes a 5% planning buffer.</div>
+          </div>
+
+          <div class="result-row">
+            <span>Available savings</span>
+            <strong id="resultSavings">R5,000.00</strong>
+          </div>
+          <div class="result-row">
+            <span>Entered funeral benefit</span>
+            <strong id="resultCover">R30,000.00</strong>
+          </div>
+          <div class="result-row">
+            <span>Other assistance</span>
+            <strong id="resultOther">R0.00</strong>
+          </div>
+          <div class="result-row">
+            <span>Total potential funding</span>
+            <strong id="totalFunding">R35,000.00</strong>
+          </div>
+
+          <div class="gap-box">
+            <span class="status" id="status">Planning shortfall</span>
+            <span class="gap-number" id="shortfall">R5,425.00</span>
+            <p id="gapMessage">This is the amount your current plan may not cover.</p>
+          </div>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span>Expenses before buffer</span>
+              <span id="baseCost">R38,500.00</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Planning buffer</span>
+              <span id="bufferAmount">R1,925.00</span>
+            </div>
+            <div class="breakdown-row">
+              <span>Potential funding above budget</span>
+              <span id="surplus">R0.00</span>
+            </div>
+          </div>
+
+          <div class="save-box">
+            <label for="savingMonths">If you need to save the shortfall, over:</label>
+            <select id="savingMonths">
+              <option value="3">3 months</option>
+              <option value="6" selected>6 months</option>
+              <option value="12">12 months</option>
+              <option value="24">24 months</option>
+              <option value="36">36 months</option>
+            </select>
+            <div class="save-result" id="monthlySaving">R904.17 / month</div>
+            <div class="save-note" id="savingNote">
+              A simple target assuming equal monthly savings and no interest.
+            </div>
+          </div>
+
+          <p class="result-message" id="resultMessage">
+            Use the estimates as a starting point. Replace them with
+            current quotes and confirmed benefit amounts.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">Plan with confidence</div>
+        <h2>Three things worth checking.</h2>
+        <p>Before relying on a funeral budget, check the details behind the numbers.</p>
+      </div>
+
+      <div class="tip-grid">
+        <div class="tip">
+          <div class="number">01 / COSTS</div>
+          <h3>Get itemised quotes</h3>
+          <p>
+            Ask a funeral parlour and the relevant cemetery or crematorium
+            for current prices. Confirm what's included and what costs extra.
+          </p>
+        </div>
+        <div class="tip">
+          <div class="number">02 / COVER</div>
+          <h3>Confirm the benefit</h3>
+          <p>
+            Check who is insured, the applicable benefit, waiting periods,
+            exclusions and the documents needed for a valid claim.
+          </p>
+        </div>
+        <div class="tip">
+          <div class="number">03 / SAVINGS</div>
+          <h3>Know who controls the money</h3>
+          <p>
+            For family savings or a stokvel, agree on withdrawal approvals,
+            records, eligibility, and what happens if several members
+            need assistance at once.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="eyebrow">Understand your options</div>
+      <h2>Funeral cover or family savings?</h2>
+
+      <h3>Funeral cover</h3>
+      <p>
+        Funeral insurance may pay an agreed benefit when a covered person
+        dies and a claim meets the policy conditions. The benefit is not
+        the same as the total premiums paid. Cover may have waiting periods,
+        exclusions and other conditions, and premiums can change depending
+        on the policy.
+      </p>
+
+      <h3>Family funeral savings or a stokvel</h3>
+      <p>
+        Savings can give a family flexibility, but the amount available
+        depends on contributions, withdrawals, group rules and how the
+        funds are managed. A stokvel balance is not automatically
+        equivalent to an insured benefit.
+      </p>
+
+      <h3>Can a family use both?</h3>
+      <p>
+        Yes, a family may choose to combine insurance with separate savings.
+        Use the calculator to understand the potential funding gap, then
+        confirm which benefits and funds would actually be available
+        when needed.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="eyebrow">Helpful resources</div>
+      <h2>Check the details with a reliable source.</h2>
+      <ul>
+        <li>
+          <a href="https://www.capitecbank.co.za/personal/insure/funeral-plan/"
+             target="_blank" rel="noopener noreferrer">
+            Capitec funeral cover information
+          </a>
+          — an example of policy benefits and waiting-period information.
+        </li>
+        <li>
+          <a href="https://www.absa.co.za/personal/insure/my-funeral/claim/"
+             target="_blank" rel="noopener noreferrer">
+            Absa funeral claim guidance
+          </a>
+          — an example of claim procedures and supporting documents.
+        </li>
+        <li>
+          <a href="https://www.fsca.co.za/"
+             target="_blank" rel="noopener noreferrer">
+            Financial Sector Conduct Authority (FSCA)
+          </a>
+          — South Africa's financial-sector regulator.
+        </li>
+      </ul>
+
+      <div class="disclaimer sans">
+        <strong>Important:</strong> This tool provides estimates for
+        general planning and education. It does not provide insurance
+        quotations, confirm that a claim will be paid, or replace
+        financial or legal advice. It does not assume a national
+        average funeral cost. Prices and eligibility vary. Confirm
+        costs with providers and benefits with the relevant insurer
+        or scheme. A calculated surplus is not a guarantee that every
+        amount will be available at the time of a funeral.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>TMI Studios</strong><br>
+      Practical tools for everyday South African life.
+    </div>
+    <div>
+      <a href="../../index.html">Home</a>
+      <a href="../index.html">Explore apps</a>
+    </div>
+    <div>© <span id="year"></span> TMI Studios</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const form = document.getElementById("plannerForm");
+  const resetBtn = document.getElementById("resetBtn");
+
+  const expenseIds = [
+    "coffin","services","burial","transport",
+    "venue","food","cultural","other"
+  ];
+
+  const fundingIds = ["savings","cover","otherFunds"];
+
+  const defaults = {
+    coffin:10000,
+    services:8000,
+    burial:4000,
+    transport:2500,
+    venue:3000,
+    food:5000,
+    cultural:3000,
+    other:1500,
+    buffer:"5",
+    savings:5000,
+    cover:30000,
+    otherFunds:0
+  };
+
+  const money = value => "R" + value.toLocaleString("en-ZA",{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  });
+
+  function readAmount(id){
+    const input = document.getElementById(id);
+    const raw = input.value.trim();
+
+    if(raw === ""){
+      return {valid:false,value:0};
+    }
+
+    const value = Number(raw);
+
+    if(
+      !Number.isFinite(value) ||
+      value < 0 ||
+      value > 100000000
+    ){
+      return {valid:false,value:0};
+    }
+
+    return {valid:true,value:value};
+  }
+
+  function updatePlan(){
+    const allIds = expenseIds.concat(fundingIds);
+    const values = {};
+
+    for(const id of allIds){
+      const result = readAmount(id);
+
+      if(!result.valid){
+        document.getElementById(id).setAttribute("aria-invalid","true");
+        document.getElementById(id).focus();
+
+        document.getElementById("resultMessage").textContent =
+          "Please enter a valid amount from R0 to R100,000,000 in every amount field.";
+
+        return;
+      }
+
+      document.getElementById(id).removeAttribute("aria-invalid");
+      values[id] = result.value;
+    }
+
+    const bufferRate = Number(document.getElementById("buffer").value);
+    const months = Number(document.getElementById("savingMonths").value);
+
+    const baseCost = expenseIds.reduce(
+      (total,id) => total + values[id],0
+    );
+
+    const bufferAmount = baseCost * bufferRate / 100;
+    const totalCost = baseCost + bufferAmount;
+
+    const totalFunding =
+      values.savings + values.cover + values.otherFunds;
+
+    const shortfall = Math.max(0,totalCost - totalFunding);
+    const surplus = Math.max(0,totalFunding - totalCost);
+
+    const monthlySaving = shortfall / months;
+
+    document.getElementById("totalCost").textContent = money(totalCost);
+    document.getElementById("bufferCaption").textContent =
+      "Includes a " + bufferRate + "% planning buffer.";
+
+    document.getElementById("resultSavings").textContent =
+      money(values.savings);
+
+    document.getElementById("resultCover").textContent =
+      money(values.cover);
+
+    document.getElementById("resultOther").textContent =
+      money(values.otherFunds);
+
+    document.getElementById("totalFunding").textContent =
+      money(totalFunding);
+
+    document.getElementById("baseCost").textContent = money(baseCost);
+    document.getElementById("bufferAmount").textContent = money(bufferAmount);
+    document.getElementById("surplus").textContent = money(surplus);
+
+    document.getElementById("shortfall").textContent = money(shortfall);
+
+    const status = document.getElementById("status");
+    const gapMessage = document.getElementById("gapMessage");
+    const resultMessage = document.getElementById("resultMessage");
+
+    if(shortfall > 0){
+      status.textContent = "Planning shortfall";
+      gapMessage.textContent =
+        "Your estimated budget exceeds the funding entered by " +
+        money(shortfall) + ".";
+
+      resultMessage.textContent =
+        "Review your expenses and confirm that the insurance benefit and other funding are genuinely available. The shortfall is a planning estimate, not a prediction.";
+
+    }else if(surplus > 0){
+      status.textContent = "Potential surplus";
+      gapMessage.textContent =
+        "The entered funding exceeds your estimated budget by " +
+        money(surplus) + ".";
+
+      resultMessage.textContent =
+        "Your entered funding covers the estimated budget. This is not a guarantee of a payout or that every fund will be accessible when needed.";
+
+    }else{
+      status.textContent = "Exactly balanced";
+      gapMessage.textContent =
+        "Your estimated funding equals your budget, with no allowance beyond the entered amounts.";
+
+      resultMessage.textContent =
+        "Your plan has no extra funding beyond the estimated budget. Consider whether an additional buffer is appropriate.";
+    }
+
+    document.getElementById("monthlySaving").textContent =
+      money(monthlySaving) + " / month";
+
+    document.getElementById("savingNote").textContent =
+      "Simple target over " + months +
+      " months, assuming equal contributions and no interest. This is not an investment return forecast.";
+  }
+
+  form.addEventListener("submit",function(event){
+    event.preventDefault();
+    updatePlan();
+  });
+
+  resetBtn.addEventListener("click",function(){
+    for(const [id,value] of Object.entries(defaults)){
+      document.getElementById(id).value = value;
+    }
+
+    updatePlan();
+  });
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+  updatePlan();
+})();
+</script>
+</body>
+  </html>
