@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domestic Worker Salary Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Calculate estimated domestic worker wages in South Africa, including ordinary hours, overtime, Sunday work and public holiday pay. Free salary calculator.">
+  <meta name="keywords" content="domestic worker salary calculator South Africa, domestic worker wages, domestic worker hourly rate, overtime calculator South Africa, household employee pay">
+  <meta name="author" content="TMI Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/domestic-worker/">
+  <meta name="theme-color" content="#0b0015">
+  <style>
+    :root {
+      --bg: #0b0015;
+      --panel: #170b27;
+      --panel2: #211333;
+      --purple: #b388ff;
+      --pink: #ff9bd2;
+      --text: #f8f3ff;
+      --muted: #c4b6d7;
+      --border: #3b2852;
+      --green: #8cf0bd;
+      --red: #ff9b9b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top, #28133d 0%, var(--bg) 55%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 34px 18px 24px;
+    }
+
+    .brand {
+      color: var(--pink);
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 14px auto 10px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.15;
+    }
+
+    header p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    main {
+      width: min(100% - 28px, 920px);
+      margin: 0 auto 45px;
+    }
+
+    .card {
+      background: rgba(23, 11, 39, .96);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(18px, 4vw, 28px);
+      margin-bottom: 18px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .18);
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    h3 {
+      margin: 20px 0 6px;
+      color: var(--pink);
+      font-size: 1rem;
+    }
+
+    .intro, .muted {
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .field { min-width: 0; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .91rem;
+      font-weight: 700;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 47px;
+      border: 1px solid #58416f;
+      border-radius: 10px;
+      padding: 11px 12px;
+      background: #10071b;
+      color: var(--text);
+      font: inherit;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+    }
+
+    .checkrow {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .checkrow input {
+      width: 19px;
+      min-height: 19px;
+      margin-top: 4px;
+      flex: 0 0 auto;
+      accent-color: var(--purple);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 17px;
+      min-height: 45px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--purple);
+      color: #160725;
+      flex: 1 1 170px;
+    }
+
+    .secondary {
+      background: #30203f;
+      color: var(--text);
+      border: 1px solid #58416f;
+    }
+
+    button:hover { filter: brightness(1.08); }
+
+    .results {
+      display: none;
+      margin-top: 22px;
+    }
+
+    .results.show { display: block; }
+
+    .hero-result {
+      background: linear-gradient(135deg, #34204d, #211333);
+      border: 1px solid #76569b;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .hero-result .label {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .big-number {
+      color: var(--green);
+      font-size: clamp(2rem, 7vw, 3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      border-radius: 12px;
+      min-width: 0;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.15rem;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      border-left: 3px solid var(--purple);
+      background: #211333;
+      padding: 12px 14px;
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      font-size: .9rem;
+      margin-top: 16px;
+    }
+
+    .warning {
+      color: #ffe1a6;
+      background: #352616;
+      border-color: #a77735;
+    }
+
+    .error {
+      display: none;
+      color: var(--red);
+      margin-top: 12px;
+      font-size: .92rem;
+    }
+
+    .error.show { display: block; }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: .93rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 11px 9px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th { color: var(--pink); }
+
+    .faq-item {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child { border-bottom: 0; }
+
+    .faq-item h3 { margin-top: 0; }
+
+    footer {
+      text-align: center;
+      padding: 25px 16px 32px;
+      color: var(--muted);
+      font-size: .88rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: var(--purple);
+      text-decoration: none;
+      margin: 0 7px;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 560px) {
+      .grid, .result-grid { grid-template-columns: 1fr; }
+      header { padding-top: 27px; }
+      .card { border-radius: 14px; }
+    }
+
+    @media print {
+      body { background: white; color: black; }
+      header, main > .card:not(#calculator), .buttons, footer, .no-print { display: none !important; }
+      main { width: 100%; margin: 0; }
+      #calculator, .hero-result, .metric { background: white; color: black; border: 1px solid #aaa; box-shadow: none; }
+      .muted, .intro, .hero-result .label, .metric span { color: #333; }
+      .big-number { color: black; }
+      .results { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">TMI Studios</div>
+    <h1>Domestic Worker Salary Calculator</h1>
+    <p>Estimate household employee wages in South Africa, from ordinary hours to overtime and special-day work.</p>
+  </header>
+
+  <main>
+    <section class="card" id="calculator">
+      <h2>Calculate wages</h2>
+      <p class="intro">Enter the agreed pay rate and hours worked. The results are estimates to help with household payroll planning.</p>
+
+      <form id="salaryForm">
+        <div class="grid">
+          <div class="field">
+            <label for="period">Pay period</label>
+            <select id="period">
+              <option value="monthly">Monthly salary</option>
+              <option value="weekly">Weekly pay</option>
+              <option value="daily">Daily pay</option>
+              <option value="hourly">Hourly pay</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="rate">Agreed pay (R)</label>
+            <input id="rate" type="number" min="0" step="0.01" value="5000" required>
+          </div>
+
+          <div class="field">
+            <label for="hoursWeek">Ordinary hours per week</label>
+            <input id="hoursWeek" type="number" min="0" max="45" step="0.5" value="40" required>
+          </div>
+
+          <div class="field">
+            <label for="weeks">Weeks in this pay period</label>
+            <select id="weeks">
+              <option value="4.333333">Average month (4.33)</option>
+              <option value="1">One week</option>
+              <option value="2">Two weeks</option>
+              <option value="4">Four weeks</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="overtime">Overtime hours this period</label>
+            <input id="overtime" type="number" min="0" step="0.5" value="0">
+          </div>
+
+          <div class="field">
+            <label for="sunday">Sunday hours worked</label>
+            <input id="sunday" type="number" min="0" step="0.5" value="0">
+          </div>
+
+          <div class="field">
+            <label for="holiday">Public holiday hours worked</label>
+            <input id="holiday" type="number" min="0" step="0.5" value="0">
+          </div>
+
+          <div class="field">
+            <label for="deductions">Other agreed deductions (R)</label>
+            <input id="deductions" type="number" min="0" step="0.01" value="0">
+          </div>
+        </div>
+
+        <label class="checkrow" for="sundayOrdinary">
+          <input id="sundayOrdinary" type="checkbox">
+          <span>Sunday is an ordinary working day for this employee. Leave unchecked if Sunday is normally a day off.</span>
+        </label>
+
+        <label class="checkrow" for="holidayOrdinary">
+          <input id="holidayOrdinary" type="checkbox">
+          <span>The public holiday would ordinarily be a working day for this employee.</span>
+        </label>
+
+        <div class="buttons">
+          <button class="primary" type="submit">Calculate salary</button>
+          <button class="secondary" type="button" id="resetBtn">Reset</button>
+        </div>
+        <p class="error" id="error" role="alert"></p>
+      </form>
+
+      <div class="results" id="results" aria-live="polite">
+        <div class="hero-result">
+          <div class="label">Estimated pay after entered deductions</div>
+          <div class="big-number" id="netPay">R0.00</div>
+          <div class="muted" id="periodLabel">For selected pay period</div>
+        </div>
+
+        <div class="result-grid">
+          <div class="metric"><span>Base pay for period</span><strong id="basePay">R0.00</strong></div>
+          <div class="metric"><span>Overtime estimate</span><strong id="overtimePay">R0.00</strong></div>
+          <div class="metric"><span>Sunday pay estimate</span><strong id="sundayPay">R0.00</strong></div>
+          <div class="metric"><span>Public holiday pay estimate</span><strong id="holidayPay">R0.00</strong></div>
+          <div class="metric"><span>Gross estimated pay</span><strong id="grossPay">R0.00</strong></div>
+          <div class="metric"><span>Estimated ordinary hourly rate</span><strong id="hourlyRate">R0.00</strong></div>
+        </div>
+
+        <div class="notice" id="resultNote"></div>
+        <div class="buttons no-print">
+          <button class="secondary" type="button" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How the calculator works</h2>
+      <p class="muted">The tool converts your agreed pay to an estimated ordinary hourly rate, then applies illustrative multipliers to additional hours. Actual legal pay depends on the employment agreement, applicable law and the circumstances of the work.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pay item</th><th>Illustrative calculation</th></tr></thead>
+          <tbody>
+            <tr><td>Ordinary hourly rate</td><td>Monthly pay × 12 ÷ (52 × weekly hours)</td></tr>
+            <tr><td>Overtime</td><td>Ordinary hourly rate × 1.5 × overtime hours</td></tr>
+            <tr><td>Sunday work</td><td>Rate depends on whether Sunday is an ordinary working day</td></tr>
+            <tr><td>Public holiday</td><td>Rate depends on whether the day would ordinarily be worked and the applicable rules</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice warning">
+        <strong>Important:</strong> This is a planning calculator, not a legal determination or payroll system. It does not automatically verify the current national minimum wage, calculate UIF or tax, determine leave pay, or decide whether a deduction is lawful. Confirm the current legal requirements before paying wages.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Domestic worker pay in South Africa: FAQs</h2>
+
+      <div class="faq-item">
+        <h3>Is there a minimum wage for domestic workers?</h3>
+        <p class="muted">Domestic workers are covered by South Africa's national minimum wage framework. The applicable hourly minimum can change, so check the latest official rate before using this estimate to set wages.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How is overtime usually calculated?</h3>
+        <p class="muted">Overtime rules depend on the applicable employment legislation and agreement. Overtime generally requires agreement and is subject to limits and prescribed compensation rules. This tool uses an illustrative 1.5-times multiplier and does not confirm legal compliance.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How should Sunday work be paid?</h3>
+        <p class="muted">The applicable Sunday rate depends on whether Sunday is ordinarily a working day for the employee and the rules that apply to the employment arrangement. Confirm the correct rate rather than relying on this estimate alone.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does this calculate UIF, tax or leave?</h3>
+        <p class="muted">No. The calculator does not calculate UIF contributions, income tax, annual leave, sick leave, notice pay or severance pay. Those require separate checks.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I use it for a live-in domestic worker?</h3>
+        <p class="muted">You can use it as a basic pay estimate, but it does not value accommodation or meals, or decide whether any deduction or benefit is permitted. Check the employment agreement and current law.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Official information</h2>
+      <p class="muted">For current wage rates and employment rules, consult the South African Department of Employment and Labour and the official national minimum wage notices. If you are unsure about a calculation, seek qualified labour or payroll advice.</p>
+      <p><a href="https://www.labour.gov.za/" target="_blank" rel="noopener noreferrer" style="color:var(--purple)">Department of Employment and Labour</a></p>
+    </section>
+
+    <section class="card">
+      <h2>Disclaimer</h2>
+      <p class="muted">This free tool provides general estimates for information and planning only. It is not legal, tax, financial or payroll advice. The calculations use simplified assumptions and may not reflect every legal requirement or employment arrangement. TMI Studios does not guarantee the accuracy or completeness of the results and accepts no liability for decisions made using this calculator. Verify rates and obligations against current official sources.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>Small tools for everyday South African life.</div>
+    <div class="footer-links">
+      <a href="../index.html">TMI Studios Home</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+    </div>
+    <div>© <span id="year"></span> TMI Studios</div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("salaryForm");
+    const results = document.getElementById("results");
+    const errorBox = document.getElementById("error");
+    const money = value => new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR"
+    }).format(Number.isFinite(value) ? value : 0);
+
+    function calculate(event) {
+      if (event) event.preventDefault();
+      errorBox.classList.remove("show");
+
+      const period = document.getElementById("period").value;
+      const rate = Number(document.getElementById("rate").value);
+      const hoursWeek = Number(document.getElementById("hoursWeek").value);
+      const weeks = Number(document.getElementById("weeks").value);
+      const overtimeHours = Number(document.getElementById("overtime").value || 0);
+      const sundayHours = Number(document.getElementById("sunday").value || 0);
+      const holidayHours = Number(document.getElementById("holiday").value || 0);
+      const deductions = Number(document.getElementById("deductions").value || 0);
+      const sundayOrdinary = document.getElementById("sundayOrdinary").checked;
+      const holidayOrdinary = document.getElementById("holidayOrdinary").checked;
+
+      const numericValues = [rate, hoursWeek, weeks, overtimeHours, sundayHours, holidayHours, deductions];
+      if (numericValues.some(v => !Number.isFinite(v) || v < 0) ||
+          rate <= 0 || hoursWeek <= 0 || hoursWeek > 45) {
+        errorBox.textContent = "Enter a pay amount greater than zero, ordinary hours between 0 and 45, and non-negative hours and deductions.";
+        errorBox.classList.add("show");
+        results.classList.remove("show");
+        return;
+      }
+
+      let monthlyEquivalent;
+      let basePay;
+      let periodHours;
+
+      if (period === "monthly") {
+        monthlyEquivalent = rate;
+        basePay = rate;
+        periodHours = hoursWeek * 52 / 12;
+      } else if (period === "weekly") {
+        monthlyEquivalent = rate * 52 / 12;
+        basePay = rate * weeks;
+        periodHours = hoursWeek * weeks;
+      } else if (period === "daily") {
+        monthlyEquivalent = rate * 5 * 52 / 12;
+        basePay = rate * 5 * weeks;
+        periodHours = hoursWeek * weeks;
+      } else {
+        monthlyEquivalent = rate * hoursWeek * 52 / 12;
+        basePay = rate * hoursWeek * weeks;
+        periodHours = hoursWeek * weeks;
+      }
+
+      const hourly = monthlyEquivalent / (hoursWeek * 52 / 12);
+      const overtimePay = overtimeHours * hourly * 1.5;
+
+      // Illustrative additional pay assumptions; check the applicable legal rate.
+      const sundayMultiplier = sundayOrdinary ? 1.5 : 2;
+      const sundayPay = sundayHours * hourly * sundayMultiplier;
+
+      // If the holiday would ordinarily be worked, estimate double pay for hours worked.
+      // Otherwise, estimate ordinary pay plus the additional hours worked.
+      const holidayPay = holidayHours * hourly * (holidayOrdinary ? 2 : 1.5);
+
+      const gross = basePay + overtimePay + sundayPay + holidayPay;
+      const net = gross - deductions;
+
+      document.getElementById("netPay").textContent = money(net);
+      document.getElementById("basePay").textContent = money(basePay);
+      document.getElementById("overtimePay").textContent = money(overtimePay);
+      document.getElementById("sundayPay").textContent = money(sundayPay);
+      document.getElementById("holidayPay").textContent = money(holidayPay);
+      document.getElementById("grossPay").textContent = money(gross);
+      document.getElementById("hourlyRate").textContent = money(hourly);
+      document.getElementById("periodLabel").textContent =
+        period === "monthly" ? "Monthly estimate" :
+        period === "weekly" ? "Estimate for selected number of weeks" :
+        period === "daily" ? "Estimate based on five paid days per week" :
+        "Estimate for selected number of weeks";
+
+      document.getElementById("resultNote").textContent =
+        "Ordinary pay is based on your entered rate and hours. Additional pay uses simplified multipliers and is added to the base pay. Make sure special-day hours are not already included in ordinary hours, otherwise the estimate may count them twice. Deductions are subtracted as entered and are not checked for legal validity.";
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    form.addEventListener("submit", calculate);
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      form.reset();
+      document.getElementById("rate").value = "5000";
+      document.getElementById("hoursWeek").value = "40";
+      document.getElementById("overtime").value = "0";
+      document.getElementById("sunday").value = "0";
+      document.getElementById("holiday").value = "0";
+      document.getElementById("deductions").value = "0";
+      errorBox.classList.remove("show");
+      results.classList.remove("show");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
