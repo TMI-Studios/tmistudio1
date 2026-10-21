@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#30245d">
+<title>Matric APS Calculator South Africa | TMI Studios</title>
+<meta name="description" content="Calculate your estimated South African matric Admission Point Score (APS) from your subject marks. See your points per subject and explore university admission planning.">
+<style>
+:root{--ink:#24213a;--purple:#30245d;--purple2:#6047b5;--lilac:#eee9ff;--paper:#fff;--bg:#f7f5fc;--muted:#77738b;--line:#e7e3f0;--gold:#ffcf70;--green:#207654;--red:#b43b52}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+header{background:var(--purple);color:white;padding:20px 17px 57px}
+nav,.hero,main,footer{max-width:960px;margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:900;letter-spacing:.5px}
+.brand span{color:var(--gold)}
+.navtag{font-size:11px;color:#d8d1f2;text-transform:uppercase;letter-spacing:1px}
+.hero{padding-top:37px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:bold}
+h1{font-size:clamp(34px,7vw,54px);line-height:1.04;letter-spacing:-1.8px;max-width:680px;margin:12px 0}
+.hero p{max-width:610px;color:#e0dcf2;margin:0;font-size:16px}
+main{padding:0 14px 40px;margin-top:-28px}
+.layout{display:grid;grid-template-columns:1fr .9fr;gap:17px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:19px;padding:22px;box-shadow:0 12px 35px #30245d0b;min-width:0}
+h2{font-size:20px;letter-spacing:-.4px;margin:0 0 5px}
+.intro{font-size:13px;color:var(--muted);margin:0 0 19px}
+.field{margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+input,select{width:100%;min-height:45px;border:1px solid #dcd7e9;border-radius:10px;background:white;padding:10px 12px;font:inherit;font-size:15px;color:var(--ink)}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--purple2);outline-offset:2px}
+.help{font-size:11px;color:var(--muted);margin-top:5px}
+.section{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--purple2);border-bottom:1px solid var(--line);padding-bottom:8px;margin:22px 0 13px}
+.subject-head,.subject{display:grid;grid-template-columns:minmax(0,1fr) 90px 55px;gap:9px;align-items:center}
+.subject-head{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:7px}
+.subject{padding:7px 0;border-bottom:1px solid #f0edf5}
+.subject label{font-size:13px;margin:0;overflow-wrap:anywhere}
+.subject input{min-height:41px;padding:8px;text-align:center}
+.points{background:var(--lilac);border-radius:8px;text-align:center;font-weight:800;font-size:14px;padding:10px 2px}
+.subject-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:13px}
+button{border:0;border-radius:10px;padding:12px 14px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.primary{background:var(--purple);color:white}
+.secondary{background:var(--lilac);color:var(--purple)}
+.smallbtn{padding:9px 11px}
+.scorecard{background:var(--purple);color:white;border-radius:16px;padding:23px;margin-bottom:13px}
+.scorelabel{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#dcd5f3}
+.bigscore{font-size:65px;line-height:1.15;letter-spacing:-2px;font-weight:900;margin:7px 0}
+.scorefoot{font-size:12px;color:#ddd6f2}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:19px}
+.stat{border:1px solid var(--line);border-radius:12px;padding:13px;min-width:0}
+.stat span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.stat strong{font-size:19px;overflow-wrap:anywhere}
+.breakdown{margin-top:10px}
+.breakrow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.breakrow span{color:var(--muted)}
+.breakrow strong{text-align:right}
+.breakrow:last-child{border-bottom:0}
+.note{background:#f3f0ff;border-radius:12px;padding:13px;font-size:12px;margin-top:17px;color:#514477}
+.scale{margin-top:18px}
+.scale-row{display:grid;grid-template-columns:45px 1fr 25px;gap:8px;align-items:center;margin:8px 0;font-size:12px}
+.track{height:8px;background:#eeeaf5;border-radius:20px;overflow:hidden}
+.fill{height:100%;background:var(--purple2);border-radius:20px;width:0}
+.scale-row b{text-align:right}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px 14px 32px}
+footer a{color:var(--purple2);text-decoration:none;margin:0 5px}
+footer a:hover{text-decoration:underline}
+details{max-width:720px;margin:14px auto;text-align:left}
+summary{cursor:pointer;font-weight:700;color:var(--purple2)}
+.disclaimer{line-height:1.7;margin-top:9px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.panel{padding:18px}.hero{padding-top:28px}.subject-head,.subject{grid-template-columns:minmax(0,1fr) 80px 49px;gap:7px}.bigscore{font-size:58px}}
+@media print{body{background:white}header{background:white;color:#111;padding:15px}.hero p,.navtag{color:#333}.kicker{color:#555}main{margin-top:0}.layout{display:block}.panel{box-shadow:none;margin-bottom:15px;break-inside:avoid}.input-panel .subject-actions,.actions,footer{display:none!important}.scorecard{background:white;color:#111;border:1px solid #aaa}.scorelabel,.scorefoot{color:#333}}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<div class="brand">TMI <span>STUDIOS</span></div>
+<div class="navtag">Your next step starts here</div>
+</nav>
+<div class="hero">
+<div class="kicker">Matric results made clearer</div>
+<h1>What's your APS score?</h1>
+<p>Enter your school subject marks to estimate your Admission Point Score. See how each subject contributes and use your result as a starting point for researching courses.</p>
+</div>
+</header>
+
+<main>
+<div class="layout">
+<section class="panel input-panel">
+<h2>Your subject marks</h2>
+<p class="intro">Enter percentages from 0 to 100. The calculator converts each mark into points using the selected scale.</p>
+
+<div class="field">
+<label for="scaleSelect">APS scoring scale</label>
+<select id="scaleSelect">
+<option value="common" selected>Common 7-point scale (estimate)</option>
+<option value="eight">8-point scale (estimate)</option>
+</select>
+<div class="help">Institutions can use different scales, subject requirements and exclusions.</div>
+</div>
+
+<div class="field">
+<label for="subjectsCount">Subjects to include</label>
+<select id="subjectsCount">
+<option value="6" selected>Best 6 subjects</option>
+<option value="7">Best 7 subjects</option>
+<option value="all">All entered subjects</option>
+</select>
+<div class="help">Some institutions exclude Life Orientation or require specific subjects. Choose the option that best fits your planning needs.</div>
+</div>
+
+<div class="section">Enter your marks</div>
+<div class="subject-head"><span>Subject</span><span>Mark %</span><span>Points</span></div>
+<div id="subjects">
+<div class="subject"><label for="mark0">Home Language</label><input id="mark0" class="mark" type="number" min="0" max="100" step="1" value="70" inputmode="numeric" aria-label="Home Language mark"><output class="points" id="points0">6</output></div>
+<div class="subject"><label for="mark1">First Additional Language</label><input id="mark1" class="mark" type="number" min="0" max="100" step="1" value="65" inputmode="numeric" aria-label="First Additional Language mark"><output class="points" id="points1">5</output></div>
+<div class="subject"><label for="mark2">Mathematics / Maths Literacy</label><input id="mark2" class="mark" type="number" min="0" max="100" step="1" value="60" inputmode="numeric" aria-label="Mathematics or Mathematical Literacy mark"><output class="points" id="points2">5</output></div>
+<div class="subject"><label for="mark3">Life Orientation</label><input id="mark3" class="mark" type="number" min="0" max="100" step="1" value="75" inputmode="numeric" aria-label="Life Orientation mark"><output class="points" id="points3">6</output></div>
+<div class="subject"><label for="mark4">Subject 5</label><input id="mark4" class="mark" type="number" min="0" max="100" step="1" value="55" inputmode="numeric" aria-label="Subject 5 mark"><output class="points" id="points4">4</output></div>
+<div class="subject"><label for="mark5">Subject 6</label><input id="mark5" class="mark" type="number" min="0" max="100" step="1" value="50" inputmode="numeric" aria-label="Subject 6 mark"><output class="points" id="points5">4</output></div>
+<div class="subject"><label for="mark6">Subject 7</label><input id="mark6" class="mark" type="number" min="0" max="100" step="1" value="" placeholder="Optional" inputmode="numeric" aria-label="Subject 7 mark"><output class="points" id="points6">—</output></div>
+</div>
+<div class="subject-actions">
+<span class="help">Rename subjects by editing their labels in your school notes.</span>
+<button type="button" class="secondary smallbtn" id="clear">Clear marks</button>
+</div>
+<div class="actions">
+<button type="button" class="primary" id="print">Print / Save PDF</button>
+<button type="button" class="secondary" id="reset">Reset example</button>
+</div>
+</section>
+
+<section class="panel">
+<h2>Your estimated APS</h2>
+<p class="intro">Updates as you enter or change your marks.</p>
+<div class="scorecard" aria-live="polite">
+<div class="scorelabel">Estimated total points</div>
+<div class="bigscore" id="total">30</div>
+<div class="scorefoot" id="scorefoot">Based on your selected subjects.</div>
+</div>
+
+<div class="stats">
+<div class="stat"><span>Subjects counted</span><strong id="count">6</strong></div>
+<div class="stat"><span>Average mark</span><strong id="average">62.5%</strong></div>
+<div class="stat"><span>Highest subject points</span><strong id="highest">6</strong></div>
+<div class="stat"><span>Lowest subject points</span><strong id="lowest">4</strong></div>
+</div>
+
+<div class="section">Subject breakdown</div>
+<div id="breakdown" class="breakdown"></div>
+
+<div class="scale">
+<div class="section">Mark-to-point guide</div>
+<div id="guide"></div>
+</div>
+
+<div class="note" id="advice">Your APS is a planning estimate, not a university admission decision. Check the official requirements for each course.</div>
+</section>
+</div>
+</main>
+
+<footer>
+<div>
+<a href="../index.html">TMI Studios</a> ·
+<a href="../privacy.html">Privacy</a> ·
+<a href="../terms.html">Terms</a> ·
+<a href="../disclaimer.html">Disclaimer</a>
+</div>
+<details>
+<summary>Important information</summary>
+<div class="disclaimer">This tool provides an educational estimate only. It does not represent an official result or guarantee admission to any university, college or programme. Admission Point Score calculations differ between institutions and qualifications. Some institutions exclude Life Orientation, use specific subject requirements, apply different point scales, or calculate points from selected subjects only. Marks entered here are processed in your browser and are not sent to TMI Studios by this calculator. Always verify your score and eligibility with the institution and course you intend to apply for.</div>
+</details>
+<p>Made for South African learners. © <span id="year"></span> TMI Studios.</p>
+</footer>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const marks=Array.from(document.querySelectorAll('.mark'));
+const initial=[70,65,60,75,55,50,''];
+const moneyless=n=>String(n);
+function pointsFor(mark){
+if(mark===''||mark===null||!Number.isFinite(Number(mark)))return null;
+const n=Math.max(0,Math.min(100,Number(mark)));
+if($('scaleSelect').value==='eight'){
+if(n>=90)return 8;
+if(n>=80)return 7;
+if(n>=70)return 6;
+if(n>=60)return 5;
+if(n>=50)return 4;
+if(n>=40)return 3;
+if(n>=30)return 2;
+return 1;
+}
+if(n>=80)return 7;
+if(n>=70)return 6;
+if(n>=60)return 5;
+if(n>=50)return 4;
+if(n>=40)return 3;
+if(n>=30)return 2;
+return 1;
+}
+function getEntries(){
+return marks.map((el,i)=>{
+const raw=el.value.trim();
+const valid=raw!==''&&Number.isFinite(Number(raw))&&Number(raw)>=0&&Number(raw)<=100;
+el.setAttribute('aria-invalid',raw!==''&&!valid?'true':'false');
+return {index:i,label:el.closest('.subject').querySelector('label').textContent,raw,valid,mark:valid?Number(raw):null,points:valid?pointsFor(Number(raw)):null};
+});
+}
+function update(){
+const entries=getEntries();
+entries.forEach(e=>{
+const out=$('points'+e.index);
+out.textContent=e.points===null?'—':e.points;
+});
+const completed=entries.filter(e=>e.valid);
+const sorted=completed.slice().sort((a,b)=>b.points-a.points);
+const mode=$('subjectsCount').value;
+let counted=mode==='all'?completed:sorted.slice(0,Number(mode));
+const total=counted.reduce((s,e)=>s+e.points,0);
+const avg=counted.length?counted.reduce((s,e)=>s+e.mark,0)/counted.length:0;
+$('total').textContent=String(total);
+$('count').textContent=String(counted.length);
+$('average').textContent=counted.length?avg.toFixed(1)+'%':'—';
+$('highest').textContent=counted.length?Math.max(...counted.map(e=>e.points)):'—';
+$('lowest').textContent=counted.length?Math.min(...counted.map(e=>e.points)):'—';
+$('scorefoot').textContent=counted.length+' subject'+(counted.length===1?'':'s')+' counted using the selected estimate scale.';
+$('breakdown').innerHTML='';
+if(!completed.length){
+const p=document.createElement('p');p.className='help';p.textContent='Enter at least one valid mark to see your breakdown.';$('breakdown').appendChild(p);
+}else{
+entries.filter(e=>e.valid).forEach(e=>{
+const row=document.createElement('div');row.className='breakrow';
+const name=document.createElement('span');name.textContent=e.label;
+const value=document.createElement('strong');value.textContent=e.points+' point'+(e.points===1?'':'s')+' · '+e.mark+'%';
+row.append(name,value);$('breakdown').appendChild(row);
+});
+const row=document.createElement('div');row.className='breakrow';
+const name=document.createElement('strong');name.textContent='Total APS estimate';
+const value=document.createElement('strong');value.textContent=String(total);
+row.append(name,value);$('breakdown').appendChild(row);
+}
+$('advice').textContent=counted.length===0
+?'Enter marks between 0 and 100 to calculate an estimate.'
+:counted.length<6
+?'You have entered fewer than six valid marks. Add the remaining subjects for a more useful estimate.'
+:'Your estimated APS is '+total+'. Use this as a starting point, then check the exact scoring method and subject requirements for your chosen course.';
+$('guide').innerHTML='';
+const bands=$('scaleSelect').value==='eight'
+?[[90,100,8],[80,89,7],[70,79,6],[60,69,5],[50,59,4],[40,49,3],[30,39,2],[0,29,1]]
+:[[80,100,7],[70,79,6],[60,69,5],[50,59,4],[40,49,3],[30,39,2],[0,29,1]];
+bands.forEach(b=>{
+const row=document.createElement('div');row.className='scale-row';
+const range=document.createElement('span');range.textContent=b[0]+'–'+b[1]+'%';
+const track=document.createElement('div');track.className='track';
+const fill=document.createElement('div');fill.className='fill';fill.style.width=(b[2]/8*100)+'%';track.appendChild(fill);
+const value=document.createElement('b');value.textContent=b[2];
+row.append(range,track,value);$('guide').appendChild(row);
+});
+}
+marks.forEach(el=>el.addEventListener('input',update));
+$('scaleSelect').addEventListener('change',update);
+$('subjectsCount').addEventListener('change',update);
+$('clear').addEventListener('click',()=>{marks.forEach(el=>el.value='');update();});
+$('reset').addEventListener('click',()=>{marks.forEach((el,i)=>el.value=initial[i]);$('scaleSelect').value='common';$('subjectsCount').value='6';update();});
+$('print').addEventListener('click',()=>window.print());
+$('year').textContent=new Date().getFullYear();
+update();
+})();
+</script>
+</body>
+  </html>
