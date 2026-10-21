@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Fine Discount Calculator South Africa | TMI Studios</title>
+  <meta name="description" content="Estimate a discounted traffic fine in South Africa. Calculate possible savings and compare fine amounts using a chosen discount percentage.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b0015">
+  <link rel="canonical" href="https://tmi-studios.github.io/tmistudio1/traffic-fine/">
+  <style>
+    :root {
+      --bg: #0b0015;
+      --panel: #170b27;
+      --panel2: #241535;
+      --purple: #b388ff;
+      --pink: #ff9bd2;
+      --text: #f8f3ff;
+      --muted: #c4b6d7;
+      --border: #3b2852;
+      --green: #8cf0bd;
+      --red: #ffaaaa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top, #28133d, var(--bg) 58%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 36px 18px 25px;
+    }
+
+    .brand {
+      color: var(--pink);
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 14px auto 10px;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.15;
+    }
+
+    header p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+    }
+
+    main {
+      width: min(100% - 28px, 850px);
+      margin: auto auto 45px;
+    }
+
+    .card {
+      background: rgba(23, 11, 39, .96);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(18px, 4vw, 28px);
+      margin-bottom: 18px;
+    }
+
+    h2 { margin: 0 0 8px; font-size: 1.35rem; }
+    h3 { color: var(--pink); font-size: 1rem; margin-bottom: 5px; }
+    .muted, .intro { color: var(--muted); font-size: .94rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .field { min-width: 0; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid #58416f;
+      border-radius: 10px;
+      padding: 12px;
+      background: #10071b;
+      color: var(--text);
+      font: inherit;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    button {
+      min-height: 46px;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--purple);
+      color: #160725;
+      flex: 1 1 170px;
+    }
+
+    .secondary {
+      background: #30203f;
+      color: var(--text);
+      border: 1px solid #58416f;
+    }
+
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+
+    .hero {
+      padding: 22px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #34204d, #211333);
+      border: 1px solid #76569b;
+      margin-bottom: 14px;
+    }
+
+    .hero small { color: var(--muted); font-size: .9rem; }
+
+    .amount {
+      color: var(--green);
+      font-weight: 900;
+      font-size: clamp(2rem, 8vw, 3rem);
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 15px;
+      border-radius: 12px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 1.2rem;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      padding: 14px;
+      margin-top: 16px;
+      border-left: 3px solid var(--purple);
+      border-radius: 0 10px 10px 0;
+      background: #241535;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .warning {
+      border-color: #d9a64c;
+      background: #352616;
+      color: #ffe1a6;
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      color: var(--red);
+    }
+
+    .error.show { display: block; }
+
+    .faq {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq:last-child { border-bottom: 0; }
+    .faq h3 { margin-top: 0; }
+
+    a { color: var(--purple); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 14px 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin: 12px 0;
+    }
+
+    footer a { text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 540px) {
+      .grid, .metrics { grid-template-columns: 1fr; }
+      header { padding-top: 28px; }
+    }
+
+    @media print {
+      body { background: white; color: black; }
+      header, main > .card:not(#calculator), .buttons, footer { display: none !important; }
+      main { width: 100%; }
+      #calculator, .hero, .metric { background: white; color: black; border: 1px solid #aaa; }
+      .muted, .hero small, .metric span { color: #333; }
+      .amount { color: black; }
+      .results { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">TMI Studios</div>
+    <h1>Traffic Fine Discount Calculator</h1>
+    <p>See what a traffic fine could cost after a possible discount, and estimate your potential savings.</p>
+  </header>
+
+  <main>
+    <section class="card" id="calculator">
+      <h2>Calculate your possible savings</h2>
+      <p class="intro">Enter the amount shown on your fine and a discount percentage to explore a hypothetical reduced amount.</p>
+
+      <form id="fineForm">
+        <div class="grid">
+          <div class="field">
+            <label for="fineAmount">Original fine amount (R)</label>
+            <input id="fineAmount" type="number" min="0.01" max="100000000" step="0.01" placeholder="e.g. 1000" required>
+          </div>
+
+          <div class="field">
+            <label for="discount">Possible discount</label>
+            <select id="discount">
+              <option value="0">0% — No discount</option>
+              <option value="10">10% — Example only</option>
+              <option value="20" selected>20% — Example only</option>
+              <option value="30">30% — Example only</option>
+              <option value="40">40% — Example only</option>
+              <option value="50">50% — Example only</option>
+              <option value="60">60% — Example only</option>
+              <option value="70">70% — Example only</option>
+              <option value="custom">Enter my own percentage</option>
+            </select>
+          </div>
+
+          <div class="field" id="customField" hidden>
+            <label for="customDiscount">Custom discount (%)</label>
+            <input id="customDiscount" type="number" min="0" max="100" step="0.1" value="20">
+          </div>
+
+          <div class="field">
+            <label for="fineType">Fine or notice type</label>
+            <select id="fineType">
+              <option value="traffic">Traffic fine</option>
+              <option value="camera">Speed or camera fine</option>
+              <option value="municipal">Municipal infringement notice</option>
+              <option value="other">Other notice</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="notice">
+          The discount options are examples for calculation only. They do not mean that an authority offers or will approve that discount.
+        </div>
+
+        <div class="buttons">
+          <button class="primary" type="submit">Calculate fine</button>
+          <button class="secondary" type="button" id="resetBtn">Reset</button>
+        </div>
+        <p class="error" id="error" role="alert"></p>
+      </form>
+
+      <div class="results" id="results" aria-live="polite">
+        <div class="hero">
+          <small>Estimated amount after the selected discount</small>
+          <div class="amount" id="reducedAmount">R0.00</div>
+          <div class="muted" id="discountSummary"></div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span>Original fine</span>
+            <strong id="originalAmount">R0.00</strong>
+          </div>
+          <div class="metric">
+            <span>Potential savings</span>
+            <strong id="savings">R0.00</strong>
+          </div>
+          <div class="metric">
+            <span>Discount percentage</span>
+            <strong id="discountPercent">0%</strong>
+          </div>
+          <div class="metric">
+            <span>Fine category selected</span>
+            <strong id="categoryResult">Traffic fine</strong>
+          </div>
+        </div>
+
+        <div class="notice warning">
+          This is a mathematical estimate, not confirmation that your fine qualifies for a discount. Check the actual amount due, payment deadline, and eligibility with the authority named on your notice.
+        </div>
+
+        <div class="buttons">
+          <button type="button" class="secondary" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How to use this calculator</h2>
+      <ol class="muted">
+        <li>Enter the fine amount printed on your notice.</li>
+        <li>Select a hypothetical discount or enter a custom percentage.</li>
+        <li>Choose the type of notice for your own reference.</li>
+        <li>Calculate to see the estimated payment and potential savings.</li>
+        <li>Verify any actual discount and the amount due with the issuing authority before paying.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Traffic fines in South Africa: FAQs</h2>
+
+      <div class="faq">
+        <h3>Can I get a discount on a traffic fine?</h3>
+        <p class="muted">Possibly, depending on the authority, notice type, applicable process and payment conditions. A discount is not automatic. Check the instructions on your notice or contact the issuing authority.</p>
+      </div>
+
+      <div class="faq">
+        <h3>Does paying early guarantee a discount?</h3>
+        <p class="muted">No. Do not assume early payment guarantees a reduction. Check whether your notice offers a discount, the qualifying dates and the exact amount payable.</p>
+      </div>
+
+      <div class="faq">
+        <h3>Can this calculator check my fine online?</h3>
+        <p class="muted">No. This tool does not connect to municipal, provincial or national traffic fine systems. It does not verify your fine, payment status or eligibility.</p>
+      </div>
+
+      <div class="faq">
+        <h3>What if I believe the fine is incorrect?</h3>
+        <p class="muted">Follow the dispute or representation instructions provided by the issuing authority. Pay attention to the deadlines and retain copies of your notice and any correspondence.</p>
+      </div>
+
+      <div class="faq">
+        <h3>Is the result an official payment amount?</h3>
+        <p class="muted">No. The result is only an arithmetic estimate based on the numbers you enter. The official amount shown by the responsible authority takes precedence.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Official information</h2>
+      <p class="muted">Use the contact details and payment instructions on your fine notice to confirm the correct amount, payment options, discount eligibility and dispute process.</p>
+      <p><a href="https://www.gov.za/" target="_blank" rel="noopener noreferrer">South African Government website</a></p>
+    </section>
+
+    <section class="card">
+      <h2>Disclaimer</h2>
+      <p class="muted">This calculator is provided for general information and arithmetic estimation only. It is not affiliated with any traffic authority and does not provide legal advice. Discount percentages are hypothetical and do not represent an offer or guarantee. Verify all details with the relevant authority before making payment or deciding whether to dispute a notice. TMI Studios does not guarantee the accuracy or completeness of information entered or results produced.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>Small tools for everyday South African life.</div>
+    <div class="footer-links">
+      <a href="../index.html">TMI Studios Home</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+    </div>
+    <div>© <span id="year"></span> TMI Studios</div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("fineForm");
+    const discountSelect = document.getElementById("discount");
+    const customField = document.getElementById("customField");
+    const customInput = document.getElementById("customDiscount");
+    const results = document.getElementById("results");
+    const errorBox = document.getElementById("error");
+
+    const money = value => new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR"
+    }).format(value);
+
+    discountSelect.addEventListener("change", () => {
+      customField.hidden = discountSelect.value !== "custom";
+      customInput.required = discountSelect.value === "custom";
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      errorBox.classList.remove("show");
+
+      const amount = Number(document.getElementById("fineAmount").value);
+      const percentage = discountSelect.value === "custom"
+        ? Number(customInput.value)
+        : Number(discountSelect.value);
+
+      if (!Number.isFinite(amount) || amount <= 0 || amount > 100000000) {
+        errorBox.textContent = "Enter a fine amount greater than zero.";
+        errorBox.classList.add("show");
+        results.classList.remove("show");
+        return;
+      }
+
+      if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
+        errorBox.textContent = "Enter a discount percentage between 0 and 100.";
+        errorBox.classList.add("show");
+        results.classList.remove("show");
+        return;
+      }
+
+      const saving = amount * percentage / 100;
+      const reduced = Math.max(0, amount - saving);
+
+      const categories = {
+        traffic: "Traffic fine",
+        camera: "Speed or camera fine",
+        municipal: "Municipal infringement",
+        other: "Other notice"
+      };
+
+      document.getElementById("reducedAmount").textContent = money(reduced);
+      document.getElementById("originalAmount").textContent = money(amount);
+      document.getElementById("savings").textContent = money(saving);
+      document.getElementById("discountPercent").textContent =
+        percentage.toLocaleString("en-ZA") + "%";
+      document.getElementById("categoryResult").textContent =
+        categories[document.getElementById("fineType").value];
+      document.getElementById("discountSummary").textContent =
+        percentage === 0
+          ? "No reduction applied."
+          : "Illustrative reduction of " + percentage.toLocaleString("en-ZA") + "%.";
+
+      results.classList.add("show");
+      results.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      form.reset();
+      customField.hidden = true;
+      customInput.required = false;
+      errorBox.classList.remove("show");
+      results.classList.remove("show");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
